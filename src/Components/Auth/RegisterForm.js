@@ -46,33 +46,30 @@ const RegisterForm = () => {
       >
         <Form>
           {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
+          {/*Los componentes ErrorMessage tienen un atributo render, eso va a servir para cuando agreguemos los estilos, solo hay que agregar la clase*/}
           <div>
             <label htmlFor="name">Nombre</label>
             <Field name="name" type="text" />
+            <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
           </div>
           <div>
             <label htmlFor="lastName">Apellido</label>
             <Field name="lastName" type="text" />
+            <ErrorMessage name="lastName" render={(msg) => <div>{msg}</div>} />
           </div>
           <div>
             <label htmlFor="email">Email</label>
             <Field name="email" type="email" />
+            <ErrorMessage name="email" render={(msg) => <div>{msg}</div>} />
           </div>
           <div>
             <label htmlFor="password">Contraseña</label>
             <Field name="password" type="password" />
+            <ErrorMessage name="password" render={(msg) => <div>{msg}</div>} />
           </div>
           <div>
             <label htmlFor="confirmPassword">Confirmar contraseña</label>
             <Field name="confirmPassword" type="password" />
-          </div>
-
-          <div>
-            {/*Los componentes ErrorMessage tienen un atributo render, eso va a servir para cuando agreguemos los estilos, solo hay que agregar la clase*/}
-            <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
-            <ErrorMessage name="lastName" render={(msg) => <div>{msg}</div>} />
-            <ErrorMessage name="email" render={(msg) => <div>{msg}</div>} />
-            <ErrorMessage name="password" render={(msg) => <div>{msg}</div>} />
             <ErrorMessage
               name="confirmPassword"
               render={(msg) => <div>{msg}</div>}
