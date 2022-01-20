@@ -15,30 +15,37 @@ const RegisterForm = () => {
           confirmPassword: "",
         }}
         validationSchema={Yup.object({
-          name: Yup.string().required("Campo obligatorio"),
-          lastName: Yup.string().required("Campo obligatorio"),
+          name: Yup.string().required("Ingresá un nombre"),
+          lastName: Yup.string().required("Ingresá un apellido"),
           email: Yup.string()
             .email("Formato de email inválido")
-            .required("Campo obligatorio"),
+            .required("Ingresá un email"),
           password: Yup.string()
             .min(6, "La contraseña debe tener 6 caracteres como mínimo.")
             .matches(
               /^(?=.*[a-z])(?=.*[0-9])(?=.*[\W])/,
               "Formato de contraseña inválida. Debe contener al menos: una letra minúscula, un número y un símbolo."
             )
-            .required(),
+            .required("Ingresá una contraseña"),
           confirmPassword: Yup.string()
             .oneOf(
               [Yup.ref("password"), null],
               "Las contraseñas deben ser iguales."
             )
-            .required(),
+            .required("Confirmá tu contraseña"),
         })}
         onSubmit={(values) => {
-          const User = values; // Este es el objeto que va a ser enviado
+          const User = {
+            // Este es el objeto que va a ser enviado
+            name: values.name,
+            lastName: values.lastName,
+            email: values.email,
+            password: values.password,
+          };
         }}
       >
         <Form>
+          {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
           <div>
             <label htmlFor="name">Nombre</label>
             <Field name="name" type="text" />
