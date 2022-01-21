@@ -13,8 +13,7 @@ import SchoolCampaign from './Campaigns/School/SchoolCampaign';
 import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
-import { TitleNews } from './Components/Titulosynovedades/TitleNews';
-import myImage from './Components/Titulosynovedades/600x450.png'
+
 
 
 function App() {
@@ -36,7 +35,6 @@ function App() {
         </Switch>
       </BrowserRouter>
 		  <div className="App">
-			  <TitleNews title="Titulo de la seccion" news="news" image={myImage} />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
