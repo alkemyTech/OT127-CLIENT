@@ -7,7 +7,7 @@ import FormLabel from '@mui/material/FormLabel';
 const EditOrganitationDataForm = () => {
 
     const [organitationData, setOrganitationData] = useState(organitationDataStructure())
-    console.log(organitationData)
+
     const handleChange = (event) => {
         event.target.id === 'name' && setOrganitationData({...organitationData, name:event.target.value})
         event.target.id === 'longDescription' && setOrganitationData({...organitationData, longDescription:event.target.value})
@@ -29,19 +29,19 @@ const EditOrganitationDataForm = () => {
             </FormControl>
             <FormLabel>Redes sociales</FormLabel>
             <FormControl>
-            <InputLabel htmlFor="my-input" required={true}>Facebook</InputLabel>
+            <InputLabel htmlFor="my-input" >Facebook</InputLabel>
             <Input id="facebook" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <InputLabel htmlFor="my-input" required={true}>Linkedin</InputLabel>
+            <InputLabel htmlFor="my-input" >Linkedin</InputLabel>
             <Input id="linkedin" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <InputLabel htmlFor="my-input" required={true}>Instagram</InputLabel>
+            <InputLabel htmlFor="my-input" >Instagram</InputLabel>
             <Input id="instagram" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <InputLabel htmlFor="my-input" required={true}>Twitter</InputLabel>
+            <InputLabel htmlFor="my-input" >Twitter</InputLabel>
             <Input id="twitter" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
