@@ -1,33 +1,49 @@
 import React, { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import '../FormStyles.css';
 
 const LoginForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        email: '',
-        password: ''
-    });
 
-    const handleChange = (e) => {
-        if(e.target.name === 'email'){
-            setInitialValues({...initialValues, email: e.target.value})
-        } if(e.target.name === 'password'){
-            setInitialValues({...initialValues, password: e.target.value})
-        }
-    }
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-        localStorage.setItem('token', 'tokenValueExample')
-    }
+    const [userData, setUserData] = useState([]);
 
     return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="email" value={initialValues.name} onChange={handleChange} placeholder="Enter email"></input>
-            <input className="input-field" type="text" name="password" value={initialValues.password} onChange={handleChange} placeholder="Enter password"></input>
-            <button className="submit-btn" type="submit">Log In</button>
-        </form>
+        <div>
+         <Formik
+           initialValues={{ email: '', password: '' }}
+           validationSchema={Yup.object({
+            email: Yup.string().email('Email inválido').required('Este campo es obligatorio'),
+            password: Yup.string()
+                .min(6, 'Debe tener por lo menos 6 caracteres.')
+                .matches(/^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/, 'Debe contener al menos una letra, un número y un símbolo.') // eslint-disable-line
+                .required('Este campo es obligatorio'),
+           })}
+           onSubmit={(values) => {
+                let loginUser = {
+                    email:values.email,
+                    password:values.password
+                }
+                setUserData([...userData, loginUser])
+           }}
+         >
+           <Form>
+              <label htmlFor="email">
+                Email
+              </label>
+              <Field name="email" type="email"/>
+              <ErrorMessage name="email" />
+    
+              <label htmlFor="password">
+                Contraseña
+              </label>
+              <Field name="password" type="password"/>
+              <ErrorMessage name="password" />
+    
+              <button type='submit'>Entrar</button>
+            </Form>
+          </Formik>
+          </div>
     );
 }
- 
-export default LoginForm;
+
+export default LoginForm
