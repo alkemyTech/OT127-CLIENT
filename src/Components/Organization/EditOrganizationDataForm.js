@@ -44,7 +44,7 @@ const EditOrganizationDataForm = () => {
         if(emptyInputs.length){
             alert(`Los campos ${emptyInputs.map(element => ` ${element}`)} son obligatorios.`)
          } else {
-            alert('Todos los campos estan bien') // Acá iría acción put por axios
+            alert('Todos los campos estan bien') // Acá va acción put por axios
             setOrganizationData(organizationDataStructure())
          }
     }
