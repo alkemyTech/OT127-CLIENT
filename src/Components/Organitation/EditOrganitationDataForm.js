@@ -5,10 +5,12 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 import FormLabel from '@mui/material/FormLabel';
+import FormHelperText from '@mui/material/FormHelperText';
 
 const EditOrganitationDataForm = () => {
 
     const [organitationData, setOrganitationData] = useState(organitationDataStructure())
+    const [requiredSocials, setRequiredSocials] = useState(socialsRequired())
     console.log(organitationData);
     const handleChange = (event) => {
         for (const property in organitationData) {
@@ -20,10 +22,15 @@ const EditOrganitationDataForm = () => {
         let regex = new RegExp(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi);
         let verifyUrl = event.target.value.match(regex)
         if(!verifyUrl){
-            alert('Solo acepta url.')
+            for (const property in requiredSocials) {
+                event.target.id === property && setRequiredSocials({...requiredSocials, [property] : 'Tienes que ingresar una URL.'})
+            }
         } else {
             for (const property in organitationData) {
             event.target.id === property && setOrganitationData({...organitationData, [property] : event.target.value})
+            for (const property in requiredSocials) {
+                event.target.id === property && setRequiredSocials({...requiredSocials, [property] : ''})
+            }
         }}
     }
 
@@ -62,18 +69,22 @@ const EditOrganitationDataForm = () => {
             <FormControl>
             <InputLabel htmlFor="facebook" >Facebook</InputLabel>
             <Input id="facebook" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
+            <FormHelperText id="my-helper-text">{requiredSocials.facebook}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="linkedin" >Linkedin</InputLabel>
             <Input id="linkedin" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
+            <FormHelperText id="my-helper-text">{requiredSocials.linkedin}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="instagram" >Instagram</InputLabel>
             <Input id="instagram" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
+            <FormHelperText id="my-helper-text">{requiredSocials.instagram}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="twitter" >Twitter</InputLabel>
             <Input id="twitter" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
+            <FormHelperText id="my-helper-text">{requiredSocials.twitter}</FormHelperText>
             </FormControl>
             <FormControl>
             <Input id="submit" type='submit' onClick={handleSubmit}/>
@@ -92,6 +103,15 @@ const organitationDataStructure = () => {
         linkedin:null,
         instagram:null,
         twitter:null
+    }
+}
+
+const socialsRequired = () => {
+    return {
+        facebook: '',
+        linkedin: '',
+        instagram: '',
+        twitter: ''
     }
 }
 
