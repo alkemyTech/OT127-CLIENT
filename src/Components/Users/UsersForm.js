@@ -22,27 +22,37 @@ const UserForm = () => {
     >
       {(formProps) => (
         <Form>
-          <label htmlFor="name">First Name</label>
-          <Field name="name" type="text" />
-          <ErrorMessage name="name" />
-          <label htmlFor="email">Email Address</label>
-          <Field name="email" type="email" />
-          <ErrorMessage name="email" />
-          <Field name="role" as="select">
-            <option value="administrador">Administrador</option>
-            <option value="regular">Regular</option>
-          </Field>
-          <input
-            name="profilePhoto"
-            type="file"
-            onChange={(event) => {
-              formProps.setFieldValue(
-                "profilePhoto",
-                event.currentTarget.files[0]
-              );
-            }}
-          />
-          <button type="submit">Submit</button>
+          <div>
+            <label htmlFor="name">Nombre</label>
+            <Field name="name" type="text" />
+            <ErrorMessage name="name" />
+          </div>
+          <div>
+            <label htmlFor="email">Email</label>
+            <Field name="email" type="email" />
+            <ErrorMessage name="email" />
+          </div>
+          <div>
+            <label htmlFor="name">Rol</label>
+            <Field name="role" as="select">
+              <option value="administrador">Administrador</option>
+              <option value="regular">Regular</option>
+            </Field>
+            <ErrorMessage name="role" />
+          </div>
+          <div>
+            <input
+              name="profilePhoto"
+              type="file"
+              onChange={(event) => {
+                formProps.setFieldValue(
+                  "profilePhoto",
+                  event.currentTarget.files[0]
+                );
+              }}
+            />
+          </div>
+          <button type="submit">Crear</button>
         </Form>
       )}
     </Formik>
