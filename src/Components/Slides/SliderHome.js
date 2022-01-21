@@ -6,6 +6,8 @@ const SliderHome = () => {
     const carousel = useRef(null)
     const intervalCarousel = useRef(null)
 
+    const [sliderData, setSliderData] = React.useState([])
+
     const nextSlide = () => {
         // Me aseguro que se ejecute solo cuando el carrusel tenga contenido
         if (carousel.current.children.length > 0) {
@@ -56,13 +58,11 @@ const SliderHome = () => {
         intervalCarousel.current = setInterval(() => {
             nextSlide()
         }, 5000)
-
         // Cuando el mouse este encima del slider eliminamos el intervalo 
         // para que este no cambiara automaticamente 
         carousel.current.addEventListener('mouseenter', () => {
             clearInterval(intervalCarousel.current)
         })
-
         // Cuando el mouse deje estar sobre el slider, reestablecemos el intervalo
         carousel.current.addEventListener('mouseleave', () => {
             intervalCarousel.current = setInterval(() => {
@@ -70,6 +70,19 @@ const SliderHome = () => {
             }, 5000)
         })
     }, [])
+
+    useEffect(() => {
+        const getSlides = async () => {
+            try {
+                const response = await axios.get('http://ongapi.alkemy.org/api/slides')
+                setSliderData(response.data.data)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        getSlides()
+    }, [])
+
 
     return (
         <div className='slider'>
