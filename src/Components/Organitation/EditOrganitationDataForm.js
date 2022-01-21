@@ -10,6 +10,7 @@ const EditOrganitationDataForm = () => {
 
     const handleChange = (event) => {
         event.target.id === 'name' && setOrganitationData({...organitationData, name:event.target.value})
+        event.target.id === 'logo' && setOrganitationData({...organitationData, logo:event.target.value})
         event.target.id === 'longDescription' && setOrganitationData({...organitationData, longDescription:event.target.value})
         event.target.id === 'facebook' && setOrganitationData({...organitationData, facebook:event.target.value})
         event.target.id === 'linkedin' && setOrganitationData({...organitationData, linkedin:event.target.value})
@@ -19,11 +20,11 @@ const EditOrganitationDataForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        let array = []
+        let emptyInputs = []
         for (const property in organitationData) {
-            organitationData[property] === null && array.push(property.charAt(0).toUpperCase() + property.slice(1))
+            organitationData[property] === null && emptyInputs.push(property.charAt(0).toUpperCase() + property.slice(1))
         }
-        array.length ? array.map(element => alert(`${element}`)) : alert('Todos los campos estan bien')
+        emptyInputs.length ? emptyInputs.map(element => alert(`El campo ${element} es obligatorio.`)) : alert('Todos los campos estan bien.')
     }
 
     return (
@@ -31,6 +32,10 @@ const EditOrganitationDataForm = () => {
             <FormControl>
             <InputLabel htmlFor="my-input" required={true}>Name</InputLabel>
             <Input id="name" aria-describedby="my-helper-text" onChange={handleChange}/>
+            </FormControl>
+            <FormControl>
+            <InputLabel htmlFor="my-input" required={true}>Logo</InputLabel>
+            <Input id="logo" type='file' accept="image/x-png, image/jpeg" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="my-input" required={true}>Long description</InputLabel>
