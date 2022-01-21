@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
@@ -7,22 +9,18 @@ import FormLabel from '@mui/material/FormLabel';
 const EditOrganitationDataForm = () => {
 
     const [organitationData, setOrganitationData] = useState(organitationDataStructure())
-
+    
     const handleChange = (event) => {
-        event.target.id === 'name' && setOrganitationData({...organitationData, name:event.target.value})
-        event.target.id === 'logo' && setOrganitationData({...organitationData, logo:event.target.value})
-        event.target.id === 'longDescription' && setOrganitationData({...organitationData, longDescription:event.target.value})
-        event.target.id === 'facebook' && setOrganitationData({...organitationData, facebook:event.target.value})
-        event.target.id === 'linkedin' && setOrganitationData({...organitationData, linkedin:event.target.value})
-        event.target.id === 'instagram' && setOrganitationData({...organitationData, instagram:event.target.value})
-        event.target.id === 'twitter' && setOrganitationData({...organitationData, twitter:event.target.value})
+        for (const property in organitationData) {
+            event.target.id === property && setOrganitationData({...organitationData, [property] : event.target.value})
+        }
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
         let emptyInputs = []
         for (const property in organitationData) {
-            organitationData[property] === null && emptyInputs.push(property.charAt(0).toUpperCase() + property.slice(1))
+            !organitationData[property] && emptyInputs.push(property.charAt(0).toUpperCase() + property.slice(1))
         }
         emptyInputs.length ? emptyInputs.map(element => alert(`El campo ${element} es obligatorio.`)) : alert('Todos los campos estan bien.')
     }
@@ -30,36 +28,44 @@ const EditOrganitationDataForm = () => {
     return (
         <div>
             <FormControl>
-            <InputLabel htmlFor="my-input" required={true}>Name</InputLabel>
+            <InputLabel htmlFor="name" required={true}>Name</InputLabel>
             <Input id="name" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <InputLabel htmlFor="my-input" required={true}>Logo</InputLabel>
+            <InputLabel htmlFor="logo" required={true}>Logo</InputLabel>
             <Input id="logo" type='file' accept="image/x-png, image/jpeg" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
+            <CKEditor
+                    editor={ ClassicEditor }
+                    data={null}
+                    onChange={ ( event, editor ) => {
+                        const data = editor.getData();
+                        setOrganitationData({...organitationData, shortDescription:data})
+                    } }
+            />
             <FormControl>
-            <InputLabel htmlFor="my-input" required={true}>Long description</InputLabel>
+            <InputLabel htmlFor="longDescription" required={true}>Long description</InputLabel>
             <Input id="longDescription" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormLabel>Redes sociales</FormLabel>
             <FormControl>
-            <InputLabel htmlFor="my-input" >Facebook</InputLabel>
+            <InputLabel htmlFor="facebook" >Facebook</InputLabel>
             <Input id="facebook" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <InputLabel htmlFor="my-input" >Linkedin</InputLabel>
+            <InputLabel htmlFor="linkedin" >Linkedin</InputLabel>
             <Input id="linkedin" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <InputLabel htmlFor="my-input" >Instagram</InputLabel>
+            <InputLabel htmlFor="instagram" >Instagram</InputLabel>
             <Input id="instagram" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <InputLabel htmlFor="my-input" >Twitter</InputLabel>
+            <InputLabel htmlFor="twitter" >Twitter</InputLabel>
             <Input id="twitter" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <Input id="my-input" type='submit' onClick={handleSubmit}/>
+            <Input id="submit" type='submit' onClick={handleSubmit}/>
             </FormControl>
         </div>
     )
