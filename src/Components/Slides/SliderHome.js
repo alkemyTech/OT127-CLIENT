@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import axios from 'axios'
 import './SliderHome.css'
 
 const SliderHome = () => {
     const carousel = useRef(null)
+    const intervalCarousel = useRef(null)
 
     const nextSlide = () => {
         // Me aseguro que se ejecute solo cuando el carrusel tenga contenido
@@ -44,6 +45,31 @@ const SliderHome = () => {
             }, 30)
         }
     }
+
+
+    // Para hacer que el slider cambie automaticamente cada 5 segundos
+    useEffect(() => {
+        // Esto hace que el slider cambie cada 5 segundos
+        // esto puede genera que un usuario no alcance a leer la informacion del slide
+        // o que cuando le de click al siguiente slide, este cambie 2 veces
+        // seguidas porque justo pasaron 5 segundo y se cambia automaticamente
+        intervalCarousel.current = setInterval(() => {
+            nextSlide()
+        }, 5000)
+
+        // Cuando el mouse este encima del slider eliminamos el intervalo 
+        // para que este no cambiara automaticamente 
+        carousel.current.addEventListener('mouseenter', () => {
+            clearInterval(intervalCarousel.current)
+        })
+
+        // Cuando el mouse deje estar sobre el slider, reestablecemos el intervalo
+        carousel.current.addEventListener('mouseleave', () => {
+            intervalCarousel.current = setInterval(() => {
+                nextSlide()
+            }, 5000)
+        })
+    }, [])
 
     return (
         <div className='slider'>
