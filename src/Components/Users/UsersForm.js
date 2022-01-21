@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
+import { useParams } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "../FormStyles.css";
 
 const UserForm = () => {
+  const { id } = useParams();
+  let initialValues = {};
+  if (id) {
+    // Para obtener éstos valores, hay que irlos a buscar al backend?? usando el id como id??
+    initialValues = {
+      name: "prueba",
+      email: "prueba@prueba.com",
+      role: "",
+      profilePhoto: "",
+    };
+  } else {
+    initialValues = { name: "", email: "", role: "", profilePhoto: "" };
+  }
+
   return (
     <Formik
-      initialValues={{ name: "", email: "", role: "", profilePhoto: "" }}
+      initialValues={initialValues}
       validationSchema={Yup.object({
         name: Yup.string()
           .min(4, "El nombre debe tener 4 letras como mínimo")
