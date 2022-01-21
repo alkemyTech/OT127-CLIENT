@@ -7,14 +7,14 @@ import Input from '@mui/material/Input';
 import FormLabel from '@mui/material/FormLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 
-const EditOrganitationDataForm = () => {
+const EditOrganizationDataForm = () => {
 
-    const [organitationData, setOrganitationData] = useState(organitationDataStructure())
+    const [organizationData, setOrganizationData] = useState(organizationDataStructure())
     const [requiredSocials, setRequiredSocials] = useState(socialsUrlRequired())
 
     const handleChange = (event) => {
-        for (const property in organitationData) {
-            event.target.id === property && setOrganitationData({...organitationData, [property] : event.target.value})
+        for (const property in organizationData) {
+            event.target.id === property && setOrganizationData({...organizationData, [property] : event.target.value})
         }
     }
 
@@ -25,11 +25,11 @@ const EditOrganitationDataForm = () => {
         if(!verifyUrl){
             for (const property in requiredSocials) {
                 id === property && setRequiredSocials({...requiredSocials, [property] : 'Tienes que ingresar una URL válida.'})
-                id === property && setOrganitationData({...organitationData, [property] : ''})
+                id === property && setOrganizationData({...organizationData, [property] : ''})
             }
         } else {
-            for (const property in organitationData) {
-            id === property && setOrganitationData({...organitationData, [property] : event.target.value})
+            for (const property in organizationData) {
+            id === property && setOrganizationData({...organizationData, [property] : event.target.value})
             for (const property in requiredSocials) {
                 id === property && setRequiredSocials({...requiredSocials, [property] : ''})
             }
@@ -38,14 +38,14 @@ const EditOrganitationDataForm = () => {
 
     const handleSubmit = () => {
         let emptyInputs = []
-        for (const property in organitationData){
-            !organitationData[property].length && emptyInputs.push(property.charAt(0).toUpperCase() + property.slice(1))
+        for (const property in organizationData){
+            !organizationData[property].length && emptyInputs.push(property.charAt(0).toUpperCase() + property.slice(1))
         }
         if(emptyInputs.length){
             alert(`Los campos ${emptyInputs.map(element => ` ${element}`)} son obligatorios.`)
          } else {
             alert('Todos los campos estan bien') // Acá iría acción put por axios
-            setOrganitationData(organitationDataStructure())
+            setOrganizationData(organizationDataStructure())
          }
     }
 
@@ -64,7 +64,7 @@ const EditOrganitationDataForm = () => {
                     data={null}
                     onChange={ ( event, editor ) => {
                         const data = editor.getData().slice(3, -4);
-                        setOrganitationData({...organitationData, shortDescription:data})
+                        setOrganizationData({...organizationData, shortDescription:data})
                     } }
             />
             <FormControl>
@@ -74,22 +74,22 @@ const EditOrganitationDataForm = () => {
             <FormLabel>Redes sociales</FormLabel>
             <FormControl>
             <InputLabel htmlFor="facebook" >Facebook</InputLabel>
-            <Input id="facebook" value={organitationData.facebook} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
+            <Input id="facebook" value={organizationData.facebook} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.facebook}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="linkedin" >Linkedin</InputLabel>
-            <Input id="linkedin" value={organitationData.linkedin} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
+            <Input id="linkedin" value={organizationData.linkedin} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.linkedin}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="instagram" >Instagram</InputLabel>
-            <Input id="instagram" value={organitationData.instagram} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
+            <Input id="instagram" value={organizationData.instagram} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.instagram}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="twitter" >Twitter</InputLabel>
-            <Input id="twitter" value={organitationData.twitter} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
+            <Input id="twitter" value={organizationData.twitter} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.twitter}</FormHelperText>
             </FormControl>
             <FormControl>
@@ -99,7 +99,7 @@ const EditOrganitationDataForm = () => {
     )
 }
 
-const organitationDataStructure = () => {
+const organizationDataStructure = () => {
     return {
         name:'',
         logo:'',
@@ -121,4 +121,4 @@ const socialsUrlRequired = () => {
     }
 }
 
-export default EditOrganitationDataForm
+export default EditOrganizationDataForm
