@@ -1,38 +1,48 @@
-import React, { useState } from 'react';
-import '../FormStyles.css';
+import React from "react";
+import { Formik, Field, Form, ErrorMessage, withFormik } from "formik";
+import * as Yup from "yup";
+import "../FormStyles.css";
+import { findByPlaceholderText } from "@testing-library/react";
 
 const UserForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        name: '',
-        email: '',
-        roleId: ''
-    })
+  return (
+    <Formik
+      initialValues={{ name: "", email: "", role: "", profilePhoto: "" }}
+      validationSchema={Yup.object({
+        name: Yup.string()
+          .max(15, "Must be 15 characters or less")
+          .required("Required"),
+        email: Yup.string().email("Invalid email address").required("Required"),
+        role: Yup.string()
+          .max(20, "Must be 20 characters or less")
+          .required("Required"),
+      })}
+      onSubmit={(values, formikBag) => {
+        console.log(values);
+      }}
+    >
+      <Form>
+        <label htmlFor="name">First Name</label>
+        <Field name="name" type="text" />
+        <ErrorMessage name="name" />
+        <label htmlFor="email">Email Address</label>
+        <Field name="email" type="email" />
+        <ErrorMessage name="email" />
+        <Field name="role" as="select">
+          <option value="administrador">Administrador</option>
+          <option value="regular">Regular</option>
+        </Field>
+        <input
+          name="profilePhoto"
+          type="file"
+          // onChange={(event) => {
+          //   setFieldValue("profilePhoto", event.currentTarget.files[0]);
+          // }}
+        />
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
+  );
+};
 
-    const handleChange = (e) => {
-        if(e.target.name === 'name'){
-            setInitialValues({...initialValues, name: e.target.value})
-        } if(e.target.name === 'email'){
-            setInitialValues({...initialValues, email: e.target.value})
-        }
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-    }
-
-    return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name || ''} onChange={handleChange} placeholder="Name"></input>
-            <input className="input-field" type="text" name="email" value={initialValues.description || ''} onChange={handleChange} placeholder="Email"></input>
-            <select className="input-field" value={initialValues.roleId || ''} onChange={e => setInitialValues({...initialValues, roleId: e.target.value})}>
-                <option value="" disabled >Select the role</option>
-                <option value="1">Admin</option>
-                <option value="2">User</option>
-            </select>
-            <button className="submit-btn" type="submit">Send</button>
-        </form>
-    );
-}
- 
 export default UserForm;
