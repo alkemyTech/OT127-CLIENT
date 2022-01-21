@@ -5,7 +5,7 @@ import '../FormStyles.css';
 
 const LoginForm = () => {
 
-    const [usersData, setUsersData] = useState([]);
+    const [userData, setUserData] = useState([]);
 
     return (
         <div>
@@ -23,7 +23,7 @@ const LoginForm = () => {
                     email:values.email,
                     password:values.password
                 }
-                setUsersData([...usersData, loginUser])
+                setUserData([...userData, loginUser])
            }}
          >
            <Form>
