@@ -29,7 +29,20 @@ const SliderHome = () => {
     }
 
     const prevSlide = () => {
-        console.log("slide anterior");
+        if (carousel.current.children.length > 0) {
+            const lastItemIndex = carousel.current.children.length - 1
+            const lastItem = carousel.current.children[lastItemIndex]
+            carousel.current.insertBefore(lastItem, carousel.current.firstChild)
+
+            carousel.current.style.transition = 'none'
+            const slideWidth = carousel.current.children[0].offsetWidth
+            carousel.current.style.transform = `translateX(-${slideWidth}px)`
+
+            setTimeout(() => {
+                carousel.current.style.transition = '300ms ease-out all'
+                carousel.current.style.transform = `translateX(0)`
+            }, 30)
+        }
     }
 
     return (
