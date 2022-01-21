@@ -9,11 +9,22 @@ import FormLabel from '@mui/material/FormLabel';
 const EditOrganitationDataForm = () => {
 
     const [organitationData, setOrganitationData] = useState(organitationDataStructure())
-    
+    console.log(organitationData);
     const handleChange = (event) => {
         for (const property in organitationData) {
             event.target.id === property && setOrganitationData({...organitationData, [property] : event.target.value})
         }
+    }
+
+    const handleBlurSocials = (event) => {
+        let regex = new RegExp(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi);
+        let verifyUrl = event.target.value.match(regex)
+        if(!verifyUrl){
+            alert('Solo acepta url.')
+        } else {
+            for (const property in organitationData) {
+            event.target.id === property && setOrganitationData({...organitationData, [property] : event.target.value})
+        }}
     }
 
     const handleSubmit = (event) => {
@@ -28,11 +39,11 @@ const EditOrganitationDataForm = () => {
     return (
         <div>
             <FormControl>
-            <InputLabel htmlFor="name" required={true}>Name</InputLabel>
+            <InputLabel htmlFor="name" required>Name</InputLabel>
             <Input id="name" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <InputLabel htmlFor="logo" required={true}>Logo</InputLabel>
+            <InputLabel htmlFor="logo" required>Logo</InputLabel>
             <Input id="logo" type='file' accept="image/x-png, image/jpeg" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <CKEditor
@@ -44,25 +55,25 @@ const EditOrganitationDataForm = () => {
                     } }
             />
             <FormControl>
-            <InputLabel htmlFor="longDescription" required={true}>Long description</InputLabel>
+            <InputLabel htmlFor="longDescription" required>Long description</InputLabel>
             <Input id="longDescription" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormLabel>Redes sociales</FormLabel>
             <FormControl>
             <InputLabel htmlFor="facebook" >Facebook</InputLabel>
-            <Input id="facebook" aria-describedby="my-helper-text" onChange={handleChange}/>
+            <Input id="facebook" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="linkedin" >Linkedin</InputLabel>
-            <Input id="linkedin" aria-describedby="my-helper-text" onChange={handleChange}/>
+            <Input id="linkedin" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="instagram" >Instagram</InputLabel>
-            <Input id="instagram" aria-describedby="my-helper-text" onChange={handleChange}/>
+            <Input id="instagram" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="twitter" >Twitter</InputLabel>
-            <Input id="twitter" aria-describedby="my-helper-text" onChange={handleChange}/>
+            <Input id="twitter" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
             </FormControl>
             <FormControl>
             <Input id="submit" type='submit' onClick={handleSubmit}/>
