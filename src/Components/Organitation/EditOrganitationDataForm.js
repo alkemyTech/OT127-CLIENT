@@ -10,8 +10,8 @@ import FormHelperText from '@mui/material/FormHelperText';
 const EditOrganitationDataForm = () => {
 
     const [organitationData, setOrganitationData] = useState(organitationDataStructure())
-    const [requiredSocials, setRequiredSocials] = useState(socialsRequired())
-    console.log(organitationData);
+    const [requiredSocials, setRequiredSocials] = useState(socialsUrlRequired())
+    
     const handleChange = (event) => {
         for (const property in organitationData) {
             event.target.id === property && setOrganitationData({...organitationData, [property] : event.target.value})
@@ -23,7 +23,8 @@ const EditOrganitationDataForm = () => {
         let verifyUrl = event.target.value.match(regex)
         if(!verifyUrl){
             for (const property in requiredSocials) {
-                event.target.id === property && setRequiredSocials({...requiredSocials, [property] : 'Tienes que ingresar una URL.'})
+                event.target.id === property && setRequiredSocials({...requiredSocials, [property] : 'Tienes que ingresar una URL válida.'})
+                event.target.id === property && setOrganitationData({...organitationData, [property] : ''})
             }
         } else {
             for (const property in organitationData) {
@@ -37,10 +38,10 @@ const EditOrganitationDataForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         let emptyInputs = []
-        for (const property in organitationData) {
-            !organitationData[property] && emptyInputs.push(property.charAt(0).toUpperCase() + property.slice(1))
+        for (const property in organitationData){
+            !organitationData[property].length && emptyInputs.push(property.charAt(0).toUpperCase() + property.slice(1))
         }
-        emptyInputs.length ? emptyInputs.map(element => alert(`El campo ${element} es obligatorio.`)) : alert('Todos los campos estan bien.')
+        emptyInputs.length ? alert('Los campos '+ emptyInputs.map(element => ` ${element}`) + ' son obligatorios.') : alert('Todos los campos estan bien.')
     }
 
     return (
@@ -57,7 +58,7 @@ const EditOrganitationDataForm = () => {
                     editor={ ClassicEditor }
                     data={null}
                     onChange={ ( event, editor ) => {
-                        const data = editor.getData();
+                        const data = editor.getData().slice(3, -4);
                         setOrganitationData({...organitationData, shortDescription:data})
                     } }
             />
@@ -68,22 +69,22 @@ const EditOrganitationDataForm = () => {
             <FormLabel>Redes sociales</FormLabel>
             <FormControl>
             <InputLabel htmlFor="facebook" >Facebook</InputLabel>
-            <Input id="facebook" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
+            <Input id="facebook" value={organitationData.facebook} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.facebook}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="linkedin" >Linkedin</InputLabel>
-            <Input id="linkedin" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
+            <Input id="linkedin" aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.linkedin}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="instagram" >Instagram</InputLabel>
-            <Input id="instagram" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
+            <Input id="instagram" aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.instagram}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="twitter" >Twitter</InputLabel>
-            <Input id="twitter" aria-describedby="my-helper-text" onBlur={handleBlurSocials}/>
+            <Input id="twitter" aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.twitter}</FormHelperText>
             </FormControl>
             <FormControl>
@@ -95,18 +96,18 @@ const EditOrganitationDataForm = () => {
 
 const organitationDataStructure = () => {
     return {
-        name:null,
-        logo:null,
-        shortDescription:null,
-        longDescription:null,
-        facebook:null,
-        linkedin:null,
-        instagram:null,
-        twitter:null
+        name:'',
+        logo:'',
+        shortDescription:'',
+        longDescription:'',
+        facebook:'',
+        linkedin:'',
+        instagram:'',
+        twitter:''
     }
 }
 
-const socialsRequired = () => {
+const socialsUrlRequired = () => {
     return {
         facebook: '',
         linkedin: '',
