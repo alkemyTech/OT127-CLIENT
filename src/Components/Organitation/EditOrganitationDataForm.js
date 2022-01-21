@@ -17,6 +17,15 @@ const EditOrganitationDataForm = () => {
         event.target.id === 'twitter' && setOrganitationData({...organitationData, twitter:event.target.value})
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        let array = []
+        for (const property in organitationData) {
+            organitationData[property] === null && array.push(property.charAt(0).toUpperCase() + property.slice(1))
+        }
+        array.length ? array.map(element => alert(`${element}`)) : alert('Todos los campos estan bien')
+    }
+
     return (
         <div>
             <FormControl>
@@ -45,7 +54,7 @@ const EditOrganitationDataForm = () => {
             <Input id="twitter" aria-describedby="my-helper-text" onChange={handleChange}/>
             </FormControl>
             <FormControl>
-            <Input id="my-input" type='submit' onClick={() => console.log('hola')}/>
+            <Input id="my-input" type='submit' onClick={handleSubmit}/>
             </FormControl>
         </div>
     )
@@ -53,14 +62,14 @@ const EditOrganitationDataForm = () => {
 
 const organitationDataStructure = () => {
     return {
-        name:'',
-        logo:'',
-        shortDescription:'',
-        longDescription:'',
-        facebookUrl:'',
-        linkedinUrl:'',
-        instagramUrl:'',
-        twitterUrl:''
+        name:null,
+        logo:null,
+        shortDescription:null,
+        longDescription:null,
+        facebook:null,
+        linkedin:null,
+        instagram:null,
+        twitter:null
     }
 }
 
