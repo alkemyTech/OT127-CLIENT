@@ -29,9 +29,9 @@ function App() {
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
+          <Route path="/login" component={LoginForm} />
         </Switch>
       </BrowserRouter> 
-      <LoginForm/> {/* Puesto acá solo para probar, no especifica en que ruta va */}
     </>
   );
 }
