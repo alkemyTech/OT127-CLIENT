@@ -11,7 +11,7 @@ const EditOrganitationDataForm = () => {
 
     const [organitationData, setOrganitationData] = useState(organitationDataStructure())
     const [requiredSocials, setRequiredSocials] = useState(socialsUrlRequired())
-    
+
     const handleChange = (event) => {
         for (const property in organitationData) {
             event.target.id === property && setOrganitationData({...organitationData, [property] : event.target.value})
@@ -19,29 +19,34 @@ const EditOrganitationDataForm = () => {
     }
 
     const handleBlurSocials = (event) => {
+        let id = event.target.id
         let regex = new RegExp(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi);
         let verifyUrl = event.target.value.match(regex)
         if(!verifyUrl){
             for (const property in requiredSocials) {
-                event.target.id === property && setRequiredSocials({...requiredSocials, [property] : 'Tienes que ingresar una URL válida.'})
-                event.target.id === property && setOrganitationData({...organitationData, [property] : ''})
+                id === property && setRequiredSocials({...requiredSocials, [property] : 'Tienes que ingresar una URL válida.'})
+                id === property && setOrganitationData({...organitationData, [property] : ''})
             }
         } else {
             for (const property in organitationData) {
-            event.target.id === property && setOrganitationData({...organitationData, [property] : event.target.value})
+            id === property && setOrganitationData({...organitationData, [property] : event.target.value})
             for (const property in requiredSocials) {
-                event.target.id === property && setRequiredSocials({...requiredSocials, [property] : ''})
+                id === property && setRequiredSocials({...requiredSocials, [property] : ''})
             }
         }}
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+    const handleSubmit = () => {
         let emptyInputs = []
         for (const property in organitationData){
             !organitationData[property].length && emptyInputs.push(property.charAt(0).toUpperCase() + property.slice(1))
         }
-        emptyInputs.length ? alert('Los campos '+ emptyInputs.map(element => ` ${element}`) + ' son obligatorios.') : alert('Todos los campos estan bien.')
+        if(emptyInputs.length){
+            alert(`Los campos ${emptyInputs.map(element => ` ${element}`)} son obligatorios.`)
+         } else {
+             alert('Todos los campos estan bien')
+            setOrganitationData(organitationDataStructure())
+         }
     }
 
     return (
@@ -74,17 +79,17 @@ const EditOrganitationDataForm = () => {
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="linkedin" >Linkedin</InputLabel>
-            <Input id="linkedin" aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
+            <Input id="linkedin" value={organitationData.linkedin} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.linkedin}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="instagram" >Instagram</InputLabel>
-            <Input id="instagram" aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
+            <Input id="instagram" value={organitationData.instagram} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.instagram}</FormHelperText>
             </FormControl>
             <FormControl>
             <InputLabel htmlFor="twitter" >Twitter</InputLabel>
-            <Input id="twitter" aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
+            <Input id="twitter" value={organitationData.twitter} aria-describedby="my-helper-text" onChange={handleChange} onBlur={handleBlurSocials}/>
             <FormHelperText id="my-helper-text">{requiredSocials.twitter}</FormHelperText>
             </FormControl>
             <FormControl>
