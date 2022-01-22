@@ -37,35 +37,54 @@ const CategoriesForm = () => {
     }
 
     return (
-        <form className="form-container" onSubmit={handleSubmit}>
 
-                <input 
-                    className="input-field" 
-                    type="text" name="name" 
-                    value={name} 
-                    onChange={e => setName(e.target.value)} 
-                    placeholder="Title">
-                </input>
 
-                <input 
-                    className="input-field" 
-                    type="text" 
-                    name="description" 
-                    value={description} 
-                    onChange={e => setDescription(e.target.value)} 
-                    placeholder="Write some description">
-                </input>
-                <input className="input-field" type="file" name='image'  onChange={handleImage}></input>
+        <div className='form-container'>
+            <Formik>
+                <Form>
+                    <div>
+                        <label
+                            htmlFor="name"
+                        >Nombre:</label>
+                        <Field
+                            className="input-field" 
+                            type="text"
+                            placeholder="Nombre de la Categoría"
+                            id="name"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor="description"
+                        >Descripción:</label>
+                        <Field
+                            className="input-field" 
+                            type="text"
+                            placeholder="Descripción de la Categoría"
+                            id="description"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor="image"
+                        >Descripción:</label>
+                        <Field
+                            type="file"
+                            id="image"
+                        />
+                    </div>
 
-                <input 
-                className="submit-btn" 
-                type="submit" 
-                value={(urlCurrent === '/create-category') ? "Add" : "Edit"}>
-                </input>
+                    <input 
+                        className="submit-btn" 
+                        type="submit" 
+                        value={(urlCurrent === '/create-category') ? "Add" : "Edit"}
+                    />
 
-        </form>
+                </Form>
+            </Formik>
+        </div>
 
-        
+
     );
 }
 
