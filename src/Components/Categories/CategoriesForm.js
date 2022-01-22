@@ -60,8 +60,11 @@ const CategoriesForm = () => {
                 onSubmit={ (values, props) => {
                     handleSubmit(values, props)
                 }}
+                
+                validationSchema={validationSchema}
             >
-                {() => (
+                {({errors, touched}) => {
+                    return (
                 <Form>
                     <div>
                         <label
@@ -74,6 +77,7 @@ const CategoriesForm = () => {
                             id="category"
                             name="category"
                         />
+                {errors.category && touched.category}
                     </div>
                     <div>
                         <label
@@ -105,7 +109,7 @@ const CategoriesForm = () => {
                     />
 
                 </Form>
-                )}
+                )}}
             </Formik>
         </div>
 
