@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik'
+import * as Yup from "yup";
 
 
 const CategoriesForm = () => {
@@ -12,6 +13,10 @@ const CategoriesForm = () => {
     const location = useLocation()
     const urlCurrent = location.pathname
     console.log(urlCurrent)
+
+    const validationSchema = Yup.object().shape({
+        category: Yup.string().required('El nombre de la categoría es obligatorio'),
+    })
 
     const handleSubmit = (values, props) => {
         console.log(values, props)
