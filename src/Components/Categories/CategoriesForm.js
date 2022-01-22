@@ -16,7 +16,11 @@ const CategoriesForm = () => {
     console.log(urlCurrent)
 
     const validationSchema = Yup.object().shape({
-        category: Yup.string().required('El nombre de la categoría es obligatorio'),
+        category: Yup.string()
+                    .min(4, 'El nombre de la categoría es muy corto')
+                    .required('El nombre de la categoría es obligatorio'),
+        description: Yup.string()
+                    .required('La descripción de la categoría es obligatorio')
     })
 
     const handleSubmit = (values, props) => {
@@ -67,6 +71,7 @@ const CategoriesForm = () => {
                 {({errors, touched}) => {
                     return (
                 <Form>
+
                     <div>
                         <label
                             htmlFor="category"
@@ -78,8 +83,11 @@ const CategoriesForm = () => {
                             id="category"
                             name="category"
                         />
-                {errors.category && touched.category}
+                        {errors.category && touched.category ? (
+                            <Error>{errors.category}</Error>
+                        ) : null}
                     </div>
+
                     <div>
                         <label
                             htmlFor="description"
@@ -91,7 +99,11 @@ const CategoriesForm = () => {
                             id="description"
                             name="description"
                         />
+                        {errors.description && touched.description ? (
+                            <Error>{errors.description}</Error>
+                        ) : null}
                     </div>
+
                     <div>
                         <label
                             htmlFor="image"
