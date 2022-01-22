@@ -15,42 +15,50 @@ const CategoriesForm = () => {
 
 
 
-    const handleImage = e => {
-        setImage(URL.createObjectURL(e.currentTarget.files[0]))
-    }
+    // const handleImage = e => {
+    //     setImage(URL.createObjectURL(e.currentTarget.files[0]))
+    // }
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
 
-        if (urlCurrent === '/create-category') {
-            // Modifico
-            // path
-            console.log("Actualizando")
+    //     if (urlCurrent === '/create-category') {
+    //         // Modifico
+    //         // path
+    //         console.log("Actualizando")
 
-        } else {
-            // Creo
-            // post
-            console.log("Creando")
-        }
+    //     } else {
+    //         // Creo
+    //         // post
+    //         console.log("Creando")
+    //     }
 
-    }
+    // }
 
     return (
 
 
         <div className='form-container'>
-            <Formik>
+            <Formik
+                initialValues={{
+                    category: "",
+                    description:"",
+                    image:null
+
+                }}
+            >
                 <Form>
                     <div>
                         <label
-                            htmlFor="name"
+                            htmlFor="category"
                         >Nombre:</label>
                         <Field
                             className="input-field" 
                             type="text"
                             placeholder="Nombre de la Categoría"
-                            id="name"
+                            id="category"
+                            name="category"
                         />
                     </div>
                     <div>
@@ -62,6 +70,7 @@ const CategoriesForm = () => {
                             type="text"
                             placeholder="Descripción de la Categoría"
                             id="description"
+                            name="description"
                         />
                     </div>
                     <div>
@@ -71,6 +80,7 @@ const CategoriesForm = () => {
                         <Field
                             type="file"
                             id="image"
+                            name="image"
                         />
                     </div>
 
