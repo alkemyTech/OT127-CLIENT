@@ -9,6 +9,8 @@ const CategoriesForm = () => {
     const [image, setImage] = useState("");
     
     const location = useLocation()
+    const urlCurrent = location.pathname
+    console.log(urlCurrent)
 
     
 
