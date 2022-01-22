@@ -5,9 +5,9 @@ import { Formik, Form, Field } from 'formik'
 
 const CategoriesForm = () => {
 
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [image, setImage] = useState("");
+    // const [name, setName] = useState("");
+    // const [description, setDescription] = useState("");
+    // const [image, setImage] = useState("");
 
     const location = useLocation()
     const urlCurrent = location.pathname
