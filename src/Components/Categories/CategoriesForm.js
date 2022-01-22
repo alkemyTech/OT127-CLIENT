@@ -24,7 +24,7 @@ const CategoriesForm = () => {
         
 
 
-        if(Object.keys(location).length){
+        if(urlCurrent === '/create-category'){
             // Modifico
             // path
             console.log("Actualizando")
