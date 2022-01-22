@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Gracias() {
+const Gracias = () => {
   return (
   <div>
     <p>Texto de agradecimiento.</p>
