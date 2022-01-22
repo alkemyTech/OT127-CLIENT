@@ -13,6 +13,10 @@ const CategoriesForm = () => {
     const urlCurrent = location.pathname
     console.log(urlCurrent)
 
+    const handleSubmit = (values, props) => {
+        console.log(values, props)
+    }
+
 
 
     // const handleImage = e => {
@@ -44,10 +48,15 @@ const CategoriesForm = () => {
                 initialValues={{
                     category: "",
                     description:"",
-                    image:null
+                    image: ""
 
                 }}
+
+                onSubmit={ (values, props) => {
+                    handleSubmit(values, props)
+                }}
             >
+                {() => (
                 <Form>
                     <div>
                         <label
@@ -91,6 +100,7 @@ const CategoriesForm = () => {
                     />
 
                 </Form>
+                )}
             </Formik>
         </div>
 
