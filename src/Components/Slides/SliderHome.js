@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import axios from 'axios'
-import './SliderHome.css'
+import './SliderHome.scss'
 
 const SliderHome = () => {
     const carousel = useRef(null)
@@ -90,9 +90,9 @@ const SliderHome = () => {
                 {sliderData.map((slide) => (
                     <div className='slider__item' key={slide.id}>
                         <img className='slider__img' src={slide.image} alt={slide.name} />
-                        <div className='slider__text-container'>
-                            <p className='slider__title'>{slide.name}</p>
-                            <p className='slider__description'>{slide.description}</p>
+                        <div className='slider__text'>
+                            <p className='slider__text--title'>{slide.name}</p>
+                            <p className='slider__text--description'>{slide.description}</p>
                         </div>
                     </div>
                 ))}
