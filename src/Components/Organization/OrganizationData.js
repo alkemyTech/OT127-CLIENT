@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const OrganizationData = () => {
 
-    const [organizationData, setOrganizationData] = useState(null)
+    const [organizationData, setOrganizationData] = useState({})
 
     const getOrgData = () => {
         axios.get(' http://ongapi.alkemy.org/api/organization')
