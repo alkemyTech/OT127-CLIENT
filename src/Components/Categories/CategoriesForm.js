@@ -61,7 +61,7 @@ const CategoriesForm = () => {
                 <input 
                 className="submit-btn" 
                 type="submit" 
-                value={(Object.keys(location).length) ? "Edit" : "Add"}>
+                value={(urlCurrent === '/create-category') ? "Add" : "Edit"}>
                 </input>
 
         </form>
