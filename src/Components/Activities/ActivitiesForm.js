@@ -4,18 +4,13 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../FormStyles.css";
 import axios from "axios";
 
-const toDataURL = (url) =>
-  fetch(url)
-    .then((response) => response.blob())
-    .then(
-      (blob) =>
-        new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result);
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
-        })
-    );
+const toDataURL = (blob) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
 
 const ActivitiesForm = () => {
   const [activity, setActivity] = useState();
@@ -42,14 +37,16 @@ const ActivitiesForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    toDataURL(image).then((dataUrl) => {
-      axios.post("http://ongapi.alkemy.org/api/activities", {
-        name,
-        description,
-        image: dataUrl,
+    axios
+      .get(image, { responseType: "blob" })
+      .then((response) => toDataURL(response.data))
+      .then((encoded) => {
+        axios.post("http://ongapi.alkemy.org/api/activities", {
+          name,
+          description,
+          image: encoded,
+        });
       });
-    });
   };
 
   return (
