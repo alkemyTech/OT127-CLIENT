@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
@@ -32,7 +30,7 @@ function App() {
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
-          <Route path='/donar' render={(props) => (<Donacion {...props} message={'Quieres donar?'}/>)}/>
+          <Route path='/donar' component={() => (<Donacion message={'Quieres donar?'}/>)}/> 
           <Route path="/gracias" component={Gracias} />
         </Switch>
       </BrowserRouter>
