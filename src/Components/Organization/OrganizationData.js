@@ -22,7 +22,7 @@ const OrganizationData = () => {
     
     return (
         <>
-        {organizationData &&
+        {organizationData.data &&
         <div>
             <h1>{organizationData.data.name}</h1>
             <img src={organizationData.data.logo} alt='organization_logo'/>
