@@ -1,8 +1,32 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React, { useEffect, useState } from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+import axios from 'axios'
 
 const HomeForm = () => {
+    const [slidesData, setSlidesData] = useState([])
+    const [welcomeText, setWelcomeText] = useState("")
+
+    useEffect(() => {
+        const getDataToEdit = async () => {
+            try {
+                const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides')
+                const welcomeResponse = await axios.get('http://ongapi.alkemy.org/api/organization')
+
+                const slides = slidesResponse.data.data
+                const welcomeText = welcomeResponse.data.data.welcome_text
+
+                setSlidesData(slides);
+                setWelcomeText(welcomeText);
+
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        getDataToEdit()
+    }, [])
+
+
     return (
         <Formik
             initialValues={{ welcome: '' }}
@@ -19,12 +43,10 @@ const HomeForm = () => {
                 </label>
                 <Field name="welcome" />
                 <ErrorMessage name="welcome" />
-
-
                 <button type='submit'>Guardar Cambios</button>
             </Form>
         </Formik>
     )
-};
+}
 
-export default HomeForm;
+export default HomeForm 
