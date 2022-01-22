@@ -18,9 +18,6 @@ const OrganizationData = () => {
 
     useEffect(() => {
         getOrgData();
-        return () => {
-            setOrganizationData(null)
-        };
     }, []);
     
     return (
