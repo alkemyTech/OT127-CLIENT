@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
+import { Formik, Form, Field } from 'formik'
 
 
 const CategoriesForm = () => {
@@ -7,12 +8,12 @@ const CategoriesForm = () => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
-    
+
     const location = useLocation()
     const urlCurrent = location.pathname
     console.log(urlCurrent)
 
-    
+
 
     const handleImage = e => {
         setImage(URL.createObjectURL(e.currentTarget.files[0]))
@@ -21,15 +22,13 @@ const CategoriesForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
 
-
-        if(urlCurrent === '/create-category'){
+        if (urlCurrent === '/create-category') {
             // Modifico
             // path
             console.log("Actualizando")
 
-        }else{
+        } else {
             // Creo
             // post
             console.log("Creando")
