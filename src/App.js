@@ -16,6 +16,7 @@ import LoginForm from "./Components/Auth/LoginForm";
 
 function App() {
   return (
+    // Agregar newsletter en footer
     <>
       <BrowserRouter>
         <Switch>
