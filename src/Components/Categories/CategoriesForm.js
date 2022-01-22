@@ -1,46 +1,35 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom'
-import axios from 'axios';
-import '../FormStyles.css';
+import { useLocation } from 'react-router-dom'
+
 
 const CategoriesForm = () => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
-    const [mesagge, setMesagge] = useState("");
     
-    const params = useParams()
-    //console.log(Object.keys(params).length)
+    const location = useLocation()
+
     
 
     const handleImage = e => {
-        setImage(e.target.files[0])
+        setImage(URL.createObjectURL(e.currentTarget.files[0]))
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        if([name, description].includes("") || (!image)){
-            setMesagge('Todos los campos son obligatorio')
 
-            setTimeout(() => {
-                setMesagge('')
-            }, 3000);
 
-            return
-        }
-
-        setName(name)
-        setDescription(description)
-
-        if(Object.keys(params).length){
+        if(Object.keys(location).length){
             // Modifico
+            // path
             console.log("Actualizando")
 
         }else{
             // Creo
+            // post
             console.log("Creando")
         }
 
