@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "../FormStyles.css";
+import axios from "axios";
+
+const toDataURL = (url) =>
+  fetch(url)
+    .then((response) => response.blob())
+    .then(
+      (blob) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        })
+    );
 
 const ActivitiesForm = () => {
-  const [activity, setActivity] = useState({
-    name: "",
-    description: "",
-    image: "",
-  });
+  const [activity, setActivity] = useState();
+  const { name, description, image } = activity ? activity : {};
 
   const handleChange = (e) => {
     if (e.target.name === "name") {
@@ -31,10 +42,15 @@ const ActivitiesForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(activity);
-  };
 
-  const { name, description, image } = activity;
+    toDataURL(image).then((dataUrl) => {
+      axios.post("http://ongapi.alkemy.org/api/activities", {
+        name,
+        description,
+        image: dataUrl,
+      });
+    });
+  };
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
@@ -57,7 +73,7 @@ const ActivitiesForm = () => {
         accept=".png, .jpg"
         onChange={handleChange}
       />
-      <img src={image} alt="" srcset="" />
+      <img src={image} alt="" />
       <button className="submit-btn" type="submit">
         Send
       </button>
