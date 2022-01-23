@@ -2,6 +2,11 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik'
 
 function ContactForm() {
+
+  const handleSubmit = (values) => {
+    console.log(values)
+  } 
+
   return (
     <div className="form-container">
       <Formik
@@ -10,6 +15,9 @@ function ContactForm() {
           email: '',
           phone: '',
           mesagge:''
+        }}
+        onSubmit={ (values) => {
+          handleSubmit(values)
         }}
       >
         {() => (
