@@ -1,20 +1,20 @@
-import React from 'react';
-import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ActivitiesForm from './Components/Activities/ActivitiesForm';
-import CategoriesForm from './Components/Categories/CategoriesForm';
-import NewsForm from './Components/News/NewsForm';
-import SlidesForm from './Components/Slides/SlidesForm';
-import TestimonialForm from './Components/Testimonials/TestimonialsForm';
-import UserForm from './Components/Users/UsersForm';
-import SchoolCampaign from './Campaigns/School/SchoolCampaign';
-import ToysCampaign from './Campaigns/Toys/ToysCampaign';
-import MembersForm from './Components/Members/MembersForm';
-import ProjectsForm from './Components/Projects/ProjectsForm';
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ActivitiesForm from "./Components/Activities/ActivitiesForm";
+import CategoriesForm from "./Components/Categories/CategoriesForm";
+import NewsForm from "./Components/News/NewsForm";
+import SlidesForm from "./Components/Slides/SlidesForm";
+import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
+import UserForm from "./Components/Users/UsersForm";
+import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
+import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
+import MembersForm from "./Components/Members/MembersForm";
+import ProjectsForm from "./Components/Projects/ProjectsForm";
 import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
-import Donacion from './Donations/Donacion';
-import Gracias from './Donations/Gracias';
+import Donacion from "./Donations/Donacion";
+import Gracias from "./Donations/Gracias";
 
 function App() {
   return (
@@ -25,7 +25,8 @@ function App() {
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/creacion" component={SlidesForm} />
+          <Route path="/backoffice/edicion/:id" component={SlidesForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
@@ -34,7 +35,10 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
-          <Route path='/donar' component={() => (<Donacion message={'Quieres donar?'}/>)}/> 
+          <Route
+            path="/donar"
+            component={() => <Donacion message={"Quieres donar?"} />}
+          />
           <Route path="/gracias" component={Gracias} />
         </Switch>
       </BrowserRouter>
