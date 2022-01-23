@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CreateEditActivities from "./Containers/Activities/CreateEditActivities";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
 import NewsForm from "./Components/News/NewsForm";
@@ -33,6 +32,7 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
+          <Route path="/activities/:id" component={CreateEditActivities} />
         </Switch>
       </BrowserRouter>
       <div className="App"></div>
