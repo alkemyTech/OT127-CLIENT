@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 const NewsletterForm = () => {
-  const [newsletter, setNewsletter] = useState({
+  const [email, setEmail] = useState({
     email: "",
   });
   return (
@@ -18,7 +18,7 @@ const NewsletterForm = () => {
         })}
         onSubmit={(values, { resetForm }) => {
           const userNewsletterSubscribed = "active";
-          setNewsletter({
+          setEmail({
             email: values.email,
           });
 
