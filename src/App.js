@@ -15,6 +15,7 @@ import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from './Donations/Donacion';
 import Gracias from './Donations/Gracias';
+import { List } from './Components/Activities/List';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
           <Route path="/create-activity" component={ActivitiesForm} />
+          <Route path="/actividades" component={List} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
@@ -34,7 +36,10 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
-          <Route path='/donar' component={() => (<Donacion message={'Quieres donar?'}/>)}/> 
+          <Route
+            path="/donar"
+            component={() => <Donacion message={"Quieres donar?"} />}
+          />
           <Route path="/gracias" component={Gracias} />
         </Switch>
       </BrowserRouter>
