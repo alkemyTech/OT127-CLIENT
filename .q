@@ -1,0 +1,73 @@
+[33mcommit cad98e256a9ed3419952b1567ac00d9c423aef89[m[33m ([m[1;36mHEAD -> [m[1;32mOT127-32/Feat/formulario-edicion-home[m[33m)[m
+Author: matias <solisma42@gmail.com>
+Date:   Sat Jan 22 19:31:10 2022 -0300
+
+    Agregado peticion a los endpoints de slides y organization
+
+[33mcommit 8956e08a6f3d1e61ada64e2e70201022d8ba2132[m
+Author: matias <solisma42@gmail.com>
+Date:   Sat Jan 22 18:10:49 2022 -0300
+
+    estructura basica con formik
+
+[33mcommit 7eed8a367997c21b5f4f447ebdc32a3c753998a8[m
+Author: matias <solisma42@gmail.com>
+Date:   Sat Jan 22 17:53:22 2022 -0300
+
+    fix: queriendo copiar codigo del archivo, borre el contenido, aca lo vuelvo a dejar como estaba
+
+[33mcommit 1e592566713aea8cc410857a29b9c7698f940e1a[m
+Author: matias <solisma42@gmail.com>
+Date:   Sat Jan 22 17:49:57 2022 -0300
+
+    Agregado archivos iniciales para el formulario edicion home
+
+[33mcommit 2ed135f8172757832419c776f6eae50059592764[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: David Zapata <55600188+davidz1995@users.noreply.github.com>
+Date:   Sat Jan 22 15:27:55 2022 -0300
+
+    Ot127 59/feat/crear componente para renderizar donacion y gracias (#9)
+    
+    * Creado componentes de donaciones, donar y gracias
+    
+    * Fix/ funcion flecha en donacion y destructuring de props
+    
+    * Fix/ ruta donar en una linea, pendiente determinar si usamos component o render
+    
+    * Fix/ Ruta donar, cambio a component
+    
+    * Fix/ Cambio componente Gracias a funcion flecha
+    
+    * Fix/ Rutas login y register. pull de main
+
+[33mcommit 989b637a8efa54464e55a89f7e0f9850029baf1a[m
+Author: Chris Caracach <69370931+Chriscaracach@users.noreply.github.com>
+Date:   Fri Jan 21 18:54:07 2022 -0300
+
+    Ot127 25/feat/register form (#1)
+    
+    * Estructura y validacion de formulario en RegisterForm.js
+    
+    * Detalles en validacion. Comentarios
+    
+    * Componentes ErrorMessage ubicados en otro lugar. Ruta del formulario. Comentarios
+    
+    * Cambio de nombre de variable user
+
+[33mcommit c31b3c34993ec7b1fbe672d314e0a9af14c35bdb[m
+Author: David Zapata <55600188+davidz1995@users.noreply.github.com>
+Date:   Thu Jan 20 23:39:42 2022 -0300
+
+    Ot127 26/feat/Formulario login (#2)
+    
+    * Creado formulario login, validado con formik
+    
+    * Fix/ agregado ruta /login
+    
+    * Fix/ Arreglo userData puesto en singular
+
+[33mcommit c7722f4e614b07850181d62dbc08da02c8686807[m[33m ([m[1;32mOT127-32-Feat-Edit-Home-Form[m[33m)[m
+Author: gabriela9292 <92749881+gabriela9292@users.noreply.github.com>
+Date:   Tue Jan 18 15:45:40 2022 -0300
+
+    Initial commit
