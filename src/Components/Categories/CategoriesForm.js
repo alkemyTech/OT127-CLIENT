@@ -147,7 +147,7 @@ const CategoriesForm = () => {
                             <input
                                 className="submit-btn"
                                 type="submit"
-                                value={(urlCurrent === '/create-category') ? "Add" : "Edit"}
+                                value={(urlCurrent === '/create-category') ? "Guardar" : "Editar"}
                             />
 
                         </Form>
