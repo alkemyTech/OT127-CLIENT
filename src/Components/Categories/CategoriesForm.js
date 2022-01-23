@@ -35,8 +35,34 @@ const CategoriesForm = () => {
             return
         }
 
-        console.log(values)
-        console.log(imagePreview)
+        if (urlCurrent === '/create-category') {
+            axios
+                .post("http://ongapi.alkemy.org/docs", values, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            axios
+                .put("http://ongapi.alkemy.org/docs", values, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+
 
     }
 
