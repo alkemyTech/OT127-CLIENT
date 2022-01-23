@@ -58,7 +58,7 @@ const CategoriesForm = () => {
                 
                 validationSchema={validationSchema}
             >
-                {({errors, touched}) => {
+                {({errors, touched, setFieldValue }) => {
                     return (
                 <Form>
 
@@ -102,7 +102,20 @@ const CategoriesForm = () => {
                             type="file"
                             id="image"
                             name="image"
+                            onChange={(e) => {
+                                const fileReader = new FileReader();
+                                fileReader.onload = () => {
+                                    if (fileReader.readyState === 2) {
+                                    setFieldValue('imageURL', fileReader.result);
+                                    setImagePreview(fileReader.result);
+                                    }
+                                };
+                                fileReader.readAsDataURL(e.target.files[0]);
+                            }}
                         />
+                        {mesagge ? (
+                            <Error>Debe agregar una Imagen</Error>
+                        ) : null}
                     </div>
 
                     <input 
