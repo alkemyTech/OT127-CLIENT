@@ -11,10 +11,18 @@ import SchoolCampaign from './Campaigns/School/SchoolCampaign';
 import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
+<<<<<<< Updated upstream
 import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from './Donations/Donacion';
 import Gracias from './Donations/Gracias';
+=======
+import NewsList from './Components/News/NewsList';
+import Actividad from './actividad/Actividad'
+
+
+
+>>>>>>> Stashed changes
 
 function App() {
   return (
@@ -38,6 +46,17 @@ function App() {
           <Route path="/gracias" component={Gracias} />
         </Switch>
       </BrowserRouter>
+<<<<<<< Updated upstream
+=======
+
+    <div className="App">
+
+      <CategoriesForm></CategoriesForm>
+      <Actividad></Actividad>
+
+      
+    </div>
+>>>>>>> Stashed changes
     </>
   );
 }

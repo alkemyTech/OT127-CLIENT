@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
+// TAREA ot127-35
+//  https://www.youtube.com/watch?v=6eXUq3re9gk&ab_channel=DiscoDurodeRoer =>componente editor de texto CKEditor me sirve para esta tarea tambien
+
+
+
 
 const MembersForm = () => {
   const [initialValues, setInitialValues] = useState({
