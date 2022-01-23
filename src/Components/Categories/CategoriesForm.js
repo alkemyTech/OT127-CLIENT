@@ -19,35 +19,27 @@ const CategoriesForm = () => {
                     .min(4, 'El nombre de la categoría es muy corto')
                     .required('El nombre de la categoría es obligatorio'),
         description: Yup.string()
-                    .required('La descripción de la categoría es obligatorio')
+                    .required('La descripción de la categoría es obligatorio'),
+                    
     })
 
-    const handleSubmit = (values, props) => {
-        console.log(values, props)
+    const handleSubmit = (values) => {
+
+        if(imagePreview === "/image/default.png"){
+            setMesagge(true)
+
+            setTimeout(() => {
+                setMesagge(false)
+            }, 1500);
+
+            return
+        }
+
+        console.log(values)
+        console.log(imagePreview)
+
     }
 
-
-
-    // const handleImage = e => {
-    //     setImage(URL.createObjectURL(e.currentTarget.files[0]))
-    // }
-
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-
-    //     if (urlCurrent === '/create-category') {
-    //         // Modifico
-    //         // path
-    //         console.log("Actualizando")
-
-    //     } else {
-    //         // Creo
-    //         // post
-    //         console.log("Creando")
-    //     }
-
-    // }
 
     return (
 
