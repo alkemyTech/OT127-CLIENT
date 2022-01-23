@@ -4,19 +4,20 @@ import * as Yup from 'yup';
 
 function ContactForm() {
 
+  const phoneValidate = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
   const newContactSchema = Yup.object().shape({
-    contactName: Yup.string()
+    nameContact: Yup.string()
               .min(3, 'El nombre es muy corto')
               .max(30, 'El nombre es muy largo')
               .required('El nombre es Obligatorio'),
-    email: Yup.string()
+    emailContact: Yup.string()
               .email('El correo es obligatorio')
               .required('El correo es obligatorio'),
-    phone: Yup.number()
-              .positive()
-              .typeError('El numero no es valido')
-              .integer('Numero no valido')
-              .required('El numero de telefono es obligatorio'),
+    phoneContact: Yup.string()
+              .matches(phoneValidate, 'Numero no valido')
+              .required('El numero de telefono es obligatorio')
+              .min(8, 'Deben ser 8 caracteres minimo'),
     mesaggeContact: Yup.string()
                 .max(50, 'El mensaje es muy largo')
                 .required('Debe colocar un mensaje'),
@@ -30,9 +31,9 @@ function ContactForm() {
     <div className="form-container">
       <Formik
         initialValues={{
-          contactName: '',
-          email: '',
-          phone: '',
+          nameContact: '',
+          emailContact: '',
+          phoneContact: '',
           mesaggeContact:''
         }}
         onSubmit={ (values) => {
@@ -47,52 +48,52 @@ function ContactForm() {
 
           <div>
             <label
-              htmlFor='contactName'
+              htmlFor='nameContact'
             >Nombre:</label>
             <Field
               className="input-field"
-              name="contactName"
-              id="contactName"
+              name="nameContact"
+              id="nameContact"
               type="text"
               placeholder="Ingrese su nombre"
             />
             {/* Cambiar el div del mensaje de error por el componente creado para form category */}
-            {errors.contactName && touched.contactName ? (
-              <div>{errors.contactName}</div>
+            {errors.nameContact && touched.nameContact ? (
+              <div>{errors.nameContact}</div>
             ) : null}
           </div>
 
           <div>
             <label
-              htmlFor='email'
+              htmlFor='emailContact'
             >Email:</label>
             <Field
               className="input-field"
-              name="email"
-              id="email"
+              name="emailContact"
+              id="emailContact"
               type="text"
               placeholder="Ingrese correo electronico"
             />
             {/* Cambiar el div del mensaje de error por el componente creado para form category */}
-            {errors.email && touched.email ? (
-              <div>{errors.email}</div>
+            {errors.emailContact && touched.emailContact ? (
+              <div>{errors.emailContact}</div>
             ) : null}
           </div>
 
           <div>
             <label
-              htmlFor='phone'
+              htmlFor='phoneContact'
             >Teléfono:</label>
             <Field
               className="input-field"
-              name="phone"
-              id="phone"
-              type="tel"
+              name="phoneContact"
+              id="phoneContact"
+              type="text"
               placeholder="Ingrese su número de teléfono"
             />
             {/* Cambiar el div del mensaje de error por el componente creado para form category */}
-            {errors.phone && touched.phone ? (
-              <div>{errors.phone}</div>
+            {errors.phoneContact && touched.phoneContact ? (
+              <div>{errors.phoneContact}</div>
             ) : null}
           </div>
 
