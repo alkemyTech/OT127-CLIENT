@@ -24,7 +24,6 @@ const CategoriesForm = () => {
     })
 
     const handleSubmit = (values) => {
-        // Validacion
         if (imagePreview === "") {
             setMesagge(true)
 
