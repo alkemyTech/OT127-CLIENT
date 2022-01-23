@@ -78,8 +78,10 @@ const CategoriesForm = () => {
 
                 }}
 
-                onSubmit={(values, props) => {
-                    handleSubmit(values, props)
+                onSubmit={ async (values, {resetForm}) => {
+                    await handleSubmit(values)
+
+                    resetForm()
                 }}
 
                 validationSchema={validationSchema}
