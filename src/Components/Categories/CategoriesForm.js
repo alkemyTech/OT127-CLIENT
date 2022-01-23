@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState} from 'react';
 import { useLocation } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik'
 import * as Yup from "yup";
@@ -7,9 +7,8 @@ import Error from '../Error/Error';
 
 const CategoriesForm = () => {
 
-    // const [name, setName] = useState("");
-    // const [description, setDescription] = useState("");
-    // const [image, setImage] = useState("");
+    const [imagePreview, setImagePreview] = useState('/image/default.png');
+    const [mesagge, setMesagge] = useState(false);
 
     const location = useLocation()
     const urlCurrent = location.pathname
