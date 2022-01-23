@@ -4,8 +4,16 @@ import { Formik, Form, Field } from 'formik'
 function ContactForm() {
   return (
     <div className="form-container">
-      <Formik>
-        <Form>
+      <Formik
+        initialValues={{
+          name: '',
+          email: '',
+          phone: '',
+          mesagge:''
+        }}
+      >
+        {() => (
+          <Form>
 
           <div>
             <label
@@ -13,6 +21,7 @@ function ContactForm() {
             >Nombre:</label>
             <Field
               className="input-field"
+              name="name"
               id="name"
               type="text"
               placeholder="Ingrese su nombre"
@@ -25,6 +34,7 @@ function ContactForm() {
             >Email:</label>
             <Field
               className="input-field"
+              name="email"
               id="email"
               type="text"
               placeholder="Ingrese correo electronico"
@@ -37,6 +47,7 @@ function ContactForm() {
             >Teléfono:</label>
             <Field
               className="input-field"
+              name="phone"
               id="phone"
               type="tel"
               placeholder="Ingrese su número de teléfono"
@@ -49,6 +60,7 @@ function ContactForm() {
             >Mensaje:</label>
             <Field
               className="input-field"
+              name="mesagge"
               as="textarea"
               id="mesagge"
               type="text"
@@ -63,6 +75,8 @@ function ContactForm() {
           />
 
         </Form>
+        )}
+        
       </Formik>
     </div>
   );
