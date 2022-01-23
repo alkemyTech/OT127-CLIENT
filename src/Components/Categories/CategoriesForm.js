@@ -74,84 +74,85 @@ const CategoriesForm = () => {
             <Formik
                 initialValues={{
                     category: "",
-                    description:"",
+                    description: "",
 
                 }}
 
-                onSubmit={ (values, props) => {
+                onSubmit={(values, props) => {
                     handleSubmit(values, props)
                 }}
-                
+
                 validationSchema={validationSchema}
             >
-                {({errors, touched, setFieldValue }) => {
+                {({ errors, touched, setFieldValue }) => {
                     return (
-                <Form>
+                        <Form>
 
-                    <div>
-                        <label
-                            htmlFor="category"
-                        >Nombre:</label>
-                        <Field
-                            className="input-field" 
-                            type="text"
-                            placeholder="Nombre de la Categoría"
-                            id="category"
-                            name="category"
-                        />
-                        {errors.category && touched.category ? (
-                            <Error>{errors.category}</Error>
-                        ) : null}
-                    </div>
+                            <div>
+                                <label
+                                    htmlFor="category"
+                                >Nombre:</label>
+                                <Field
+                                    className="input-field"
+                                    type="text"
+                                    placeholder="Nombre de la Categoría"
+                                    id="category"
+                                    name="category"
+                                />
+                                {errors.category && touched.category ? (
+                                    <Error>{errors.category}</Error>
+                                ) : null}
+                            </div>
 
-                    <div>
-                        <label
-                            htmlFor="description"
-                        >Descripción:</label>
-                        <Field
-                            className="input-field" 
-                            type="text"
-                            placeholder="Descripción de la Categoría"
-                            id="description"
-                            name="description"
-                        />
-                        {errors.description && touched.description ? (
-                            <Error>{errors.description}</Error>
-                        ) : null}
-                    </div>
+                            <div>
+                                <label
+                                    htmlFor="description"
+                                >Descripción:</label>
+                                <Field
+                                    className="input-field"
+                                    type="text"
+                                    placeholder="Descripción de la Categoría"
+                                    id="description"
+                                    name="description"
+                                />
+                                {errors.description && touched.description ? (
+                                    <Error>{errors.description}</Error>
+                                ) : null}
+                            </div>
 
-                    <div>
-                        <label
-                            htmlFor="image"
-                        >Descripción:</label>
-                        <Field
-                            type="file"
-                            id="image"
-                            name="image"
-                            onChange={(e) => {
-                                const fileReader = new FileReader();
-                                fileReader.onload = () => {
-                                    if (fileReader.readyState === 2) {
-                                    setFieldValue('imageURL', fileReader.result);
-                                    setImagePreview(fileReader.result);
-                                    }
-                                };
-                                fileReader.readAsDataURL(e.target.files[0]);
-                            }}
-                        />
-                        {mesagge ? (
-                            <Error>Debe agregar una Imagen</Error>
-                        ) : null}
-                    </div>
+                            <div>
+                                <label
+                                    htmlFor="image"
+                                >Descripción:</label>
+                                <Field
+                                    type="file"
+                                    id="image"
+                                    name="image"
+                                    onChange={(e) => {
+                                        const fileReader = new FileReader();
+                                        fileReader.onload = () => {
+                                            if (fileReader.readyState === 2) {
+                                                setFieldValue('imageURL', fileReader.result);
+                                                setImagePreview(fileReader.result);
+                                            }
+                                        };
+                                        fileReader.readAsDataURL(e.target.files[0]);
+                                    }}
+                                />
+                                {mesagge ? (
+                                    <Error>Debe agregar una Imagen</Error>
+                                ) : null}
+                            </div>
 
-                    <input 
-                        className="submit-btn" 
-                        type="submit" 
-                        value={(urlCurrent === '/create-category') ? "Add" : "Edit"}
-                    />
+                            <input
+                                className="submit-btn"
+                                type="submit"
+                                value={(urlCurrent === '/create-category') ? "Add" : "Edit"}
+                            />
 
-                </Form>
-                )}}
+                        </Form>
+                    )
+                }}
             </Formik>
         </div>
 
