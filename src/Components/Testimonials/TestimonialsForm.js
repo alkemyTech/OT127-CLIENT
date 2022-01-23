@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
 
-const TestimonialForm = () => {
+const TestimonialForm = (prop) => {
     const [initialValues, setInitialValues] = useState({
        name: '',
        description: '' 
