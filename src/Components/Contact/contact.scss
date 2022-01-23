@@ -12,7 +12,7 @@
   border: 1px solid #e5e5e5;
 
   &__title {
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: bold;
     margin-bottom: 1em;
   }
@@ -22,7 +22,7 @@
     margin-left: 100px;
     width: 100%;
     height: 100%;
-	 line-height: 0.5;
+    line-height: 0.3;
   }
   &__footer {
     display: flex;
@@ -31,5 +31,17 @@
     justify-content: center;
     width: 100%;
     height: 100%;
+     img {
+      width: 35px;
+      height: 35px;
+		border-radius: 100%;
+		background: #e7e7e7;
+		padding: 2px;
+		margin: 2px;
+		border: 1px solid #e0e0e0;
+    }
+	 img:hover {
+		background: #e0e0e0;
   }
+}
 }
