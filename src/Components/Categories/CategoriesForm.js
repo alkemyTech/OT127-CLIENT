@@ -49,7 +49,6 @@ const CategoriesForm = () => {
                 initialValues={{
                     category: "",
                     description:"",
-                    image: ""
 
                 }}
 
