@@ -1,8 +1,15 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 function ContactForm() {
+
+  const newContactSchema = Yup.object().shape({
+    contactName: Yup.string()
+                    .min(3, 'El nombre es muy corto')
+                    .max(20, 'El nombre es muy largo')
+                    .required('El nombre es Obligatorio'),
+  })
 
   const handleSubmit = (values) => {
     console.log(values)
@@ -12,7 +19,7 @@ function ContactForm() {
     <div className="form-container">
       <Formik
         initialValues={{
-          name: '',
+          contactName: '',
           email: '',
           phone: '',
           mesagge:''
