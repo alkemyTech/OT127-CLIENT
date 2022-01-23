@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import axios from "axios";
 import * as Yup from "yup";
 import "../FormStyles.css";
 
@@ -32,7 +33,35 @@ const UserForm = () => {
         role: Yup.string().required("Campo obligatorio"),
       })}
       onSubmit={(values) => {
-        console.log(values);
+        //Si estamos creando
+        axios
+          .post("url", {
+            //revisar url
+            name: values.name,
+            email: values.email,
+            role: values.role,
+            profilePhoto: values.profilePhoto,
+          })
+          .then((res) => {
+            console.log(res); //Revisar qué hacer
+          })
+          .catch((error) => {
+            console.log(error); //Revisar qué hacer
+          });
+        //Si estamos editando
+        axios
+          .patch("url", {
+            name: values.name,
+            email: values.email,
+            role: values.role,
+            profilePhoto: values.profilePhoto,
+          })
+          .then((res) => {
+            console.log(res); //Revisar qué hacer
+          })
+          .catch((error) => {
+            console.log(error); //Revisar qué hacer
+          });
       }}
     >
       {(formProps) => (
