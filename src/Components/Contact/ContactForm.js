@@ -1,14 +1,25 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 function ContactForm() {
 
   const newContactSchema = Yup.object().shape({
     contactName: Yup.string()
-                    .min(3, 'El nombre es muy corto')
-                    .max(20, 'El nombre es muy largo')
-                    .required('El nombre es Obligatorio'),
+              .min(3, 'El nombre es muy corto')
+              .max(30, 'El nombre es muy largo')
+              .required('El nombre es Obligatorio'),
+    email: Yup.string()
+              .email('El correo es obligatorio')
+              .required('El correo es obligatorio'),
+    phone: Yup.number()
+              .positive()
+              .typeError('El numero no es valido')
+              .integer('Numero no valido')
+              .required('El numero de telefono es obligatorio'),
+    mesaggeContact: Yup.string()
+                .max(50, 'El mensaje es muy largo')
+                .required('Debe colocar un mensaje'),
   })
 
   const handleSubmit = (values) => {
@@ -22,7 +33,7 @@ function ContactForm() {
           contactName: '',
           email: '',
           phone: '',
-          mesagge:''
+          mesaggeContact:''
         }}
         onSubmit={ (values) => {
           handleSubmit(values)
@@ -62,6 +73,10 @@ function ContactForm() {
               type="text"
               placeholder="Ingrese correo electronico"
             />
+            {/* Cambiar el div del mensaje de error por el componente creado para form category */}
+            {errors.email && touched.email ? (
+              <div>{errors.email}</div>
+            ) : null}
           </div>
 
           <div>
@@ -75,20 +90,27 @@ function ContactForm() {
               type="tel"
               placeholder="Ingrese su número de teléfono"
             />
+            {/* Cambiar el div del mensaje de error por el componente creado para form category */}
+            {errors.phone && touched.phone ? (
+              <div>{errors.phone}</div>
+            ) : null}
           </div>
 
           <div>
             <label
-              htmlFor='mesagge'
+              htmlFor='mesaggeContact'
             >Mensaje:</label>
             <Field
               className="input-field"
-              name="mesagge"
-              as="textarea"
-              id="mesagge"
+              name="mesaggeContact"
               type="text"
+              id="mesaggeContact"
               placeholder="Mensaje"
             />
+            {/* Cambiar el div del mensaje de error por el componente creado para form category */}
+            {errors.mesaggeContact && touched.mesaggeContact? (
+              <div>{errors.mesaggeContact}</div>
+            ) : null}
           </div>
 
           <input
