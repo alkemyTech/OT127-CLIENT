@@ -27,21 +27,28 @@ function ContactForm() {
         onSubmit={ (values) => {
           handleSubmit(values)
         }}
+        validationSchema={newContactSchema}
       >
-        {() => (
+        {({errors, touched}) => {
+
+          return (
           <Form>
 
           <div>
             <label
-              htmlFor='name'
+              htmlFor='contactName'
             >Nombre:</label>
             <Field
               className="input-field"
-              name="name"
-              id="name"
+              name="contactName"
+              id="contactName"
               type="text"
               placeholder="Ingrese su nombre"
             />
+            {/* Cambiar el div del mensaje de error por el componente creado para form category */}
+            {errors.contactName && touched.contactName ? (
+              <div>{errors.contactName}</div>
+            ) : null}
           </div>
 
           <div>
@@ -91,7 +98,7 @@ function ContactForm() {
           />
 
         </Form>
-        )}
+        )}}
         
       </Formik>
     </div>
