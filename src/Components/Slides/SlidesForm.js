@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import "../FormStyles.css";
+
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
+
+import "../FormStyles.css";
 
 const SlidesForm = () => {
   const [slidesData, setSlidesData] = useState({
@@ -34,28 +38,41 @@ const SlidesForm = () => {
   };
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <input
-        className="input-field"
-        type="text"
-        name="name"
-        value={name}
-        onChange={handleChange}
-        placeholder="Slide Title"
-      ></input>
-      <CKEditor
-        id="description"
-        config={{
-          language: "es",
+    <>
+      <Formik
+        initialValues={{ name: "", order: "" }}
+        validationSchema={Yup.object({
+          name: Yup.string().required("Este campo es obligatorio"),
+          oder: Yup.number().required().positive().integer(),
+        })}
+        onSubmit={(values) => {
+          let loginUser = {
+            name: values.email,
+            order: values.password,
+          };
+          setSlidesData([...slidesData, loginUser]);
         }}
-        data={description}
-        editor={ClassicEditor}
-        onChange={handleDescriptionState}
-      />
-      <button className="submit-btn" type="submit">
-        Send
-      </button>
-    </form>
+      >
+        <Form className="form-container">
+          <Field
+            className="input-field"
+            type="text"
+            name="name"
+            placeholder="Slide Title"
+          />
+          <CKEditor
+            id="description"
+            config={{
+              language: "es",
+            }}
+            data={description}
+            editor={ClassicEditor}
+            onChange={handleDescriptionState}
+          />
+          <button type="submit">Entrar</button>
+        </Form>
+      </Formik>
+    </>
   );
 };
 
