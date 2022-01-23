@@ -1,31 +1,31 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form, Field } from 'formik';
+import axios from "axios";
 import * as Yup from "yup";
 import Error from '../Error/Error';
 
 
 const CategoriesForm = () => {
 
-    const [imagePreview, setImagePreview] = useState('/image/default.png');
+    const [imagePreview, setImagePreview] = useState('');
     const [mesagge, setMesagge] = useState(false);
 
     const location = useLocation()
     const urlCurrent = location.pathname
-    console.log(urlCurrent)
 
     const validationSchema = Yup.object().shape({
         category: Yup.string()
-                    .min(4, 'El nombre de la categoría es muy corto')
-                    .required('El nombre de la categoría es obligatorio'),
+            .min(4, 'El nombre de la categoría es muy corto')
+            .required('El nombre de la categoría es obligatorio'),
         description: Yup.string()
-                    .required('La descripción de la categoría es obligatorio'),
-                    
+            .required('La descripción de la categoría es obligatorio'),
+
     })
 
     const handleSubmit = (values) => {
 
-        if(imagePreview === "/image/default.png"){
+        if (imagePreview === "") {
             setMesagge(true)
 
             setTimeout(() => {
