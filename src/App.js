@@ -13,20 +13,11 @@ import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
-<<<<<<< HEAD
-import Donacion from './Donations/Donacion';
-import Gracias from './Donations/Gracias';
-
-
-
-
-=======
 import Donacion from "./Donations/Donacion";
 import Gracias from "./Donations/Gracias";
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm  from "./Components/Organization/EditOrganizationDataForm";
->>>>>>> 878655f9fbdd666b3b96355e370add0069a2a899
 function App() {
   return (
     // Agregar newsletter en footer
