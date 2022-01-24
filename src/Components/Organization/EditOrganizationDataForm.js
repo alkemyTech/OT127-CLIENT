@@ -7,7 +7,7 @@ import Input from "@mui/material/Input";
 import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 
-const EditOrganizationDataForm = () => {
+const OrganizationForm = () => {
   const [organizationData, setOrganizationData] = useState(
     organizationDataStructure()
   );
@@ -196,4 +196,4 @@ const socialsUrlRequired = () => {
   };
 };
 
-export default EditOrganizationDataForm;
+export default OrganizationForm ;
