@@ -24,12 +24,12 @@ const OrganizationForm = () => {
     instagram: "",
     twitter: "",
   });
-  
+
   const handleChange = (event, name) => {
-      setOrganizationData({
-          ...organizationData,
-          [name]: event.target.value
-      })
+    setOrganizationData({
+      ...organizationData,
+      [name]: event.target.value,
+    });
   };
 
   const handleBlurSocials = (event) => {
@@ -77,7 +77,7 @@ const OrganizationForm = () => {
       );
     } else {
       alert("Todos los campos estan bien"); // Acá va acción put por axios
-      window.location.reload()
+      window.location.reload();
     }
   };
 
@@ -91,7 +91,7 @@ const OrganizationForm = () => {
           id="name"
           value={organizationData.name}
           aria-describedby="my-helper-text"
-          onChange={(event) => handleChange(event,'name')}
+          onChange={(event) => handleChange(event, "name")}
         />
       </FormControl>
       <FormControl>
@@ -104,7 +104,7 @@ const OrganizationForm = () => {
           type="file"
           accept="image/x-png, image/jpeg"
           aria-describedby="my-helper-text"
-          onChange={(event) => handleChange(event,'logo')}
+          onChange={(event) => handleChange(event, "logo")}
         />
       </FormControl>
       <CKEditor
@@ -124,7 +124,7 @@ const OrganizationForm = () => {
           id="longDescription"
           value={organizationData.longDescription}
           aria-describedby="my-helper-text"
-          onChange={(event) => handleChange(event,'longDescription')}
+          onChange={(event) => handleChange(event, "longDescription")}
         />
       </FormControl>
       <FormLabel>Redes sociales</FormLabel>
@@ -134,7 +134,7 @@ const OrganizationForm = () => {
           id="facebook"
           value={organizationData.facebook}
           aria-describedby="my-helper-text"
-          onChange={(event) => handleChange(event,'facebook')}
+          onChange={(event) => handleChange(event, "facebook")}
           onBlur={handleBlurSocials}
         />
         <FormHelperText id="my-helper-text">
@@ -147,7 +147,7 @@ const OrganizationForm = () => {
           id="linkedin"
           value={organizationData.linkedin}
           aria-describedby="my-helper-text"
-          onChange={(event) => handleChange(event,'linkedin')}
+          onChange={(event) => handleChange(event, "linkedin")}
           onBlur={handleBlurSocials}
         />
         <FormHelperText id="my-helper-text">
@@ -160,7 +160,7 @@ const OrganizationForm = () => {
           id="instagram"
           value={organizationData.instagram}
           aria-describedby="my-helper-text"
-          onChange={(event) => handleChange(event,'instagram')}
+          onChange={(event) => handleChange(event, "instagram")}
           onBlur={handleBlurSocials}
         />
         <FormHelperText id="my-helper-text">
@@ -173,7 +173,7 @@ const OrganizationForm = () => {
           id="twitter"
           value={organizationData.twitter}
           aria-describedby="my-helper-text"
-          onChange={(event) => handleChange(event,'twitter')}
+          onChange={(event) => handleChange(event, "twitter")}
           onBlur={handleBlurSocials}
         />
         <FormHelperText id="my-helper-text">
