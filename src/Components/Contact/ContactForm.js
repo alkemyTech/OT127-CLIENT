@@ -54,9 +54,7 @@ function ContactForm() {
 									placeholder="Ingrese su nombre"
 								/>
 								{/* Cambiar el div del mensaje de error por el componente creado para form category */}
-								{errors.name && touched.name ? (
-									<div>{errors.name}</div>
-								) : null}
+								{errors.name && touched.name ? <div>{errors.name}</div> : null}
 							</div>
 
 							<div>
