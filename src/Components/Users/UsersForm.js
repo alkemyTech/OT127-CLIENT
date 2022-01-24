@@ -164,7 +164,8 @@ const UserForm = () => {
             />
             <ErrorMessage name="profilePhoto" />
           </div>
-          <button type="submit">Crear</button>
+
+          <button type="submit">{id ? "Guardar" : "Crear"}</button>
         </Form>
       )}
     </Formik>
