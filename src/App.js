@@ -18,6 +18,7 @@ import Gracias from './Donations/Gracias';
 import Home from './Pages/Home';
 function App() {
   return (
+    // Agregar newsletter en footer
     <>
       <BrowserRouter>
         <Switch>
