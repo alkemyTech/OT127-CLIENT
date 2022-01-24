@@ -1,17 +1,18 @@
-import React from 'react';
-import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ActivitiesForm from './Components/Activities/ActivitiesForm';
-import CategoriesForm from './Components/Categories/CategoriesForm';
-import NewsForm from './Components/News/NewsForm';
-import SlidesForm from './Components/Slides/SlidesForm';
-import TestimonialForm from './Components/Testimonials/TestimonialsForm';
-import UserForm from './Components/Users/UsersForm';
-import SchoolCampaign from './Campaigns/School/SchoolCampaign';
-import ToysCampaign from './Campaigns/Toys/ToysCampaign';
-import MembersForm from './Components/Members/MembersForm';
-import ProjectsForm from './Components/Projects/ProjectsForm';
-import LoginForm from './Components/Auth/LoginForm'
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import ActivitiesForm from "./Components/Activities/ActivitiesForm";
+import CategoriesForm from "./Components/Categories/CategoriesForm";
+import NewsForm from "./Components/News/NewsForm";
+import SlidesForm from "./Components/Slides/SlidesForm";
+import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
+import UserForm from "./Components/Users/UsersForm";
+import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
+import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
+import MembersForm from "./Components/Members/MembersForm";
+import ProjectsForm from "./Components/Projects/ProjectsForm";
+import LoginForm from "./Components/Auth/LoginForm";
+import News from "./Components/News/News";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
+          <Route path="/novedades" component={News} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
@@ -31,7 +33,7 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
         </Switch>
-      </BrowserRouter> 
+      </BrowserRouter>
     </>
   );
 }
