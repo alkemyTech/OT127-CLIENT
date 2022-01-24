@@ -15,21 +15,30 @@ const HomeForm = () => {
         }],
     })
 
-    const updateValues = (values) => {
+    const updateValues = async (values) => {
         let editedSlides = []
 
         slidesData.forEach((slide) => {
             for (let i = 0; i < values.slides.length; i++) {
                 if (slide.id === values.slides[i].id) {
                     if (slide.image !== values.slides[i].image || slide.name !== values.slides[i].name || slide.description !== values.slides[i].description) {
-                        console.log("el Slide ID fue editado" + values.slides[i].id)
+                        console.log("el Slide ID fue editado " + values.slides[i].id)
                     }
                 }
             }
         })
 
         if (values.welcome !== welcomeText.welcome_text) {
-            console.log("el mensaje de bienvenida fue modificado");
+            try {
+                console.log("el mensaje de bienvenida fue modificado");
+                let newWelcomeText = welcomeText
+                newWelcomeText.welcome_text = values.welcome
+                const res = await axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
+            } catch (error) {
+                // TO DO
+                console.error(error)
+            }
+
         }
     }
 
@@ -83,9 +92,9 @@ const HomeForm = () => {
                     welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('Este campo es obligatorio'),
                     slides: Yup.array().of(
                         Yup.object().shape({
-                            name: Yup.string().required('Este campo es obligatorio'),
-                            description: Yup.string().required('Este campo es obligatorio'),
-                            image: Yup.string().required('Este campo es obligatorio'),
+                            name: Yup.string().required('Este campo es obligatorio').nullable(),
+                            description: Yup.string().required('Este campo es obligatorio').nullable(),
+                            image: Yup.string().required('Este campo es obligatorio').nullable(),
                         })
                     )
                 })
@@ -123,11 +132,13 @@ const HomeForm = () => {
                                         name={`slides.${i}.description`}
                                         className='form__input'
                                     />
+                                    <ErrorMessage name={`slides.${i}.description`} component="div" />
                                     <label>URL de la imagen</label>
                                     <Field
                                         name={`slides.${i}.image`}
                                         className='form__input'
                                     />
+                                    <ErrorMessage name={`slides.${i}.image`} component="div" />
                                 </div>
                             )
                         }))}
