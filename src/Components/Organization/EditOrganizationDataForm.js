@@ -24,7 +24,7 @@ const OrganizationForm = () => {
     instagram: "",
     twitter: "",
   });
-  console.log(organizationData);
+  
   const handleChange = (event) => {
     for (const property in organizationData) {
       event.target.id === property &&
