@@ -24,7 +24,7 @@ const OrganizationForm = () => {
     instagram: "",
     twitter: "",
   });
-
+  console.log(organizationData);
   const handleChange = (event) => {
     for (const property in organizationData) {
       event.target.id === property &&
@@ -92,6 +92,7 @@ const OrganizationForm = () => {
         </InputLabel>
         <Input
           id="name"
+          value={organizationData.name}
           aria-describedby="my-helper-text"
           onChange={handleChange}
         />
@@ -102,6 +103,7 @@ const OrganizationForm = () => {
         </InputLabel>
         <Input
           id="logo"
+          value={organizationData.logo}
           type="file"
           accept="image/x-png, image/jpeg"
           aria-describedby="my-helper-text"
@@ -111,6 +113,7 @@ const OrganizationForm = () => {
       <CKEditor
         editor={ClassicEditor}
         data={null}
+        value={organizationData.shortDescription}
         onChange={(event, editor) => {
           const data = editor.getData().slice(3, -4);
           setOrganizationData({ ...organizationData, shortDescription: data });
@@ -122,6 +125,7 @@ const OrganizationForm = () => {
         </InputLabel>
         <Input
           id="longDescription"
+          value={organizationData.longDescription}
           aria-describedby="my-helper-text"
           onChange={handleChange}
         />
