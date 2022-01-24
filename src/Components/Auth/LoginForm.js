@@ -17,7 +17,7 @@ const LoginForm = () => {
           password: Yup.string()
             .min(6, "Debe tener por lo menos 6 caracteres.")
             .matches(
-              /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/,
+              /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/, // eslint-disable-line
               "Debe contener al menos una letra, un número y un símbolo."
             )
             .required("Este campo es obligatorio"),
