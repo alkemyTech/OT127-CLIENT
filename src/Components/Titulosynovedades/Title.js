@@ -14,7 +14,6 @@ const Title = ({ title, image = '/images/600x450.png' }) => {
 		</>
 	)
 }
-
 export default Title;
 Title.propTypes = {
 	title: PropTypes.string.isRequired,
