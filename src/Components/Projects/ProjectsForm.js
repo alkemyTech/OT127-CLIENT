@@ -4,7 +4,7 @@ import "../FormStyles.css";
 
 const ProjectsForm = () => {
   const [project, setProject] = useState({});
-  const { title, description, image } = project;
+  const { title, description, image, due_date } = project;
 
   const handleChangeTitle = (e) => {
     setProject((prevProject) => ({ ...prevProject, title: e.target.value }));
@@ -18,18 +18,39 @@ const ProjectsForm = () => {
   };
 
   const handleChangeImage = (e) => {
+    const img = URL.createObjectURL(e.target.files[0]);
+
     setProject((prevProject) => ({
       ...prevProject,
-      image: e.target.files[0],
+      image: img,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleChangeDate = (e) => {
+    setProject((prevProject) => ({
+      ...prevProject,
+      due_date: e.target.value,
+    }));
+  };
+
+  const handleSubmitCreateProject = (e) => {
     e.preventDefault();
+
+    let newDate = new Date(due_date).toISOString();
+
+    axios
+      .post("http://ongapi.alkemy.org/api/projects", {
+        title,
+        description,
+        image:
+          "https://economipedia.com/wp-content/uploads/test-de-estr%C3%A9s.png",
+        due_date: newDate,
+      })
+      .then((res) => console.log(res));
   };
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
+    <form className="form-container" onSubmit={handleSubmitCreateProject}>
       <input
         className="input-field"
         type="text"
@@ -47,6 +68,13 @@ const ProjectsForm = () => {
         onChange={handleChangeDescription}
         placeholder="Write some description"
       ></input>
+      <input
+        type="date"
+        name="trip-start"
+        value={due_date}
+        onChange={handleChangeDate}
+      ></input>
+
       <input
         type="file"
         name="file"
