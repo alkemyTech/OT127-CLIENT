@@ -8,10 +8,22 @@ import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 
 const OrganizationForm = () => {
-  const [organizationData, setOrganizationData] = useState(
-    organizationDataStructure()
-  );
-  const [requiredSocials, setRequiredSocials] = useState(socialsUrlRequired());
+  const [organizationData, setOrganizationData] = useState({
+    name: "",
+    logo: "",
+    shortDescription: "",
+    longDescription: "",
+    facebook: "",
+    linkedin: "",
+    instagram: "",
+    twitter: "",
+  });
+  const [requiredSocials, setRequiredSocials] = useState({
+    facebook: "",
+    linkedin: "",
+    instagram: "",
+    twitter: "",
+  });
 
   const handleChange = (event) => {
     for (const property in organizationData) {
@@ -68,7 +80,7 @@ const OrganizationForm = () => {
       );
     } else {
       alert("Todos los campos estan bien"); // Acá va acción put por axios
-      setOrganizationData(organizationDataStructure());
+      window.location.reload()
     }
   };
 
@@ -174,26 +186,4 @@ const OrganizationForm = () => {
   );
 };
 
-const organizationDataStructure = () => {
-  return {
-    name: "",
-    logo: "",
-    shortDescription: "",
-    longDescription: "",
-    facebook: "",
-    linkedin: "",
-    instagram: "",
-    twitter: "",
-  };
-};
-
-const socialsUrlRequired = () => {
-  return {
-    facebook: "",
-    linkedin: "",
-    instagram: "",
-    twitter: "",
-  };
-};
-
-export default OrganizationForm ;
+export default OrganizationForm;
