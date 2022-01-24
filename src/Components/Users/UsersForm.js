@@ -82,6 +82,15 @@ const UserForm = () => {
           });
   };
 
+  const handleChange = (e) => {
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setprofilePhoto(reader.result);
+    };
+  };
+
   //Effect para hacer el GET del user y roles
   useEffect(() => {
     getRoles();
@@ -150,12 +159,7 @@ const UserForm = () => {
               name="profilePhoto"
               accept=".png, .jpg"
               onChange={(e) => {
-                let reader = new FileReader();
-                let file = e.target.files[0];
-                reader.readAsDataURL(file);
-                reader.onloadend = () => {
-                  setprofilePhoto(reader.result);
-                };
+                handleChange(e);
               }}
             />
             <ErrorMessage name="profilePhoto" />
