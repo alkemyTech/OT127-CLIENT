@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
@@ -7,7 +7,7 @@ import Error from "../Error/Error";
 
 const CategoriesForm = () => {
 	const [imagePreview, setImagePreview] = useState("");
-	const [mesagge, setMesagge] = useState(false);
+	const [message, setMessage] = useState(false);
 
 	const location = useLocation();
 	const urlCurrent = location.pathname;
@@ -21,12 +21,14 @@ const CategoriesForm = () => {
 		),
 	});
 
+	
+
 	const handleSubmit = (values) => {
 		if (imagePreview === "") {
-			setMesagge(true);
+			setMessage(true);
 
 			setTimeout(() => {
-				setMesagge(false);
+				setMessage(false);
 			}, 1500);
 
 			return;
@@ -132,7 +134,7 @@ const CategoriesForm = () => {
 										);
 									}}
 								/>
-								{mesagge ? (
+								{message ? (
 									<Error>Debe agregar una Imagen</Error>
 								) : null}
 							</div>
