@@ -13,7 +13,7 @@ import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
-import  { Contact } from "./Components/Contact/Contact";
+import Contact from "./Components/Contact/Contact";
 import Donacion from './Donations/Donacion';
 import Gracias from './Donations/Gracias';
 
