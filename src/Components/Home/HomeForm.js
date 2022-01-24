@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import './HomeForm.scss'
 const HomeForm = () => {
     const [slidesData, setSlidesData] = useState([])
     const [welcomeText, setWelcomeText] = useState('')
+    const [initialValues, setInitialValues] = useState({
+        welcome: welcomeText,
+        slides: [{
+            name: '',
+            description: '',
+            image: '',
+        }],
+    })
+
+
 
     useEffect(() => {
         const getDataToEdit = async () => {
@@ -15,9 +25,22 @@ const HomeForm = () => {
 
                 const slides = slidesResponse.data.data
                 const welcomeText = welcomeResponse.data.data.welcome_text
-                console.log(slides);
                 setSlidesData(slides);
                 setWelcomeText(welcomeText);
+
+                let slidesToEdit = []
+                slides.map((slide) => {
+                    slidesToEdit.push({
+                        name: slide.name,
+                        description: slide.description,
+                        image: slide.image,
+                    })
+                })
+
+                setInitialValues({
+                    welcome: welcomeText,
+                    slides: slidesToEdit
+                })
 
             } catch (error) {
                 console.error(error)
@@ -27,20 +50,46 @@ const HomeForm = () => {
     }, [])
 
 
+
     return (
         <Formik
             enableReinitialize={true}
-            initialValues={{
-                welcome: welcomeText,
-            }}
-            validationSchema={Yup.object({
-                welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('Este campo es obligatorio'),
-            })}
+            initialValues={initialValues}
+            // {{
+            //     welcome: welcomeText,
+            //     slides: [{
+            //         name: '',
+            //         description: '',
+            //         image: '',
+            //     }],
+            // }}
+            validationSchema={
+                Yup.object().shape({
+                    welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('Este campo es obligatorio'),
+                    slides: Yup.array().of(
+                        Yup.object().shape({
+                            name: Yup.string().required('Este campo es obligatorio'),
+                            description: Yup.string().required('Este campo es obligatorio'),
+                            image: Yup.string().required('Este campo es obligatorio'),
+                        })
+                    )
+                })
+                // Yup.object({
+                //     welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('Este campo es obligatorio'),
+                // })
+            }
             onSubmit={(values) => {
                 console.log(values)
             }}
         >
-            <Form className='form'>
+            {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+            }) => (<Form className='form'>
                 <p className='form__title'>Formulario de Edición Home</p>
                 <p>Modifique los campos que desee editar</p>
                 <label htmlFor="welcome">
@@ -48,24 +97,39 @@ const HomeForm = () => {
                 </label>
                 <Field name="welcome" className='form__input' />
                 <ErrorMessage name="welcome" />
+                <p className='form__sliders-title'>Sliders</p>
                 <div className='form__sliders'>
-                    <p className='form__sliders-title'>Sliders</p>
-                    {slidesData.map((slide) => (
-                        <div className='form__slide' key={slide.id}>
-                            <hr className='form__divider' />
-                            <p>ID: {slide.id}</p>
-                            <label>Titulo</label>
-                            <Field name={`${slide.id}_title`} className='form__input' value={slide.name} />
-                            <label>Descripción</label>
-                            <Field name={`${slide.id}_description`} className='form__input' />
-                            <label>URL de la imagen</label>
-                            <Field name={`${slide.id}_image`} className='form__input' />
-                        </div>
-                    ))}
+                    <FieldArray name="slides">
+                        {() => (values.slides.map((slide, i) => {
+                            return (
+                                <div key={i} className='form__slide'>
+                                    <hr className='form__divider' />
+                                    <p>ID: {slide.id}</p>
+                                    <label>Titulo</label>
+                                    <Field
+                                        name={`slides.${i}.name`}
+                                        className='form__input'
+                                    />
+                                    <ErrorMessage name={`slides.${i}.name`} component="div" />
+                                    <label>Descripción</label >
+                                    <Field
+                                        name={`slides.${i}.description`}
+                                        className='form__input'
+                                    />
+                                    <label>URL de la imagen</label>
+                                    <Field
+                                        name={`slides.${i}.image`}
+                                        className='form__input'
+                                    />
+
+                                </div>
+                            );
+                        }))}
+                    </FieldArray>
                 </div>
                 <button type='submit' className='form__button'>GUARDAR CAMBIOS</button>
-            </Form>
-        </Formik>
+            </Form>)}
+        </Formik >
     )
 }
 
