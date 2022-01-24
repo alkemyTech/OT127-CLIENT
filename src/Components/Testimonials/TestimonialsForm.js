@@ -5,7 +5,10 @@ const TestimonialForm = () => {
     const [initialValues, setInitialValues] = useState({
        name: '',
        description: '' 
-    });
+	 });
+	const [ images, setImages ] = useState()
+	
+
 
     const handleChange = (e) => {
         if(e.target.name === 'name'){
@@ -20,10 +23,16 @@ const TestimonialForm = () => {
         console.log(initialValues);
     }
 
+	function onImageChange(e) {
+		setImages(e.target.files)
+		console.log(e.target.files);
+	}
+
     return (
         <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Testimonial Title"></input>
-            <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Testimonial description"></input>
+			<input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Testimonial Title"></input>
+			<input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Testimonial description"></input>
+			<input type="file" name="image" onChange={onImageChange} />
             <button className="submit-btn" type="submit">Send</button>
         </form>
     );
