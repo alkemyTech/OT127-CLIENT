@@ -19,6 +19,7 @@ import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 function App() {
   return (
+    // Agregar newsletter en footer
     <>
       <BrowserRouter>
         <Switch>
