@@ -10,6 +10,7 @@ import "../FormStyles.css";
 
 const UserForm = () => {
   const { id } = useParams();
+  const [isCreating, setisCreating] = useState(true);
   const [initialValues, setinitialValues] = useState({
     name: "",
     email: "",
@@ -39,6 +40,7 @@ const UserForm = () => {
       }
     };
     if (id) {
+      setisCreating(false);
       getUser();
     }
   }, []);
@@ -80,7 +82,37 @@ const UserForm = () => {
       })}
       onSubmit={(values) => {
         //Si estamos creando, método POST
-        //Si estamos editando, método PATCH
+
+        isCreating
+          ? axios
+              .post("http://ongapi.alkemy.org/api/users", {
+                name: values.name,
+                email: values.email,
+                role: values.role,
+                profilePhoto: values.profilePhoto,
+              })
+              .then((res) => {
+                console.log("POST");
+                console.log(res); //Revisar qué hacer
+              })
+              .catch((error) => {
+                console.log(error); //Revisar qué hacer
+              })
+          : //Si estamos editando, método PATCH
+            axios
+              .put("http://ongapi.alkemy.org/api/users/" + id, {
+                name: values.name,
+                email: values.email,
+                role: values.role,
+                profilePhoto: values.profilePhoto,
+              })
+              .then((res) => {
+                console.log("PUT");
+                console.log(res); //Revisar qué hacer
+              })
+              .catch((error) => {
+                console.log(error); //Revisar qué hacer
+              });
       }}
     >
       {(formProps) => (
