@@ -5,9 +5,9 @@ import axios from 'axios'
 import './HomeForm.scss'
 const HomeForm = () => {
     const [slidesData, setSlidesData] = useState([])
-    const [welcomeText, setWelcomeText] = useState('')
+    // const [welcomeText, setWelcomeText] = useState('')
     const [initialValues, setInitialValues] = useState({
-        welcome: welcomeText,
+        welcome: '',
         slides: [{
             name: '',
             description: '',
@@ -15,6 +15,24 @@ const HomeForm = () => {
         }],
     })
 
+    const updateValues = (values) => {
+        console.log(values.slides);
+
+        let editedSlides = []
+
+        slidesData.map((slide) => {
+            for (let i = 0; i < values.slides.length; i++) {
+                if (slide.id === values.slides[i].id) {
+                    if (slide.image !== values.slides[i].image || slide.name !== values.slides[i].name || slide.description !== values.slides[i].description) {
+                        console.log("el Slide ID fue editado" + values.slides[i].id)
+                    }
+                }
+            }
+        })
+
+        console.log(editedSlides)
+        console.log("Algo");
+    }
 
 
     useEffect(() => {
@@ -26,14 +44,22 @@ const HomeForm = () => {
                 const slides = slidesResponse.data.data
                 const welcomeText = welcomeResponse.data.data.welcome_text
                 setSlidesData(slides);
-                setWelcomeText(welcomeText);
-
+                // setWelcomeText(welcomeText);
+                console.log(slides);
+                console.log(welcomeResponse.data.data);
                 let slidesToEdit = []
-                slides.map((slide) => {
+                slides.forEach((slide) => {
                     slidesToEdit.push({
+                        id: slide.id,
                         name: slide.name,
                         description: slide.description,
                         image: slide.image,
+                        order: slide.order,
+                        user_id: slide.user_id,
+                        created_at: slide.created_at,
+                        updated_at: slide.updated_at,
+                        deleted_at: slide.deleted_at,
+                        group_id: slide.group_id,
                     })
                 })
 
@@ -79,7 +105,8 @@ const HomeForm = () => {
                 // })
             }
             onSubmit={(values) => {
-                console.log(values)
+                // console.log(values)
+                updateValues(values)
             }}
         >
             {({
