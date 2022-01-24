@@ -5,7 +5,7 @@ const Title = ({ title, image = '/images/600x450.png' }) => {
 	return (
 		<>
 			<div className="title__container" style={{
-				backgroundImage: `url(${image || imgPlaceHolder})`
+				backgroundImage: `url(${image})`
 			}}>
 				<div className="title__header">
 					<h1>{title}</h1>
