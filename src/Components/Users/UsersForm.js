@@ -37,6 +37,24 @@ const UserForm = () => {
     }
   };
 
+  const getRoles = async () => {
+    try {
+      let rolesData = await axios
+        .get("http://ongapi.alkemy.org/api/roles")
+        .then((response) => {
+          let resData = response.data.data;
+          let arrData = [];
+          resData.forEach((element) => {
+            arrData.push({ id: element.id, name: element.name });
+          });
+          return arrData;
+        });
+      setRoles(rolesData);
+    } catch (error) {
+      //TODO
+    }
+  };
+
   const handleSubmit = (values) => {
     id
       ? axios
@@ -64,33 +82,12 @@ const UserForm = () => {
           });
   };
 
-  //Effect para hacer el GET del user
+  //Effect para hacer el GET del user y roles
   useEffect(() => {
+    getRoles();
     if (id) {
       getUser();
     }
-  }, []);
-
-  //Effect para hacer el GET de los roles
-  useEffect(() => {
-    const getRoles = async () => {
-      try {
-        let rolesData = await axios
-          .get("http://ongapi.alkemy.org/api/roles")
-          .then((response) => {
-            let resData = response.data.data;
-            let arrData = [];
-            resData.forEach((element) => {
-              arrData.push({ id: element.id, name: element.name });
-            });
-            return arrData;
-          });
-        setRoles(rolesData);
-      } catch (error) {
-        //TODO
-      }
-    };
-    getRoles();
   }, []);
 
   return (
