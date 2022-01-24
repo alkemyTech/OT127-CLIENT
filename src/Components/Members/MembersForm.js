@@ -3,7 +3,7 @@ import '../FormStyles.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Formik, Field, Form } from 'formik';
-//SASS
+
 import "../Members/Members.scss";
 
 
@@ -25,7 +25,7 @@ const MembersForm = () => {
     console.log(initialValues);
   }
   
-  //CKeditor
+
   let theEditor;
 
     ClassicEditor
@@ -46,55 +46,10 @@ const MembersForm = () => {
     function send_1() {
       var testing = "<p><strong>Tilte</strong></p><p><i>123</i></p>";
       theEditor.setData(testing);
-
     }
-
-
-    
 
   return (
     <>
-
-      {/*<form className="form-container" onSubmit={handleSubmit}>
-        <input 
-          className="input-field" 
-          type="text" 
-          name="name" 
-          value={initialValues.name} 
-          onChange={handleChange} 
-          placeholder="Name">
-        </input>
-        
-        <CKEditor
-          editor={ ClassicEditor }
-          data="<p>Hello from CKEditor 5!</p>"
-          className="input-field"
-          name="description"
-          value={initialValues.description}
-          onReady={ editor => {
-              // You can store the "editor" and use when it is needed.
-              console.log( 'Editor is ready to use!', editor );
-          } }
-
-          onChange={ ( handleChange, editor ) => {
-            const data = editor.getData();
-            console.log( { handleChange, editor, data } );
-              
-          } }
-          //onChange={handleChange}
-          onBlur={ ( event, editor ) => {
-              console.log( 'Blur.', editor );
-          } }
-          onFocus={ ( event, editor ) => {
-              console.log( 'Focus.', editor );
-          } }
-        />
-        
-
-        <textarea class="form-control" name="agenda_mesyuarat" id="agenda_mesyuarat" value="" title="Agenda Mesyuarat"></textarea>
-        <button className="submit-btn" type="submit">Send</button>
-        </form>*/}
-
       <Formik
         id='formulario'
         className='bgImage'
@@ -103,14 +58,11 @@ const MembersForm = () => {
           await new Promise(resolve => setTimeout(resolve, 500));
           alert(JSON.stringify(values, null, 2));
         }}>
-        
         <div className='formWrap'>
           <Form className='required_notification'>
             <div>
               <Field name="name" type="text" />
             </div>
-          
-            {/*<Field name="description" type="text" />*/}
             <div>
               <CKEditor
                 editor={ ClassicEditor }
@@ -124,19 +76,13 @@ const MembersForm = () => {
 
               />
             </div>
-
             <div className='submit'>
               <button type='submit' className='submit' >Submit</button>
             </div>
-
           </Form>
-          
-          
         </div>
       </Formik>
     </>
-    
-
   );
 }
  
