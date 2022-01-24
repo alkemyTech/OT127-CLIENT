@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
 import NewsForm from './Components/News/NewsForm';
@@ -21,10 +21,11 @@ import Gracias from './Donations/Gracias';
 
 function App() {
   return (
+    // Agregar newsletter en footer
     <>
       <BrowserRouter>
         <Switch>
-          {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+          <Route path="/" exact component={Home} />
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
@@ -37,11 +38,10 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
-          <Route path='/donar' component={() => (<Donacion message={'Quieres donar?'}/>)}/> 
+          <Route path='/donar' component={() => (<Donacion message={'Quieres donar?'} />)} />
           <Route path="/gracias" component={Gracias} />
         </Switch>
       </BrowserRouter>
-<<<<<<< HEAD
 
 		  <div className="App">
       <header className="App-header">
@@ -90,8 +90,6 @@ function App() {
         </span>
       </header>
     </div>
-=======
->>>>>>> 2ed135f8172757832419c776f6eae50059592764
     </>
   );
 }
