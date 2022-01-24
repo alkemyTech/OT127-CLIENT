@@ -79,8 +79,8 @@ const ProjectsForm = () => {
         value={title}
         onChange={handleChangeTitle}
         placeholder="Title"
+        required
       ></input>
-
       <input
         className="input-field"
         type="text"
@@ -88,6 +88,7 @@ const ProjectsForm = () => {
         value={description}
         onChange={handleChangeDescription}
         placeholder="Write some description"
+        required
       ></input>
       <input
         type="date"
@@ -95,7 +96,6 @@ const ProjectsForm = () => {
         value={due_date && due_date.split("T")[0]}
         onChange={handleChangeDate}
       ></input>
-
       <input
         type="file"
         name="file"
