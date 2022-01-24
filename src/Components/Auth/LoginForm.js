@@ -6,6 +6,14 @@ import "../FormStyles.css";
 const LoginForm = () => {
   const [userData, setUserData] = useState([]);
 
+  const handleSubmit = (values) => {
+    let loginUser = {
+      email: values.email,
+      password: values.password,
+    };
+    setUserData([...userData, loginUser]);
+  };
+
   return (
     <div>
       <Formik
@@ -23,11 +31,7 @@ const LoginForm = () => {
             .required("Este campo es obligatorio"),
         })}
         onSubmit={(values) => {
-          let loginUser = {
-            email: values.email,
-            password: values.password,
-          };
-          setUserData([...userData, loginUser]);
+          handleSubmit(values);
         }}
       >
         <Form>
