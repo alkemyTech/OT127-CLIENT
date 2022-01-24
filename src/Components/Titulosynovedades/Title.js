@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-export const Title = ({ title, image }) => {
-	const imgPlaceHolder = "/images/600x450.png"
-
+const Title = ({ title, image = '/images/600x450.png' }) => {
 	return (
 		<>
 			<div className="title__container" style={{
@@ -17,6 +15,7 @@ export const Title = ({ title, image }) => {
 	)
 }
 
+export default Title;
 Title.propTypes = {
 	title: PropTypes.string.isRequired,
 	image: PropTypes.string
