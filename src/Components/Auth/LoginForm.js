@@ -7,11 +7,10 @@ const LoginForm = () => {
   const [userData, setUserData] = useState([]);
 
   const handleSubmit = (values) => {
-    let loginUser = {
-      email: values.email,
-      password: values.password,
-    };
-    setUserData([...userData, loginUser]);
+    setUserData([
+      ...userData,
+      { email: values.email, password: values.password },
+    ]);
   };
 
   return (
