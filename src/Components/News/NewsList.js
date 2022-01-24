@@ -7,7 +7,6 @@ const NewsList = (news) => {
       <ul className="list-container">
         {news.length > 0 ? (
           news.map((element) => {
-            console.log(element);
             return (
               <li className="card-info" key={element.id}>
                 <h3>{element.name}</h3>
