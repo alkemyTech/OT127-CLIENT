@@ -16,6 +16,7 @@ import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from "./Donations/Donacion";
 import Gracias from "./Donations/Gracias";
 import Home from "./Pages/Home";
+import OrganizationData from "./Components/Organization/OrganizationData";
 function App() {
   return (
     <>
