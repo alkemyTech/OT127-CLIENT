@@ -8,7 +8,6 @@ import "../FormStyles.css";
 const UserForm = () => {
   const { id } = useParams();
   const [profilePhoto, setprofilePhoto] = useState("");
-  const [isCreating, setisCreating] = useState(true);
   const [initialValues, setinitialValues] = useState({
     name: "",
     email: "",
@@ -38,10 +37,36 @@ const UserForm = () => {
     }
   };
 
+  const handleSubmit = (values) => {
+    id
+      ? axios
+          .post("http://ongapi.alkemy.org/api/users", {
+            name: values.name,
+            email: values.email,
+            role: values.role,
+            profilePhoto: profilePhoto,
+            password: values.password,
+          })
+          .catch((error) => {
+            //TODO
+          })
+      : //Si estamos editando, método PUT
+        axios
+          .put("http://ongapi.alkemy.org/api/users/" + id, {
+            name: values.name,
+            email: values.email,
+            role: values.role,
+            profilePhoto: profilePhoto,
+            password: values.password,
+          })
+          .catch((error) => {
+            //TODO
+          });
+  };
+
   //Effect para hacer el GET del user
   useEffect(() => {
     if (id) {
-      setisCreating(false);
       getUser();
     }
   }, []);
@@ -89,32 +114,7 @@ const UserForm = () => {
           .required("Ingresá una contraseña"),
       })}
       onSubmit={(values) => {
-        //Si estamos creando, método POST
-        //Validamos
-        isCreating
-          ? axios
-              .post("http://ongapi.alkemy.org/api/users", {
-                name: values.name,
-                email: values.email,
-                role: values.role,
-                profilePhoto: profilePhoto,
-                password: values.password,
-              })
-              .catch((error) => {
-                //TODO
-              })
-          : //Si estamos editando, método PUT
-            axios
-              .put("http://ongapi.alkemy.org/api/users/" + id, {
-                name: values.name,
-                email: values.email,
-                role: values.role,
-                profilePhoto: profilePhoto,
-                password: values.password,
-              })
-              .catch((error) => {
-                //TODO
-              });
+        handleSubmit(values);
       }}
     >
       {() => (
