@@ -16,8 +16,6 @@ const HomeForm = () => {
     })
 
     const updateValues = (values) => {
-        console.log(values.slides);
-
         let editedSlides = []
 
         slidesData.forEach((slide) => {
@@ -29,9 +27,6 @@ const HomeForm = () => {
                 }
             }
         })
-
-        console.log(editedSlides)
-        console.log("Algo");
 
         if (values.welcome !== welcomeText.welcome_text) {
             console.log("el mensaje de bienvenida fue modificado");
@@ -79,20 +74,10 @@ const HomeForm = () => {
         getDataToEdit()
     }, [])
 
-
-
     return (
         <Formik
             enableReinitialize={true}
             initialValues={initialValues}
-            // {{
-            //     welcome: welcomeText,
-            //     slides: [{
-            //         name: '',
-            //         description: '',
-            //         image: '',
-            //     }],
-            // }}
             validationSchema={
                 Yup.object().shape({
                     welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('Este campo es obligatorio'),
@@ -104,22 +89,13 @@ const HomeForm = () => {
                         })
                     )
                 })
-                // Yup.object({
-                //     welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('Este campo es obligatorio'),
-                // })
             }
             onSubmit={(values) => {
-                // console.log(values)
                 updateValues(values)
             }}
         >
             {({
                 values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
             }) => (<Form className='form'>
                 <p className='form__title'>Formulario de Edición Home</p>
                 <p>Modifique los campos que desee editar</p>
@@ -152,9 +128,8 @@ const HomeForm = () => {
                                         name={`slides.${i}.image`}
                                         className='form__input'
                                     />
-
                                 </div>
-                            );
+                            )
                         }))}
                     </FieldArray>
                 </div>
