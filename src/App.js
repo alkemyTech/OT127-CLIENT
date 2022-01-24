@@ -13,14 +13,15 @@ import MembersForm from "./Components/Members/MembersForm";
 import ProjectsForm from "./Components/Projects/ProjectsForm";
 import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
-import OrganizationData from "./Components/Organization/OrganizationData";
-
+import Donacion from "./Donations/Donacion";
+import Gracias from "./Donations/Gracias";
+import Home from "./Pages/Home";
 function App() {
   return (
     <>
       <BrowserRouter>
         <Switch>
-          {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+          <Route path="/" exact component={Home} />
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
@@ -34,9 +35,13 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
+          <Route
+            path="/donar"
+            component={() => <Donacion message={"Quieres donar?"} />}
+          />
+          <Route path="/gracias" component={Gracias} />
         </Switch>
       </BrowserRouter>
-      <div className="App"></div>
     </>
   );
 }
