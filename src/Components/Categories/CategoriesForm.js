@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
@@ -9,8 +9,8 @@ const CategoriesForm = () => {
 	const [imagePreview, setImagePreview] = useState("");
 	const [message, setMessage] = useState(false);
 
-	const location = useLocation();
-	const urlCurrent = location.pathname;
+	const location = useParams();
+	console.log(location)
 
 	const validationSchema = Yup.object().shape({
 		category: Yup.string()
