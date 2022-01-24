@@ -1,27 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import "../FormStyles.css";
 
+//TODO = Classes de CSS ?? BEM??
+//TODO = Solucionar quilombo con rutas, algo con un exact, no lee la ruta /create-user pelada
+
 const UserForm = () => {
   const { id } = useParams();
-  let initialValues = {};
-  if (id) {
-    // Para obtener éstos valores, hay que irlos a buscar al backend?? usando el id como id??
-    initialValues = {
-      name: "prueba",
-      email: "prueba@prueba.com",
-      role: "",
-      profilePhoto: "",
+  const [initialValues, setinitialValues] = useState({
+    name: "",
+    email: "",
+    role: "",
+    profilePhoto: "",
+  });
+
+  //Effect para hacer el GET del user
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        let userData = await axios
+          .get("http://ongapi.alkemy.org/api/users/" + id)
+          .then((response) => {
+            let resData = response.data.data;
+            return {
+              name: resData.name,
+              email: resData.email,
+              role: resData.role_id,
+              profilePhoto: resData.profile_image,
+            };
+          });
+        setinitialValues(userData);
+      } catch (error) {
+        return error; //!Qué hago con ésto??
+      }
     };
-  } else {
-    initialValues = { name: "", email: "", role: "", profilePhoto: "" };
-  }
+    if (id) {
+      getUser();
+    }
+  }, []);
 
   return (
     <Formik
+      enableReinitialize={true}
       initialValues={initialValues}
       validationSchema={Yup.object({
         name: Yup.string()
@@ -30,38 +53,11 @@ const UserForm = () => {
         email: Yup.string()
           .email("Formato de email inválido")
           .required("Campo obligatorio"),
-        role: Yup.string().required("Campo obligatorio"),
+        role: Yup.number().required("Campo obligatorio"),
       })}
       onSubmit={(values) => {
-        //Si estamos creando
-        axios
-          .post("url", {
-            //revisar url
-            name: values.name,
-            email: values.email,
-            role: values.role,
-            profilePhoto: values.profilePhoto,
-          })
-          .then((res) => {
-            console.log(res); //Revisar qué hacer
-          })
-          .catch((error) => {
-            console.log(error); //Revisar qué hacer
-          });
-        //Si estamos editando
-        axios
-          .patch("url", {
-            name: values.name,
-            email: values.email,
-            role: values.role,
-            profilePhoto: values.profilePhoto,
-          })
-          .then((res) => {
-            console.log(res); //Revisar qué hacer
-          })
-          .catch((error) => {
-            console.log(error); //Revisar qué hacer
-          });
+        //Si estamos creando, método POST
+        //Si estamos editando, método PATCH
       }}
     >
       {(formProps) => (
