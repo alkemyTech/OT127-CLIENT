@@ -14,12 +14,17 @@ const SlidesForm = () => {
     name: "",
     description: "",
     order: "",
-    file: "",
+    image: "",
   });
-  const [imagePreview, setImagePreview] = useState(null);
+  const [preview, setPreview] = useState(null);
 
-  const reader = new FileReader();
-  reader.readAsDataURL();
+  const imagePreview = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPreview(reader.result);
+    };
+  };
 
   const formSchema = Yup.object({
     name: Yup.string().required("Este campo es obligatorio"),
@@ -49,13 +54,14 @@ const SlidesForm = () => {
             order: values.order,
             image: values.image.name,
           };
+
           setFormData({ ...formData, ...formValues });
           console.log(formData);
 
           resetForm();
         }}
       >
-        {({ setFieldValue }) => (
+        {({ values, setFieldValue }) => (
           <Form className="form-container">
             <Field
               className="input-field"
@@ -106,13 +112,11 @@ const SlidesForm = () => {
                 setFieldValue("image", e.currentTarget.files[0]);
               }}
             />
+            {values.image && imagePreview(values.image)}
             <div>
-              <img
-                src={imagePreview}
-                alt="preview"
-                width="150px"
-                height="auto"
-              />
+              {preview && (
+                <img src={preview} alt="preview" width="150px" height="auto" />
+              )}
             </div>
             <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
 
@@ -127,58 +131,3 @@ const SlidesForm = () => {
 };
 
 export default SlidesForm;
-
-// <Formik
-//   initialValues={{ name: "", order: "", image: "" }}
-//   //validationSchema={() => ({})}
-//   onSubmit={(values) => {
-//     let formValues = {
-//       name: values.name,
-//       order: values.order,
-//       image: values.file.name,
-//     };
-//     console.log(values);
-//     setFormData({ ...formData, formValues });
-//   }}
-// >
-//   {({ setFieldValue }) => (
-//     <Form className="form-container">
-//       <Field
-//         className="input-field"
-//         type="text"
-//         name="name"
-//         placeholder="Slide Title"
-//       />
-//       <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
-//       <CKEditor
-//         id="description"
-//         config={{
-//           language: "es",
-//         }}
-//         data={description}
-//         editor={ClassicEditor}
-//         onChange={handleDescriptionState}
-//       />
-//       <Field
-//         className="input-field"
-//         type="number"
-//         name="order"
-//         onChange={(e) => {
-//           setFieldValue("order", e.currentTarget.value);
-//         }}
-//         placeholder="ingrese un numero"
-//       />
-//       <Field
-//         className="input-field"
-//         type="file"
-//         name="image"
-//         onChange={(e) => {
-//           setFieldValue("image", e.currentTarget.files[0]);
-//         }}
-//       />
-//       <button className="submit-btn" type="submit">
-//         Enviar
-//       </button>
-//     </Form>
-//   )}
-// </Formik>
