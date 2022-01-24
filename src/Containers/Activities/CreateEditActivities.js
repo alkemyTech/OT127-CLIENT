@@ -42,22 +42,21 @@ const CreateEditActivities = () => {
   };
 
   const handleSubmitCreateActivity = (e) => {
+    e.preventDefault();
     axios.post("http://ongapi.alkemy.org/api/activities", {
       name,
       description,
       image,
-    });
+    }); //TODO: Controlar errores (Catch)
   };
 
   const handleSubmitUpdateActivity = (e) => {
     e.preventDefault();
-    axios
-      .put(`http://ongapi.alkemy.org/api/activities/${id}`, {
-        name,
-        description,
-        image,
-      })
-      .then((res) => console.log(res));
+    axios.put(`http://ongapi.alkemy.org/api/activities/${id}`, {
+      name,
+      description,
+      image,
+    }); //TODO: Controlar errores (Catch)
   };
 
   return (

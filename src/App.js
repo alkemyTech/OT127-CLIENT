@@ -26,7 +26,10 @@ function App() {
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
           <Route path="/create-activity" component={CreateEditActivities} />
           <Route path="/" exact component={Home} />
-          <Route path="/create-activity" component={CreateEditActivities} />
+          <Route
+            path="/backoffice/create-activity"
+            component={CreateEditActivities}
+          />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
@@ -38,7 +41,10 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
-          <Route path="/activities/:id" component={CreateEditActivities} />
+          <Route
+            path="/backoffice/activities/:id"
+            component={CreateEditActivities}
+          />
           <Route
             path="/donar"
             component={() => <Donacion message={"Quieres donar?"} />}
