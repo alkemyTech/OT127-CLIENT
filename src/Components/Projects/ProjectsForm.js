@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../FormStyles.css";
 
 const ProjectsForm = () => {
+  const { id } = useParams();
   const [project, setProject] = useState({});
   const { title, description, image, due_date } = project;
+
+  useEffect(() => {
+    axios.get(`http://ongapi.alkemy.org/api/projects/${id}`).then((res) => {
+      setProject(res.data.data);
+      console.log(res.data.data);
+    });
+  }, [id]);
 
   const handleChangeTitle = (e) => {
     setProject((prevProject) => ({ ...prevProject, title: e.target.value }));
@@ -35,15 +44,12 @@ const ProjectsForm = () => {
 
   const handleSubmitCreateProject = (e) => {
     e.preventDefault();
-
     let newDate = new Date(due_date).toISOString();
-
     axios
       .post("http://ongapi.alkemy.org/api/projects", {
         title,
         description,
-        image:
-          "https://economipedia.com/wp-content/uploads/test-de-estr%C3%A9s.png",
+        image,
         due_date: newDate,
       })
       .then((res) => console.log(res));
@@ -71,7 +77,7 @@ const ProjectsForm = () => {
       <input
         type="date"
         name="trip-start"
-        value={due_date}
+        value={due_date && due_date.split("T")[0]}
         onChange={handleChangeDate}
       ></input>
 
