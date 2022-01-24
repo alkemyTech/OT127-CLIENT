@@ -42,10 +42,10 @@ const CategoriesForm = () => {
 					},
 				})
 				.then((response) => {
-					console.log(response);
+					// to do (falta logica)
 				})
 				.catch((err) => {
-					console.log(err);
+					// to do (falta logica)
 				});
 		} else {
 			axios
@@ -55,10 +55,10 @@ const CategoriesForm = () => {
 					},
 				})
 				.then((response) => {
-					console.log(response);
+					// to do (falta logica)
 				})
 				.catch((err) => {
-					console.log(err);
+					// to do (falta logica)
 				});
 		}
 	};
