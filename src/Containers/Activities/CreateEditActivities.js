@@ -13,48 +13,48 @@ const toDataURL = (blob) =>
 
 const CreateEditActivities = () => {
   const { id } = useParams();
-  console.log(id);
-  const [activity, setActivity] = useState();
-  const { name, description, image } = activity ? activity : {};
+  const [activity, setActivity] = useState({});
+  const { name, description, image } = Object.keys(activity).length
+    ? activity
+    : {};
 
-  const handleChange = (e) => {
-    if (e.target.name === "name") {
-      setActivity({ ...activity, name: e.target.value });
-    }
-    if (e.target.name === "file") {
-      setActivity({
-        ...activity,
-        image: URL.createObjectURL(e.target.files[0]),
+  useEffect(() => {
+    axios.get(`http://ongapi.alkemy.org/api/activities/${id}`).then((res) => {
+      setActivity(res.data.data);
+    });
+  }, [id]);
+
+  const handleChangeName = (e) => {
+    setActivity((prevActivity) => ({ ...prevActivity, name: e.target.value }));
+  };
+
+  const handleChangeImage = (e) => {
+    const img = URL.createObjectURL(e.target.files[0]);
+    axios
+      .get(img, { responseType: "blob" })
+      .then((response) => toDataURL(response.data))
+      .then((encoded) => {
+        setActivity((prevActivity) => ({ ...prevActivity, image: encoded }));
       });
-    }
   };
 
   const handleChangeDescription = (e, editor) => {
-    if (e.name === "change:data") {
-      const data = editor.getData();
-      setActivity({ ...activity, description: data });
-    }
+    const data = editor.getData();
+    setActivity((prevActivity) => ({ ...prevActivity, description: data }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .get(image, { responseType: "blob" })
-      .then((response) => toDataURL(response.data))
-      .then((encoded) => {
-        axios.post("http://ongapi.alkemy.org/api/activities", {
-          name,
-          description,
-          image: encoded,
-        });
-      });
+  const handleSubmitCreateActivity = (e) => {
+    axios.post("http://ongapi.alkemy.org/api/activities", {
+      name,
+      description,
+      image,
+    });
   };
 
-  const handleSubmitUpdate = (e) => {
+  const handleSubmitUpdateActivity = (e) => {
     e.preventDefault();
-
     axios
-      .put("http://ongapi.alkemy.org/api/activities/1119", {
+      .put(`http://ongapi.alkemy.org/api/activities/${id}`, {
         name,
         description,
         image,
@@ -62,20 +62,16 @@ const CreateEditActivities = () => {
       .then((res) => console.log(res));
   };
 
-  useEffect(() => {
-    axios.get(`http://ongapi.alkemy.org/api/activities/${id}`).then((res) => {
-      const activity = res.data.data;
-      setActivity(activity);
-    });
-  }, [id]);
-
   return (
     <>
       <ActivitiesForm
         activity={activity}
-        handleChange={handleChange}
+        handleChangeName={handleChangeName}
+        handleChangeImage={handleChangeImage}
         handleChangeDescription={handleChangeDescription}
-        handleSubmit={id ? handleSubmitUpdate : handleSubmit}
+        handleSubmit={
+          id ? handleSubmitUpdateActivity : handleSubmitCreateActivity
+        }
       />
     </>
   );

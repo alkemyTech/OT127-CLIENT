@@ -4,12 +4,12 @@ import "../FormStyles.css";
 
 const ActivitiesForm = ({
   activity,
-  handleChange,
+  handleChangeName,
+  handleChangeImage,
   handleChangeDescription,
   handleSubmit,
 }) => {
-  const { name, description, image } = activity ? activity : {};
-
+  const { name, description, image } = activity;
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <input
@@ -17,9 +17,9 @@ const ActivitiesForm = ({
         type="text"
         name="name"
         value={name}
-        onChange={handleChange}
+        onChange={handleChangeName}
         placeholder="Activity Title"
-      ></input>
+      />
       <CKEditor
         editor={ClassicEditor}
         data={description}
@@ -29,7 +29,7 @@ const ActivitiesForm = ({
         type="file"
         name="file"
         accept=".png, .jpg"
-        onChange={handleChange}
+        onChange={handleChangeImage}
       />
       <img src={image} alt="" />
       <button className="submit-btn" type="submit">
