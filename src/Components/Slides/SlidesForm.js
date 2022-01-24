@@ -27,7 +27,9 @@ const SlidesForm = () => {
   };
 
   const formSchema = Yup.object({
-    name: Yup.string().required("Este campo es obligatorio"),
+    name: Yup.string()
+      .min(4, "Debe tener al menos 4 caracteres")
+      .required("Este campo es obligatorio"),
     description: Yup.string().required("Este campo es obligatorio"),
     order: Yup.number()
       .moreThan(-1, "Debe ser un numero mayor o igual a cero")
@@ -56,8 +58,8 @@ const SlidesForm = () => {
           };
 
           setFormData({ ...formData, ...formValues });
-          console.log(formData);
 
+          setPreview(null);
           resetForm();
         }}
       >
@@ -111,14 +113,15 @@ const SlidesForm = () => {
               onChange={(e) => {
                 setFieldValue("image", e.currentTarget.files[0]);
               }}
+              accept=".jpg, .png"
             />
+            <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
             {values.image && imagePreview(values.image)}
             <div>
               {preview && (
                 <img src={preview} alt="preview" width="150px" height="auto" />
               )}
             </div>
-            <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
 
             <button type="submit" className="submit-btn">
               Login
