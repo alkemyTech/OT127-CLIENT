@@ -5,7 +5,7 @@ import axios from 'axios'
 import './HomeForm.scss'
 const HomeForm = () => {
     const [slidesData, setSlidesData] = useState([])
-    // const [welcomeText, setWelcomeText] = useState('')
+    const [welcomeText, setWelcomeText] = useState('')
     const [initialValues, setInitialValues] = useState({
         welcome: '',
         slides: [{
@@ -20,7 +20,7 @@ const HomeForm = () => {
 
         let editedSlides = []
 
-        slidesData.map((slide) => {
+        slidesData.forEach((slide) => {
             for (let i = 0; i < values.slides.length; i++) {
                 if (slide.id === values.slides[i].id) {
                     if (slide.image !== values.slides[i].image || slide.name !== values.slides[i].name || slide.description !== values.slides[i].description) {
@@ -32,6 +32,10 @@ const HomeForm = () => {
 
         console.log(editedSlides)
         console.log("Algo");
+
+        if (values.welcome !== welcomeText.welcome_text) {
+            console.log("el mensaje de bienvenida fue modificado");
+        }
     }
 
 
@@ -42,11 +46,11 @@ const HomeForm = () => {
                 const welcomeResponse = await axios.get('http://ongapi.alkemy.org/api/organization')
 
                 const slides = slidesResponse.data.data
-                const welcomeText = welcomeResponse.data.data.welcome_text
+                const welcomeText = welcomeResponse.data.data
+
                 setSlidesData(slides);
-                // setWelcomeText(welcomeText);
-                console.log(slides);
-                console.log(welcomeResponse.data.data);
+                setWelcomeText(welcomeText);
+
                 let slidesToEdit = []
                 slides.forEach((slide) => {
                     slidesToEdit.push({
@@ -64,7 +68,7 @@ const HomeForm = () => {
                 })
 
                 setInitialValues({
-                    welcome: welcomeText,
+                    welcome: welcomeText.welcome_text,
                     slides: slidesToEdit
                 })
 
