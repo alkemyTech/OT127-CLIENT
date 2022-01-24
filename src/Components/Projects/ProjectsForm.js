@@ -11,7 +11,6 @@ const ProjectsForm = () => {
   useEffect(() => {
     axios.get(`http://ongapi.alkemy.org/api/projects/${id}`).then((res) => {
       setProject(res.data.data);
-      console.log(res.data.data);
     });
   }, [id]);
 
@@ -55,8 +54,24 @@ const ProjectsForm = () => {
       .then((res) => console.log(res));
   };
 
+  const handleSubmitUpdateProject = (e) => {
+    e.preventDefault();
+    let newDate = new Date(due_date).toISOString();
+    axios
+      .put(`http://ongapi.alkemy.org/api/projects/${id}`, {
+        title,
+        description,
+        image,
+        due_date: newDate,
+      })
+      .then((res) => console.log(res));
+  };
+
   return (
-    <form className="form-container" onSubmit={handleSubmitCreateProject}>
+    <form
+      className="form-container"
+      onSubmit={id ? handleSubmitUpdateProject : handleSubmitCreateProject}
+    >
       <input
         className="input-field"
         type="text"
