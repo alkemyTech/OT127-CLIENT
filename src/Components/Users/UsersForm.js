@@ -16,7 +16,7 @@ const UserForm = () => {
     profilePhoto: "",
     password: "",
   });
-  const [Roles, setRoles] = useState([]);
+  const [roles, setRoles] = useState([]);
 
   //Effect para hacer el GET del user
   useEffect(() => {
@@ -131,7 +131,7 @@ const UserForm = () => {
           <div>
             <label htmlFor="name">Rol</label>
             <Field name="role" as="select">
-              {Roles.map((item) => {
+              {roles.map((item) => {
                 return (
                   <option value={item.id} key={item.id}>
                     {item.name}
