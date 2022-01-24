@@ -88,7 +88,6 @@ const OrganizationForm = () => {
           Name
         </InputLabel>
         <Input
-          id="name"
           value={organizationData.name}
           aria-describedby="my-helper-text"
           onChange={(event) => handleChange(event, "name")}
@@ -99,7 +98,6 @@ const OrganizationForm = () => {
           Logo
         </InputLabel>
         <Input
-          id="logo"
           value={organizationData.logo}
           type="file"
           accept="image/x-png, image/jpeg"
@@ -121,7 +119,6 @@ const OrganizationForm = () => {
           Long description
         </InputLabel>
         <Input
-          id="longDescription"
           value={organizationData.longDescription}
           aria-describedby="my-helper-text"
           onChange={(event) => handleChange(event, "longDescription")}
@@ -131,7 +128,6 @@ const OrganizationForm = () => {
       <FormControl>
         <InputLabel htmlFor="facebook">Facebook</InputLabel>
         <Input
-          id="facebook"
           value={organizationData.facebook}
           aria-describedby="my-helper-text"
           onChange={(event) => handleChange(event, "facebook")}
@@ -144,7 +140,6 @@ const OrganizationForm = () => {
       <FormControl>
         <InputLabel htmlFor="linkedin">Linkedin</InputLabel>
         <Input
-          id="linkedin"
           value={organizationData.linkedin}
           aria-describedby="my-helper-text"
           onChange={(event) => handleChange(event, "linkedin")}
@@ -157,7 +152,6 @@ const OrganizationForm = () => {
       <FormControl>
         <InputLabel htmlFor="instagram">Instagram</InputLabel>
         <Input
-          id="instagram"
           value={organizationData.instagram}
           aria-describedby="my-helper-text"
           onChange={(event) => handleChange(event, "instagram")}
@@ -170,7 +164,6 @@ const OrganizationForm = () => {
       <FormControl>
         <InputLabel htmlFor="twitter">Twitter</InputLabel>
         <Input
-          id="twitter"
           value={organizationData.twitter}
           aria-describedby="my-helper-text"
           onChange={(event) => handleChange(event, "twitter")}
