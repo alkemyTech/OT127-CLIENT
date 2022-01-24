@@ -3,14 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^31.1.0",
+    "@ckeditor/ckeditor5-react": "^3.0.3",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.3.0",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
+<<<<<<< HEAD
     "axios": "^0.21.1",
 <<<<<<< HEAD
     "prop-types": "^15.8.1",
 =======
+=======
+    "axios": "^0.21.4",
+>>>>>>> 878655f9fbdd666b3b96355e370add0069a2a899
     "formik": "^2.2.9",
 >>>>>>> 2ed135f8172757832419c776f6eae50059592764
     "react": "^17.0.2",
