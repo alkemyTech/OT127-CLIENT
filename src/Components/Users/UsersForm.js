@@ -18,27 +18,28 @@ const UserForm = () => {
   });
   const [roles, setRoles] = useState([]);
 
+  const getUser = async () => {
+    try {
+      let userData = await axios
+        .get("http://ongapi.alkemy.org/api/users/" + id)
+        .then((response) => {
+          let resData = response.data.data;
+          return {
+            name: resData.name,
+            email: resData.email,
+            role: resData.role_id,
+            profilePhoto: resData.profile_image,
+            password: resData.password,
+          };
+        });
+      setinitialValues(userData);
+    } catch (error) {
+      //TODO
+    }
+  };
+
   //Effect para hacer el GET del user
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        let userData = await axios
-          .get("http://ongapi.alkemy.org/api/users/" + id)
-          .then((response) => {
-            let resData = response.data.data;
-            return {
-              name: resData.name,
-              email: resData.email,
-              role: resData.role_id,
-              profilePhoto: resData.profile_image,
-              password: resData.password,
-            };
-          });
-        setinitialValues(userData);
-      } catch (error) {
-        //TODO
-      }
-    };
     if (id) {
       setisCreating(false);
       getUser();
