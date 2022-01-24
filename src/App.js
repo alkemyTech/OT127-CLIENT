@@ -37,10 +37,7 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
-          <Route
-            path="/donar"
-            component={() => <Donacion message={"Quieres donar?"} />}
-          />
+          <Route path="/donar" component={() => <Donacion message="Quieres donar?" />}/>
           <Route path="/gracias" component={Gracias} />
         </Switch>
       </BrowserRouter>
