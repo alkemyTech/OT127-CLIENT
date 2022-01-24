@@ -5,17 +5,16 @@ import axios from "axios";
 import * as Yup from "yup";
 import "../FormStyles.css";
 
-//TODO = Classes de CSS ?? BEM??
-//TODO = Solucionar quilombo con rutas, algo con un exact, no lee la ruta /create-user pelada
-
 const UserForm = () => {
   const { id } = useParams();
+  const [profilePhoto, setprofilePhoto] = useState("");
   const [isCreating, setisCreating] = useState(true);
   const [initialValues, setinitialValues] = useState({
     name: "",
     email: "",
     role: "",
     profilePhoto: "",
+    password: "",
   });
   const [Roles, setRoles] = useState([]);
 
@@ -32,11 +31,12 @@ const UserForm = () => {
               email: resData.email,
               role: resData.role_id,
               profilePhoto: resData.profile_image,
+              password: resData.password,
             };
           });
         setinitialValues(userData);
       } catch (error) {
-        return error; //!Qué hago con ésto??
+        //TODO
       }
     };
     if (id) {
@@ -61,7 +61,7 @@ const UserForm = () => {
           });
         setRoles(rolesData);
       } catch (error) {
-        return error; //!Qué hago con ésto?? Preguntar
+        //TODO
       }
     };
     getRoles();
@@ -79,43 +79,44 @@ const UserForm = () => {
           .email("Formato de email inválido")
           .required("Campo obligatorio"),
         role: Yup.number().required("Campo obligatorio"),
+        password: Yup.string()
+          .min(6, "La contraseña debe tener 6 caracteres como mínimo.")
+          .matches(
+            /^(?=.*[a-z])(?=.*[0-9])(?=.*[\W])/,
+            "Formato de contraseña inválida. Debe contener al menos: una letra minúscula, un número y un símbolo."
+          )
+          .required("Ingresá una contraseña"),
       })}
       onSubmit={(values) => {
         //Si estamos creando, método POST
-
+        //Validamos
         isCreating
           ? axios
               .post("http://ongapi.alkemy.org/api/users", {
                 name: values.name,
                 email: values.email,
                 role: values.role,
-                profilePhoto: values.profilePhoto,
-              })
-              .then((res) => {
-                console.log("POST");
-                console.log(res); //Revisar qué hacer
+                profilePhoto: profilePhoto,
+                password: values.password,
               })
               .catch((error) => {
-                console.log(error); //Revisar qué hacer
+                //TODO
               })
-          : //Si estamos editando, método PATCH
+          : //Si estamos editando, método PUT
             axios
               .put("http://ongapi.alkemy.org/api/users/" + id, {
                 name: values.name,
                 email: values.email,
                 role: values.role,
-                profilePhoto: values.profilePhoto,
-              })
-              .then((res) => {
-                console.log("PUT");
-                console.log(res); //Revisar qué hacer
+                profilePhoto: profilePhoto,
+                password: values.password,
               })
               .catch((error) => {
-                console.log(error); //Revisar qué hacer
+                //TODO
               });
       }}
     >
-      {(formProps) => (
+      {() => (
         <Form>
           <div>
             <label htmlFor="name">Nombre</label>
@@ -141,16 +142,25 @@ const UserForm = () => {
             <ErrorMessage name="role" />
           </div>
           <div>
+            <label htmlFor="password">Contraseña</label>
+            <Field name="password" type="password"></Field>
+            <ErrorMessage name="password" />
+          </div>
+          <div>
             <input
-              name="profilePhoto"
               type="file"
-              onChange={(event) => {
-                formProps.setFieldValue(
-                  "profilePhoto",
-                  event.currentTarget.files[0]
-                );
+              name="profilePhoto"
+              accept=".png, .jpg"
+              onChange={(e) => {
+                let reader = new FileReader();
+                let file = e.target.files[0];
+                reader.readAsDataURL(file);
+                reader.onloadend = () => {
+                  setprofilePhoto(reader.result);
+                };
               }}
             />
+            <ErrorMessage name="profilePhoto" />
           </div>
           <button type="submit">Crear</button>
         </Form>
