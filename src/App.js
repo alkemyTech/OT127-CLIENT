@@ -16,6 +16,8 @@ import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from "./Donations/Donacion";
 import Gracias from "./Donations/Gracias";
 import Home from "./Pages/Home";
+import OrganizationData from "./Components/Organization/OrganizationData";
+import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 
 function App() {
   return (
@@ -28,6 +30,11 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/organization" component={OrganizationData} />
+          <Route
+            path="/backoffice/organization/edit"
+            component={OrganizationForm}
+          />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/backoffice/create-user" exact component={UserForm} />
           <Route path="/backoffice/create-user/:id" component={UserForm} />
@@ -39,7 +46,7 @@ function App() {
           <Route path="/register" component={RegisterForm} />
           <Route
             path="/donar"
-            component={() => <Donacion message={"Quieres donar?"} />}
+            component={() => <Donacion message="Quieres donar?" />}
           />
           <Route path="/gracias" component={Gracias} />
         </Switch>
