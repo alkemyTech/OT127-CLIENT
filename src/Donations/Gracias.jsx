@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const Gracias = () => {
   return (
-  <div>
-    <p>Texto de agradecimiento.</p>
-  </div>
+    <div>
+      <p>Texto de agradecimiento.</p>
+    </div>
   );
-}
+};
 
 export default Gracias;
