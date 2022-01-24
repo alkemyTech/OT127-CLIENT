@@ -1,0 +1,72 @@
+
+  /* //// Form Styles \\\\ */
+  
+  form {
+    width: 100%;
+    max-width: 960px;
+    height: 100%;
+  }
+  $white: white;
+
+  .formWrap {
+      width: 75%;
+      max-width: 500px;
+    height: 100%;
+      margin: 0 auto;
+    padding: 1rem 0;
+    overflow: auto;
+      p {
+        color: white;
+        padding-left: .5rem;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+      }
+  }
+  
+  input {
+    &[type="text"], 
+    &[type="email"], 
+    &[type="password"] {
+      width: 96%;
+        height: 2.5rem;
+        margin: 0 .25rem .5rem;
+      padding-left: .5rem;
+      background-color: $white;
+     
+      outline: none;
+      transition-property: background-color, border, box-shadow;
+      transition-duration: .5s;
+        
+       
+    }
+      &:focus {
+          color: $white;
+          background-color: $white;
+          border: 2px solid $white;    
+      }
+    &[type="submit"] {
+    width: 75%;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    margin: 1rem 0 0 12.5%;
+  
+    border: 2px solid white;
+    border-radius: .25rem;
+  
+    color: $white;
+    text-transform: uppercase;
+    background-color: transparent;
+    transition: background-color .5s;
+      &:hover {
+        color: $white;
+        border: 2px solid $white;
+        background-color: orange;
+      }
+      &:focus {
+        background-color: orange;
+        outline: none;
+      }
+    }
+  } 
+  
+  

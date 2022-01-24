@@ -3,6 +3,8 @@ import '../FormStyles.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Formik, Field, Form } from 'formik';
+//SASS
+import "../Members/Members.scss";
 
 
 const MembersForm = () => {
@@ -94,32 +96,43 @@ const MembersForm = () => {
         </form>*/}
 
       <Formik
+        id='formulario'
+        className='bgImage'
         initialValues={{ name: "", description: ""}}
         onSubmit={async values => {
           await new Promise(resolve => setTimeout(resolve, 500));
           alert(JSON.stringify(values, null, 2));
         }}>
         
-        <Form>
-          <Field name="name" type="text" />
-         
-          {/*<Field name="description" type="text" />*/}
+        <div className='formWrap'>
+          <Form className='required_notification'>
+            <div>
+              <Field name="name" type="text" />
+            </div>
+          
+            {/*<Field name="description" type="text" />*/}
+            <div>
+              <CKEditor
+                editor={ ClassicEditor }
+                data="<p>Hello from CKEditor 5!</p>"
+                className="input-field"
+                name="description"
+                onReady={ editor => {
+                    // You can store the "editor" and use when it is needed.
+                    console.log( 'Editor is ready to use!', editor );
+                } }
 
-          <CKEditor
-            editor={ ClassicEditor }
-            data="<p>Hello from CKEditor 5!</p>"
-            className="input-field"
-            name="description"
-            onReady={ editor => {
-                // You can store the "editor" and use when it is needed.
-                console.log( 'Editor is ready to use!', editor );
-            } }
+              />
+            </div>
 
-          />
+            <div className='submit'>
+              <button type='submit' className='submit' >Submit</button>
+            </div>
 
-          <button type='submit' >Submit</button>
-        </Form>
-      
+          </Form>
+          
+          
+        </div>
       </Formik>
     </>
     
