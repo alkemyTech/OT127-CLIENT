@@ -14,9 +14,7 @@ const toDataURL = (blob) =>
 const CreateEditActivities = () => {
   const { id } = useParams();
   const [activity, setActivity] = useState({});
-  const { name, description, image } = Object.keys(activity).length
-    ? activity
-    : {};
+  const { name, description, image } = activity;
 
   useEffect(() => {
     axios.get(`http://ongapi.alkemy.org/api/activities/${id}`).then((res) => {
