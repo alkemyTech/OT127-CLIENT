@@ -12,16 +12,9 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
-<<<<<<< HEAD
-    "axios": "^0.21.1",
-<<<<<<< HEAD
     "prop-types": "^15.8.1",
-=======
-=======
     "axios": "^0.21.4",
->>>>>>> 878655f9fbdd666b3b96355e370add0069a2a899
     "formik": "^2.2.9",
->>>>>>> 2ed135f8172757832419c776f6eae50059592764
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
