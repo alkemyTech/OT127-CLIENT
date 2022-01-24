@@ -16,6 +16,7 @@ const UserForm = () => {
     role: "",
     profilePhoto: "",
   });
+  const [Roles, setRoles] = useState([]);
 
   //Effect para hacer el GET del user
   useEffect(() => {
@@ -40,6 +41,28 @@ const UserForm = () => {
     if (id) {
       getUser();
     }
+  }, []);
+
+  //Effect para hacer el GET de los roles
+  useEffect(() => {
+    const getRoles = async () => {
+      try {
+        let rolesData = await axios
+          .get("http://ongapi.alkemy.org/api/roles")
+          .then((response) => {
+            let resData = response.data.data;
+            let arrData = [];
+            resData.forEach((element) => {
+              arrData.push({ id: element.id, name: element.name });
+            });
+            return arrData;
+          });
+        setRoles(rolesData);
+      } catch (error) {
+        return error; //!Qué hago con ésto?? Preguntar
+      }
+    };
+    getRoles();
   }, []);
 
   return (
@@ -75,8 +98,13 @@ const UserForm = () => {
           <div>
             <label htmlFor="name">Rol</label>
             <Field name="role" as="select">
-              <option value="administrador">Administrador</option>
-              <option value="regular">Regular</option>
+              {Roles.map((item) => {
+                return (
+                  <option value={item.id} key={item.id}>
+                    {item.name}
+                  </option>
+                );
+              })}
             </Field>
             <ErrorMessage name="role" />
           </div>
