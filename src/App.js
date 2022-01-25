@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import CreateEditActivities from "./Containers/Activities/CreateEditActivities";
+import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
 import NewsForm from "./Components/News/NewsForm";
 import SlidesForm from "./Components/Slides/SlidesForm";
@@ -24,11 +24,11 @@ function App() {
       <BrowserRouter>
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
-          <Route path="/create-activity" component={CreateEditActivities} />
+
           <Route path="/" exact component={Home} />
           <Route
             path="/backoffice/create-activity"
-            component={CreateEditActivities}
+            component={ActivitiesForm}
           />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
@@ -41,10 +41,7 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
-          <Route
-            path="/backoffice/activities/:id"
-            component={CreateEditActivities}
-          />
+          <Route path="/backoffice/activities/:id" component={ActivitiesForm} />
           <Route
             path="/donar"
             component={() => <Donacion message={"Quieres donar?"} />}
