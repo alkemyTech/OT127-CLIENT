@@ -15,7 +15,7 @@ import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from './Donations/Donacion';
 import Gracias from './Donations/Gracias';
-import  List  from './Components/Activities/List';
+import Activities from './Components/Activities/Activities';
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm  from "./Components/Organization/EditOrganizationDataForm";
@@ -27,7 +27,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/create-activity" component={ActivitiesForm} />
-          <Route path="/actividades" component={List} />
+          <Route path="/actividades" component={Activities} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
