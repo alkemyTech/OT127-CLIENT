@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field } from "formik";
+import {Formik, Form, Field} from "formik";
 import * as Yup from "yup";
 
 function ContactForm() {
@@ -41,7 +41,7 @@ function ContactForm() {
 				}}
 				validationSchema={newContactSchema}
 			>
-				{({ errors, touched }) => {
+				{({errors, touched}) => {
 					return (
 						<Form>
 							<div>
