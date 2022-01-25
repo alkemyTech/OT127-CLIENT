@@ -13,6 +13,8 @@ const toDataURL = (blob) =>
     reader.readAsDataURL(blob);
   });
 
+const API_URL = "http://ongapi.alkemy.org/api/activities/";
+
 const ActivitiesForm = () => {
   const { id } = useParams();
   const [activity, setActivity] = useState({});
@@ -20,7 +22,7 @@ const ActivitiesForm = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`http://ongapi.alkemy.org/api/activities/${id}`).then((res) => {
+      axios.get(API_URL + id).then((res) => {
         setActivity(res.data.data);
       });
     }
@@ -48,13 +50,13 @@ const ActivitiesForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      axios.put(`http://ongapi.alkemy.org/api/activities/${id}`, {
+      axios.put(API_URL + id, {
         name,
         description,
         image,
       }); //TODO: Controlar errores (Catch)
     } else {
-      axios.post("http://ongapi.alkemy.org/api/activities", {
+      axios.post(API_URL, {
         name,
         description,
         image,
