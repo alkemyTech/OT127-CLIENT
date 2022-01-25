@@ -16,13 +16,18 @@ const HomeForm = () => {
     })
 
     const updateValues = async (values) => {
-        let editedSlides = []
 
         slidesData.forEach((slide) => {
             for (let i = 0; i < values.slides.length; i++) {
                 if (slide.id === values.slides[i].id) {
                     if (slide.image !== values.slides[i].image || slide.name !== values.slides[i].name || slide.description !== values.slides[i].description) {
-                        console.log("el Slide ID fue editado " + values.slides[i].id)
+                        try {
+                            axios.put(`http://ongapi.alkemy.org/api/slides/${values.slides[i].id}`, values.slides[i])
+                        } catch (error) {
+                            // TO DO
+                            console.error(error)
+                        }
+
                     }
                 }
             }
@@ -30,13 +35,11 @@ const HomeForm = () => {
 
         if (values.welcome !== welcomeText.welcome_text) {
             try {
-                console.log("el mensaje de bienvenida fue modificado");
                 let newWelcomeText = welcomeText
                 newWelcomeText.welcome_text = values.welcome
-                const res = await axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
+                await axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
             } catch (error) {
                 // TO DO
-                console.error(error)
             }
 
         }
