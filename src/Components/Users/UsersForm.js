@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form, ErrorMessage, useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import "../FormStyles.css";
 
 const UserForm = () => {
   const { id } = useParams();
-  const [profilePhoto, setprofilePhoto] = useState("");
   const [initialValues, setinitialValues] = useState({
     name: "",
     email: "",
@@ -58,36 +57,22 @@ const UserForm = () => {
   const handleSubmit = (values) => {
     id
       ? axios
-          .post("http://ongapi.alkemy.org/api/users", {
-            name: values.name,
-            email: values.email,
-            role: values.role,
-            profilePhoto: profilePhoto,
-            password: values.password,
-          })
+          .put("http://ongapi.alkemy.org/api/users/" + id, values)
           .catch((error) => {
             //TODO
           })
-      : //Si estamos editando, método PUT
-        axios
-          .put("http://ongapi.alkemy.org/api/users/" + id, {
-            name: values.name,
-            email: values.email,
-            role: values.role,
-            profilePhoto: profilePhoto,
-            password: values.password,
-          })
+      : axios
+          .post("http://ongapi.alkemy.org/api/users", values)
           .catch((error) => {
             //TODO
           });
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e, setFieldValue) => {
     let reader = new FileReader();
-    let file = e.target.files[0];
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(e.target.files[0]);
     reader.onloadend = () => {
-      setprofilePhoto(reader.result);
+      setFieldValue("profilePhoto", reader.result);
     };
   };
 
@@ -123,7 +108,7 @@ const UserForm = () => {
         handleSubmit(values);
       }}
     >
-      {() => (
+      {({ setFieldValue }) => (
         <Form>
           <div>
             <label htmlFor="name">Nombre</label>
@@ -159,7 +144,7 @@ const UserForm = () => {
               name="profilePhoto"
               accept=".png, .jpg"
               onChange={(e) => {
-                handleChange(e);
+                handleChange(e, setFieldValue);
               }}
             />
             <ErrorMessage name="profilePhoto" />
