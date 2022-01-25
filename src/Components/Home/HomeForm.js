@@ -15,6 +15,26 @@ const HomeForm = () => {
         }],
     })
 
+    const updateSlides = async (slide, id) => {
+        try {
+            // TO DO: solucionar error: no base64 string provided
+            const response = await axios.put(`http://ongapi.alkemy.org/api/slides/${id}`, slide)
+        } catch (error) {
+            // TO DO
+        }
+    }
+
+    const updateWelcomeText = async (values) => {
+        try {
+            // TO DO: solucionar error: no base64 string provided
+            let newWelcomeText = welcomeText
+            newWelcomeText.welcome_text = values.welcome
+            const response = await axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
+        } catch (error) {
+            // TO DO
+        }
+    }
+
     const updateValues = (values) => {
 
         //Comparo los slides originales con los que vienen del formulario
@@ -24,13 +44,7 @@ const HomeForm = () => {
                     if (slide.image !== values.slides[i].image || slide.name !== values.slides[i].name || slide.description !== values.slides[i].description) {
                         // cuando detecta los slides que fueron modificados realizamos la peticion "PUT"
                         // con todos los datos que ya tenia el slides mas el nuevo campo modificado
-                        console.log(values.slides[i]);
-                        try {
-                            axios.put(`http://ongapi.alkemy.org/api/slides/${values.slides[i].id}`, values.slides[i])
-                        } catch (error) {
-                            // TO DO
-                            console.error(error)
-                        }
+                        updateSlides(values.slides[i], values.slides[i].id)
                     }
                 }
             }
@@ -38,13 +52,7 @@ const HomeForm = () => {
         // Comparo el mensaje que viene del formulario con el original
         if (values.welcome !== welcomeText.welcome_text) {
             // si son diferentes realizamos la peticion "PUT" con todos los datos originales excepto el mensaje modificado
-            try {
-                let newWelcomeText = welcomeText
-                newWelcomeText.welcome_text = values.welcome
-                axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
-            } catch (error) {
-                // TO DO
-            }
+            updateWelcomeText(values)
         }
     }
 
@@ -60,8 +68,8 @@ const HomeForm = () => {
                 const welcomeText = welcomeResponse.data.data
                 // Guardamos la informacion original aparte, para luego hacer una comparacion
                 // con la informacion que venga del formulario y ver que se modifico
-                setSlidesData(slides);
-                setWelcomeText(welcomeText);
+                setSlidesData(slides)
+                setWelcomeText(welcomeText)
 
                 // guardamos los valores iniciales que va a usar formik
                 setInitialValues({
@@ -82,12 +90,12 @@ const HomeForm = () => {
             initialValues={initialValues}
             validationSchema={
                 Yup.object().shape({
-                    welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('Este campo es obligatorio'),
+                    welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('El campo Texto de Bienvenida es obligatorio'),
                     slides: Yup.array().of(
                         Yup.object().shape({
-                            name: Yup.string().required('Este campo es obligatorio').nullable(),
-                            description: Yup.string().required('Este campo es obligatorio').nullable(),
-                            image: Yup.string().required('Este campo es obligatorio').nullable(),
+                            name: Yup.string().required('El campo Titulo es obligatorio').nullable(),
+                            description: Yup.string().required('El campo Descripción es obligatorio').nullable(),
+                            image: Yup.string().required('El campo URL de la imagen es obligatorio').nullable(),
                         })
                     )
                 })
