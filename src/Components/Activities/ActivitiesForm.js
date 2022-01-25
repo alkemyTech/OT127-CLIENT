@@ -24,7 +24,7 @@ const ActivitiesForm = () => {
         setActivity(res.data.data);
       });
     }
-  }, [id]);
+  });
 
   const handleChangeName = (e) => {
     setActivity((prevActivity) => ({ ...prevActivity, name: e.target.value }));
@@ -45,29 +45,25 @@ const ActivitiesForm = () => {
     setActivity((prevActivity) => ({ ...prevActivity, description: data }));
   };
 
-  const handleSubmitCreate = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://ongapi.alkemy.org/api/activities", {
-      name,
-      description,
-      image,
-    }); //TODO: Controlar errores (Catch)
-  };
-
-  const handleSubmitUpdate = (e) => {
-    e.preventDefault();
-    axios.put(`http://ongapi.alkemy.org/api/activities/${id}`, {
-      name,
-      description,
-      image,
-    }); //TODO: Controlar errores (Catch)
+    if (id) {
+      axios.put(`http://ongapi.alkemy.org/api/activities/${id}`, {
+        name,
+        description,
+        image,
+      }); //TODO: Controlar errores (Catch)
+    } else {
+      axios.post("http://ongapi.alkemy.org/api/activities", {
+        name,
+        description,
+        image,
+      }); //TODO: Controlar errores (Catch)
+    }
   };
 
   return (
-    <form
-      className="form-container"
-      onSubmit={id ? handleSubmitUpdate : handleSubmitCreate}
-    >
+    <form className="form-container" onSubmit={handleSubmit}>
       <input
         className="input-field"
         type="text"
