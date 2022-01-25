@@ -34,8 +34,8 @@ const RegisterForm = () => {
             )
             .required("Confirmá tu contraseña"),
         })}
-        onSubmit={(values) => {
-          const user = {
+        onSubmit={(values) => {      // eslint-disable-next-line
+          const user = { 
             // Este es el objeto que va a ser enviado
             name: values.name,
             lastName: values.lastName,
