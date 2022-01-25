@@ -16,7 +16,6 @@ const SlidesForm = () => {
   const [initialValues, setInitialValues] = useState(null);
   const [slidesData, setSlidesData] = useState([]); // para validar order
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
   const { id } = useParams();
   const url = "http://ongapi.alkemy.org/api/slides";
@@ -25,33 +24,28 @@ const SlidesForm = () => {
     await axios
       .get(url)
       .then((res) => {
-        const {
-          data: { data },
-        } = res;
-        setSlidesData(data);
+        setSlidesData(res.data.data);
       })
       .catch((err) => {
         alert(err.message);
       });
   };
-
+  const orderUnique = slidesData.map((data) => data.order);
   const getSlidesById = async (id) => {
     setLoading(true);
 
     await axios
       .get(`${url}/${id}`)
       .then((res) => {
-        const { data: status } = res;
-        if (status.success) {
-          const { data } = status;
+        if (res.data.success) {
           setInitialValues({
-            name: data.name,
-            description: data.description,
-            order: data.order ? data.order : 0,
-            image: data.image,
+            name: res.data.data.name,
+            description: res.data.data.description,
+            order: res.data.data.order ? res.data.data.order : 0,
+            image: res.data.data.image,
           });
         } else {
-          alert(status.message);
+          alert(res.data.status.message);
         }
       })
       .catch((err) => {
@@ -63,7 +57,7 @@ const SlidesForm = () => {
 
   useEffect(() => {
     if (id) {
-      getSlidesById();
+      getSlidesById(id);
     }
     getSlidesData();
   }, []); // eslint-disable-line
@@ -100,25 +94,16 @@ const SlidesForm = () => {
           alert(err.message);
         });
     } else {
-      const orderUnique = slidesData.filter(
-        (data) => data.order === formValues.order
-      );
-      if (orderUnique.length > 0) {
-        setError(true);
-        return;
-      } else if (orderUnique.length === 0) {
-        setError(false);
-        await axios
-          .post(url, {
-            name: formValues.name,
-            description: formValues.description,
-            order: formValues.order,
-            image: formValues.image,
-          })
-          .catch((err) => {
-            alert(err.message);
-          });
-      }
+      await axios
+        .post(url, {
+          name: formValues.name,
+          description: formValues.description,
+          order: formValues.order,
+          image: formValues.image,
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
     }
   };
 
@@ -129,10 +114,11 @@ const SlidesForm = () => {
       .min(4, "Debe tener al menos 4 caracteres")
       .required("Este campo es obligatorio"),
     description: Yup.string().required("Este campo es obligatorio"),
-    order: Yup.number()
-      .moreThan(-1, "Debe ser un numero mayor o igual a cero")
+    order: Yup.number("debe ser un numero")
+      .moreThan(0, "Debe ser un numero mayor o igual a cero")
       .required("Este campo es obligatorio")
-      .integer(),
+      .integer()
+      .notOneOf(orderUnique, "Numero de orden ya esta en uso"),
     image: Yup.string().required("Este campo es obligatorio"),
   });
 
@@ -149,16 +135,18 @@ const SlidesForm = () => {
             image: initialValues ? initialValues.image : "",
           }}
           validationSchema={validations}
-          onSubmit={(values, { resetForm }) => {
+          onSubmit={async (values, { resetForm }) => {
             let formValues = {
               name: values.name,
               description: values.description,
               order: values.order,
               image: values.image,
             };
-            handleSubmit(formValues);
+            await handleSubmit(formValues);
             setInitialValues(null);
+            // limpio el input file
             inputFileRef.current.value = "";
+
             resetForm({
               values: {
                 name: "",
@@ -213,7 +201,6 @@ const SlidesForm = () => {
                 }}
                 placeholder="ingrese un numero"
               />
-              {error && <p>El numero de orden ya esta siendo usado</p>}
               <ErrorMessage name="order" render={(msg) => <div>{msg}</div>} />
               <label htmlFor="order">Cargar Imagen</label>
               <input
