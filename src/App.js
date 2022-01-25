@@ -19,7 +19,7 @@ import ContactForm from "./Components/Contact/ContactForm";
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
-import HomeForm from "./Components/Home/HomeForm";
+import HomeForm from "./Components/Backoffice/HomeForm";
 
 function App() {
 	return (
