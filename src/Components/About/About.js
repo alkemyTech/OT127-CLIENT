@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import Title from "../Titulosynovedades/Title";
 
 const About = () => {
+  const [about, setAbout] = useState("hola main section de Nosotros");
   return (
     <div>
-      <h1>hola nosotros</h1>
+      <Title title="Nosotros" />
+      <main>{about}</main>
     </div>
   );
 };
