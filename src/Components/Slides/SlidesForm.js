@@ -69,7 +69,26 @@ const SlidesForm = () => {
     getSlidesById();
   }, [id]);
 
+  const toBase64 = (file) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+    });
+  };
+
   const handleSubmit = async (formValues) => {
+    let { image, ...rest } = formValues;
+    if (typeof image === "object") {
+      image = await toBase64(image);
+      formValues = {
+        image,
+        ...rest,
+      };
+    }
+
     if (id) {
       const url = `http://ongapi.alkemy.org/api/slides/${id}`;
       await axios
@@ -77,6 +96,7 @@ const SlidesForm = () => {
           name: formValues.name,
           description: formValues.description,
           order: formValues.order,
+          image: formValues.image,
         })
         .catch((err) => {
           alert(err.message);
@@ -89,13 +109,14 @@ const SlidesForm = () => {
       if (orderUnique.length > 0) {
         setError(true);
         return;
-      } else {
+      } else if (orderUnique.length === 0) {
         setError(false);
         await axios
           .post(url, {
             name: formValues.name,
             description: formValues.description,
             order: formValues.order,
+            image: formValues.image,
           })
           .catch((err) => {
             alert(err.message);
@@ -136,16 +157,16 @@ const SlidesForm = () => {
               name: values.name,
               description: values.description,
               order: values.order,
-              image: values.image.name,
+              image: values.image,
             };
-            setInitialValues(null);
             handleSubmit(formValues);
+            setInitialValues(null);
+            inputFileRef.current.value = "";
             resetForm({
               values: {
                 name: "",
                 description: "",
                 order: "",
-                image: "",
               },
             });
           }}
