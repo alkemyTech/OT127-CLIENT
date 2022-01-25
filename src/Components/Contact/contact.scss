@@ -1,4 +1,4 @@
-.contact {
+.contact__container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,12 +11,13 @@
   border-radius: 10px;
   border: 1px solid #e5e5e5;
 
-  &__title {
+  &__title-text {
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 1em;
   }
-  &__content {
+}
+ .contact__content {
     display: flex;
     flex-direction: column;
     margin-left: 100px;
@@ -24,9 +25,9 @@
     height: 100%;
     line-height: 0.3;
   }
-  &__footer {
+.contact__footer {
     display: flex;
-    flex-direction: column;
+	  flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -43,5 +44,4 @@
 	 img:hover {
 		background: #e0e0e0;
   }
-}
 }
