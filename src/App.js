@@ -15,9 +15,11 @@ import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from "./Donations/Donacion";
 import Gracias from "./Donations/Gracias";
+import ContactForm from "./Components/Contact/ContactForm";
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
+
 function App() {
   return (
     // Agregar newsletter en footer
@@ -27,6 +29,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/create-category" component={CategoriesForm} />
+          <Route path="/contact" component={ContactForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
           <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
