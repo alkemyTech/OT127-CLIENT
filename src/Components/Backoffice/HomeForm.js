@@ -18,7 +18,7 @@ const HomeForm = () => {
     const updateSlides = async (slide, id) => {
         try {
             // TO DO: solucionar error: no base64 string provided
-            const response = await axios.put(`http://ongapi.alkemy.org/api/slides/${id}`, slide)
+            await axios.put(`http://ongapi.alkemy.org/api/slides/${id}`, slide)
         } catch (error) {
             // TO DO
         }
@@ -29,7 +29,7 @@ const HomeForm = () => {
             // TO DO: solucionar error: no base64 string provided
             let newWelcomeText = welcomeText
             newWelcomeText.welcome_text = values.welcome
-            const response = await axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
+            await axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
         } catch (error) {
             // TO DO
         }
