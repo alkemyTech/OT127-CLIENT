@@ -26,7 +26,7 @@ const ActivitiesForm = () => {
         setActivity(res.data.data);
       });
     }
-  });
+  }, []);
 
   const handleChangeName = (e) => {
     setActivity((prevActivity) => ({ ...prevActivity, name: e.target.value }));
