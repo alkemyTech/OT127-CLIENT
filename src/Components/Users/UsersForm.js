@@ -16,20 +16,21 @@ const UserForm = () => {
   });
   const [roles, setRoles] = useState([]);
 
+  const urlUsers = "http://ongapi.alkemy.org/api/users";
+  const urlRoles = "http://ongapi.alkemy.org/api/roles";
+
   const getUser = async () => {
     try {
-      let userData = await axios
-        .get("http://ongapi.alkemy.org/api/users/" + id)
-        .then((response) => {
-          let resData = response.data.data;
-          return {
-            name: resData.name,
-            email: resData.email,
-            role: resData.role_id,
-            profilePhoto: resData.profile_image,
-            password: resData.password,
-          };
-        });
+      let userData = await axios.get(`${urlUsers}/${id}`).then((response) => {
+        let resData = response.data.data;
+        return {
+          name: resData.name,
+          email: resData.email,
+          role: resData.role_id,
+          profilePhoto: resData.profile_image,
+          password: resData.password,
+        };
+      });
       setinitialValues(userData);
     } catch (error) {
       //TODO
@@ -38,16 +39,14 @@ const UserForm = () => {
 
   const getRoles = async () => {
     try {
-      let rolesData = await axios
-        .get("http://ongapi.alkemy.org/api/roles")
-        .then((response) => {
-          let resData = response.data.data;
-          let arrData = [];
-          resData.forEach((element) => {
-            arrData.push({ id: element.id, name: element.name });
-          });
-          return arrData;
+      let rolesData = await axios.get(urlRoles).then((response) => {
+        let resData = response.data.data;
+        let arrData = [];
+        resData.forEach((element) => {
+          arrData.push({ id: element.id, name: element.name });
         });
+        return arrData;
+      });
       setRoles(rolesData);
     } catch (error) {
       //TODO
@@ -56,16 +55,12 @@ const UserForm = () => {
 
   const handleSubmit = (values) => {
     id
-      ? axios
-          .put("http://ongapi.alkemy.org/api/users/" + id, values)
-          .catch((error) => {
-            //TODO
-          })
-      : axios
-          .post("http://ongapi.alkemy.org/api/users", values)
-          .catch((error) => {
-            //TODO
-          });
+      ? axios.put(`${urlUsers}/${id}`, values).catch((error) => {
+          //TODO
+        })
+      : axios.post(urlUsers, values).catch((error) => {
+          //TODO
+        });
   };
 
   const handleChange = (e, setFieldValue) => {
