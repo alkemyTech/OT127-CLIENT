@@ -20,54 +20,54 @@ const SlidesForm = () => {
 
   const { id } = useParams();
 
-  useEffect(() => {
-    const getSlidesData = async () => {
-      const url = "http://ongapi.alkemy.org/api/slides";
+  const getSlidesData = async () => {
+    const url = "http://ongapi.alkemy.org/api/slides";
 
-      await axios
-        .get(url)
-        .then((res) => {
-          const {
-            data: { data },
-          } = res;
-          setSlidesData(data);
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
-    };
-    getSlidesData();
-  }, []);
+    await axios
+      .get(url)
+      .then((res) => {
+        const {
+          data: { data },
+        } = res;
+        setSlidesData(data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
 
-  useEffect(() => {
-    const getSlidesById = async () => {
-      if (id) {
-        setLoading(true);
-        const url = `http://ongapi.alkemy.org/api/slides/${id}`;
-        await axios
-          .get(url)
-          .then((res) => {
-            const { data: status } = res;
-            if (status.success) {
-              const { data } = status;
-              setInitialValues({
-                name: data.name,
-                description: data.description,
-                order: data.order ? data.order : "",
-                image: data.image,
-              });
-            } else {
-              alert(status.message);
-            }
-          })
-          .catch((err) => {
-            alert(err.message);
+  const getSlidesById = async (id) => {
+    setLoading(true);
+    const url = `http://ongapi.alkemy.org/api/slides/${id}`;
+    await axios
+      .get(url)
+      .then((res) => {
+        const { data: status } = res;
+        if (status.success) {
+          const { data } = status;
+          setInitialValues({
+            name: data.name,
+            description: data.description,
+            order: data.order ? data.order : "",
+            image: data.image,
           });
-      }
-      setLoading(false);
-    };
-    getSlidesById();
-  }, [id]);
+        } else {
+          alert(status.message);
+        }
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (id) {
+      getSlidesById();
+    }
+    getSlidesData();
+  }, []); // eslint-disable-line
 
   const toBase64 = (file) => {
     return new Promise((resolve) => {
