@@ -15,33 +15,36 @@ const HomeForm = () => {
         }],
     })
 
-    const updateValues = async (values) => {
+    const updateValues = (values) => {
 
+        //Comparo los slides originales con los que vienen del formulario
         slidesData.forEach((slide) => {
             for (let i = 0; i < values.slides.length; i++) {
                 if (slide.id === values.slides[i].id) {
                     if (slide.image !== values.slides[i].image || slide.name !== values.slides[i].name || slide.description !== values.slides[i].description) {
+                        // cuando detecta los slides que fueron modificados realizamos la peticion "PUT"
+                        // con todos los datos que ya tenia el slides mas el nuevo campo modificado
+                        console.log(values.slides[i]);
                         try {
                             axios.put(`http://ongapi.alkemy.org/api/slides/${values.slides[i].id}`, values.slides[i])
                         } catch (error) {
                             // TO DO
                             console.error(error)
                         }
-
                     }
                 }
             }
         })
-
+        // Comparo el mensaje que viene del formulario con el original
         if (values.welcome !== welcomeText.welcome_text) {
+            // si son diferentes realizamos la peticion "PUT" con todos los datos originales excepto el mensaje modificado
             try {
                 let newWelcomeText = welcomeText
                 newWelcomeText.welcome_text = values.welcome
-                await axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
+                axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
             } catch (error) {
                 // TO DO
             }
-
         }
     }
 
@@ -49,38 +52,25 @@ const HomeForm = () => {
     useEffect(() => {
         const getDataToEdit = async () => {
             try {
-                const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides')
+                // Traemos la toda la informacion que podria ser editada
+                // solo traemos los 3 primeros slides, de ser necesario traer todos, borrar el "?limit=3"
+                const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides?limit=3')
                 const welcomeResponse = await axios.get('http://ongapi.alkemy.org/api/organization')
-
                 const slides = slidesResponse.data.data
                 const welcomeText = welcomeResponse.data.data
-
+                // Guardamos la informacion original aparte, para luego hacer una comparacion
+                // con la informacion que venga del formulario y ver que se modifico
                 setSlidesData(slides);
                 setWelcomeText(welcomeText);
 
-                let slidesToEdit = []
-                slides.forEach((slide) => {
-                    slidesToEdit.push({
-                        id: slide.id,
-                        name: slide.name,
-                        description: slide.description,
-                        image: slide.image,
-                        order: slide.order,
-                        user_id: slide.user_id,
-                        created_at: slide.created_at,
-                        updated_at: slide.updated_at,
-                        deleted_at: slide.deleted_at,
-                        group_id: slide.group_id,
-                    })
-                })
-
+                // guardamos los valores iniciales que va a usar formik
                 setInitialValues({
                     welcome: welcomeText.welcome_text,
-                    slides: slidesToEdit
+                    slides: slides
                 })
 
             } catch (error) {
-                console.error(error)
+                // TO DO
             }
         }
         getDataToEdit()
