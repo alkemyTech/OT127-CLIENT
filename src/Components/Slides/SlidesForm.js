@@ -19,10 +19,9 @@ const SlidesForm = () => {
   const [error, setError] = useState(false);
 
   const { id } = useParams();
+  const url = "http://ongapi.alkemy.org/api/slides";
 
   const getSlidesData = async () => {
-    const url = "http://ongapi.alkemy.org/api/slides";
-
     await axios
       .get(url)
       .then((res) => {
@@ -38,9 +37,9 @@ const SlidesForm = () => {
 
   const getSlidesById = async (id) => {
     setLoading(true);
-    const url = `http://ongapi.alkemy.org/api/slides/${id}`;
+
     await axios
-      .get(url)
+      .get(`${url}/${id}`)
       .then((res) => {
         const { data: status } = res;
         if (status.success) {
@@ -48,7 +47,7 @@ const SlidesForm = () => {
           setInitialValues({
             name: data.name,
             description: data.description,
-            order: data.order ? data.order : "",
+            order: data.order ? data.order : 0,
             image: data.image,
           });
         } else {
@@ -90,9 +89,8 @@ const SlidesForm = () => {
     }
 
     if (id) {
-      const url = `http://ongapi.alkemy.org/api/slides/${id}`;
       await axios
-        .put(url, {
+        .put(`${url}/${id}`, {
           name: formValues.name,
           description: formValues.description,
           order: formValues.order,
@@ -101,8 +99,7 @@ const SlidesForm = () => {
         .catch((err) => {
           alert(err.message);
         });
-    } else if (!id) {
-      const url = "http://ongapi.alkemy.org/api/slides";
+    } else {
       const orderUnique = slidesData.filter(
         (data) => data.order === formValues.order
       );
