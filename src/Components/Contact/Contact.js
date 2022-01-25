@@ -3,7 +3,7 @@ import "./contact.scss";
 const Contact = ({ name, short_description, address, phone, cellphone }) => {
 	return (
 		<>
-			<div className="contact__container">
+			<div className="contact">
 				<div className="contact__title-text">
 					<Title title="Contacto" />
 				</div>
