@@ -1,49 +1,52 @@
-import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import '../FormStyles.css';
+import React, { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import "../FormStyles.css";
 
 const LoginForm = () => {
-
   const [userData, setUserData] = useState([]);
+
+  const handleSubmit = (values) => {
+    setUserData([
+      ...userData,
+      { email: values.email, password: values.password },
+    ]);
+  };
 
   return (
     <div>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({
-          email: Yup.string().email('Email inválido').required('Este campo es obligatorio'),
+          email: Yup.string()
+            .email("Email inválido")
+            .required("Este campo es obligatorio"),
           password: Yup.string()
-            .min(6, 'Debe tener por lo menos 6 caracteres.')
-            .matches(/^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/, 'Debe contener al menos una letra, un número y un símbolo.') // eslint-disable-line
-            .required('Este campo es obligatorio'),
+            .min(6, "Debe tener por lo menos 6 caracteres.")
+            .matches(
+              /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/, // eslint-disable-line
+              "Debe contener al menos una letra, un número y un símbolo."
+            )
+            .required("Este campo es obligatorio"),
         })}
         onSubmit={(values) => {
-          let loginUser = {
-            email: values.email,
-            password: values.password
-          }
-          setUserData([...userData, loginUser])
+          handleSubmit(values);
         }}
       >
         <Form>
-          <label htmlFor="email">
-            Email
-          </label>
+          <label htmlFor="email">Email</label>
           <Field name="email" type="email" />
           <ErrorMessage name="email" />
 
-          <label htmlFor="password">
-            Contraseña
-          </label>
+          <label htmlFor="password">Contraseña</label>
           <Field name="password" type="password" />
           <ErrorMessage name="password" />
 
-          <button type='submit'>Entrar</button>
+          <button type="submit">Entrar</button>
         </Form>
       </Formik>
     </div>
   );
-}
+};
 
-export default LoginForm
+export default LoginForm;
