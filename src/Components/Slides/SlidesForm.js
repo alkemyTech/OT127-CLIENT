@@ -33,12 +33,11 @@ const SlidesForm = () => {
           setSlidesData(data);
         })
         .catch((err) => {
-          console.log(err.message);
+          alert(err.message);
         });
     };
     getSlidesData();
   }, []);
-  console.log(slidesData);
 
   useEffect(() => {
     const getSlidesById = async () => {
@@ -84,16 +83,24 @@ const SlidesForm = () => {
         });
     } else if (!id) {
       const url = "http://ongapi.alkemy.org/api/slides";
-
-      await axios
-        .post(url, {
-          name: formValues.name,
-          description: formValues.description,
-          order: formValues.order,
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
+      const orderUnique = slidesData.filter(
+        (data) => data.order === formValues.order
+      );
+      if (orderUnique.length > 0) {
+        setError(true);
+        return;
+      } else {
+        setError(false);
+        await axios
+          .post(url, {
+            name: formValues.name,
+            description: formValues.description,
+            order: formValues.order,
+          })
+          .catch((err) => {
+            alert(err.message);
+          });
+      }
     }
   };
 
@@ -125,7 +132,6 @@ const SlidesForm = () => {
           }}
           validationSchema={validations}
           onSubmit={(values, { resetForm }) => {
-            console.log(values);
             let formValues = {
               name: values.name,
               description: values.description,
@@ -134,7 +140,6 @@ const SlidesForm = () => {
             };
             setInitialValues(null);
             handleSubmit(formValues);
-            inputFileRef.current.value = "";
             resetForm({
               values: {
                 name: "",
