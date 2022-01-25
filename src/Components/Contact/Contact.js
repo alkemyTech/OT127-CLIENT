@@ -9,7 +9,7 @@ const Contact = ({ name, short_description, address, phone, cellphone }) => {
 				</div>
 				{/* las variables las saque de la api de alkemy/organization porque 
 				dice que las props van a venir mas adelante desde una api, supuse
-				que era de esa */}
+				que era de   esa */}
 				<div className="contact__content">
 					<p>Nombre:{name}</p>
 					<p>Descripcion:{short_description}</p>
