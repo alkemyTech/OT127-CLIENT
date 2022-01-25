@@ -16,9 +16,11 @@ import LoginForm from "./Components/Auth/LoginForm";
 import Contact from "./Components/Contact/Contact";
 import Gracias from './Donations/Gracias';
 import Donacion from "./Donations/Donacion";
+import ContactForm from "./Components/Contact/ContactForm";
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
+
 function App() {
 	return (
 		// Agregar newsletter en footer
@@ -29,10 +31,14 @@ function App() {
 					<Route path="/create-activity" component={ActivitiesForm} />
 					<Route path="/create-category" component={CategoriesForm} />
 					<Route path="/contacto" component={Contact} />
+					<Route path="/contact" component={ContactForm} />
 					<Route path="/create-news" component={NewsForm} />
 					<Route path="/backoffice/create-slide" component={SlidesForm} />
 					<Route path="/backoffice/organization" component={OrganizationData} />
-					<Route path="/backoffice/organization/edit" component={OrganizationForm} />
+					<Route
+						path="/backoffice/organization/edit"
+						component={OrganizationForm}
+					/>
 					<Route path="/create-testimonials" component={TestimonialForm} />
 					<Route path="/create-user" component={UserForm} />
 					<Route path="/create-member" component={MembersForm} />
@@ -41,7 +47,10 @@ function App() {
 					<Route path="/toys-campaign" component={ToysCampaign} />
 					<Route path="/login" component={LoginForm} />
 					<Route path="/register" component={RegisterForm} />
-					<Route path="/donar" component={() => <Donacion message="Quieres donar?" />} />
+					<Route
+						path="/donar"
+						component={() => <Donacion message="Quieres donar?" />}
+					/>
 					<Route path="/gracias" component={Gracias} />
 				</Switch>
 			</BrowserRouter>
