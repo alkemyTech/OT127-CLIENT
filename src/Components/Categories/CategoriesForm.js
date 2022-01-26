@@ -28,12 +28,11 @@ const CategoriesForm = () => {
 					const {data} = await axios.get(
 						`http://ongapi.alkemy.org/api/categories/${id}`
 					);
-					console.log(data.data);
 					setName(data.data.name);
 					setDescription(data.data.description);
 					set_image(data.data.image);
 				} catch (error) {
-					console.log(error);
+				// To do
 				}
 			} else {
 				setName("");
@@ -66,10 +65,10 @@ const CategoriesForm = () => {
 					image,
 				})
 				.then(function (response) {
-					console.log(response);
+					// To do
 				})
 				.catch(function (error) {
-					console.log(error);
+					// to do
 				});
 		} else {
 			axios
@@ -79,10 +78,10 @@ const CategoriesForm = () => {
 					image,
 				})
 				.then(function (response) {
-					console.log(response);
+					// To do
 				})
 				.catch(function (error) {
-					console.log(error);
+					// to do
 				});
 		}
 	};
