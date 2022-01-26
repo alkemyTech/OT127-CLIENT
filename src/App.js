@@ -45,6 +45,7 @@ function App() {
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/backoffice/create-user" exact component={UserForm} />
           <Route path="/backoffice/create-user/:id" component={UserForm} />
+          <Route path="/backoffice/news" component={NewsList} />
           <Route path="/create-member" component={MembersForm} />
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
@@ -56,7 +57,6 @@ function App() {
             component={() => <Donacion message="Quieres donar?" />}
           />
           <Route path="/gracias" component={Gracias} />
-          <Route path="/backoffice/news" component={NewsList} />
         </Switch>
       </BrowserRouter>
       <div className="App"></div>

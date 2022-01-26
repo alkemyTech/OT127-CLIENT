@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../CardListStyles.css';
 
 const NewsList = () => {
@@ -10,6 +11,7 @@ const NewsList = () => {
 
     return (
         <div>
+        <Link to='/backoffice/news/create'>Create news</Link>
             <h1>Listado de Novedades</h1>
             <ul className="list-container">
                 {newsMock.length > 0 ? 
