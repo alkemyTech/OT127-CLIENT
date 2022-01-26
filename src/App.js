@@ -20,40 +20,6 @@ import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 
 function App() {
-<<<<<<< HEAD
-	return (
-		// Agregar newsletter en footer
-		<>
-			<BrowserRouter>
-				<Switch>
-					<Route path="/" exact component={Home} />
-					<Route path="/create-activity" component={ActivitiesForm} />
-					<Route path="/create-category" component={CategoriesForm} />
-					<Route path="/contact" component={ContactForm} />
-					<Route path="/create-news" component={NewsForm} />
-					<Route path="/backoffice/create-slide" component={SlidesForm} />
-					<Route path="/backoffice/organization" component={OrganizationData} />
-					<Route
-						path="/backoffice/organization/edit"
-						component={OrganizationForm}
-					/>
-					<Route path="/create-testimonials" component={TestimonialForm} />
-					<Route path="/create-user" component={UserForm} />
-					<Route path="/create-project" component={ProjectsForm} />
-					<Route path="/school-campaign" component={SchoolCampaign} />
-					<Route path="/toys-campaign" component={ToysCampaign} />
-					<Route path="/login" component={LoginForm} />
-					<Route path="/register" component={RegisterForm} />
-					<Route
-						path="/donar"
-						component={() => <Donacion message="Quieres donar?" />}
-					/>
-					<Route path="/gracias" component={Gracias} />
-				</Switch>
-			</BrowserRouter>
-		</>
-	);
-=======
   return (
     // Agregar newsletter en footer
     <>
@@ -93,7 +59,6 @@ function App() {
       <div className="App"></div>
     </>
   );
->>>>>>> 1b3e2a6a08a3c231410bb1ab545ce88027b2f16b
 }
 
 export default App;
