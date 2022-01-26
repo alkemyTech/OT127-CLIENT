@@ -38,7 +38,7 @@ const NewsList = () => {
     },
   ];
 
-  function createData(name, image, createdAt, actions) {
+  const createData = (name, image, createdAt, actions) => {
     return { name, image, createdAt, actions };
   }
 
