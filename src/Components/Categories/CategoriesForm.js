@@ -32,7 +32,7 @@ const CategoriesForm = () => {
 					setDescription(data.data.description);
 					set_image(data.data.image);
 				} catch (error) {
-				// To do
+					// To do
 				}
 			} else {
 				setName("");
