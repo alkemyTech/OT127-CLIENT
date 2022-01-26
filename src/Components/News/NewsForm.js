@@ -1,41 +1,74 @@
 import React, { useState } from 'react';
-import '../../Components/FormStyles.css';
+import '../FormStyles.css';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import axios from 'axios';
 
-const NewsForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        title: '',
-        content: '',
-        category: ''
-    });
+const CategoriesForm = () => {
+    
+    const handleSubmit = async(values) => {
+        /* // => OnSumit
+        const [userData, setUserData] = useState([]);
+        setUserData([
+        ...userData,
+        { name: values.name, description: values.description, categorie: values.categorie },
+        ]); 
+        */
+        const name = values.name;
+        const description = values.description;
+        const categories = values.categorie;
 
-    const handleChange = (e) => {
-        if(e.target.name === 'title'){
-            setInitialValues({...initialValues, title: e.target.value})
-        } if(e.target.name === 'content'){
-            setInitialValues({...initialValues, content: e.target.value})
-        } if(e.target.name === 'category') {
-            setInitialValues({...initialValues, category: e.target.value})
-        }
-    }
+        const baseUrl = 'http://ongapi.alkemy.org/api/news';
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-    }
+        axios
+        .post( 
+            baseUrl, {
+                name, description, categories
+            }
+         )
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    };
 
     return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="title" value={initialValues.title || ''} onChange={handleChange}></input>
-            <input className="input-field" type="text" name="content" value={initialValues.content || ''} onChange={handleChange}></input>
-            <select className="select-field" name="category" value={initialValues.category || ''} onChange={handleChange}>
-                <option value="" disabled>Select category</option>
-                <option value="1">Demo option 1</option>
-                <option value="2">Demo option 2</option>
-                <option value="3">Demo option 3</option>
-            </select>
-            <button className="submit-btn" type="submit">Send</button>
-        </form>
+        <Formik
+            initialValues={{ name: "", description: "", categorie: ""  }}
+            validationSchema={Yup.object({
+            name: Yup.string()
+                .min(4, "Debe tener por lo menos 4 caracteres.")
+                .required("Este campo es obligatorio"),
+            description: Yup.string()
+                .required("Este campo es obligatorio"),
+            categorie: Yup.string()
+                .required("Este campo es obligatorio"),
+            })}
+            onSubmit={(values) => {
+                handleSubmit(values);
+            }}    
+        >
+            <Form>
+                <label htmlFor="name">Titulo</label>
+                <Field name="name" type="titulo" />
+                <ErrorMessage name="name" />
+
+                <label htmlFor="description">Description</label> 
+                <Field name="description" type="description" />
+                <ErrorMessage name="description"/>
+
+                <label htmlFor="categorie">Categories</label> 
+                <Field component="select" name="categorie" type="categorie">
+                    <option value="option1" >categorie1</option>
+                    <option value="option2">categorie2</option>
+                </Field>
+                <ErrorMessage name="categorie" />
+                
+                <button type="submit">Entrar</button>
+            </Form>
+        </Formik>
     );
 }
- 
-export default NewsForm;
+export default CategoriesForm;
