@@ -24,12 +24,24 @@ const HomeForm = () => {
         }
     }
 
+    const toDataURL = (url) => {
+        fetch(url)
+            .then(response => response.blob())
+            .then(
+                blob =>
+                    new Promise((resolve, reject) =>
+                        Object.assign(new FileReader(), {
+                            onloadend: ({ target }) => resolve(target.result),
+                            onerror: ({ target }) => reject(target.error),
+                        }).readAsDataURL(blob),
+                    ),
+            );
+    }
+
     const updateWelcomeText = async (values) => {
         try {
             // TO DO: solucionar error: no base64 string provided
-            let newWelcomeText = welcomeText
-            newWelcomeText.welcome_text = values.welcome
-            await axios.put('http://ongapi.alkemy.org/api/organization/1', newWelcomeText)
+            await axios.put('http://ongapi.alkemy.org/api/organization/1', { name: welcome_text.name, welcome_text: values.welcome })
         } catch (error) {
             // TO DO
         }
