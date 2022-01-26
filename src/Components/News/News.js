@@ -6,10 +6,12 @@ const News = () => {
   const newsList = () => {
     return news.length ? (
       news.map((element) => (
-        <li className="card-info" key={element.id}>
-          <h3>{element.name}</h3>
-          <p>{element.description}</p>
-        </li>
+        <ul className="list-container">
+          <li className="card-info" key={element.id}>
+            <h3>{element.name}</h3>
+            <p>{element.description}</p>
+          </li>
+        </ul>
       ))
     ) : (
       <p>No hay novedades</p>
@@ -19,7 +21,7 @@ const News = () => {
   return (
     <>
       <h1>Novedades</h1>
-      <ul className="list-container">{newsList()}</ul>
+      {newsList()}
     </>
   );
 };
