@@ -38,6 +38,12 @@ class ActivitiesService {
         .then((response) => response.data);
     }
   };
+
+  delete = async (id) => {
+    if (id) {
+      axios.delete(`${this.API_URL}/${id}`).then((response) => response.data);
+    }
+  };
 }
 
 const activitiesController = new ActivitiesService();
