@@ -1,25 +1,25 @@
-import React from "react";
-import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ActivitiesForm from "./Components/Activities/ActivitiesForm";
-import CategoriesForm from "./Components/Categories/CategoriesForm";
-import NewsForm from "./Components/News/NewsForm";
-import SlidesForm from "./Components/Slides/SlidesForm";
-import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
-import UserForm from "./Components/Users/UsersForm";
-import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
-import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
-import MembersForm from "./Components/Members/MembersForm";
-import ProjectsForm from "./Components/Projects/ProjectsForm";
-import RegisterForm from "./Components/Auth/RegisterForm";
-import LoginForm from "./Components/Auth/LoginForm";
-import Contact from "./Components/Contact/Contact";
-import Gracias from './Donations/Gracias';
-import Donacion from "./Donations/Donacion";
-import ContactForm from "./Components/Contact/ContactForm";
-import Home from "./Pages/Home";
-import OrganizationData from "./Components/Organization/OrganizationData";
-import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
+import React from "react"
+import "./App.css"
+import { BrowserRouter, Route, Switch } from "react-router-dom"
+import ActivitiesForm from "./Components/Activities/ActivitiesForm"
+import CategoriesForm from "./Components/Categories/CategoriesForm"
+import NewsForm from "./Components/News/NewsForm"
+import SlidesForm from "./Components/Slides/SlidesForm"
+import TestimonialForm from "./Components/Testimonials/TestimonialsForm"
+import UserForm from "./Components/Users/UsersForm"
+import SchoolCampaign from "./Campaigns/School/SchoolCampaign"
+import ToysCampaign from "./Campaigns/Toys/ToysCampaign"
+import MembersForm from "./Components/Members/MembersForm"
+import ProjectsForm from "./Components/Projects/ProjectsForm"
+import RegisterForm from "./Components/Auth/RegisterForm"
+import LoginForm from "./Components/Auth/LoginForm"
+import Contact from "./Components/Contact/Contact"
+import Gracias from "./Donations/Gracias"
+import Donacion from "./Donations/Donacion"
+import ContactForm from "./Components/Contact/ContactForm"
+import Home from "./Pages/Home"
+import OrganizationData from "./Components/Organization/OrganizationData"
+import OrganizationForm from "./Components/Organization/EditOrganizationDataForm"
 
 function App() {
 	return (
@@ -33,13 +33,31 @@ function App() {
 					<Route path="/contacto" component={Contact} />
 					<Route path="/contact" component={ContactForm} />
 					<Route path="/create-news" component={NewsForm} />
-					<Route path="/backoffice/create-slide" component={SlidesForm} />
-					<Route path="/backoffice/organization" component={OrganizationData} />
+					<Route
+						path="/backoffice/create-slide"
+						component={SlidesForm}
+					/>
+					<Route
+						path="/backoffice/organization"
+						component={OrganizationData}
+					/>
 					<Route
 						path="/backoffice/organization/edit"
 						component={OrganizationForm}
 					/>
-					<Route path="/create-testimonials" component={TestimonialForm} />
+					<Route
+						path="/backoffice/create-user"
+						exact
+						component={UserForm}
+					/>
+					<Route
+						path="/backoffice/create-user/:id"
+						component={UserForm}
+					/>
+					<Route
+						path="/create-testimonials"
+						component={TestimonialForm}
+					/>
 					<Route path="/create-user" component={UserForm} />
 					<Route path="/create-member" component={MembersForm} />
 					<Route path="/create-project" component={ProjectsForm} />
@@ -54,8 +72,8 @@ function App() {
 					<Route path="/gracias" component={Gracias} />
 				</Switch>
 			</BrowserRouter>
+			<div className="App"></div>
 		</>
-	);
+	)
 }
-
-export default App;
+export default App
