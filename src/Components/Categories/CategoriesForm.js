@@ -7,7 +7,7 @@ const CategoriesForm = () => {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [message, setMessage] = useState(false);
-	const [image, set_image] = useState();
+	const [image, set_image] = useState("");
 
 	const send_image = (files) => {
 		const fileReader = new FileReader();
@@ -32,8 +32,6 @@ const CategoriesForm = () => {
 					setName(data.data.name);
 					setDescription(data.data.description);
 					set_image(data.data.image);
-
-					// setDescription(data.data.image)
 				} catch (error) {
 					console.log(error);
 				}
@@ -50,40 +48,49 @@ const CategoriesForm = () => {
 		e.preventDefault();
 
 		// Validaciones
+		if (name.trim() === "" || description.trim() === "" || image.length === 0) {
+			setMessage(true);
+			setTimeout(() => {
+				setMessage(false);
+			}, 1500);
 
-		if(id){
+			return;
+		}
+
+		if (id) {
 			axios
-		.put(	`http://ongapi.alkemy.org/api/categories/${id}`, {
-			id,
-			name,
-			description,
-			image
-		})
-		.then(function (response) {
-			console.log(response);
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
-		}else{
+				.put(`http://ongapi.alkemy.org/api/categories/${id}`, {
+					id,
+					name,
+					description,
+					image,
+				})
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		} else {
 			axios
-			.post("http://ongapi.alkemy.org/api/categories", {
-				name,
-				description,
-				image
-			})
-			.then(function (response) {
-				console.log(response);
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
+				.post("http://ongapi.alkemy.org/api/categories", {
+					name,
+					description,
+					image,
+				})
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 		}
 	};
 
 	return (
 		<div className="form-container">
 			<form onSubmit={handleSubmit}>
+				{message ? <Error>Todos los campos son obligatorios</Error> : null}
 				<div>
 					<label htmlFor="name">Nombre:</label>
 					<input
@@ -95,9 +102,7 @@ const CategoriesForm = () => {
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
-					{/* {errors.name && touched.name ? <Error>{errors.name}</Error> : null} */}
 				</div>
-
 				<div>
 					<label htmlFor="description">Descripción:</label>
 					<input
@@ -109,9 +114,6 @@ const CategoriesForm = () => {
 						value={description}
 						onChange={(e) => setDescription(e.target.value)}
 					/>
-					{/* {errors.description && touched.description ? (
-						<Error>{errors.description}</Error>
-					) : null} */}
 				</div>
 
 				<div>
@@ -138,6 +140,7 @@ const CategoriesForm = () => {
 					value={id ? "Editar" : "Guardar"}
 				/>
 			</form>
+			{id ? <img src={image ? image : ""} alt="imagen_muestra" /> : null}
 		</div>
 	);
 };
