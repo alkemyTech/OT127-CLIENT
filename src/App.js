@@ -31,6 +31,7 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
           <Route path="/create-news" component={NewsForm} />
+          <Route path="/contact" component={ContactForm} />
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
           <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
           <Route path="/backoffice/organization" component={OrganizationData} />
@@ -39,7 +40,8 @@ function App() {
             component={OrganizationForm}
           />
           <Route path="/create-testimonials" component={TestimonialForm} />
-          <Route path="/create-user" component={UserForm} />
+          <Route path="/backoffice/create-user" exact component={UserForm} />
+          <Route path="/backoffice/create-user/:id" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
@@ -53,6 +55,7 @@ function App() {
           <Route path="/gracias" component={Gracias} />
         </Switch>
       </BrowserRouter>
+      <div className="App"></div>
     </>
   );
 }
