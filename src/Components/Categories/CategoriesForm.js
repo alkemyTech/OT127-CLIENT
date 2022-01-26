@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
-
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-//import { selectOptions } from '@testing-library/user-event/dist/select-options';
 
 const CategoriesForm = () => {
     const [userData, setUserData] = useState([]);
@@ -14,6 +12,7 @@ const CategoriesForm = () => {
         { name: values.name, description: values.description, categorie: values.categorie },
         ]);  
     };
+
     return (
         <Formik
             initialValues={{ name: "", description: "", categorie: ""  }}
@@ -28,7 +27,6 @@ const CategoriesForm = () => {
             categorie: Yup.string()
                 .required("Este campo es obligatorio"),
             })}
-            
             onSubmit={(values) => {
                 handleSubmit(values);
                 console.log(values);
@@ -53,18 +51,6 @@ const CategoriesForm = () => {
                 <button type="submit">Entrar</button>
             </Form>
 
-            {/*<form className="form-container" onSubmit={handleSubmit}>
-                <input className="input-field" type="text" name="name" value={initialValues.name || ''} onChange={handleChange} placeholder="Title"></input>
-                
-                <input className="input-field" type="text" name="description" value={initialValues.description || ''} onChange={handleChange} placeholder="Write some description"></input>
-                
-                <select className="input-field" value={initialValues.categorie || ''} onChange={e => setInitialValues({...initialValues, categorie: e.target.value})}>
-                    <option value="1">Categories1</option>
-                    <option value="2">Categories2</option>
-                    <option value="3">Categories3</option>
-                </select>
-                <button className="submit-btn" type="submit">Send</button>
-            </form>*/}
         </Formik>
     );
 }
