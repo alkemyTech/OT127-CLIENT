@@ -30,15 +30,13 @@ const TestimonialForm = () => {
 	}
 	const editUpdate =(id)=>{
 	if (id === undefined) {
-		//create--testimonial
+		//crear--testimonial
 	}else{
-		//update--testimonial(id)-rellenar campos para editar y despues enviar
-		axios.get(url`/${id}`)
+		//actualizar--testimonial(id)-rellenar campos para editar y despues enviar
+		axios
+		.get(`${url}/${id}`)
 		.then(res => {
-		setInitialValues({
-			name: res.data.name,
-			description: res.data.description
-		})
+			log(res.data)
 	}	
 	}
 	}
