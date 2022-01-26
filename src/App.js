@@ -15,7 +15,10 @@ import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from "./Donations/Donacion";
 import Gracias from "./Donations/Gracias";
+import ContactForm from "./Components/Contact/ContactForm";
 import Home from "./Pages/Home";
+import OrganizationData from "./Components/Organization/OrganizationData";
+import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 
 function App() {
   return (
@@ -23,32 +26,38 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
-
           <Route path="/" exact component={Home} />
           <Route
             path="/backoffice/create-activity"
             component={ActivitiesForm}
           />
           <Route path="/create-category" component={CategoriesForm} />
+          <Route path="/contact" component={ContactForm} />
           <Route path="/create-news" component={NewsForm} />
+          <Route path="/contact" component={ContactForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/organization" component={OrganizationData} />
+          <Route
+            path="/backoffice/organization/edit"
+            component={OrganizationForm}
+          />
           <Route path="/create-testimonials" component={TestimonialForm} />
-          <Route path="/create-user" component={UserForm} />
+          <Route path="/backoffice/create-user" exact component={UserForm} />
+          <Route path="/backoffice/create-user/:id" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
-          <Route path="/backoffice/activities/:id" component={ActivitiesForm} />
           <Route
             path="/donar"
-            component={() => <Donacion message={"Quieres donar?"} />}
+            component={() => <Donacion message="Quieres donar?" />}
           />
           <Route path="/gracias" component={Gracias} />
         </Switch>
       </BrowserRouter>
+      <div className="App"></div>
     </>
   );
 }
