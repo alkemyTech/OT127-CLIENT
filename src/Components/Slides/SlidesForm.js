@@ -13,12 +13,19 @@ import axios from "axios";
 import "../FormStyles.css";
 
 const SlidesForm = () => {
-  const [initialValues, setInitialValues] = useState(null);
+  const [initialValues, setInitialValues] = useState({
+    name: "",
+    description: "",
+    order: 0,
+    image: "",
+    id: false,
+  });
   const [slidesData, setSlidesData] = useState([]); // para validar order
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
   const url = "http://ongapi.alkemy.org/api/slides";
+  console.log(id);
 
   const getSlidesData = async () => {
     await axios
@@ -44,6 +51,7 @@ const SlidesForm = () => {
             description: description,
             order: order ? order : 0,
             image: image,
+            id: true,
           });
         } else {
           const { status } = res.data;
@@ -85,9 +93,12 @@ const SlidesForm = () => {
     }
 
     if (id) {
-      await axios.put(`${url}/${id}`, formValues).catch((err) => {
-        alert(err.message);
-      });
+      await axios
+        .put(`${url}/${id}`, formValues)
+        .then((res) => console.log(res))
+        .catch((err) => {
+          alert(err.message);
+        });
     } else {
       await axios.post(url, formValues).catch((err) => {
         alert(err.message);
@@ -102,7 +113,8 @@ const SlidesForm = () => {
       .min(4, "Debe tener al menos 4 caracteres")
       .required("Este campo es obligatorio"),
     description: Yup.string().required("Este campo es obligatorio"),
-    order: Yup.number("debe ser un numero")
+    id: Yup.boolean(),
+    order: Yup.number()
       .moreThan(0, "Debe ser un numero mayor o igual a cero")
       .required("Este campo es obligatorio")
       .integer()
@@ -116,12 +128,8 @@ const SlidesForm = () => {
         <p>LOADING...</p>
       ) : (
         <Formik
-          initialValues={{
-            name: initialValues ? initialValues.name : "",
-            description: initialValues ? initialValues.description : "",
-            order: initialValues ? initialValues.order : "",
-            image: initialValues ? initialValues.image : "",
-          }}
+          enableReinitialize={true}
+          initialValues={initialValues}
           validationSchema={validations}
           onSubmit={async (values, { resetForm }) => {
             let formValues = {
@@ -131,17 +139,10 @@ const SlidesForm = () => {
               image: values.image,
             };
             await handleSubmit(formValues);
-            setInitialValues(null);
             // limpio el input file
             inputFileRef.current.value = "";
 
-            resetForm({
-              values: {
-                name: "",
-                description: "",
-                order: "",
-              },
-            });
+            resetForm();
           }}
         >
           {({ setFieldValue }) => (
@@ -187,6 +188,7 @@ const SlidesForm = () => {
                 onChange={(e) => {
                   setFieldValue("order", parseInt(e.currentTarget.value));
                 }}
+                disabled={id}
                 placeholder="ingrese un numero"
               />
               <ErrorMessage name="order" render={(msg) => <div>{msg}</div>} />
