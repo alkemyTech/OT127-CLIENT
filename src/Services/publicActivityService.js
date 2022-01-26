@@ -16,6 +16,28 @@ class ActivitiesService {
         .then((response) => response.data);
     }
   };
+
+  post = async (name, description, image) => {
+    axios
+      .post(this.API_URL, {
+        name,
+        description,
+        image,
+      })
+      .then((response) => response.data);
+  };
+
+  put = async (id, name, description, image) => {
+    if (id) {
+      axios
+        .put(`${this.API_URL}/${id}`, {
+          name,
+          description,
+          image,
+        })
+        .then((response) => response.data);
+    }
+  };
 }
 
 const activitiesController = new ActivitiesService();
