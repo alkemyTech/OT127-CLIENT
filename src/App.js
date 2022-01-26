@@ -28,7 +28,10 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/create-activity" component={ActivitiesForm} />
+          <Route
+            path="/backoffice/create-activity"
+            component={ActivitiesForm}
+          />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
           <Route path="/novedades" component={News} />
