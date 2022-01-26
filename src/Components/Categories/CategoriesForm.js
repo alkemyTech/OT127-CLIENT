@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../FormStyles.css';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+ 
 
 const CategoriesForm = () => {
     const [userData, setUserData] = useState([]);
@@ -54,5 +55,4 @@ const CategoriesForm = () => {
         </Formik>
     );
 }
- 
 export default CategoriesForm;
