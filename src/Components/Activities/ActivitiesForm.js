@@ -26,7 +26,7 @@ const ActivitiesForm = () => {
         setActivity(res.data.data);
       });
     }
-  }, []);
+  }, []); //eslint-disable-line
 
   const handleChangeName = (e) => {
     setActivity((prevActivity) => ({ ...prevActivity, name: e.target.value }));
