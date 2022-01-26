@@ -69,8 +69,7 @@ const HomeForm = () => {
         const getDataToEdit = async () => {
             try {
                 // Traemos la toda la informacion que podria ser editada
-                // solo traemos los 3 primeros slides, de ser necesario traer todos, borrar el "?limit=3"
-                const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides?limit=3')
+                const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides')
                 const welcomeResponse = await axios.get('http://ongapi.alkemy.org/api/organization')
                 const slides = slidesResponse.data.data
                 const welcomeText = welcomeResponse.data.data
