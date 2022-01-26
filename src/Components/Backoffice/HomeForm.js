@@ -15,33 +15,29 @@ const HomeForm = () => {
         }],
     })
 
-    const updateSlides = async (slide, id) => {
-        try {
-            // TO DO: solucionar error: no base64 string provided
-            await axios.put(`http://ongapi.alkemy.org/api/slides/${id}`, slide)
-        } catch (error) {
-            // TO DO
-        }
+    const toDataURL = (blob) =>
+        new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+        });
+
+    const updateSlides = (slide, id) => {
+        // Primero tenemos que pasar la URL de la imagen a un string base64
+        axios
+            .get(slide.image, { responseType: "blob" })
+            .then((response) => toDataURL(response.data))
+            .then((encoded) => {
+                slide.image = encoded
+                axios.put(`http://ongapi.alkemy.org/api/slides/${id}`, slide)
+            });
     }
 
-    const toDataURL = (url) => {
-        fetch(url)
-            .then(response => response.blob())
-            .then(
-                blob =>
-                    new Promise((resolve, reject) =>
-                        Object.assign(new FileReader(), {
-                            onloadend: ({ target }) => resolve(target.result),
-                            onerror: ({ target }) => reject(target.error),
-                        }).readAsDataURL(blob),
-                    ),
-            );
-    }
 
     const updateWelcomeText = async (values) => {
         try {
-            // TO DO: solucionar error: no base64 string provided
-            await axios.put('http://ongapi.alkemy.org/api/organization/1', { name: welcome_text.name, welcome_text: values.welcome })
+            await axios.put('http://ongapi.alkemy.org/api/organization/1', { name: welcomeText.name, welcome_text: values.welcome })
         } catch (error) {
             // TO DO
         }
