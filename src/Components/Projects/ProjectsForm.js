@@ -3,75 +3,70 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../FormStyles.css";
 
+const API_URL = "http://ongapi.alkemy.org/api/projects";
+
 const ProjectsForm = () => {
   const { id } = useParams();
   const [project, setProject] = useState({});
   const { title, description, image, due_date } = project;
 
   useEffect(() => {
-    axios.get(`http://ongapi.alkemy.org/api/projects/${id}`).then((res) => {
-      setProject(res.data.data);
-    });
-  }, [id]);
+    if (id) {
+      axios.get(`${API_URL}/${id}`).then((res) => {
+        setProject(res.data.data);
+      });
+    }
+  }, []);
 
   const handleChangeTitle = (e) => {
-    setProject((prevProject) => ({ ...prevProject, title: e.target.value }));
+    setProject({ ...project, title: e.target.value });
   };
 
   const handleChangeDescription = (e) => {
-    setProject((prevProject) => ({
-      ...prevProject,
+    setProject({
+      ...project,
       description: e.target.value,
-    }));
+    });
   };
 
   const handleChangeImage = (e) => {
     const img = URL.createObjectURL(e.target.files[0]);
 
-    setProject((prevProject) => ({
-      ...prevProject,
+    setProject({
+      ...project,
       image: img,
-    }));
+    });
   };
 
   const handleChangeDate = (e) => {
-    setProject((prevProject) => ({
-      ...prevProject,
+    setProject({
+      ...project,
       due_date: e.target.value,
-    }));
+    });
   };
 
-  const handleSubmitCreateProject = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     let newDate = new Date(due_date).toISOString();
-    axios
-      .post("http://ongapi.alkemy.org/api/projects", {
+    if (id) {
+      axios.put(`${API_URL}/${id}`, {
         title,
         description,
         image,
         due_date: newDate,
-      })
-      .then((res) => console.log(res));
-  };
-
-  const handleSubmitUpdateProject = (e) => {
-    e.preventDefault();
-    let newDate = new Date(due_date).toISOString();
-    axios
-      .put(`http://ongapi.alkemy.org/api/projects/${id}`, {
+      }); //TODO: Controlar errores (Catch)
+    } else {
+      axios.post(API_URL, {
         title,
         description,
         image,
         due_date: newDate,
-      })
-      .then((res) => console.log(res));
+      }); //TODO: Controlar errores (Catch)
+    }
   };
 
   return (
-    <form
-      className="form-container"
-      onSubmit={id ? handleSubmitUpdateProject : handleSubmitCreateProject}
-    >
+    <form className="form-container" onSubmit={handleSubmit}>
       <input
         className="input-field"
         type="text"
