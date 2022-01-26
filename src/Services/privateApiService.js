@@ -15,9 +15,7 @@ const Get = () => {
 
 const getSecureHeader = () => {
   const token = localStorage.getItem("token");
-  token? {Authorization: "Bearer " + token} : {error:'No token found'}
+  token ? { Authorization: "Bearer " + token } : { error: "No token found" };
 };
 
 export default Get;
-
-/* Criterios de aceptacion: Generar un metodo en el servicio de peticiones HTTP privadas, que verifique la existencia del token en el localStorage y que devuelva un objeto Header Authorization con el valor "Bearer " + el token obtenido. */
