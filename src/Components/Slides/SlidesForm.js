@@ -31,21 +31,23 @@ const SlidesForm = () => {
       });
   };
   const orderUnique = slidesData.map((data) => data.order);
-  const getSlidesById = async (id) => {
+  const getSlideById = async (id) => {
     setLoading(true);
 
     await axios
       .get(`${url}/${id}`)
       .then((res) => {
         if (res.data.success) {
+          const { name, description, order, image } = res.data.data;
           setInitialValues({
-            name: res.data.data.name,
-            description: res.data.data.description,
-            order: res.data.data.order ? res.data.data.order : 0,
-            image: res.data.data.image,
+            name: name,
+            description: description,
+            order: order ? order : 0,
+            image: image,
           });
         } else {
-          alert(res.data.status.message);
+          const { status } = res.data;
+          alert(status.message);
         }
       })
       .catch((err) => {
@@ -57,7 +59,7 @@ const SlidesForm = () => {
 
   useEffect(() => {
     if (id) {
-      getSlidesById(id);
+      getSlideById(id);
     }
     getSlidesData();
   }, []); // eslint-disable-line
@@ -83,27 +85,13 @@ const SlidesForm = () => {
     }
 
     if (id) {
-      await axios
-        .put(`${url}/${id}`, {
-          name: formValues.name,
-          description: formValues.description,
-          order: formValues.order,
-          image: formValues.image,
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
+      await axios.put(`${url}/${id}`, formValues).catch((err) => {
+        alert(err.message);
+      });
     } else {
-      await axios
-        .post(url, {
-          name: formValues.name,
-          description: formValues.description,
-          order: formValues.order,
-          image: formValues.image,
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
+      await axios.post(url, formValues).catch((err) => {
+        alert(err.message);
+      });
     }
   };
 
