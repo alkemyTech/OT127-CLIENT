@@ -23,26 +23,16 @@ const ProjectsForm = () => {
   };
 
   const handleChangeDescription = (e) => {
-    setProject({
-      ...project,
-      description: e.target.value,
-    });
+    setProject({ ...project, description: e.target.value });
   };
 
   const handleChangeImage = (e) => {
     const img = URL.createObjectURL(e.target.files[0]);
-
-    setProject({
-      ...project,
-      image: img,
-    });
+    setProject({ ...project, image: img });
   };
 
   const handleChangeDate = (e) => {
-    setProject({
-      ...project,
-      due_date: e.target.value,
-    });
+    setProject({ ...project, due_date: e.target.value });
   };
 
   const handleSubmit = (e) => {
