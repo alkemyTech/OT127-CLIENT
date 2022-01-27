@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import "./UsersList.scss"
 
 const UsersList = () => {
     const [users, setUsers] = React.useState([]);
@@ -35,7 +36,7 @@ const UsersList = () => {
                         <tr key={user.id}>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td>
+                            <td className='UsersList__action'>
                                 <button onClick={() => handleEdit(user)}>EDITAR</button>
                                 <button onClick={() => handleDelete(user)}>ELIMINAR</button>
                             </td>
