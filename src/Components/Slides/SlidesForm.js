@@ -37,6 +37,8 @@ const SlidesForm = () => {
         alert(err.message);
       });
   };
+
+  // arreglo de order utilizado en la validacion
   const orderBlackList = slidesDataTovalidateOrder
     .map((data) => data.order)
     .filter((order) => order !== initialValues.order);
@@ -72,6 +74,7 @@ const SlidesForm = () => {
     if (id) {
       getSlideById(id);
     }
+    // se obtiene los datos de slides para armar un arreglo de order ya usados
     getSlidesDataToValidateOrder();
   }, []); // eslint-disable-line
 
