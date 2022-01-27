@@ -1,9 +1,7 @@
 import React from "react";
 
-//TODO = Agregar estilos BEM
-
 const Card = ({
-  imgSrc = "https://via.placeholder.com/150",
+  imgSrc = "https://via.placeholder.com/150?text=No+Image",
   title,
   description,
 }) => {
