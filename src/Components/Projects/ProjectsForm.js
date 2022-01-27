@@ -11,19 +11,23 @@ const ProjectsForm = () => {
   const { title, description, image, due_date } = project;
 
   useEffect(() => {
+    getProjectByID(id);
+  }, []);
+
+  function getProjectByID(id) {
     if (id) {
       axios.get(`${API_URL}/${id}`).then((res) => {
         setProject(res.data.data);
       });
     }
-  }, []);
+  }
 
   const handleChange = (e, property) => {
     setProject({ ...project, [property]: e.target.value });
     setProject({ ...project, [property]: e.target.value });
     setProject({ ...project, [property]: e.target.value });
 
-    if (e.target.value === "image") {
+    if (e.target.name === "image") {
       const img = URL.createObjectURL(e.target.files[0]);
       setProject({ ...project, [property]: img });
     }
