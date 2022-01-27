@@ -8,22 +8,24 @@ import { useFormik } from "formik"
 import "../FormStyles.css"
 
 const TestimonialForm = () => {
-	// const id = useParams().id
-	const id = 78
+	const id = useParams().id
 	const url = "http://ongapi.alkemy.org/api/testimonials/"
 	const [ testimonial, setTestimonial ] = useState({})
 	const [ initialValues, setInitialValues ] = useState({
 		name: "",
-		description: ""
+		description: "",
+		image:""
 	})
 	const [ image, setImage ] = useState()
-
 	const handleChange = (e) => {
 		if (e.target.name === "name") {
 			setInitialValues({ ...initialValues, name: e.target.value })
 		}
 		if (e.target.name === "description") {
 			setInitialValues({ ...initialValues, description: e.target.value })
+		}
+		if (e.target.name === "imagefield") {
+			setInitialValues({ ...initialValues, image: e.target.value })
 		}
 	}
 	const handleSubmit = (e) => {
@@ -35,74 +37,78 @@ const TestimonialForm = () => {
 		console.log(e.target.files)
 	}
 	//----------------------//
-	// const formik = useFormik({
-	// 	initialValues: {
-	// 		name: "",
-	// 		description: "",
-	// 		imagen: ""
-	// 	},
-	// 	validate: (values) => {
-	// 		const errors = {};
-	// 		if (!values.email) {
-	// 			errors.name = "El campo no puede estar vacio";
-	// 		} else if (!values.password) {
-	// 			errors.description = "El campo no puede estar vacio";
-	// 		}
-	// 		return errors;
-	// 	},
-	// 	onSubmit: () => {
-	// 		if (!formik.isValid) {
-	// 			return
-	// 		}
-	// 	},
-	// })
-	//-----------------------//
-	useEffect(() => {
-		if (id){
-			axios
-				.get(`${url}${id}`)
-				.then((res) => {
-					setTestimonial(res.data.data)
-					console.log("asd data", res.data.data);
-					setInitialValues({
-						name: res.data.data.name,
-						description: res.data.data.description,
-					})
-					setImage(res.data.data.image)
+	const formik = useFormik({
+		initialValues: {
+			name: "",
+			description: "",
+			image: ""
+		},
+		validate: (initialValues) => {
+			const errors = {};
+			if (!initialValues.name) {
+				errors.name = "El campo no puede estar vacio"
+			} else if (!initialValues.description) {
+				errors.description = "El campo no puede estar vacio"
+			} else if (!initialValues.image) {
+				errors.image = "El campo no puede estar vacio"
+			}
+			return errors;
+		},
+		onSubmit: () => {
+			if (!formik.isValid) {
+				return
+			}else{
 
-				})
-				.catch((err) => {
-					console.log(err)
-				})
-		} else {
-		
-		}
-	}, [])
-	const createUpdateTestimonial = (id) => {
+			}
+		},
+	})
+	//-----------------------//
+	const updateTestimonial = (id) => {
+				axios
+					.get(`${url}${id}`)
+					.then((res) => {
+						setTestimonial(res.data.data)
+						setInitialValues({
+							name: res.data.data.name,
+							description: res.data.data.description,
+							image: res.data.data.image
+						})
+					})
+					.catch((err) => {
+						console.log(err)
+					})
+			}
+	const createTestimonial =()=>{
+
+	}
+
+	useEffect((id) => {
 		if (id === undefined) {
 			//crear--testimonial
 		} else {
 			//actualizar--testimonial(id)-rellenar campos para editar y despues enviar
+			updateTestimonial(id)
 		}
-	}
-
+	}, [id])
 	return (
 		<form className="form-container" onSubmit={handleSubmit}>
 			<input
 				className="input-field"
 				type="text"
 				name="name"
-				value={initialValues.name}
+				value={formik.initialValues.name}
 				onChange={handleChange}
 				placeholder={initialValues.name}
 			></input>
+			{formik.errors.name ? <div>{formik.errors.name}</div> : null}
 			<input type="file" name="image" onChange={onImageChange} />
 			<input
 				type="text"
 				name="imagefield"
-				value={image}
-				placeholder={image}
+				value={initialValues.image}
+				placeholder={initialValues.image}
 				className="input-field"
+				onChange={handleChange}
 			></input>
 			<CKEditor
 				editor={ClassicEditor}
@@ -122,7 +128,7 @@ const TestimonialForm = () => {
 				// 		console.log("Focus.", editor)
 				// 	}}
 			/>
-			<button className="submit-btn" type="submit" onClick="">
+			<button className="submit-btn" type="submit" onClick={handleSubmit}>
 				Send
 			</button>
 		</form>
