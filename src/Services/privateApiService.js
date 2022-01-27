@@ -2,15 +2,22 @@ import axios from "axios";
 
 const config = {
   headers: {
-    Group: "01", //Aqui va el ID del equipo!!
+    Group: "127",
   },
+};
+
+const getSecureHeader = () => {
+  const token = localStorage.getItem("token");
+  return token
+    ? { Authorization: "Bearer " + token }
+    : { error: "No token found" };
 };
 
 const GetPrivate = async (route, id = null) => {
   try {
     let url;
     id ? (url = route + "/" + id) : (url = route);
-    let response = await axios.get(url); //TODO Agregar headers, ver que onda
+    let response = await axios.get(url, config);
     return response;
   } catch (error) {
     return error;
