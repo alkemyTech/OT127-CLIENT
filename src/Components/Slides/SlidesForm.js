@@ -19,7 +19,7 @@ const SlidesForm = () => {
     order: 0,
     image: "",
   });
-  const [slidesDataTovalidateOrder, setSlidesDataToValidateOrder] = useState(
+  const [slidesDataToValidateOrder, setSlidesDataToValidateOrder] = useState(
     []
   ); // para validar order
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ const SlidesForm = () => {
   };
 
   // arreglo de order utilizado en la validacion
-  const orderBlackList = slidesDataTovalidateOrder
+  const orderBlackList = slidesDataToValidateOrder
     .map((data) => data.order)
     .filter((order) => order !== initialValues.order);
 
