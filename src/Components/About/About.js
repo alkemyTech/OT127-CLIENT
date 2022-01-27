@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import Title from "../Titulosynovedades/Title";
 
-const About = () => {
-  const [about, setAbout] = useState("hola main section de Nosotros");
+const About = ({
+  text = "Desde 1997 en Somos Más trabajamos con los chicos y chicas, mamás y papás, abuelos y vecinos del barrio La Cava ",
+}) => {
+  // El texto en un futuro se obtendra desde una API
   return (
-    <div>
+    <>
       <Title title="Nosotros" />
-      <main>{about}</main>
-    </div>
+      <main>
+        <p>{text}</p>
+      </main>
+    </>
   );
 };
 
