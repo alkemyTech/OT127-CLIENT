@@ -37,7 +37,7 @@ function App() {
           />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
-          <Route path="/novedades/:id" component={NewsDetails} />
+          <Route path="/novedades/:id" component={() => <NewsDetails title="Titulo recibido por props" />} />
           <Route path="/novedades" component={News} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />

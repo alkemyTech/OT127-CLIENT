@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Title from '../../Titulosynovedades/Title';
 
-const NewsDetails = () => {
+
+const NewsDetails = ({ title }) => {
+    const { id } = useParams()
+
     return (
         <div>
-            <p>Detalle de novedades</p>
+            <Title title={title} />
+            <p>Detalle de novedades ID: {id} </p>
         </div>
     )
 };
