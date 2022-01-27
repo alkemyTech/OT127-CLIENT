@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ActivitiesForm from "./Components/Activities/ActivitiesForm";
+//import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import NewsForm from "./Components/News/NewsForm";
+import News from "./Components/News/News";
 import SlidesForm from "./Components/Slides/SlidesForm";
 import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
 import UserForm from "./Components/Users/UsersForm";
@@ -19,6 +20,7 @@ import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 import MembersForm from "./Components/Members/MembersForm";
 
+import BackOffice from "./Components/Backoffice/BackOffice";
 
 function App() {
   return (
@@ -31,9 +33,10 @@ function App() {
             path="/backoffice/create-activity"
             component={ActivitiesForm}
           />
+          <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
+          <Route path="/novedades" component={News} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/contact" component={ContactForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/backoffice/organization" component={OrganizationData} />
           <Route
@@ -54,8 +57,10 @@ function App() {
             component={() => <Donacion message="Quieres donar?" />}
           />
           <Route path="/gracias" component={Gracias} />
+          <Route path="/backoffice" component={BackOffice} />
         </Switch>
       </BrowserRouter>
+
       <div className="App"></div>
     </>
   );
