@@ -20,6 +20,7 @@ import ContactForm from "./Components/Contact/ContactForm";
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
+import BackOffice from "./Components/Backoffice/BackOffice";
 
 function App() {
 	return (
@@ -58,7 +59,8 @@ function App() {
 						path="/create-testimonials"
 						component={TestimonialForm}
 					/>
-					<Route path="/create-user" component={UserForm} />
+					<Route path="/backoffice/create-user" exact component={UserForm} />
+					<Route path="/backoffice/create-user/:id" component={UserForm} />
 					<Route path="/create-member" component={MembersForm} />
 					<Route path="/create-project" component={ProjectsForm} />
 					<Route path="/school-campaign" component={SchoolCampaign} />
@@ -70,6 +72,7 @@ function App() {
 						component={() => <Donacion message="Quieres donar?" />}
 					/>
 					<Route path="/gracias" component={Gracias} />
+					<Route path="/backoffice" component={BackOffice} />
 				</Switch>
 			</BrowserRouter>
 			<div className="App"></div>
