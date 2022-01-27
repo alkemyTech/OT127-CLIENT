@@ -19,29 +19,27 @@ const SlidesForm = () => {
     order: 0,
     image: "",
   });
-  const [slidesDataToValidateOrder, setSlidesDataToValidateOrder] = useState(
-    []
-  ); // para validar order
+  const [orderList, setOrderList] = useState([]); // para validar order
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
   const url = "http://ongapi.alkemy.org/api/slides";
 
-  const getSlidesDataToValidateOrder = async () => {
+  const getOrderList = async () => {
     await axios
       .get(url)
       .then((res) => {
-        setSlidesDataToValidateOrder(res.data.data);
+        let data = res.data.data;
+        // arreglo de order utilizados
+        const orderBlackList = data
+          .map((data) => data.order)
+          .filter((order) => order !== initialValues.order);
+        setOrderList(orderBlackList);
       })
       .catch((err) => {
         alert(err.message);
       });
   };
-
-  // arreglo de order utilizado en la validacion
-  const orderBlackList = slidesDataToValidateOrder
-    .map((data) => data.order)
-    .filter((order) => order !== initialValues.order);
 
   const getSlideById = async (id) => {
     setLoading(true);
@@ -74,8 +72,8 @@ const SlidesForm = () => {
     if (id) {
       getSlideById(id);
     }
-    // se obtiene los datos de slides para armar un arreglo de order ya usados
-    getSlidesDataToValidateOrder();
+    // se obtiene un arreglo de order ya usados
+    getOrderList();
   }, []); // eslint-disable-line
 
   const toBase64 = (file) => {
@@ -121,7 +119,7 @@ const SlidesForm = () => {
       .moreThan(0, "Debe ser un numero mayor o igual a cero")
       .required("Este campo es obligatorio")
       .integer()
-      .notOneOf(orderBlackList, "Numero de orden ya esta en uso"),
+      .notOneOf(orderList, "Numero de orden ya esta en uso"),
     image: Yup.string().required("Este campo es obligatorio"),
   });
 
