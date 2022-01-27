@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import "./UsersList.scss"
+import { Link } from 'react-router-dom';
 
 const UsersList = () => {
     const [users, setUsers] = React.useState([]);
     useEffect(() => {
         const getUsers = async () => {
-            // Actualmente la api devuelve 300 usuarios, para trabajar mejor las limite a 5
-            const response = await axios.get("http://ongapi.alkemy.org/api/users?limit=5")
+            const response = await axios.get("http://ongapi.alkemy.org/api/users")
             setUsers(response.data.data)
         }
         getUsers()
@@ -24,7 +24,12 @@ const UsersList = () => {
 
     return (
         <div className='UsersList'>
-            <p>Usuarios</p>
+            <nav className='UsersList__nav'>
+                <p>Usuarios</p>
+                <Link to="/backoffice/users/create">
+                    <button>CREAR</button>
+                </Link>
+            </nav>
             <table>
                 <tbody>
                     <tr>
