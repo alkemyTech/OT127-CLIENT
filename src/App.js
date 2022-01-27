@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
 import NewsForm from "./Components/News/NewsForm";
+import News from "./Components/News/News";
 import SlidesForm from "./Components/Slides/SlidesForm";
 import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
 import UserForm from "./Components/Users/UsersForm";
@@ -35,6 +36,7 @@ function App() {
           />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
+          <Route path="/novedades" component={News} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/backoffice/organization" component={OrganizationData} />
@@ -59,6 +61,7 @@ function App() {
           <Route path="/backoffice" component={BackOffice} />
         </Switch>
       </BrowserRouter>
+
       <div className="App"></div>
     </>
   );
