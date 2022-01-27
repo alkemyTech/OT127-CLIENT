@@ -18,21 +18,15 @@ const ProjectsForm = () => {
     }
   }, []);
 
-  const handleChangeTitle = (e) => {
-    setProject({ ...project, title: e.target.value });
-  };
+  const handleChange = (e, property) => {
+    setProject({ ...project, [property]: e.target.value });
+    setProject({ ...project, [property]: e.target.value });
+    setProject({ ...project, [property]: e.target.value });
 
-  const handleChangeDescription = (e) => {
-    setProject({ ...project, description: e.target.value });
-  };
-
-  const handleChangeImage = (e) => {
-    const img = URL.createObjectURL(e.target.files[0]);
-    setProject({ ...project, image: img });
-  };
-
-  const handleChangeDate = (e) => {
-    setProject({ ...project, due_date: e.target.value });
+    if (e.target.value === "image") {
+      const img = URL.createObjectURL(e.target.files[0]);
+      setProject({ ...project, [property]: img });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -62,7 +56,7 @@ const ProjectsForm = () => {
         type="text"
         name="title"
         value={title}
-        onChange={handleChangeTitle}
+        onChange={(e) => handleChange(e, "title")}
         placeholder="Title"
         required
       ></input>
@@ -71,21 +65,21 @@ const ProjectsForm = () => {
         type="text"
         name="description"
         value={description}
-        onChange={handleChangeDescription}
+        onChange={(e) => handleChange(e, "description")}
         placeholder="Write some description"
         required
       ></input>
       <input
         type="date"
-        name="trip-start"
+        name="due_date"
         value={due_date && due_date.split("T")[0]}
-        onChange={handleChangeDate}
+        onChange={(e) => handleChange(e, "due_date")}
       ></input>
       <input
         type="file"
-        name="file"
+        name="image"
         accept=".png, .jpg"
-        onChange={handleChangeImage}
+        onChange={(e) => handleChange(e, "image")}
       ></input>
       <img src={image} alt="" />
       <button className="submit-btn" type="submit">
