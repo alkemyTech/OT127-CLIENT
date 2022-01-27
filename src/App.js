@@ -21,6 +21,7 @@ import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 import BackOffice from "./Components/Backoffice/BackOffice";
+import MembersList from "./Components/Members/MembersList";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/backoffice/create-user" exact component={UserForm} />
           <Route path="/backoffice/create-user/:id" component={UserForm} />
+          <Route path="/backoffice/members" exact component={MembersList} />
           <Route path="/create-member" component={MembersForm} />
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
