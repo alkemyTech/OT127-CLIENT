@@ -16,6 +16,9 @@
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+tr {
+  border: 1px solid black;
+}
 .datagrid table td,
 .datagrid table th {
   padding: 3px 10px;
