@@ -18,14 +18,12 @@ const SlidesForm = () => {
     description: "",
     order: 0,
     image: "",
-    id: false,
   });
   const [slidesData, setSlidesData] = useState([]); // para validar order
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
   const url = "http://ongapi.alkemy.org/api/slides";
-  console.log(id);
 
   const getSlidesData = async () => {
     await axios
@@ -37,7 +35,10 @@ const SlidesForm = () => {
         alert(err.message);
       });
   };
-  const orderUnique = slidesData.map((data) => data.order);
+  const orderUnique = slidesData
+    .map((data) => data.order)
+    .filter((order) => order !== initialValues.order);
+
   const getSlideById = async (id) => {
     setLoading(true);
 
@@ -93,12 +94,9 @@ const SlidesForm = () => {
     }
 
     if (id) {
-      await axios
-        .put(`${url}/${id}`, formValues)
-        .then((res) => console.log(res))
-        .catch((err) => {
-          alert(err.message);
-        });
+      await axios.put(`${url}/${id}`, formValues).catch((err) => {
+        alert(err.message);
+      });
     } else {
       await axios.post(url, formValues).catch((err) => {
         alert(err.message);
@@ -188,7 +186,6 @@ const SlidesForm = () => {
                 onChange={(e) => {
                   setFieldValue("order", parseInt(e.currentTarget.value));
                 }}
-                disabled={id}
                 placeholder="ingrese un numero"
               />
               <ErrorMessage name="order" render={(msg) => <div>{msg}</div>} />
