@@ -19,6 +19,7 @@ import ContactForm from "./Components/Contact/ContactForm";
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
+import UsersList from "./Components/Users/UsersList";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/contact" component={ContactForm} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/contact" component={ContactForm} />
+          <Route path="/backoffice/users" component={UsersList} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/backoffice/organization" component={OrganizationData} />
           <Route
