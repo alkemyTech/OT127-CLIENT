@@ -6,14 +6,18 @@ class ActivitiesService {
   }
 
   getAll = async () => {
-    await axios.get(this.API_URL).then((response) => response.data);
+    await axios
+      .get(this.API_URL)
+      .then((response) => response.data)
+      .catch((error) => error.message);
   };
 
   getById = async (id) => {
     if (id) {
       await axios
         .get(`${this.API_URL}/${id}`)
-        .then((response) => response.data);
+        .then((response) => response.data)
+        .catch((error) => error.message);
     }
   };
 
@@ -24,7 +28,8 @@ class ActivitiesService {
         description,
         image,
       })
-      .then((response) => response.data);
+      .then((response) => response.data)
+      .catch((error) => error.message);
   };
 
   put = async (id, name, description, image) => {
@@ -35,13 +40,17 @@ class ActivitiesService {
           description,
           image,
         })
-        .then((response) => response.data);
+        .then((response) => response.data)
+        .catch((error) => error.message);
     }
   };
 
   delete = async (id) => {
     if (id) {
-      axios.delete(`${this.API_URL}/${id}`).then((response) => response.data);
+      axios
+        .delete(`${this.API_URL}/${id}`)
+        .then((response) => response.data)
+        .catch((error) => error.message);
     }
   };
 }
