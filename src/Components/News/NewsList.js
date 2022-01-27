@@ -38,14 +38,6 @@ const NewsList = () => {
     },
   ];
 
-  const createData = (name, image, createdAt, actions) => {
-    return { name, image, createdAt, actions };
-  }
-
-  const rows = newsMock.map((mock) =>
-    createData(mock.name, mock.image, mock.createdAt)
-  );
-
   const handleClickEdit = () => {
       //TODO, acciones editar novedades 
   }
@@ -68,18 +60,18 @@ const NewsList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {newsMock.map((mock) => (
               <TableRow
-                key={row.name}
+                key={mock.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {mock.name}
                 </TableCell>
                 <TableCell align="right">
-                  <img src={row.image} alt="News_image" width="150em" />
+                  <img src={mock.image} alt="News_image" width="150em" />
                 </TableCell>
-                <TableCell align="right">{row.createdAt}</TableCell>
+                <TableCell align="right">{mock.createdAt}</TableCell>
                 <TableCell align="right">
                   <Button variant="outlined" style={{ marginRight: "1em" }} onClick={handleClickEdit}>
                     Edit
