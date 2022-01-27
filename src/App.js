@@ -16,7 +16,6 @@ import LoginForm from "./Components/Auth/LoginForm"
 import Contact from "./Components/Contact/Contact"
 import Gracias from "./Donations/Gracias"
 import Donacion from "./Donations/Donacion"
-import ContactForm from "./Components/Contact/ContactForm"
 import Home from "./Pages/Home"
 import OrganizationData from "./Components/Organization/OrganizationData"
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm"
@@ -31,7 +30,6 @@ function App() {
 					<Route path="/create-activity" component={ActivitiesForm} />
 					<Route path="/create-category" component={CategoriesForm} />
 					<Route path="/contacto" component={Contact} />
-					<Route path="/contact" component={ContactForm} />
 					<Route path="/create-news" component={NewsForm} />
 					<Route
 						path="/backoffice/create-slide"
