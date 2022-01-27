@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./members-list.scss";
 
@@ -31,34 +32,37 @@ const MembersList = () => {
   ];
 
   return (
-    <div className=" container datagrid">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Photo</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {membersMock.map((member) => (
-            <tr key={member.id}>
-              <td>{member.name}</td>
-              <td>
-                <img src={member.photo} alt={member.photo} width="50px" />
-              </td>
-              <td>
-                <button>Eliminar</button>
-              </td>
-              <td>
-                <button href="#">Editar</button>
-              </td>
+    <div className="container">
+      <Link to="/backoffice/members/create">Create Member</Link>
+      <div className=" datagrid">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Photo</th>
+              <th></th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {membersMock.map((member) => (
+              <tr key={member.id}>
+                <td>{member.name}</td>
+                <td>
+                  <img src={member.photo} alt={member.photo} width="50px" />
+                </td>
+                <td>
+                  <button>Eliminar</button>
+                </td>
+                <td>
+                  <button href="#">Editar</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
