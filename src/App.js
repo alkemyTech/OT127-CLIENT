@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
 import NewsForm from "./Components/News/NewsForm";
+import News from "./Components/News/News";
 import SlidesForm from "./Components/Slides/SlidesForm";
 import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
 import UserForm from "./Components/Users/UsersForm";
@@ -19,6 +20,7 @@ import ContactForm from "./Components/Contact/ContactForm";
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
+import BackOffice from "./Components/Backoffice/BackOffice";
 import UsersList from "./Components/Users/UsersList";
 
 function App() {
@@ -28,14 +30,15 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Home} />
+
           <Route
             path="/backoffice/create-activity"
             component={ActivitiesForm}
           />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
+          <Route path="/novedades" component={News} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/contact" component={ContactForm} />
           <Route path="/backoffice/users" component={UsersList} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/backoffice/organization" component={OrganizationData} />
@@ -57,8 +60,10 @@ function App() {
             component={() => <Donacion message="Quieres donar?" />}
           />
           <Route path="/gracias" component={Gracias} />
+          <Route path="/backoffice" component={BackOffice} />
         </Switch>
       </BrowserRouter>
+
       <div className="App"></div>
     </>
   );
