@@ -51,7 +51,10 @@ function App() {
             component={() => <Donacion message="Quieres donar?" />}
           />
           <Route path="/gracias" component={Gracias} />
-          <Route path="/nosotros" component={() => <About />} />
+          <Route
+            path="/nosotros"
+            component={() => <About text="Sobre Nosotros" />}
+          />
         </Switch>
       </BrowserRouter>
     </>
