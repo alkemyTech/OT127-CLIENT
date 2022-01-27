@@ -1,86 +1,90 @@
 import {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
-import axios from "axios";
+import Axios from "axios";
 import Error from "../Error/Error";
 
 const CategoriesForm = () => {
-	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
-	const [message, setMessage] = useState(false);
-	const [image, set_image] = useState("");
+	const [formValues, setFormValues] = useState({
+		name: "",
+		description: "",
+		message: "",
+		image: "",
+	});
+
+	const {id} = useParams();
+	const urlApiCategoriesID = `http://ongapi.alkemy.org/api/categories/${id}`;
+	const urlApiCreateCategories = `http://ongapi.alkemy.org/api/categories`;
 
 	const send_image = (files) => {
 		const fileReader = new FileReader();
 		fileReader.onload = () => {
 			if (fileReader.readyState === 2) {
-				set_image(fileReader.result);
+				setFormValues({...formValues, image: fileReader.result});
 			}
 		};
 		fileReader.readAsDataURL(files);
 	};
 
-	const {id} = useParams();
+	const ApiData = async (id) => {
+		if (id) {
+			try {
+				const {data} = await Axios.get(urlApiCategoriesID);
+				setFormValues({
+					...formValues,
+					name: data.data.name,
+					description: data.data.description,
+					image: data.data.image,
+				});
+			} catch (error) {
+				// To do
+			}
+		} else {
+			setFormValues({name: "", description: "", image: ""});
+		}
+	};
 
 	useEffect(() => {
-		const ApiData = async (id) => {
-			if (id) {
-				try {
-					const {data} = await axios.get(
-						`http://ongapi.alkemy.org/api/categories/${id}`
-					);
-					setName(data.data.name);
-					setDescription(data.data.description);
-					set_image(data.data.image);
-				} catch (error) {
-					// To do
-				}
-			} else {
-				setName("");
-				setDescription("");
-			}
-		};
-
 		ApiData(id);
-	}, [id]);
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		// Validaciones
-		if (name.trim() === "" || description.trim() === "" || image.length === 0) {
-			setMessage(true);
+		if (Object.keys(formValues).length === 0) {
+			setFormValues({...formValues, message: true});
 			setTimeout(() => {
-				setMessage(false);
+				setFormValues({...formValues, message: false});
 			}, 1500);
 
 			return;
 		}
 
+		const {name, description, image} = formValues;
+
 		if (id) {
-			axios
-				.put(`http://ongapi.alkemy.org/api/categories/${id}`, {
-					id,
-					name,
-					description,
-					image,
-				})
-				.then(function (response) {
+			Axios.put(urlApiCategoriesID, {
+				id,
+				name,
+				description,
+				image,
+			})
+				.then((response) => {
 					// To do
 				})
-				.catch(function (error) {
+				.catch((error) => {
 					// to do
 				});
 		} else {
-			axios
-				.post("http://ongapi.alkemy.org/api/categories", {
-					name,
-					description,
-					image,
-				})
-				.then(function (response) {
+			Axios.post(urlApiCreateCategories, {
+				name,
+				description,
+				image,
+			})
+				.then((response) => {
 					// To do
 				})
-				.catch(function (error) {
+				.catch((error) => {
 					// to do
 				});
 		}
@@ -89,7 +93,9 @@ const CategoriesForm = () => {
 	return (
 		<div className="form-container">
 			<form onSubmit={handleSubmit}>
-				{message ? <Error>Todos los campos son obligatorios</Error> : null}
+				{formValues.message ? (
+					<Error>Todos los campos son obligatorios</Error>
+				) : null}
 				<div>
 					<label htmlFor="name">Nombre:</label>
 					<input
@@ -98,8 +104,10 @@ const CategoriesForm = () => {
 						placeholder="Nombre de la Categoría"
 						id="name"
 						name="name"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
+						value={formValues.name}
+						onChange={(e) =>
+							setFormValues({...formValues, name: e.target.value})
+						}
 					/>
 				</div>
 				<div>
@@ -110,8 +118,10 @@ const CategoriesForm = () => {
 						placeholder="Descripción de la Categoría"
 						id="description"
 						name="description"
-						value={description}
-						onChange={(e) => setDescription(e.target.value)}
+						value={formValues.description}
+						onChange={(e) =>
+							setFormValues({...formValues, description: e.target.value})
+						}
 					/>
 				</div>
 
@@ -124,11 +134,12 @@ const CategoriesForm = () => {
 						accept="image/png,image/jpeg"
 						onChange={(e) => {
 							send_image(e.target.files[0]);
-							set_image(
-								(window.URL || window.webkitURL).createObjectURL(
+							setFormValues({
+								...formValues,
+								image: (window.URL || window.webkitURL).createObjectURL(
 									e.target.files[0]
-								)
-							);
+								),
+							});
 						}}
 					/>
 				</div>
@@ -139,7 +150,12 @@ const CategoriesForm = () => {
 					value={id ? "Editar" : "Guardar"}
 				/>
 			</form>
-			{id ? <img src={image ? image : ""} alt="imagen_muestra" /> : null}
+			{id ? (
+				<img
+					src={formValues.image ? formValues.image : ""}
+					alt="imagen_muestra"
+				/>
+			) : null}
 		</div>
 	);
 };
