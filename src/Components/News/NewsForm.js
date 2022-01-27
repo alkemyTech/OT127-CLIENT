@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
 
-const CategoriesForm = () => {
+const NewsForm = () => {
     
     const handleSubmit = async(values) => {
         /* // => OnSumit
@@ -71,4 +71,4 @@ const CategoriesForm = () => {
         </Formik>
     );
 }
-export default CategoriesForm;
+export default NewsForm;
