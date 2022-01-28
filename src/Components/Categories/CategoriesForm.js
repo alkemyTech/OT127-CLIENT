@@ -73,7 +73,7 @@ const CategoriesForm = () => {
 					// to do
 				});
 		} else {
-			Axios.post(urlApiCreateCategories, {
+			Axios.post(urlApiCategories, {
 				name,
 				description,
 				image,
