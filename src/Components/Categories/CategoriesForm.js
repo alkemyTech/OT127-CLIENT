@@ -12,8 +12,7 @@ const CategoriesForm = () => {
 	});
 
 	const {id} = useParams();
-	const urlApiCategoriesID = `http://ongapi.alkemy.org/api/categories/${id}`;
-	const urlApiCreateCategories = `http://ongapi.alkemy.org/api/categories`;
+	const urlApiCategories = `http://ongapi.alkemy.org/api/categories`;
 
 	const send_image = (files) => {
 		const fileReader = new FileReader();
@@ -25,10 +24,10 @@ const CategoriesForm = () => {
 		fileReader.readAsDataURL(files);
 	};
 
-	const ApiData = async (id) => {
+	const getCategoryData = async () => {
 		if (id) {
 			try {
-				const {data} = await Axios.get(urlApiCategoriesID);
+				const {data} = await Axios.get(`${urlApiCategories}/${id}`);
 				setFormValues({
 					...formValues,
 					name: data.data.name,
@@ -38,13 +37,11 @@ const CategoriesForm = () => {
 			} catch (error) {
 				// To do
 			}
-		} else {
-			setFormValues({name: "", description: "", image: ""});
 		}
 	};
 
 	useEffect(() => {
-		ApiData(id);
+		getCategoryData(id);
 	}, []);
 
 	const handleSubmit = async (e) => {
@@ -63,7 +60,7 @@ const CategoriesForm = () => {
 		const {name, description, image} = formValues;
 
 		if (id) {
-			Axios.put(urlApiCategoriesID, {
+			Axios.put(`${urlApiCategories}/${id}`, {
 				id,
 				name,
 				description,
