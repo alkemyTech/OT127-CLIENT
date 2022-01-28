@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import '../../Components/FormStyles.css';
 
+//Prueba
+import News from './News';
+
+
 const NewsForm = () => {
     const [initialValues, setInitialValues] = useState({
         title: '',
@@ -23,18 +27,26 @@ const NewsForm = () => {
         console.log(initialValues);
     }
 
+    //prueba props HTML
+    const TextoHTML = '<input/>';
+
     return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="title" value={initialValues.title || ''} onChange={handleChange}></input>
-            <input className="input-field" type="text" name="content" value={initialValues.content || ''} onChange={handleChange}></input>
-            <select className="select-field" name="category" value={initialValues.category || ''} onChange={handleChange}>
-                <option value="" disabled>Select category</option>
-                <option value="1">Demo option 1</option>
-                <option value="2">Demo option 2</option>
-                <option value="3">Demo option 3</option>
-            </select>
-            <button className="submit-btn" type="submit">Send</button>
-        </form>
+        <>
+            <form className="form-container" onSubmit={handleSubmit}>
+                <input className="input-field" type="text" name="title" value={initialValues.title || ''} onChange={handleChange}></input>
+                <input className="input-field" type="text" name="content" value={initialValues.content || ''} onChange={handleChange}></input>
+                <select className="select-field" name="category" value={initialValues.category || ''} onChange={handleChange}>
+                    <option value="" disabled>Select category</option>
+                    <option value="1">Demo option 1</option>
+                    <option value="2">Demo option 2</option>
+                    <option value="3">Demo option 3</option>
+                </select>
+                <button className="submit-btn" type="submit">Send</button>
+            </form>
+            
+            
+            <News props={TextoHTML} />
+        </>
     );
 }
  
