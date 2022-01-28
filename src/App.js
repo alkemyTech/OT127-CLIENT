@@ -20,7 +20,7 @@ import ContactForm from "./Components/Contact/ContactForm";
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
-import NewsList from './Components/News/NewsList'
+import NewsList from "./Components/News/NewsList";
 import BackOffice from "./Components/Backoffice/BackOffice";
 import About from "./Components/About/About";
 
