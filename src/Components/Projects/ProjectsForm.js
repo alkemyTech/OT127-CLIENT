@@ -23,13 +23,11 @@ const ProjectsForm = () => {
   }
 
   const handleChange = (e, property) => {
-    setProject({ ...project, [property]: e.target.value });
-    setProject({ ...project, [property]: e.target.value });
-    setProject({ ...project, [property]: e.target.value });
-
     if (e.target.name === "image") {
       const img = URL.createObjectURL(e.target.files[0]);
       setProject({ ...project, [property]: img });
+    } else {
+      setProject({ ...project, [property]: e.target.value });
     }
   };
 
