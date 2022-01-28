@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const config = {
+let config = {
   headers: {
     Group: "127",
   },
@@ -17,6 +17,17 @@ const GetPrivate = async (route, id = null) => {
   try {
     let url;
     id ? (url = route + "/" + id) : (url = route);
+    let token = getSecureHeader();
+    if (token.Authorization) {
+      config = {
+        headers: {
+          ...config.headers,
+          Authorization: token.Authorization,
+        },
+      };
+    } else {
+      return token.error;
+    }
     let response = await axios.get(url, config);
     return response;
   } catch (error) {
