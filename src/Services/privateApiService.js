@@ -13,7 +13,7 @@ const getSecureHeader = () => {
     : { error: "No token found" };
 };
 
-const GetPrivate = async (route, id = null) => {
+const getPrivate = async (route, id = null) => {
   try {
     let url;
     id ? (url = route + "/" + id) : (url = route);
@@ -35,4 +35,4 @@ const GetPrivate = async (route, id = null) => {
   }
 };
 
-export default GetPrivate;
+export default getPrivate;
