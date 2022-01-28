@@ -2,7 +2,7 @@ import axios from "axios";
 
 const config = {
   headers: {
-    Group: 01, //Aqui va el ID del equipo!!
+    Group: 127,
   },
 };
 
@@ -15,7 +15,26 @@ const Get = () => {
 
 const getSecureHeader = () => {
   const token = localStorage.getItem("token");
-  token ? { Authorization: "Bearer " + token } : { error: "No token found" };
+  return token
+    ? { Authorization: "Bearer " + token }
+    : { error: "No token found" };
+};
+
+export const privateServicePatch = (route, id, data) => {
+  let url = id ? `${route}/${id}` : route;
+  let token = getSecureHeader();
+  const { Authorization, error } = token;
+
+  if (Authorization) {
+    axios.patch(url, data, {
+      header: {
+        ...config.headers,
+        Authorization,
+      },
+    }); // TODO: Controlar errores
+  } else {
+    return error;
+  }
 };
 
 export default Get;
