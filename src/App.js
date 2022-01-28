@@ -21,6 +21,7 @@ import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 import BackOffice from "./Components/Backoffice/BackOffice";
+import About from "./Components/About/About";
 
 function App() {
   return (
@@ -54,6 +55,10 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
+          <Route
+            path="/nosotros"
+            component={() => <About text="Sobre Nosotros" />}
+          />
           <Route
             path="/donar"
             component={() => <Donacion message="Quieres donar?" />}
