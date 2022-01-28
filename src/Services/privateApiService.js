@@ -2,7 +2,7 @@ import axios from "axios";
 
 const config = {
 	headers: {
-		Group: 01, //Aqui va el ID del equipo!!
+		Group: 127, //Aqui va el ID del equipo!!
 	},
 };
 
@@ -18,14 +18,14 @@ const getSecureHeader = () => {
 	token ? {Authorization: "Bearer " + token} : {error: "No token found"};
 };
 
-export function Put() {
+export const Put = () => {
 	axios
 		.put(url, data, config)
 		.then((res) => {
-			//to do
+			return
 		})
 		.catch((err) => {
-			//to do
+			return
 		});
 }
 
