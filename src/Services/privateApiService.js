@@ -20,7 +20,7 @@ const getSecureHeader = () => {
     : { error: "No token found" };
 };
 
-export const patch = (route, id, data) => {
+export const privateServicePatch = (route, id, data) => {
   let url = id ? `${route}/${id}` : route;
   let token = getSecureHeader();
   let { Authorization, error } = token;
