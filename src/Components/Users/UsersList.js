@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./UsersList.scss"
 import { Link } from 'react-router-dom';
 
 const UsersList = () => {
-    const [users, setUsers] = React.useState([]);
+    const [users, setUsers] = useState([])
+
+    const getUsersData = async () => {
+        const response = await axios.get("http://ongapi.alkemy.org/api/users")
+        setUsers(response.data.data)
+    }
+
     useEffect(() => {
-        const getUsers = async () => {
-            const response = await axios.get("http://ongapi.alkemy.org/api/users")
-            setUsers(response.data.data)
-        }
-        getUsers()
+        getUsersData()
     }, []);
 
     const handleEdit = (values) => {
