@@ -8,12 +8,12 @@ import Title from '../../Titulosynovedades/Title';
 const NewsDetails = ({ title }) => {
     const [news, setNews] = React.useState({});
     const { id } = useParams()
+    const getNewsData = async () => {
+        const response = await axios.get(`http://ongapi.alkemy.org/api/news/${id}`)
+        setNews(response.data.data);
+    }
     useEffect(() => {
-        const getNews = async () => {
-            const response = await axios.get(`http://ongapi.alkemy.org/api/news/${id}`)
-            setNews(response.data.data);
-        }
-        getNews()
+        getNewsData()
     }, []);
 
 
