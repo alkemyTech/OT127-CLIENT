@@ -21,8 +21,9 @@ const getSecureHeader = () => {
 };
 
 export const privateServiceDelete = (route, id) => {
-  if (!route) return (console.error("Error: debe proporcionar una ruta"))
-  if (!id) return (console.error("Error: debe proporcionar un id"))
+  if (!route) return (alert("Error: debe proporcionar una ruta"))
+  if ((!id && id !== 0) || id < 0) return (alert("Error: debe proporcionar un id valido"))
+  console.log("A eliminar: " + route + "/" + id);
 }
 
 export default Get;
