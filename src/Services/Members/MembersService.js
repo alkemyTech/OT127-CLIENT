@@ -8,7 +8,7 @@ const GetMembers = async () => {
   return response;
 };
 
-const GetMembersbyId = async (id) => {
+const GetMembersById = async (id) => {
   const response = await Get(baseURL, id);
   return response;
 };
@@ -32,4 +32,4 @@ const DeleteMember = async (id) => {
   return response;
 };
 
-export { GetMembers, GetMembersbyId, PostMember, PutMember, DeleteMember };
+export { GetMembers, GetMembersById, PostMember, PutMember, DeleteMember };
