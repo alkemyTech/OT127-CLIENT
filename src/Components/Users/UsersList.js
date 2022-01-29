@@ -32,18 +32,20 @@ const UsersList = () => {
                     <button>CREAR</button>
                 </Link>
             </nav>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Acción</th>
+            <table className='UsersList__table'>
+                <thead>
+                    <tr className='UsersList__tr'>
+                        <th className='UsersList__th'>Nombre</th>
+                        <th className='UsersList__th'>Email</th>
+                        <th className='UsersList__th'>Acción</th>
                     </tr>
+                </thead>
+                <tbody className='UsersList__tbody'>
                     {users.map((user) => (
-                        <tr key={user.id}>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td className='UsersList__action'>
+                        <tr className='UsersList__tr' key={user.id}>
+                            <td className='UsersList__th'>{user.name}</td>
+                            <td className='UsersList__th'>{user.email}</td>
+                            <td className='UsersList__th UsersList__action' >
                                 <button onClick={() => handleEdit(user)}>EDITAR</button>
                                 <button onClick={() => handleDelete(user)}>ELIMINAR</button>
                             </td>
