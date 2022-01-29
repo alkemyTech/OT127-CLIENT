@@ -76,7 +76,14 @@ const SlideList = () => {
                   </TableCell>
                   <TableCell align="center">{row.order}</TableCell>
                   <TableCell>
-                    <button>Editar</button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        routeRedirect(row.id);
+                      }}
+                    >
+                      Editar
+                    </button>
                   </TableCell>
                   <TableCell align="center">
                     <button>Eliminar</button>
