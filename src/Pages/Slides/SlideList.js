@@ -1,3 +1,56 @@
+const slides = {
+  data: [
+    {
+      id: 865,
+      name: "Ignacio",
+      description: "<p>asdasdas</p>",
+      image: "http://ongapi.alkemy.org/storage/j8Uo4skOTP.jpeg",
+      order: 5454,
+      user_id: null,
+      created_at: "2022-01-27T04:31:35.000000Z",
+      updated_at: "2022-01-27T04:31:35.000000Z",
+      deleted_at: null,
+      group_id: null,
+    },
+    {
+      id: 866,
+      name: "Ignacio",
+      description: "<p>dfsfsd</p>",
+      image: "http://ongapi.alkemy.org/storage/rEZJhWbxCx.jpeg",
+      order: 8989,
+      user_id: null,
+      created_at: "2022-01-27T04:58:27.000000Z",
+      updated_at: "2022-01-27T04:58:27.000000Z",
+      deleted_at: null,
+      group_id: null,
+    },
+    {
+      id: 868,
+      name: "Titulo de prueba",
+      description: "<p>fdes</p>",
+      image: "http://ongapi.alkemy.org/storage/tRMcq6w2JV.jpeg",
+      order: 1,
+      user_id: null,
+      created_at: "2022-01-27T20:29:02.000000Z",
+      updated_at: "2022-01-27T20:29:02.000000Z",
+      deleted_at: null,
+      group_id: null,
+    },
+    {
+      id: 869,
+      name: "myslide",
+      description: "<p>myslide</p>",
+      image: "http://ongapi.alkemy.org/storage/ae5LYQeuId.png",
+      order: 4555,
+      user_id: null,
+      created_at: "2022-01-28T16:23:08.000000Z",
+      updated_at: "2022-01-28T16:23:08.000000Z",
+      deleted_at: null,
+      group_id: null,
+    },
+  ],
+};
+
 const SlideList = () => {
   return <div>hola</div>;
 };
