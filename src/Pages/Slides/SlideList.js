@@ -41,6 +41,12 @@ const getSlidesData = new Promise((resolved) => resolved(slides));
 
 const SlideList = () => {
   const [slides, setSlides] = useState([]);
+  const history = useHistory();
+
+  const routeRedirect = (id) => {
+    let path = `ruta`;
+    history.push(path);
+  };
 
   getSlidesData.then((res) => {
     setSlides(res.data);
