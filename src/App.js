@@ -21,6 +21,7 @@ import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 import BackOffice from "./Components/Backoffice/BackOffice";
+import About from "./Components/About/About";
 import UsersList from "./Components/Users/UsersList";
 
 function App() {
@@ -39,8 +40,9 @@ function App() {
           <Route path="/contact" component={ContactForm} />
           <Route path="/novedades" component={News} />
           <Route path="/create-news" component={NewsForm} />
+          <Route path="/backoffice/slides/creacion" component={SlidesForm} />
           <Route path="/backoffice/users" component={UsersList} />
-          <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
           <Route path="/backoffice/organization" component={OrganizationData} />
           <Route
             path="/backoffice/organization/edit"
@@ -55,6 +57,10 @@ function App() {
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
+          <Route
+            path="/nosotros"
+            component={() => <About text="Sobre Nosotros" />}
+          />
           <Route
             path="/donar"
             component={() => <Donacion message="Quieres donar?" />}
