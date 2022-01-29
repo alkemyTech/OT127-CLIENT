@@ -51,7 +51,11 @@ const slides = {
   ],
 };
 
+const getSlidesData = new Promise((resolved) => resolved(slides));
+
 const SlideList = () => {
+  getSlidesData.then((res) => console.log(res.data));
+
   return <div>hola</div>;
 };
 
