@@ -22,6 +22,7 @@ import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 import BackOffice from "./Components/Backoffice/BackOffice";
 import About from "./Components/About/About";
+import SlideList from "./Pages/Slides/SlideList";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
           <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
+          <Route path="/backoffice/slides" component={SlideList} />
           <Route path="/backoffice/organization" component={OrganizationData} />
           <Route
             path="/backoffice/organization/edit"
