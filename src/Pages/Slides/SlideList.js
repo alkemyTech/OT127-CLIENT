@@ -43,14 +43,14 @@ const SlideList = () => {
   const [slides, setSlides] = useState([]);
   const history = useHistory();
 
-  const routeRedirect = (id, action) => {
-    let path = "";
-    if (action === "edit") {
-      path = `/backoffice/slides/edicion/${id}`;
-    } else {
-      path = `/backoffice/slides/delete/${id}`; //Esta ruta no esta creada.
-    }
+  const paths = {
+    edit: "/backoffice/slides/edicion",
+    delete: "/backoffice/slides/delete",
+    create: "/backoffice/slides/creacion",
+  };
 
+  const routeRedirect = (id, action) => {
+    let path = `${paths[action]}/${id}`;
     history.push(path);
   };
 
@@ -62,6 +62,14 @@ const SlideList = () => {
 
   return (
     <div style={{ width: "90%", padding: "1em", margin: "0 auto" }}>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          routeRedirect("", "create");
+        }}
+      >
+        Crear slide
+      </button>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
