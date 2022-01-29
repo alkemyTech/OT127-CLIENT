@@ -43,8 +43,14 @@ const SlideList = () => {
   const [slides, setSlides] = useState([]);
   const history = useHistory();
 
-  const routeRedirect = (id) => {
-    let path = `ruta`;
+  const routeRedirect = (id, action) => {
+    let path = "";
+    if (action === "edit") {
+      path = `/backoffice/slides/edicion/${id}`;
+    } else {
+      path = `/backoffice/slides/delete/${id}`; //Esta ruta no esta creada.
+    }
+
     history.push(path);
   };
 
@@ -79,7 +85,7 @@ const SlideList = () => {
                     <button
                       onClick={(e) => {
                         e.preventDefault();
-                        routeRedirect(row.id);
+                        routeRedirect(row.id, "edit");
                       }}
                     >
                       Editar
@@ -89,7 +95,7 @@ const SlideList = () => {
                     <button
                       onClick={(e) => {
                         e.preventDefault();
-                        routeRedirect(row.id);
+                        routeRedirect(row.id, "delete");
                       }}
                     >
                       Eliminar
