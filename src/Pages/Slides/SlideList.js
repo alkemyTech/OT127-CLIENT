@@ -63,16 +63,16 @@ const SlideList = () => {
           </TableHead>
           <TableBody>
             {rows &&
-              rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell align="center">{row.name}</TableCell>
+              rows.map(({ id, name, image, order }) => (
+                <TableRow key={id}>
+                  <TableCell align="center">{name}</TableCell>
                   <TableCell align="center">
-                    <img src={row.image} alt="" style={{ width: "30%" }} />
+                    <img src={image} alt="" style={{ width: "30%" }} />
                   </TableCell>
-                  <TableCell align="center">{row.order}</TableCell>
+                  <TableCell align="center">{order}</TableCell>
                   <TableCell>
                     <button>
-                      <Link to={`/backoffice/slides/edicion/${row.id}`}>
+                      <Link to={`/backoffice/slides/edicion/${id}`}>
                         Editar
                       </Link>
                     </button>
@@ -80,7 +80,7 @@ const SlideList = () => {
                   <TableCell align="center">
                     <button>
                       {/*TODO: Crear ruta*/}
-                      <Link to={`/backoffice/slides/delete/${row.id}`}>
+                      <Link to={`/backoffice/slides/delete/${id}`}>
                         Eliminar
                       </Link>
                     </button>
