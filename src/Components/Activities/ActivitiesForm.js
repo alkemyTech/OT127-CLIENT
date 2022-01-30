@@ -49,17 +49,9 @@ const ActivitiesForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      axios.put(`${API_URL}/${id}`, {
-        name,
-        description,
-        image,
-      }); //TODO: Controlar errores (Catch)
+      activitiesController.put(id, name, description, image)
     } else {
-      axios.post(API_URL, {
-        name,
-        description,
-        image,
-      }); //TODO: Controlar errores (Catch)
+      activitiesController.post(name, description, image)
     }
   };
 
