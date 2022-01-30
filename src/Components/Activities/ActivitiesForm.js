@@ -14,8 +14,6 @@ const toDataURL = (blob) =>
     reader.readAsDataURL(blob);
   });
 
-const API_URL = "http://ongapi.alkemy.org/api/activities";
-
 const ActivitiesForm = () => {
   const { id } = useParams();
   const [activity, setActivity] = useState({});
@@ -23,7 +21,7 @@ const ActivitiesForm = () => {
 
   useEffect(() => {
     if (id) {
-      activitiesController.getById(id).then(res => setActivity(res))
+      activitiesController.getById(id).then((res) => setActivity(res));
     }
   }, []); //eslint-disable-line
 
@@ -33,9 +31,9 @@ const ActivitiesForm = () => {
 
   const handleChangeImage = (e) => {
     const img = URL.createObjectURL(e.target.files[0]);
-    axios
-      .get(img, { responseType: "blob" })
-      .then((response) => toDataURL(response.data))
+    activitiesController
+      .changeImage(img)
+      .then((response) => toDataURL(response))
       .then((encoded) => {
         setActivity((prevActivity) => ({ ...prevActivity, image: encoded }));
       });
@@ -49,9 +47,13 @@ const ActivitiesForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      activitiesController.put(id, name, description, image)
+      activitiesController.put(id, name, description, image).then(() => {
+        alert("Actualizado");
+      });
     } else {
-      activitiesController.post(name, description, image)
+      activitiesController.post(name, description, image).then(() => {
+        alert("Actividad creada");
+      });
     }
   };
 

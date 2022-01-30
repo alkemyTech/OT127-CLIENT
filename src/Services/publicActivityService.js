@@ -9,7 +9,7 @@ class ActivitiesService {
     let data;
     await axios
       .get(this.API_URL)
-      .then((response) => response.data.data)
+      .then((response) => (data = response.data.data))
       .catch((error) => error.message);
     return data;
   };
@@ -26,7 +26,7 @@ class ActivitiesService {
   };
 
   post = async (name, description, image) => {
-    axios
+    await axios
       .post(this.API_URL, {
         name,
         description,
@@ -38,7 +38,7 @@ class ActivitiesService {
 
   put = async (id, name, description, image) => {
     if (id) {
-      axios
+      await axios
         .put(`${this.API_URL}/${id}`, {
           name,
           description,
@@ -51,11 +51,20 @@ class ActivitiesService {
 
   delete = async (id) => {
     if (id) {
-      axios
+      await axios
         .delete(`${this.API_URL}/${id}`)
         .then((response) => response.data)
         .catch((error) => error.message);
     }
+  };
+
+  changeImage = async (img) => {
+    let encoded;
+    await axios
+      .get(img, { responseType: "blob" })
+      .then((response) => (encoded = response.data))
+      .catch((error) => error.message);
+    return encoded;
   };
 }
 
