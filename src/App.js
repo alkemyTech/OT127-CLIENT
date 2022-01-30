@@ -20,8 +20,10 @@ import ContactForm from "./Components/Contact/ContactForm";
 import Home from "./Pages/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
+import NewsList from "./Components/News/NewsList";
 import BackOffice from "./Components/Backoffice/BackOffice";
 import About from "./Components/About/About";
+import NewsDetails from "./Components/News/Detail/NewsDetails";
 import UsersList from "./Components/Users/UsersList";
 
 function App() {
@@ -36,8 +38,10 @@ function App() {
             path="/backoffice/create-activity"
             component={ActivitiesForm}
           />
+
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
+          <Route path="/novedades/:id" component={() => <NewsDetails title="Titulo recibido por props" />} />
           <Route path="/novedades" component={News} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
@@ -51,12 +55,15 @@ function App() {
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/backoffice/create-user" exact component={UserForm} />
           <Route path="/backoffice/create-user/:id" component={UserForm} />
+          <Route path="/backoffice/news" component={NewsList} />
           <Route path="/create-member" component={MembersForm} />
-          <Route path="/create-project" component={ProjectsForm} />
+          <Route path="/backoffice/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
+          <Route path="/backoffice/activities/:id" component={ActivitiesForm} />
+          <Route path="/backoffice/projects/:id" component={ProjectsForm} />
           <Route
             path="/nosotros"
             component={() => <About text="Sobre Nosotros" />}
