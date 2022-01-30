@@ -24,7 +24,7 @@ const slides = {
     },
     {
       id: 3,
-      name: "Titulo de prueba asdsad  ad asd asd ",
+      name: "Título de prueba",
       image: "http://ongapi.alkemy.org/storage/tRMcq6w2JV.jpeg",
       order: 1,
     },
@@ -55,7 +55,7 @@ const SlideList = () => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">Titulo</TableCell>
+              <TableCell align="center">Título</TableCell>
               <TableCell align="center">Imagen</TableCell>
               <TableCell align="center">Orden</TableCell>
               <TableCell align="center">Acciones</TableCell>
