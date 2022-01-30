@@ -25,27 +25,27 @@ const UsersList = () => {
 
 
     return (
-        <div className='UsersList'>
-            <nav className='UsersList__nav'>
+        <div className='usersList'>
+            <nav className='usersList__nav'>
                 <p>Usuarios</p>
                 <Link to="/backoffice/users/create">
                     <button>CREAR</button>
                 </Link>
             </nav>
-            <table className='UsersList__table'>
+            <table className='usersList__table'>
                 <thead>
-                    <tr className='UsersList__tr'>
-                        <th className='UsersList__th'>Nombre</th>
-                        <th className='UsersList__th'>Email</th>
-                        <th className='UsersList__th'>Acción</th>
+                    <tr className='usersList__tr'>
+                        <th className='usersList__th'>Nombre</th>
+                        <th className='usersList__th'>Email</th>
+                        <th className='usersList__th'>Acción</th>
                     </tr>
                 </thead>
-                <tbody className='UsersList__tbody'>
+                <tbody className='usersList__tbody'>
                     {users.map((user) => (
-                        <tr className='UsersList__tr' key={user.id}>
-                            <td className='UsersList__th'>{user.name}</td>
-                            <td className='UsersList__th'>{user.email}</td>
-                            <td className='UsersList__th UsersList__action' >
+                        <tr className='usersList__tr' key={user.id}>
+                            <td className='usersList__th'>{user.name}</td>
+                            <td className='usersList__th'>{user.email}</td>
+                            <td className='usersList__th usersList__action' >
                                 <button onClick={() => handleEdit(user)}>EDITAR</button>
                                 <button onClick={() => handleDelete(user)}>ELIMINAR</button>
                             </td>
