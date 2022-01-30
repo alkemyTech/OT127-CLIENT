@@ -41,8 +41,18 @@ export const createNewSlide = async (data) => {
     }
 }
 
-export const updateSlide = () => {
-
+export const updateSlide = async (data, id) => {
+    try {
+        // Primero hay que convertir el link de la imagen a base64
+        let imgBlob = await axios.get(data.image, { responseType: "blob" })
+        let encoded = await toDataURL(imgBlob.data)
+        // Guardamos el link ya transformado a base 64 y hacemos la peticion 
+        data.image = encoded
+        const response = await axios.put(`http://ongapi.alkemy.org/api/slides/${id}`, data)
+        return response
+    } catch (error) {
+        return error
+    }
 }
 
 export const deleteSlide = () => {
