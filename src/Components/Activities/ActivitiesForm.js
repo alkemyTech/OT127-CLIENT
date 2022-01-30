@@ -4,6 +4,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useParams } from "react-router-dom";
 import "../FormStyles.css";
 import axios from "axios";
+import { activitiesController } from "../../Services/publicActivityService";
 
 const toDataURL = (blob) =>
   new Promise((resolve, reject) => {
@@ -22,9 +23,7 @@ const ActivitiesForm = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`${API_URL}/${id}`).then((res) => {
-        setActivity(res.data.data);
-      });
+      activitiesController.getById(id).then(res => setActivity(res))
     }
   }, []); //eslint-disable-line
 

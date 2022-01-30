@@ -6,18 +6,22 @@ class ActivitiesService {
   }
 
   getAll = async () => {
+    let data;
     await axios
       .get(this.API_URL)
-      .then((response) => response.data)
+      .then((response) => response.data.data)
       .catch((error) => error.message);
+    return data;
   };
 
   getById = async (id) => {
+    let data;
     if (id) {
       await axios
         .get(`${this.API_URL}/${id}`)
-        .then((response) => response.data)
+        .then((response) => (data = response.data.data))
         .catch((error) => error.message);
+      return data;
     }
   };
 
