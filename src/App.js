@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./sass/main.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
