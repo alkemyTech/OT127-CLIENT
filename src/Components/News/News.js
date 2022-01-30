@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import getNews from "../../Services/newsService";
 
 const News = () => {
-  const [news, setNews] = useState([]); //News va a ser sacado de la API en un futuro
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    getNews(setNews);
+  }, []);
 
   const newsList = () => {
     return news.length ? (
