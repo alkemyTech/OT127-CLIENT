@@ -50,7 +50,7 @@ const SlideList = () => {
 
   return (
     <div style={{ width: "90%", padding: "1em", margin: "0 auto" }}>
-      <Link to="/backoffice/slides/creacion">Crear Slide</Link>
+      <Link to="/backoffice/slides/create">Crear Slide</Link>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
