@@ -35,6 +35,7 @@ function App() {
             path="/backoffice/create-activity"
             component={ActivitiesForm}
           />
+
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
           <Route path="/novedades" component={News} />
@@ -50,11 +51,13 @@ function App() {
           <Route path="/backoffice/create-user" exact component={UserForm} />
           <Route path="/backoffice/create-user/:id" component={UserForm} />
           <Route path="/create-member" component={MembersForm} />
-          <Route path="/create-project" component={ProjectsForm} />
+          <Route path="/backoffice/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
+          <Route path="/backoffice/activities/:id" component={ActivitiesForm} />
+          <Route path="/backoffice/projects/:id" component={ProjectsForm} />
           <Route
             path="/nosotros"
             component={() => <About text="Sobre Nosotros" />}
