@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import axios from 'axios'
 import './SliderHome.scss'
 import { getSlidesData } from '../../Services/slidesApiService';
 
