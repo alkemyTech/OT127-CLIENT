@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import axios from 'axios'
 import './SliderHome.scss'
+import { getSlidesData } from '../../Services/slidesApiService';
 
 const SliderHome = () => {
     const carousel = useRef(null)
@@ -74,8 +75,8 @@ const SliderHome = () => {
     useEffect(() => {
         const getSlides = async () => {
             try {
-                const response = await axios.get('http://ongapi.alkemy.org/api/slides')
-                setSliderData(response.data.data)
+                const response = await getSlidesData()
+                setSliderData(response)
             } catch (error) {
                 console.error(error)
             }
