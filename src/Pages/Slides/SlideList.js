@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -41,18 +41,6 @@ const getSlidesData = new Promise((resolved) => resolved(slides));
 
 const SlideList = () => {
   const [slides, setSlides] = useState([]);
-  const history = useHistory();
-
-  const paths = {
-    edit: "/backoffice/slides/edicion",
-    delete: "/backoffice/slides/delete",
-    create: "/backoffice/slides/creacion",
-  };
-
-  const routeRedirect = (id, action) => {
-    let path = `${paths[action]}/${id}`;
-    history.push(path);
-  };
 
   getSlidesData.then((res) => {
     setSlides(res.data);
@@ -62,14 +50,7 @@ const SlideList = () => {
 
   return (
     <div style={{ width: "90%", padding: "1em", margin: "0 auto" }}>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          routeRedirect("", "create");
-        }}
-      >
-        Crear slide
-      </button>
+      <Link to="/backoffice/slides/creacion">Crear Slide</Link>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -90,23 +71,18 @@ const SlideList = () => {
                   </TableCell>
                   <TableCell align="center">{row.order}</TableCell>
                   <TableCell>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        routeRedirect(row.id, "edit");
-                      }}
-                    >
-                      Editar
+                    <button>
+                      <Link to={`/backoffice/slides/edicion/${row.id}`}>
+                        Editar
+                      </Link>
                     </button>
                   </TableCell>
                   <TableCell align="center">
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        routeRedirect(row.id, "delete");
-                      }}
-                    >
-                      Eliminar
+                    <button>
+                      {/*TODO: Crear ruta*/}
+                      <Link to={`/backoffice/slides/delete/${row.id}`}>
+                        Eliminar
+                      </Link>
                     </button>
                   </TableCell>
                 </TableRow>
