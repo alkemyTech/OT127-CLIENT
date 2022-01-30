@@ -20,7 +20,7 @@ const getSecureHeader = () => {
     : { error: "No token found" }
 }
 
-export const privateServiceDelete = (route, id) => {
+export const privateDelete = (route, id) => {
   if (!route) return (alert("Error: debe proporcionar una ruta"))
   if ((!id && id !== 0) || id < 0) return (alert("Error: debe proporcionar un id valido"))
 
