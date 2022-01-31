@@ -37,6 +37,7 @@ function App() {
           <Route path="/contact" component={ContactForm} />
           <Route path="/novedades" component={News} />
           <Route path="/create-news" component={NewsForm} />
+          <Route path="/create-news/:id" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/backoffice/organization" component={OrganizationData} />
           <Route

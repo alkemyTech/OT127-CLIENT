@@ -1,49 +1,92 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../FormStyles.css';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
+import {useParams} from "react-router-dom";
+
 
 const NewsForm = () => {
-    
+
+    const {id} = useParams();
+
+    const [newsAPI, setNewsAPI] = useState([]);
+
     const handleSubmit = async(values) => {
-        /* // => OnSumit
-        const [userData, setUserData] = useState([]);
-        setUserData([
-        ...userData,
-        { name: values.name, description: values.description, categorie: values.categorie },
-        ]); 
-        */
+        
         const name = values.name;
         const description = values.description;
-        const categories = values.categorie;
-
+        const NewForm = values.NewForm;
         const baseUrl = 'http://ongapi.alkemy.org/api/news';
 
         axios
         .post( 
             baseUrl, {
-                name, description, categories
+                name, description, NewForm
             }
          )
         .then(function (response) {
-            console.log(response);
+            //to do
         })
         .catch(function (error) {
-            console.log(error);
+            //to do
         });
+
+
+        //validacion de id
+        if (id) {
+			axios.put(`${baseUrl}/${id}`, {
+				id,
+				name,
+				description,
+			})
+				.then((response) => {
+					// To do
+				})
+				.catch((error) => {
+					// to do
+				});
+		} else {
+			axios.post(baseUrl, {
+				name,
+				description,
+			})
+            .then((response) => {
+                // To do
+            })
+            .catch((error) => {
+                // to do
+            });
+        }
     };
 
+    
+    
+
+    useEffect(() => {
+        const URLNews = 'http://ongapi.alkemy.org/api/news';
+        axios.get(URLNews)
+            .then((response) => {
+                setNewsAPI(response.data.data);
+            })
+            .catch((error) => {
+                alert(error);
+        });
+
+    }, []);
+    
+    const img = 'http://ongapi.alkemy.org/storage/zcCthBIvEr.png';
+    
     return (
         <Formik
-            initialValues={{ name: "", description: "", categorie: ""  }}
-            validationSchema={Yup.object({
+        initialValues={{ name: "", description: "", NewForm: ""  }}
+        validationSchema={Yup.object({
             name: Yup.string()
                 .min(4, "Debe tener por lo menos 4 caracteres.")
                 .required("Este campo es obligatorio"),
             description: Yup.string()
                 .required("Este campo es obligatorio"),
-            categorie: Yup.string()
+            NewForm: Yup.string()
                 .required("Este campo es obligatorio"),
             })}
             onSubmit={(values) => {
@@ -59,14 +102,21 @@ const NewsForm = () => {
                 <Field name="description" type="description" />
                 <ErrorMessage name="description"/>
 
-                <label htmlFor="categorie">Categories</label> 
-                <Field component="select" name="categorie" type="categorie">
-                    <option value="option1" >categorie1</option>
-                    <option value="option2">categorie2</option>
+                <label htmlFor="NewForm">New Form</label> 
+                <Field component="select" name="NewForm" type="NewForm">
+                    {newsAPI.map(element => {
+                        return (
+                            <option key={element.id} value={element.id}>
+                                {element.name}
+                            </option>
+                        )
+                    })}
                 </Field>
-                <ErrorMessage name="categorie" />
+                <ErrorMessage name="categorie" />  
                 
-                <button type="submit">Entrar</button>
+                <img src={img} alt="image" />
+
+                <button type="submit">Enviar</button>
             </Form>
         </Formik>
     );
