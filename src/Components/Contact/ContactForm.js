@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { postContact } from "../../Services/contactServices";
 
 function ContactForm() {
   const phoneValidate =
@@ -24,7 +25,7 @@ function ContactForm() {
   });
 
   const handleSubmit = (values) => {
-    // to do (logica pendiente)
+    postContact(values);
   };
 
   return (
