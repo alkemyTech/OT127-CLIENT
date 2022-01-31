@@ -1,4 +1,5 @@
 import React from "react"
+import "./sass/main.scss"
 import "./App.css"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import ActivitiesForm from "./Components/Activities/ActivitiesForm"
@@ -22,6 +23,12 @@ import Home from "./Pages/Home"
 import OrganizationData from "./Components/Organization/OrganizationData"
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm"
 import BackOffice from "./Components/Backoffice/BackOffice"
+import ActivityDetail from "./Components/Activities/ActivityDetail"
+import UsersList from "./Components/Users/UsersList"
+import NewsDetails from "./Components/News/Detail/NewsDetails"
+import MembersList from "./Components/Members/MembersList"
+import NewsList from "./Components/News/NewsList"
+import About from "./Components/About/About"
 
 function App() {
 	return (
@@ -36,8 +43,24 @@ function App() {
 					<Route path="/novedades" component={News} />
 					<Route path="/contact" component={ContactForm} />
 					<Route path="/create-news" component={NewsForm} />
+					<Route path="/actividades/:id" component={ActivityDetail} />
+					<Route path="/backoffice/users" component={UsersList} />
+					<Route
+						path="/novedades/:id"
+						component={() => (
+							<NewsDetails title="Titulo recibido por props" />
+						)}
+					/>
 					<Route
 						path="/backoffice/create-slide"
+						component={SlidesForm}
+					/>
+					<Route
+						path="/backoffice/slides/creacion"
+						component={SlidesForm}
+					/>
+					<Route
+						path="/backoffice/slides/edicion/:id"
 						component={SlidesForm}
 					/>
 					<Route
@@ -70,15 +93,37 @@ function App() {
 						path="/backoffice/create-user/:id"
 						component={UserForm}
 					/>
+					<Route
+						path="/backoffice/members"
+						exact
+						component={MembersList}
+					/>
+					<Route path="/backoffice/news" component={NewsList} />
 					<Route path="/create-member" component={MembersForm} />
 					<Route path="/create-project" component={ProjectsForm} />
+					<Route
+						path="/backoffice/projects/:id"
+						component={ProjectsForm}
+					/>
+					<Route
+						path="/backoffice/create-project"
+						component={ProjectsForm}
+					/>
 					<Route path="/school-campaign" component={SchoolCampaign} />
 					<Route path="/toys-campaign" component={ToysCampaign} />
 					<Route path="/login" component={LoginForm} />
 					<Route path="/register" component={RegisterForm} />
 					<Route
+						path="/backoffice/activities/:id"
+						component={ActivitiesForm}
+					/>
+					<Route
 						path="/donar"
 						component={() => <Donacion message="Quieres donar?" />}
+					/>
+					<Route
+						path="/nosotros"
+						component={() => <About text="Sobre Nosotros" />}
 					/>
 					<Route path="/gracias" component={Gracias} />
 					<Route path="/backoffice" component={BackOffice} />
