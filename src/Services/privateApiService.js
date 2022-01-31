@@ -1,16 +1,9 @@
 import axios from "axios";
 
-<<<<<<< HEAD
-let config = {
-  headers: {
-    Group: 127,
-  },
-=======
 const config = {
 	headers: {
 		Group: "127", 
 	},
->>>>>>> 1ca2a9788b17199aa7ae5f3ddb9cc1887c198a01
 };
 
 export const Get = () => {
@@ -27,7 +20,6 @@ export const getSecureHeader = () => {
     : { error: "No token found" };
 };
 
-<<<<<<< HEAD
 export const privateServicePatch = (route, id, data) => {
   let url = id ? `${route}/${id}` : route;
   let token = getSecureHeader();
@@ -40,10 +32,8 @@ export const privateServicePatch = (route, id, data) => {
         Authorization,
       },
     }); // TODO: Controlar errores
-  } else {
+  }
       
-const getPrivate = async (route, id = null) => {
-=======
 export const Put = () => {
 	axios
 		.put(url, data, config)
@@ -57,7 +47,6 @@ export const Put = () => {
 
 
 export const getPrivate = async (route, id = null) => {
->>>>>>> 1ca2a9788b17199aa7ae5f3ddb9cc1887c198a01
   try {
     let url;
     id ? (url = route + "/" + id) : (url = route);
@@ -78,5 +67,3 @@ export const getPrivate = async (route, id = null) => {
     return error;
   }
 };
-
-
