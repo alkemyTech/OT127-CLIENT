@@ -43,14 +43,18 @@ const getSlidesData = new Promise((res) => res(slides));
 const SlideList = () => {
   const [slides, setSlides] = useState([]);
 
-  getSlidesData.then((res) => {
-    setSlides(res.data);
-  });
+  getSlidesData
+    .then((res) => {
+      setSlides(res.data);
+    })
+    .catch((err) => {
+      alert(err);
+    });
 
   const rows = slides;
 
   return (
-    <div className="container">
+    <div className="list-container">
       <Link to="/backoffice/slides/create">Crear Slide</Link>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
