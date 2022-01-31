@@ -1,32 +1,80 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import axios from 'axios';
 
-const MembersForm = () => {
-  const [initialValues, setInitialValues] = useState({
-    name: '',
-    description: ''
-  })
+const NewsForm = () => {
+    
+    const handleSubmit = async(values) => {
 
-  const handleChange = (e) => {
-    if(e.target.name === 'name'){
-      setInitialValues({...initialValues, name: e.target.value})
-    } if(e.target.name === 'description'){
-      setInitialValues({...initialValues, description: e.target.value})
-    }
-  }
+      console.log (values);
+       
+        const name = values.name;
+        const description = values.description;
+        const facebook = values.facebook;
+        const linkedin = values.linkedin;
+        const img = values.file;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(initialValues);
-  }
+        const baseUrl = 'http://ongapi.alkemy.org/api/members';
 
-  return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Name"></input>
-      <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some description"></input>
-      <button className="submit-btn" type="submit">Send</button>
-    </form>
-  );
+        axios
+        .post( 
+            baseUrl, {
+                name, description, facebook, linkedin, img
+            }
+         )
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    };
+
+    return (
+        <Formik
+            initialValues={{ name: "", description: "", facebook: "", linkedin: "", file: ""}}
+            validationSchema={Yup.object({
+            name: Yup.string()
+                .min(4, "Debe tener por lo menos 4 caracteres.")
+                .required("Este campo es obligatorio"),
+            description: Yup.string()
+                .required("Este campo es obligatorio"),
+            facebook: Yup.string()
+                .required("Este campo es obligatorio")
+                .email('No coloco un formato valido'),
+            linkedin: Yup.string()
+                .required("Este campo es obligatorio")
+                .email('No coloco un formato valido'),
+            })}
+
+            onSubmit={(values) => {
+                handleSubmit(values);
+            }}    
+        >
+            <Form>
+                <label htmlFor="name">Nombre</label>
+                <Field name="name" type="titulo" />
+                <ErrorMessage name="name" />
+
+                <label htmlFor="description">Descripcion</label> 
+                <Field name="description" type="description" />
+                <ErrorMessage name="description"/>
+
+                <label htmlFor="facebook">Facebook</label> 
+                <Field name="facebook" type="facebook" />
+                <ErrorMessage name="facebook"/>
+
+                <label htmlFor="linkedin">LinkedIn</label> 
+                <Field name="linkedin" type="linkedin" />
+                <ErrorMessage name="linkedin"/>
+
+                <input id="file" name="file" type="file"  />
+                
+                <button type="submit">Envia</button>
+            </Form>
+        </Formik>
+    );
 }
- 
-export default MembersForm;
+export default NewsForm;
