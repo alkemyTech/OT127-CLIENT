@@ -75,7 +75,7 @@ const SliderHome = () => {
         const getSlides = async () => {
             try {
                 const response = await getSlidesData()
-                setSliderData(response)
+                setSliderData(response.data.data)
             } catch (error) {
                 console.error(error)
             }
