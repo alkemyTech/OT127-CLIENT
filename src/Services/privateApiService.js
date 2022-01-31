@@ -1,15 +1,38 @@
-import axios from 'axios';
+import axios from "axios";
 
-const config = {
-    headers: {
-        Group: 127                //Aqui va el ID del equipo!!
+let config = {
+  headers: {
+    Group: "127",
+  },
+};
+
+const getSecureHeader = () => {
+  const token = localStorage.getItem("token");
+  return token
+    ? { Authorization: "Bearer " + token }
+    : { error: "No token found" };
+};
+
+const getPrivate = async (route, id = null) => {
+  try {
+    let url;
+    id ? (url = route + "/" + id) : (url = route);
+    let token = getSecureHeader();
+    if (token.Authorization) {
+      config = {
+        headers: {
+          ...config.headers,
+          Authorization: token.Authorization,
+        },
+      };
+    } else {
+      return token.error;
     }
-}
+    let response = await axios.get(url, config);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
 
-const Get = () => {
-    axios.get('https://jsonplaceholder.typicode.com/users', config)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-}
-
-export default Get
+export default getPrivate;
