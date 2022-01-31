@@ -2,20 +2,22 @@ import axios from "axios";
 
 const config = {
 	headers: {
-		Group: 127, //Aqui va el ID del equipo!!
+		Group: "127", 
 	},
 };
 
-const Get = () => {
+export const Get = () => {
 	axios
 		.get("https://jsonplaceholder.typicode.com/users", config)
 		.then((res) => console.log(res))
 		.catch((err) => console.log(err));
 };
 
-const getSecureHeader = () => {
-	const token = localStorage.getItem("token");
-	token ? {Authorization: "Bearer " + token} : {error: "No token found"};
+export const getSecureHeader = () => {
+  const token = localStorage.getItem("token");
+  return token
+    ? { Authorization: "Bearer " + token }
+    : { error: "No token found" };
 };
 
 export const Put = () => {
@@ -29,4 +31,27 @@ export const Put = () => {
 		});
 }
 
-export default Get;
+
+export const getPrivate = async (route, id = null) => {
+  try {
+    let url;
+    id ? (url = route + "/" + id) : (url = route);
+    let token = getSecureHeader();
+    if (token.Authorization) {
+      config = {
+        headers: {
+          ...config.headers,
+          Authorization: token.Authorization,
+        },
+      };
+    } else {
+      return token.error;
+    }
+    let response = await axios.get(url, config);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+
