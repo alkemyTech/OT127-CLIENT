@@ -2,7 +2,7 @@ import axios from "axios";
 
 const config = {
   headers: {
-    Group: 127, //Aqui va el ID del equipo!!
+    group_id: 127, //Aqui va el ID del equipo!!
   },
 };
 
