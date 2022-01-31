@@ -22,7 +22,7 @@ import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 import BackOffice from "./Components/Backoffice/BackOffice";
 import About from "./Components/About/About";
-import Detail from "./Components/Activities/Detail";
+import ActivityDetail from "./Components/Activities/ActivityDetail";
 
 function App() {
   return (
@@ -39,7 +39,7 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
           <Route path="/novedades" component={News} />
-          <Route path="/actividades/:id" component={Detail} />
+          <Route path="/actividades/:id" component={ActivityDetail} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
           <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
