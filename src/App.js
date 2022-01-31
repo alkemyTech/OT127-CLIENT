@@ -22,6 +22,7 @@ import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 import NewsList from "./Components/News/NewsList";
 import BackOffice from "./Components/Backoffice/BackOffice";
+import MembersList from "./Components/Members/MembersList";
 import About from "./Components/About/About";
 import NewsDetails from "./Components/News/Detail/NewsDetails";
 
@@ -40,7 +41,10 @@ function App() {
 
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
-          <Route path="/novedades/:id" component={() => <NewsDetails title="Titulo recibido por props" />} />
+          <Route
+            path="/novedades/:id"
+            component={() => <NewsDetails title="Titulo recibido por props" />}
+          />
           <Route path="/novedades" component={News} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
@@ -53,6 +57,7 @@ function App() {
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/backoffice/create-user" exact component={UserForm} />
           <Route path="/backoffice/create-user/:id" component={UserForm} />
+          <Route path="/backoffice/members" exact component={MembersList} />
           <Route path="/backoffice/news" component={NewsList} />
           <Route path="/create-member" component={MembersForm} />
           <Route path="/backoffice/create-project" component={ProjectsForm} />
