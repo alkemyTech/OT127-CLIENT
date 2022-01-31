@@ -26,6 +26,7 @@ import MembersList from "./Components/Members/MembersList";
 import About from "./Components/About/About";
 import ActivityDetail from "./Components/Activities/ActivityDetail";
 import NewsDetails from "./Components/News/Detail/NewsDetails";
+import UsersList from "./Components/Users/UsersList";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/actividades/:id" component={ActivityDetail} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
+          <Route path="/backoffice/users" component={UsersList} />
           <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
           <Route path="/backoffice/organization" component={OrganizationData} />
           <Route
