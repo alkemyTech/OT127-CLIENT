@@ -1,16 +1,16 @@
 import axios from "axios";
 
 const config = {
-	headers: {
-		Group: "127", 
-	},
+  headers: {
+    Group: "127",
+  },
 };
 
 export const Get = () => {
-	axios
-		.get("https://jsonplaceholder.typicode.com/users", config)
-		.then((res) => console.log(res))
-		.catch((err) => console.log(err));
+  axios
+    .get("https://jsonplaceholder.typicode.com/users", config)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 };
 
 export const getSecureHeader = () => {
@@ -33,18 +33,18 @@ export const privateServicePatch = (route, id, data) => {
       },
     }); // TODO: Controlar errores
   }
-      
-export const Put = () => {
-	axios
-		.put(url, data, config)
-		.then((res) => {
-			return res
-		})
-		.catch((err) => {
-			return err
-		});
-}
+};
 
+export const Put = (url, data) => {
+  axios
+    .put(url, data, config)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
 
 export const getPrivate = async (route, id = null) => {
   try {
