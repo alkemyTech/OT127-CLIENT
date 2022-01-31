@@ -7,8 +7,9 @@ import {useParams} from "react-router-dom";
 
 
 const NewsForm = () => {
-
-    const {id} = useParams();
+    
+    
+    let { id } = useParams(); 
 
     const [newsAPI, setNewsAPI] = useState([]);
 
@@ -19,60 +20,48 @@ const NewsForm = () => {
         const NewForm = values.NewForm;
         const baseUrl = 'http://ongapi.alkemy.org/api/news';
 
-        axios
-        .post( 
-            baseUrl, {
-                name, description, NewForm
-            }
-         )
-        .then(function (response) {
-            //to do
-        })
-        .catch(function (error) {
-            //to do
-        });
-
-
-        //validacion de id
         if (id) {
 			axios.put(`${baseUrl}/${id}`, {
 				id,
 				name,
 				description,
 			})
-				.then((response) => {
-					// To do
-				})
-				.catch((error) => {
-					// to do
-				});
-		} else {
-			axios.post(baseUrl, {
-				name,
-				description,
-			})
             .then((response) => {
                 // To do
+                console.log(response);
+                
             })
             .catch((error) => {
                 // to do
+                console.log(error);
             });
+		} else {
+            axios
+            .post( 
+                baseUrl, {
+                    name, description, NewForm
+                }
+            )
+            .then(function (response) {
+                //to do
+                console.log(response);
+            })
+            .catch(function (error) {
+                //to do
+            });
+            
         }
     };
-
-    
-    
 
     useEffect(() => {
         const URLNews = 'http://ongapi.alkemy.org/api/news';
         axios.get(URLNews)
             .then((response) => {
-                setNewsAPI(response.data.data);
+                //to do
             })
             .catch((error) => {
-                alert(error);
+                //to do
         });
-
     }, []);
     
     const img = 'http://ongapi.alkemy.org/storage/zcCthBIvEr.png';
@@ -103,7 +92,7 @@ const NewsForm = () => {
                 <ErrorMessage name="description"/>
 
                 <label htmlFor="NewForm">New Form</label> 
-                <Field component="select" name="NewForm" type="NewForm">
+                <Field component="select" as='select' name="NewForm" type="NewForm">
                     {newsAPI.map(element => {
                         return (
                             <option key={element.id} value={element.id}>
