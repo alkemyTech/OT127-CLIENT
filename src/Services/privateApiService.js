@@ -22,10 +22,10 @@ export const Put = () => {
 	axios
 		.put(url, data, config)
 		.then((res) => {
-			return
+			return res
 		})
 		.catch((err) => {
-			return
+			return err
 		});
 }
 
