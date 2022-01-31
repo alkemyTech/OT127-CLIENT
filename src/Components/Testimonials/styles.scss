@@ -1,0 +1,18 @@
+.form {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    &__text-error {
+        color: red;
+    }
+
+    &__label {
+        font-size: 1.1rem;
+        margin-top: 20px;
+    }
+	 &__image-preview{
+		width: 25%;
+		height: 25%;
+	 }
+}

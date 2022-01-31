@@ -6,129 +6,165 @@ import axios from "axios"
 import { useFormik } from "formik"
 
 import "../FormStyles.css"
+import "./styles.scss"
 
 const TestimonialForm = () => {
-	const id = useParams().id
-	const url = "http://ongapi.alkemy.org/api/testimonials/"
-	const [ testimonial, setTestimonial ] = useState({})
-	const [ initialValues, setInitialValues ] = useState({
-		name: "",
-		description: "",
-		image:""
-	})
-	const [ image, setImage ] = useState()
-	const handleChange = (e) => {
-		if (e.target.name === "name") {
-			setInitialValues({ ...initialValues, name: e.target.value })
-		}
-		if (e.target.name === "description") {
-			setInitialValues({ ...initialValues, description: e.target.value })
-		}
-		if (e.target.name === "imagefield") {
-			setInitialValues({ ...initialValues, image: e.target.value })
+	const { id } = useParams()
+	const url = "http://ongapi.alkemy.org/api/testimonials"
+	const [ name, setName ] = useState("")
+	const [ description, setDescription ] = useState("")
+	const [ imageInput, setImageInput ] = useState("")
+
+	const image = (e) => {
+		const file = e.target.files[ 0 ]
+		const reader = new FileReader()
+		reader.readAsDataURL(file)
+		reader.onloadend = () => {
+			setImageInput(reader.result)
 		}
 	}
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		console.log(initialValues)
+
+	const Get = async (baseUrl, id) => {
+		const url = id ? `${baseUrl}/${id}` : `${baseUrl}`
+		try {
+			const res = await axios.get(url)
+			return res.data
+		} catch (error) {
+			return error
+		}
 	}
-	const onImageChange = (e) => {
-		setImage(e.target.files)
-		console.log(e.target.files)
+
+	const getImagePreview = async (baseUrl) => {
+		const data = await fetch(baseUrl)
+		const blob = await data.blob()
+		return new Promise((resolve) => {
+			const fReader = new FileReader()
+			fReader.readAsDataURL(blob)
+			fReader.onloadend = () => {
+				const base64data = fReader.result
+				resolve(base64data)
+			}
+		})
 	}
-	//----------------------//
+
+
+	const getDataTestimonials = async () => {
+		if (id) {
+			try {
+				await Get(url, id).then((res) => {
+					const { data } = res
+					getImagePreview(data.image).then((imagen64) => {
+						setImageInput(imagen64)
+					})
+					setName(data.name)
+					setDescription(data.description)
+				})
+			} catch (error) {
+				// alert("Testimonio Inexistente")
+			}
+		}
+	}
+
+	const createTestimonial = (values) => {
+		axios
+			.post(url, {
+				name: values.name,
+				description: values.description,
+				image: imageInput,
+			})
+			.then((res) => alert(res))
+			.catch((err) => alert(err))
+	}
+
+	const updateTestimonial = (values) => {
+		axios
+			.put(`${url}/${id}`, {
+				name: values.name,
+				description: values.description,
+				image: imageInput,
+			})
+			.then(({ data }) => alert(data))
+			.catch((err) => alert(err))
+	}
+
+	useEffect(() => {
+		getDataTestimonials()
+		// eslint-disable-next-line
+	}, [])
+
 	const formik = useFormik({
 		initialValues: {
 			name: "",
 			description: "",
-			image: ""
+			image: "",
 		},
-		validate: (initialValues) => {
-			const errors = {};
-			if (!initialValues.name) {
-				errors.name = "El campo no puede estar vacio"
-			} else if (!initialValues.description) {
-				errors.description = "El campo no puede estar vacio"
-			} else if (!initialValues.image) {
-				errors.image = "El campo no puede estar vacio"
+		validate: (values) => {
+			const errors = {}
+			if (!values.name) {
+				errors.name = "El campo nombre no puede estar vacio"
+			} else if (values.name.length < 4) {
+				errors.name = "El nombre debe tener al menos 4 caracteres"
 			}
-			return errors;
+			if (!values.description) {
+				errors.description = "El campo descripcion no puede estar vacio"
+			}
+			if (!values.image) {
+				errors.image = "El campo imagen no puede estar vacio"
+			}
+			return errors
 		},
-		onSubmit: () => {
+		onSubmit: (values) => {
 			if (!formik.isValid) {
 				return
-			}else{
-
+			} else if (id) {
+				updateTestimonial(values)
+			} else {
+				createTestimonial(values)
 			}
 		},
 	})
-	//-----------------------//
-	const updateTestimonial = (id) => {
-				axios
-					.get(`${url}${id}`)
-					.then((res) => {
-						setTestimonial(res.data.data)
-						setInitialValues({
-							name: res.data.data.name,
-							description: res.data.data.description,
-							image: res.data.data.image
-						})
-					})
-					.catch((err) => {
-						console.log(err)
-					})
-			}
-	const createTestimonial =()=>{
 
-	}
-
-	useEffect((id) => {
-		if (id === undefined) {
-			//crear--testimonial
-		} else {
-			//actualizar--testimonial(id)-rellenar campos para editar y despues enviar
-			updateTestimonial(id)
-		}
-	}, [id])
 	return (
-		<form className="form-container" onSubmit={handleSubmit}>
+		<form className="form" onSubmit={formik.handleSubmit}>
+			<h2>Testimonios</h2>
+			<label className="form__label">Nombre:</label>
 			<input
 				className="input-field"
 				type="text"
 				name="name"
-				value={formik.initialValues.name}
-				onChange={handleChange}
-				placeholder={initialValues.name}
+				defaultValue={name || formik.values.name || ""}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
 			></input>
-			{formik.errors.name ? <div>{formik.errors.name}</div> : null}
-			<input type="file" name="image" onChange={onImageChange} />
+			{
+				formik.touched.name && formik.errors.name
+					? (<small className="form__text-error">{formik.errors.name}</small>)
+					: null
+			}
+			<label className="form__label">Imagen:</label>
 			<input
-				type="text"
-				name="imagefield"
-				value={initialValues.image}
-				placeholder={initialValues.image}
-				className="input-field"
-				onChange={handleChange}
-			></input>
+				type="file"
+				name="image"
+				onChange={(e) => {
+					formik.handleChange(e)
+					image(e)
+				}}
+				accept="image/png,image/jpeg"
+			/>
+			{
+				(imageInput)
+					? <img src={imageInput} className="form__image-preview" alt="ImagePreview" />
+					: null
+			}
+			<label className="form__label">Descripcion:</label>
 			<CKEditor
 				editor={ClassicEditor}
-				data={initialValues.description}
-				onReady={(editor) => {
-					// You can store the "editor" and use when it is needed.
-					console.log("Editor is ready to use!", editor)
+				data={description}
+				onChange={(event, editor) => {
+					formik.setFieldValue("description", editor.getDataTestimonials())
 				}}
-				// 	onChange={(event, editor) => {
-				// 		const data = editor.getData()
-				// 		console.log({ event, editor, data })
-				// 	}}
-				// 	onBlur={(event, editor) => {
-				// 		console.log("Blur.", editor)
-				// 	}}
-				// 	onFocus={(event, editor) => {
-				// 		console.log("Focus.", editor)
-				// 	}}
 			/>
-			<button className="submit-btn" type="submit" onClick={handleSubmit}>
+			<button className="submit-btn" type="submit">
 				Send
 			</button>
 		</form>
