@@ -7,6 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import "./SlideList.css";
 
 const slides = {
   data: [
@@ -37,7 +38,7 @@ const slides = {
   ],
 };
 
-const getSlidesData = new Promise((resolved) => resolved(slides));
+const getSlidesData = new Promise((res) => res(slides));
 
 const SlideList = () => {
   const [slides, setSlides] = useState([]);
@@ -49,7 +50,7 @@ const SlideList = () => {
   const rows = slides;
 
   return (
-    <div style={{ width: "90%", padding: "1em", margin: "0 auto" }}>
+    <div className="container">
       <Link to="/backoffice/slides/create">Crear Slide</Link>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
@@ -67,7 +68,7 @@ const SlideList = () => {
                 <TableRow key={id}>
                   <TableCell align="center">{name}</TableCell>
                   <TableCell align="center">
-                    <img src={image} alt="" style={{ width: "30%" }} />
+                    <img src={image} alt="" className="imageTable" />
                   </TableCell>
                   <TableCell align="center">{order}</TableCell>
                   <TableCell>
