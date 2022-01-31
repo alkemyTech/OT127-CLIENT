@@ -13,7 +13,7 @@ const toDataURL = (blob) =>
     reader.readAsDataURL(blob);
   });
 
-const API_URL = "http://ongapi.alkemy.org/api/activities/";
+const API_URL = "http://ongapi.alkemy.org/api/activities";
 
 const ActivitiesForm = () => {
   const { id } = useParams();
@@ -22,7 +22,7 @@ const ActivitiesForm = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(API_URL + id).then((res) => {
+      axios.get(`${API_URL}/${id}`).then((res) => {
         setActivity(res.data.data);
       });
     }
@@ -50,7 +50,7 @@ const ActivitiesForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      axios.put(API_URL + id, {
+      axios.put(`${API_URL}/${id}`, {
         name,
         description,
         image,
