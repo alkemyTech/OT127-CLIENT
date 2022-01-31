@@ -24,6 +24,7 @@ import NewsList from "./Components/News/NewsList";
 import BackOffice from "./Components/Backoffice/BackOffice";
 import MembersList from "./Components/Members/MembersList";
 import About from "./Components/About/About";
+import ActivityDetail from "./Components/Activities/ActivityDetail";
 import NewsDetails from "./Components/News/Detail/NewsDetails";
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
             component={() => <NewsDetails title="Titulo recibido por props" />}
           />
           <Route path="/novedades" component={News} />
+          <Route path="/actividades/:id" component={ActivityDetail} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
           <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
