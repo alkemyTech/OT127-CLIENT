@@ -27,12 +27,12 @@ const CategoriesForm = () => {
 	const getCategoryData = async () => {
 		if (id) {
 			try {
-				const {data} = await Axios.get(`${urlApiCategories}/${id}`);
+				const {name, description, image} = await Axios.get(`${urlApiCategories}/${id}`);
 				setFormValues({
 					...formValues,
-					name: data.data.name,
-					description: data.data.description,
-					image: data.data.image,
+					name: name,
+					description: description,
+					image: image,
 				});
 			} catch (error) {
 				// To do
@@ -67,10 +67,10 @@ const CategoriesForm = () => {
 				image,
 			})
 				.then((response) => {
-					// To do
+					return response
 				})
 				.catch((error) => {
-					// to do
+					return error
 				});
 		} else {
 			Axios.post(urlApiCategories, {
@@ -79,10 +79,10 @@ const CategoriesForm = () => {
 				image,
 			})
 				.then((response) => {
-					// To do
+					return response
 				})
 				.catch((error) => {
-					// to do
+					return error
 				});
 		}
 	};
