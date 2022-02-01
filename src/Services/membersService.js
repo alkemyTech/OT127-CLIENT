@@ -7,12 +7,14 @@ const getMembers = async (setMembers) => {
   setMembers(response.data.data);
 };
 
+// Metodo a utilizar cuando este componente MembersForm
 const postMember = async (data) => {
   await axios.post(baseURL, data).catch((err) => err.message);
 };
 
+// Metodo a utilizar cuando este componente MembersForm
 const putMember = async (id, data) => {
-  await axios.post(`${baseURL}/${id}`, data).catch((err) => err.message);
+  await axios.put(`${baseURL}/${id}`, data).catch((err) => err.message);
 };
 
 export { getMembers, postMember, putMember };
