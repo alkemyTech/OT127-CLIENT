@@ -12,55 +12,64 @@ const NewsForm = () => {
     let { id } = useParams(); 
 
     const [newsAPI, setNewsAPI] = useState([]);
+    const [formValues, setFormValues] = useState({name: "", description: "", categorie: ""})  
+    const baseUrl = 'http://ongapi.alkemy.org/api/news';
 
-    const handleSubmit = async(values) => {
+    const handleChange = (e) => {
+        if(e.target.name === 'name'){
+            setFormValues({...formValues, name: e.target.value})
+        } if(e.target.name === 'description'){
+            setFormValues({...formValues, description: e.target.value})
+        } if(e.target.categorie === 'categorie'){
+            setFormValues({...formValues, categorie: e.target.value})
+        }
+    }
+
+    const handleSubmit = async(setFormValues) => {
         
-        const name = values.name;
-        const description = values.description;
-        const NewForm = values.NewForm;
-        const baseUrl = 'http://ongapi.alkemy.org/api/news';
+        const name = setFormValues.name;
+        const description = setFormValues.description;
+        const categorie = setFormValues.categorie;
 
         if (id) {
 			axios.put(`${baseUrl}/${id}`, {
 				id,
 				name,
 				description,
+                categorie,
 			})
             .then((response) => {
-                // To do
-                console.log(response);
-                
+                // To do    
+                return response.config.data;            
             })
             .catch((error) => {
-                // to do
-                console.log(error);
+                return error;
             });
 		} else {
             axios
             .post( 
                 baseUrl, {
-                    name, description, NewForm
+                    name, description, categorie
                 }
             )
             .then(function (response) {
-                //to do
-                console.log(response);
+                // To do
+                return response.config.data;
             })
             .catch(function (error) {
-                //to do
+                return error;
             });
             
         }
     };
 
     useEffect(() => {
-        const URLNews = 'http://ongapi.alkemy.org/api/news';
-        axios.get(URLNews)
+        axios.get(baseUrl)
             .then((response) => {
-                //to do
+                setNewsAPI(response.data.data);
             })
             .catch((error) => {
-                //to do
+                return error;
         });
     }, []);
     
@@ -68,18 +77,18 @@ const NewsForm = () => {
     
     return (
         <Formik
-        initialValues={{ name: "", description: "", NewForm: ""  }}
+        initialValues={formValues}
         validationSchema={Yup.object({
             name: Yup.string()
                 .min(4, "Debe tener por lo menos 4 caracteres.")
                 .required("Este campo es obligatorio"),
             description: Yup.string()
                 .required("Este campo es obligatorio"),
-            NewForm: Yup.string()
+            categorie: Yup.string()
                 .required("Este campo es obligatorio"),
             })}
-            onSubmit={(values) => {
-                handleSubmit(values);
+            onSubmit={(formValues) => {
+                handleSubmit(formValues);
             }}    
         >
             <Form>
@@ -87,12 +96,12 @@ const NewsForm = () => {
                 <Field name="name" type="titulo" />
                 <ErrorMessage name="name" />
 
-                <label htmlFor="description">Description</label> 
+                <label htmlFor="description">Contenido</label> 
                 <Field name="description" type="description" />
                 <ErrorMessage name="description"/>
 
-                <label htmlFor="NewForm">New Form</label> 
-                <Field component="select" as='select' name="NewForm" type="NewForm">
+                <label htmlFor="categorie">Categorias</label> 
+                <Field component="select" as='select' name="categorie" type="categorie">
                     {newsAPI.map(element => {
                         return (
                             <option key={element.id} value={element.id}>
