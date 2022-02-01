@@ -124,7 +124,7 @@ const SlidesForm = () => {
   });
 
   return (
-    <>
+    <div className="body">
       {loading ? (
         <p>LOADING...</p>
       ) : (
@@ -147,18 +147,25 @@ const SlidesForm = () => {
           }}
         >
           {({ setFieldValue }) => (
-            <Form className="form-container">
-              <label htmlFor="name">Titulo</label>
+            <Form className="body__form">
+              <label className="body__form--label" htmlFor="name">
+                Titulo
+              </label>
               <Field
                 id="name"
-                className="input-field"
+                className="body__form--input"
                 type="text"
                 name="name"
                 placeholder="Slide Title"
               />
 
-              <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
-              <label htmlFor="description">Descripcion</label>
+              <ErrorMessage
+                name="name"
+                render={(msg) => <div className="body__form--error">{msg}</div>}
+              />
+              <label className="body__form--label" htmlFor="description">
+                Descripcion
+              </label>
               <Field name="description">
                 {({ field }) => (
                   <>
@@ -178,12 +185,14 @@ const SlidesForm = () => {
 
               <ErrorMessage
                 name="description"
-                render={(msg) => <div>{msg}</div>}
+                render={(msg) => <div className="body__form--error">{msg}</div>}
               />
-              <label htmlFor="order">Numero de orden</label>
+              <label className="body__form--label" htmlFor="order">
+                Numero de orden
+              </label>
               <Field
                 id="order"
-                className="input-field"
+                className="body__form--input"
                 type="number"
                 name="order"
                 onChange={(e) => {
@@ -191,26 +200,33 @@ const SlidesForm = () => {
                 }}
                 placeholder="ingrese un numero"
               />
-              <ErrorMessage name="order" render={(msg) => <div>{msg}</div>} />
-              <label htmlFor="order">Cargar Imagen</label>
+              <ErrorMessage
+                name="order"
+                render={(msg) => <div className="body__form--error">{msg}</div>}
+              />
+              <label className="body__form--label" htmlFor="order">
+                Cargar Imagen
+              </label>
               <input
                 ref={inputFileRef}
-                className="input-field"
                 type="file"
                 onChange={(e) => {
                   setFieldValue("image", e.currentTarget.files[0]);
                 }}
                 accept=".jpg, .png"
               />
-              <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
-              <button type="submit" className="submit-btn">
+              <ErrorMessage
+                name="image"
+                render={(msg) => <div className="body__form--error">{msg}</div>}
+              />
+              <button type="submit" className="body__form--submit">
                 Enviar
               </button>
             </Form>
           )}
         </Formik>
       )}
-    </>
+    </div>
   );
 };
 
