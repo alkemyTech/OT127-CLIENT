@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,49 +8,37 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./SlideList.css";
 
-const slides = {
-  data: [
-    {
-      id: 1,
-      name: "Ignacio",
-      image: "http://ongapi.alkemy.org/storage/j8Uo4skOTP.jpeg",
-      order: 5454,
-    },
-    {
-      id: 2,
-      name: "Roman",
-      image: "http://ongapi.alkemy.org/storage/rEZJhWbxCx.jpeg",
-      order: 8989,
-    },
-    {
-      id: 3,
-      name: "Título de prueba",
-      image: "http://ongapi.alkemy.org/storage/tRMcq6w2JV.jpeg",
-      order: 1,
-    },
-    {
-      id: 4,
-      name: "myslide",
-      image: "http://ongapi.alkemy.org/storage/ae5LYQeuId.png",
-      order: 4555,
-    },
-  ],
-};
-
-const getSlidesData = new Promise((res) => res(slides));
-
 const SlideList = () => {
-  const [slides, setSlides] = useState([]);
+  const slidesList = {
+    data: [
+      {
+        id: 1,
+        name: "Ignacio",
+        image: "http://ongapi.alkemy.org/storage/j8Uo4skOTP.jpeg",
+        order: 5454,
+      },
+      {
+        id: 2,
+        name: "Roman",
+        image: "http://ongapi.alkemy.org/storage/rEZJhWbxCx.jpeg",
+        order: 8989,
+      },
+      {
+        id: 3,
+        name: "Título de prueba",
+        image: "http://ongapi.alkemy.org/storage/tRMcq6w2JV.jpeg",
+        order: 1,
+      },
+      {
+        id: 4,
+        name: "myslide",
+        image: "http://ongapi.alkemy.org/storage/ae5LYQeuId.png",
+        order: 4555,
+      },
+    ],
+  };
 
-  getSlidesData
-    .then((res) => {
-      setSlides(res.data);
-    })
-    .catch((err) => {
-      alert(err);
-    });
-
-  const rows = slides;
+  const rows = slidesList;
 
   return (
     <div className="list-container">
