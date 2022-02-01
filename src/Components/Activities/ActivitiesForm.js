@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
+import '../Activities/Style.scss'
+
+
 
 const ActivitiesForm = () => {
     const [initialValues, setInitialValues] = useState({
         name: '',
         description: '',
-        campo: ''
+        area: ''
     });
 
     const handleChange = (e) => {
@@ -13,14 +16,15 @@ const ActivitiesForm = () => {
             setInitialValues({...initialValues, name: e.target.value})
         } if(e.target.name === 'description'){
             setInitialValues({...initialValues, description: e.target.value})
-        } if (e.target.campo === 'campo')(
-            setInitialValues({...initialValues, campo: e.target.value})
+        } if (e.target.area === 'area')(
+            setInitialValues({...initialValues, area: e.target.value})
         )
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(initialValues);
+        // To do
+        return initialValues;
     }
 
     //renderHTML
@@ -36,10 +40,10 @@ const ActivitiesForm = () => {
             <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Activity Title"></input>
             <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some activity description"></input>
             
-            <textarea type="text" name="campo"  defaultValue={ initialValues.campo } onChange={handleChange} ></textarea>
+            <textarea type="text" name="area"  defaultValue={ initialValues.area } onChange={handleChange} ></textarea>
             <div 
-                style={{ border: '1px solid', padding: '0.5rem' }}
-                dangerouslySetInnerHTML={{ __html: formattedMessage }} 
+            className='textHTML'
+            dangerouslySetInnerHTML={{ __html: formattedMessage }} 
             />
 
 
