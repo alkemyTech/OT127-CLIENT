@@ -80,76 +80,114 @@ const UserForm = () => {
   }, []); //eslint-disable-line
 
   return (
-    <Formik
-      enableReinitialize={true}
-      initialValues={initialValues}
-      validationSchema={Yup.object({
-        name: Yup.string()
-          .min(4, "El nombre debe tener 4 letras como mínimo")
-          .required("Campo obligatorio"),
-        email: Yup.string()
-          .email("Formato de email inválido")
-          .required("Campo obligatorio"),
-        role: Yup.number().required("Campo obligatorio"),
-        password: Yup.string()
-          .min(6, "La contraseña debe tener 6 caracteres como mínimo.")
-          .matches(
-            /^(?=.*[a-z])(?=.*[0-9])(?=.*[\W])/,
-            "Formato de contraseña inválida. Debe contener al menos: una letra minúscula, un número y un símbolo."
-          )
-          .required("Ingresá una contraseña"),
-      })}
-      onSubmit={(values) => {
-        handleSubmit(values);
-      }}
-    >
-      {({ setFieldValue }) => (
-        <Form>
-          <div>
-            <label htmlFor="name">Nombre</label>
-            <Field name="name" type="text" />
-            <ErrorMessage name="name" />
-          </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <Field name="email" type="email" />
-            <ErrorMessage name="email" />
-          </div>
-          <div>
-            <label htmlFor="name">Rol</label>
-            <Field name="role" as="select">
-              {roles.map((item) => {
-                return (
-                  <option value={item.id} key={item.id}>
-                    {item.name}
-                  </option>
-                );
-              })}
-            </Field>
-            <ErrorMessage name="role" />
-          </div>
-          <div>
-            <label htmlFor="password">Contraseña</label>
-            <Field name="password" type="password"></Field>
-            <ErrorMessage name="password" />
-          </div>
-          <div>
-            <input
-              type="file"
-              name="profilePhoto"
-              accept=".png, .jpg"
-              onChange={(e) => {
-                handleChange(e, setFieldValue);
-              }}
-            />
-            <ErrorMessage name="profilePhoto" />
-          </div>
-          <button className="button-sm" type="submit">
-            {id ? "Guardar" : "Crear"}
-          </button>
-        </Form>
-      )}
-    </Formik>
+    <div className="body">
+      <Formik
+        enableReinitialize={true}
+        initialValues={initialValues}
+        validationSchema={Yup.object({
+          name: Yup.string()
+            .min(4, "El nombre debe tener 4 letras como mínimo")
+            .required("Campo obligatorio"),
+          email: Yup.string()
+            .email("Formato de email inválido")
+            .required("Campo obligatorio"),
+          role: Yup.number().required("Campo obligatorio"),
+          password: Yup.string()
+            .min(6, "La contraseña debe tener 6 caracteres como mínimo.")
+            .matches(
+              /^(?=.*[a-z])(?=.*[0-9])(?=.*[\W])/,
+              "Formato de contraseña inválida. Debe contener al menos: una letra minúscula, un número y un símbolo."
+            )
+            .required("Ingresá una contraseña"),
+        })}
+        onSubmit={(values) => {
+          handleSubmit(values);
+        }}
+      >
+        {({ setFieldValue }) => (
+          <Form className="body__form">
+            <div className="body__form--subcontainer">
+              <label htmlFor="name" className="body__form--label">
+                Nombre
+              </label>
+              <Field className="body__form--input" name="name" type="text" />
+              <ErrorMessage
+                name="name"
+                render={(msg) => <div className="body__form--error">{msg}</div>}
+                className="body__form--error"
+              />
+            </div>
+            <div className="body__form--subcontainer">
+              <label htmlFor="email" className="body__form--label">
+                Email
+              </label>
+              <Field className="body__form--input" name="email" type="email" />
+              <ErrorMessage
+                name="email"
+                render={(msg) => <div className="body__form--error">{msg}</div>}
+                className="body__form--error"
+              />
+            </div>
+            <div className="body__form--subcontainer">
+              <label htmlFor="name" className="body__form--label">
+                Rol
+              </label>
+              <Field className="body__form--input" name="role" as="select">
+                {roles.map((item) => {
+                  return (
+                    <option
+                      className="body__form--option"
+                      value={item.id}
+                      key={item.id}
+                    >
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </Field>
+              <ErrorMessage
+                name="role"
+                render={(msg) => <div className="body__form--error">{msg}</div>}
+                className="body__form--error"
+              />
+            </div>
+            <div className="body__form--subcontainer">
+              <label htmlFor="password" className="body__form--label">
+                Contraseña
+              </label>
+              <Field
+                className="body__form--input"
+                name="password"
+                type="password"
+              ></Field>
+              <ErrorMessage
+                name="password"
+                render={(msg) => <div className="body__form--error">{msg}</div>}
+                className="body__form--error"
+              />
+            </div>
+            <div className="body__form--subcontainer">
+              <input
+                type="file"
+                name="profilePhoto"
+                accept=".png, .jpg"
+                onChange={(e) => {
+                  handleChange(e, setFieldValue);
+                }}
+              />
+              <ErrorMessage
+                name="profilePhoto"
+                render={(msg) => <div className="body__form--error">{msg}</div>}
+                className="body__form--error"
+              />
+            </div>
+            <button className="body__form--submit" type="submit">
+              {id ? "Guardar" : "Crear"}
+            </button>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 
