@@ -1,16 +1,16 @@
 import axios from "axios";
 
 const config = {
-	headers: {
-		Group: "127", 
-	},
+  headers: {
+    Group: "127",
+  },
 };
 
 export const Get = () => {
-	axios
-		.get("https://jsonplaceholder.typicode.com/users", config)
-		.then((res) => console.log(res))
-		.catch((err) => console.log(err));
+  axios
+    .get("https://jsonplaceholder.typicode.com/users", config)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 };
 
 export const getSecureHeader = () => {
@@ -20,17 +20,31 @@ export const getSecureHeader = () => {
     : { error: "No token found" };
 };
 
-export const Put = () => {
-	axios
-		.put(url, data, config)
-		.then((res) => {
-			return res
-		})
-		.catch((err) => {
-			return err
-		});
-}
+export const privateServicePatch = (route, id, data) => {
+  let url = id ? `${route}/${id}` : route;
+  let token = getSecureHeader();
+  const { Authorization, error } = token;
 
+  if (Authorization) {
+    axios.patch(url, data, {
+      header: {
+        ...config.headers,
+        Authorization,
+      },
+    }); // TODO: Controlar errores
+  }
+};
+
+export const Put = (url, data) => {
+  axios
+    .put(url, data, config)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
 
 export const getPrivate = async (route, id = null) => {
   try {
@@ -53,5 +67,3 @@ export const getPrivate = async (route, id = null) => {
     return error;
   }
 };
-
-
