@@ -5,52 +5,53 @@ import * as Yup from "yup";
 import axios from 'axios';
 
 const NewsForm = () => {
+
+    const [formValues, setFormValues] = useState({name: "", description: "", facebookUrl: "", linkedinUrl: "", file: ""});
     
-    const handleSubmit = async(values) => {
-
-      console.log (values);
+    const baseUrl = 'http://ongapi.alkemy.org/api/members';
+    
+    const handleSubmit = async(setFormValues) => {
        
-        const name = values.name;
-        const description = values.description;
-        const facebook = values.facebook;
-        const linkedin = values.linkedin;
-        const img = values.file;
-
-        const baseUrl = 'http://ongapi.alkemy.org/api/members';
+        const name = setFormValues.name;
+        const description = setFormValues.description;
+        const facebookUrl = setFormValues.facebookUrl;
+        const linkedinUrl = setFormValues.linkedinUrl;
+        const image = setFormValues.file;
 
         axios
         .post( 
             baseUrl, {
-                name, description, facebook, linkedin, img
+                name, description, facebookUrl, linkedinUrl, image
             }
          )
         .then(function (response) {
-            console.log(response);
+            // To do
+            return response.config.data;
         })
         .catch(function (error) {
-            console.log(error);
+            return error;
         });
     };
 
     return (
         <Formik
-            initialValues={{ name: "", description: "", facebook: "", linkedin: "", file: ""}}
+            initialValues={formValues}
             validationSchema={Yup.object({
             name: Yup.string()
                 .min(4, "Debe tener por lo menos 4 caracteres.")
                 .required("Este campo es obligatorio"),
             description: Yup.string()
                 .required("Este campo es obligatorio"),
-            facebook: Yup.string()
+            facebookUrl: Yup.string()
                 .required("Este campo es obligatorio")
                 .email('No coloco un formato valido'),
-            linkedin: Yup.string()
+            linkedinUrl: Yup.string()
                 .required("Este campo es obligatorio")
                 .email('No coloco un formato valido'),
             })}
 
-            onSubmit={(values) => {
-                handleSubmit(values);
+            onSubmit={(setFormValues) => {
+                handleSubmit(setFormValues);
             }}    
         >
             <Form>
@@ -62,13 +63,13 @@ const NewsForm = () => {
                 <Field name="description" type="description" />
                 <ErrorMessage name="description"/>
 
-                <label htmlFor="facebook">Facebook</label> 
-                <Field name="facebook" type="facebook" />
-                <ErrorMessage name="facebook"/>
+                <label htmlFor="facebookUrl">Facebook</label> 
+                <Field name="facebookUrl" type="facebookUrl" />
+                <ErrorMessage name="facebookUrl"/>
 
-                <label htmlFor="linkedin">LinkedIn</label> 
-                <Field name="linkedin" type="linkedin" />
-                <ErrorMessage name="linkedin"/>
+                <label htmlFor="linkedinUrl">LinkedIn</label> 
+                <Field name="linkedinUrl" type="linkedinUrl" />
+                <ErrorMessage name="linkedinUrl"/>
 
                 <input id="file" name="file" type="file"  />
                 
