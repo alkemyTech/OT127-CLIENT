@@ -14,7 +14,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="body">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({
@@ -33,16 +33,16 @@ const LoginForm = () => {
           handleSubmit(values);
         }}
       >
-        <Form>
-          <label htmlFor="email">Email</label>
-          <Field name="email" type="email" />
-          <ErrorMessage name="email" />
+        <Form className="body__form">
+          <label htmlFor="email" className="body__form--label">Email</label>
+          <Field name="email" type="email" className="body__form--input"/>
+          <ErrorMessage name="email" render={(msg) => <div className="body__form--error">{msg}</div>}/>
 
-          <label htmlFor="password">Contraseña</label>
-          <Field name="password" type="password" />
-          <ErrorMessage name="password" />
+          <label htmlFor="password" className="body__form--label">Contraseña</label>
+          <Field name="password" type="password" className="body__form--input"/>
+          <ErrorMessage name="password" render={(msg) => <div className="body__form--error">{msg}</div>}/>
 
-          <button type="submit">Entrar</button>
+          <button type="submit" className="body__form--submit">Entrar</button>
         </Form>
       </Formik>
     </div>

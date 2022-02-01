@@ -77,7 +77,7 @@ const UserForm = () => {
     if (id) {
       getUser();
     }
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <Formik

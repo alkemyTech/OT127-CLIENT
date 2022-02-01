@@ -12,7 +12,7 @@ const ProjectsForm = () => {
 
   useEffect(() => {
     getProjectByID(id);
-  }, []);
+  }, []); //eslint-disable-line
 
   function getProjectByID(id) {
     if (id) {

@@ -14,7 +14,7 @@ const NewsDetails = ({ title }) => {
     }
     useEffect(() => {
         getNewsData()
-    }, []);
+    }, []); //eslint-disable-line
 
 
     return (
