@@ -43,7 +43,7 @@ const HomeForm = () => {
         }
     }
 
-    const updateValues = (values) => {
+    const compareValues = (values) => {
 
         //Comparo los slides originales con los que vienen del formulario
         slidesData.forEach((slide) => {
@@ -108,7 +108,7 @@ const HomeForm = () => {
                 })
             }
             onSubmit={(values) => {
-                updateValues(values)
+                compareValues(values)
             }}
         >
             {({
