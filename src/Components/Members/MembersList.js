@@ -18,8 +18,13 @@ import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 const MembersList = () => {
   const [membersList, setMembersList] = useState([]);
 
+  const getMembersList = async () => {
+    const res = await getMembers();
+    setMembersList(res.data.data);
+  };
+
   useEffect(() => {
-    getMembers(setMembersList);
+    getMembersList();
   }, []);
 
   const handleEdit = (id) => {

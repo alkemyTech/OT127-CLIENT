@@ -2,9 +2,9 @@ import axios from "axios";
 
 const baseURL = "http://ongapi.alkemy.org/api/members";
 
-const getMembers = async (setMembers) => {
+const getMembers = async () => {
   const response = await axios.get(baseURL).catch((error) => error.message);
-  setMembers(response.data.data);
+  return response;
 };
 
 // Metodo a utilizar cuando este componente MembersForm
