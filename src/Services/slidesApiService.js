@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+const url = 'http://ongapi.alkemy.org/api/slides'
+
 const toDataURL = (blob) =>
     // Para convertir los links de imagenes a base64
     new Promise((resolve, reject) => {
@@ -11,7 +13,7 @@ const toDataURL = (blob) =>
 
 export const getSlidesData = async () => {
     try {
-        const response = await axios.get('http://ongapi.alkemy.org/api/slides')
+        const response = await axios.get(url)
         return response
     } catch (error) {
         return error
@@ -20,7 +22,7 @@ export const getSlidesData = async () => {
 
 export const getSlidesDataById = async (id) => {
     try {
-        const response = await axios.get(`http://ongapi.alkemy.org/api/slides/${id}`)
+        const response = await axios.get(`${url}/${id}`)
         return response
     } catch (error) {
         return error
@@ -34,7 +36,7 @@ export const createNewSlide = async (data) => {
         let encoded = await toDataURL(imgBlob.data)
         // Guardamos el link ya transformado a base 64 y hacemos la peticion 
         data.image = encoded
-        const response = await axios.post('http://ongapi.alkemy.org/api/slides', data)
+        const response = await axios.post(url, data)
         return response
     } catch (error) {
         return error
@@ -48,7 +50,7 @@ export const updateSlide = async (data, id) => {
         let encoded = await toDataURL(imgBlob.data)
         // Guardamos el link ya transformado a base 64 y hacemos la peticion 
         data.image = encoded
-        const response = await axios.put(`http://ongapi.alkemy.org/api/slides/${id}`, data)
+        const response = await axios.put(`${url}/${id}`, data)
         return response
     } catch (error) {
         return error
@@ -57,7 +59,7 @@ export const updateSlide = async (data, id) => {
 
 export const deleteSlide = async (id) => {
     try {
-        const response = await axios.delete(`http://ongapi.alkemy.org/api/slides/${id}`)
+        const response = await axios.delete(`${url}/${id}`)
         return response
     } catch (error) {
         return error
