@@ -53,7 +53,7 @@ function App() {
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
           <Route path="/backoffice/users" component={UsersList} />
           <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
-          <Route path="/backoffice/organization" component={OrganizationData} />
+          {/* <Route path="/backoffice/organization" component={OrganizationData} /> */}
           <Route
             path="/backoffice/organization/edit"
             component={OrganizationForm}
