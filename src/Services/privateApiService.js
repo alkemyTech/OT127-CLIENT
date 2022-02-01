@@ -20,17 +20,31 @@ export const getSecureHeader = () => {
     : { error: "No token found" };
 };
 
-export const Put = () => {
+export const privateServicePatch = (route, id, data) => {
+  let url = id ? `${route}/${id}` : route;
+  let token = getSecureHeader();
+  const { Authorization, error } = token;
+
+  if (Authorization) {
+    axios.patch(url, data, {
+      header: {
+        ...config.headers,
+        Authorization,
+      },
+    }); // TODO: Controlar errores
+  }
+};
+
+export const Put = (url, data) => {
   axios
     .put(url, data, config)
     .then((res) => {
-      return res
+      return res;
     })
     .catch((err) => {
-      return err
+      return err;
     });
-}
-
+};
 
 export const getPrivate = async (route, id = null) => {
   try {
@@ -53,5 +67,3 @@ export const getPrivate = async (route, id = null) => {
     return error;
   }
 };
-
-
