@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../FormStyles.css";
 
+// Todo: extender servicios http members cuando el componente este listo
+
 const MembersForm = () => {
   const [initialValues, setInitialValues] = useState({
     name: "",
@@ -22,29 +24,27 @@ const MembersForm = () => {
   };
 
   return (
-    <div className="body">
-      <form className="body__form" onSubmit={handleSubmit}>
-        <input
-          className="body__form--input"
-          type="text"
-          name="name"
-          value={initialValues.name}
-          onChange={handleChange}
-          placeholder="Name"
-        ></input>
-        <input
-          className="body__form--input"
-          type="text"
-          name="description"
-          value={initialValues.description}
-          onChange={handleChange}
-          placeholder="Write some description"
-        ></input>
-        <button className="body__form--submit" type="submit">
-          Send
-        </button>
-      </form>
-    </div>
+    <form className="form-container" onSubmit={handleSubmit}>
+      <input
+        className="input-field"
+        type="text"
+        name="name"
+        value={initialValues.name}
+        onChange={handleChange}
+        placeholder="Name"
+      ></input>
+      <input
+        className="input-field"
+        type="text"
+        name="description"
+        value={initialValues.description}
+        onChange={handleChange}
+        placeholder="Write some description"
+      ></input>
+      <button className="submit-btn" type="submit">
+        Send
+      </button>
+    </form>
   );
 };
 
