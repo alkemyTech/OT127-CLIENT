@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./sass/main.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
@@ -17,7 +17,7 @@ import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from "./Donations/Donacion";
 import Gracias from "./Donations/Gracias";
 import ContactForm from "./Components/Contact/ContactForm";
-import Home from "./Pages/Home";
+import Home from "./Pages/Home/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 import NewsList from "./Components/News/NewsList";
