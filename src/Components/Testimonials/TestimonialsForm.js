@@ -8,32 +8,42 @@ import { useFormik } from "formik"
 import "../FormStyles.css"
 import "./styles.scss"
 
+
+
+
+
 const TestimonialForm = () => {
-	const { id } = useParams()
-	const url = "http://ongapi.alkemy.org/api/testimonials"
-	const [ name, setName ] = useState("")
-	const [ description, setDescription ] = useState("")
-	const [ imageInput, setImageInput ] = useState("")
+	// const { id } = useParams()
+	const id = 78
+
+	const url = "http://ongapi.alkemy.org/api/testimonials";
+
+	const [ formValues, setFormValues ] = useState({
+		name: "",
+		description: "",
+		image: "",
+	})
+
+	const handleChange = (e, property, editor) => {
+		setFormValues({
+			...formValues,
+			[ property ]: e.target?.value || editor.getData(),
+		})
+	}
 
 	const image = (e) => {
 		const file = e.target.files[ 0 ]
 		const reader = new FileReader()
-		reader.readAsDataURL(file)
+		reader.readAsDataURL(file);
 		reader.onloadend = () => {
-			setImageInput(reader.result)
+			setFormValues({
+				...formValues,
+				image: reader.result,
+			})
 		}
 	}
 
-	const Get = async (baseUrl, id) => {
-		const url = id ? `${baseUrl}/${id}` : `${baseUrl}`
-		try {
-			const res = await axios.get(url)
-			return res.data
-		} catch (error) {
-			return error
-		}
-	}
-
+	
 	const getImagePreview = async (baseUrl) => {
 		const data = await fetch(baseUrl)
 		const blob = await data.blob()
@@ -46,44 +56,55 @@ const TestimonialForm = () => {
 			}
 		})
 	}
+	
+	const Get = async (baseUrl, id) => {
+		const url = `${baseUrl}/${id}`
+		try {
+			const res = await axios.get(url)
+			return res.data
+		} catch (error) {
+			return error
+		}
+	}
 
 
 	const getDataTestimonials = async () => {
 		if (id) {
 			try {
+				// pq pisa la data del formvalues y la deja en " "
+				// pero funciona repitiendo codigo
 				await Get(url, id).then((res) => {
-					const { data } = res
-					getImagePreview(data.image).then((imagen64) => {
-						setImageInput(imagen64)
+					const { data } = res;
+					setFormValues({
+						...formValues,
+						name: data.name,
+						description: data.description,
 					})
-					setName(data.name)
-					setDescription(data.description)
+					getImagePreview(data.image).then((imagen64) => {
+						setFormValues({
+							name: data.name,
+							image: imagen64,
+							description: data.description,
+						})
+					})
 				})
 			} catch (error) {
-				// alert("Testimonio Inexistente")
+				alert("Testimonio Inexistente")
 			}
 		}
 	}
 
-	const createTestimonial = (values) => {
+	const createTestimonial = (formValues) => {
 		axios
-			.post(url, {
-				name: values.name,
-				description: values.description,
-				image: imageInput,
-			})
-			.then((res) => alert(res))
+			.post(url, formValues)
+			.then(({ status }) => alert(status))
 			.catch((err) => alert(err))
 	}
 
-	const updateTestimonial = (values) => {
+	const updateTestimonial = (formValues) => {
 		axios
-			.put(`${url}/${id}`, {
-				name: values.name,
-				description: values.description,
-				image: imageInput,
-			})
-			.then(({ data }) => alert(data))
+			.put(`${url}/${id}`, formValues)
+			.then(({ status }) => alert(status))
 			.catch((err) => alert(err))
 	}
 
@@ -92,38 +113,38 @@ const TestimonialForm = () => {
 		// eslint-disable-next-line
 	}, [])
 
+	const validate = (values) => {
+		const errors = {}
+		if (!values.name) {
+			errors.name = "El campo nombre no puede estar vacio"
+		} else if (values.name.length < 4) {
+			errors.name = "El nombre debe tener al menos 4 caracteres"
+		}
+		if (!values.description) {
+			errors.description = "El campo descripcion no puede estar vacio"
+		}
+		if (!values.image) {
+			errors.image = "El campo imagen no puede estar vacio"
+		}
+		return errors
+	}
+	const onSubmit = (values) => {
+		if (!formik.isValid) {
+			return
+		} else if (id) {
+			updateTestimonial(values)
+		} else {
+			createTestimonial(values)
+		}
+	}
+
 	const formik = useFormik({
-		initialValues: {
-			name: "",
-			description: "",
-			image: "",
-		},
-		validate: (values) => {
-			const errors = {}
-			if (!values.name) {
-				errors.name = "El campo nombre no puede estar vacio"
-			} else if (values.name.length < 4) {
-				errors.name = "El nombre debe tener al menos 4 caracteres"
-			}
-			if (!values.description) {
-				errors.description = "El campo descripcion no puede estar vacio"
-			}
-			if (!values.image) {
-				errors.image = "El campo imagen no puede estar vacio"
-			}
-			return errors
-		},
-		onSubmit: (values) => {
-			if (!formik.isValid) {
-				return
-			} else if (id) {
-				updateTestimonial(values)
-			} else {
-				createTestimonial(values)
-			}
-		},
+		initialValues: formValues,
+		validate,
+		onSubmit,
 	})
 
+	console.log(formValues, "values")
 	return (
 		<form className="form" onSubmit={formik.handleSubmit}>
 			<h2>Testimonios</h2>
@@ -132,8 +153,8 @@ const TestimonialForm = () => {
 				className="input-field"
 				type="text"
 				name="name"
-				defaultValue={name || formik.values.name || ""}
-				onChange={formik.handleChange}
+				defaultValue={formValues.name || formik.values.name || ""}
+				onChange={(e) => formik.handleChange && handleChange(e, "name")}
 				onBlur={formik.handleBlur}
 			></input>
 			{
@@ -146,22 +167,22 @@ const TestimonialForm = () => {
 				type="file"
 				name="image"
 				onChange={(e) => {
-					formik.handleChange(e)
+					handleChange(e, "image")
 					image(e)
 				}}
 				accept="image/png,image/jpeg"
 			/>
 			{
-				(imageInput)
-					? <img src={imageInput} className="form__image-preview" alt="ImagePreview" />
+				formValues.image
+					? <img src={formValues.image} className="form__image-preview" alt="ImagePreview" />
 					: null
 			}
 			<label className="form__label">Descripcion:</label>
 			<CKEditor
 				editor={ClassicEditor}
-				data={description}
+				data={formValues.description}
 				onChange={(event, editor) => {
-					formik.setFieldValue("description", editor.getDataTestimonials())
+					handleChange("", "description", editor)
 				}}
 			/>
 			<button className="submit-btn" type="submit">
