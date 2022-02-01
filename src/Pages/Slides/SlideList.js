@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,7 +10,7 @@ import Paper from "@mui/material/Paper";
 import "./SlideList.css";
 
 const SlideList = () => {
-  const slidesList = {
+  const slideList = {
     data: [
       {
         id: 1,
@@ -37,8 +38,17 @@ const SlideList = () => {
       },
     ],
   };
+  const [slides, setSlides] = useState([]);
 
-  const rows = slidesList;
+  const getSlidesData = () => {
+    setSlides(slideList.data);
+  };
+
+  useEffect(() => {
+    getSlidesData();
+  }, []);
+
+  const rows = slides;
 
   return (
     <div className="list-container">
