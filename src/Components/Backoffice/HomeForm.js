@@ -64,30 +64,30 @@ const HomeForm = () => {
         }
     }
 
+    const getDataToEdit = async () => {
+        try {
+            // Traemos la toda la informacion que podria ser editada
+            const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides')
+            const welcomeResponse = await axios.get('http://ongapi.alkemy.org/api/organization')
+            const slides = slidesResponse.data.data
+            const welcomeText = welcomeResponse.data.data
+            // Guardamos la informacion original aparte, para luego hacer una comparacion
+            // con la informacion que venga del formulario y ver que se modifico
+            setSlidesData(slides)
+            setWelcomeText(welcomeText)
+
+            // guardamos los valores iniciales que va a usar formik
+            setInitialValues({
+                welcome: welcomeText.welcome_text,
+                slides: slides
+            })
+
+        } catch (error) {
+            // TO DO
+        }
+    }
 
     useEffect(() => {
-        const getDataToEdit = async () => {
-            try {
-                // Traemos la toda la informacion que podria ser editada
-                const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides')
-                const welcomeResponse = await axios.get('http://ongapi.alkemy.org/api/organization')
-                const slides = slidesResponse.data.data
-                const welcomeText = welcomeResponse.data.data
-                // Guardamos la informacion original aparte, para luego hacer una comparacion
-                // con la informacion que venga del formulario y ver que se modifico
-                setSlidesData(slides)
-                setWelcomeText(welcomeText)
-
-                // guardamos los valores iniciales que va a usar formik
-                setInitialValues({
-                    welcome: welcomeText.welcome_text,
-                    slides: slides
-                })
-
-            } catch (error) {
-                // TO DO
-            }
-        }
         getDataToEdit()
     }, [])
 
