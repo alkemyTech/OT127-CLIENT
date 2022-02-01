@@ -22,13 +22,11 @@ const MembersList = () => {
     getMembers(setMembersList);
   }, []);
 
-  console.log(membersList);
-
-  const handleEdit = {
+  const handleEdit = (id) => {
     // Logica a desarrollar
   };
 
-  const handleDelete = {
+  const handleDelete = (id) => {
     // Logica a desarrollar
   };
 
@@ -77,10 +75,10 @@ const MembersList = () => {
                   <img src={member.image} alt={member.name} width="50px" />
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "25%" }}>
-                  <Button color="success" onClick={() => handleEdit}>
+                  <Button color="success" onClick={() => handleEdit(member.id)}>
                     Editar
                   </Button>{" "}
-                  <Button color="error" onClick={() => handleDelete}>
+                  <Button color="error" onClick={() => handleDelete(member.id)}>
                     Eliminar
                   </Button>
                 </StyledTableCell>
