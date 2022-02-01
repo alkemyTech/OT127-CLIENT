@@ -51,7 +51,7 @@ const CategoriesForm = () => {
 		const {name, description, image} = formValues;
 
 		// Validaciones
-		if ([name, description, image].includes("")) {
+		if (name === "" && description === "" && image === "") {
 			setFormValues({...formValues, message: true});
 			setTimeout(() => {
 				setFormValues({...formValues, message: false});
