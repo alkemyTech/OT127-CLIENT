@@ -71,15 +71,15 @@ const SliderHome = () => {
         })
     }, [])
 
-    useEffect(() => {
-        const getSlides = async () => {
-            try {
-                const response = await getSlidesData()
-                setSliderData(response.data.data)
-            } catch (error) {
-                console.error(error)
-            }
+    const getSlides = async () => {
+        try {
+            const response = await getSlidesData()
+            setSliderData(response.data.data)
+        } catch (error) {
+            console.error(error)
         }
+    }
+    useEffect(() => {
         getSlides()
     }, [])
 
