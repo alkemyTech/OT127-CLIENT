@@ -51,7 +51,7 @@ const CategoriesForm = () => {
 		const {name, description, image} = formValues;
 
 		// Validaciones
-		if (name === "" && description === "" && image === "") {
+		if (name === "" || description === "" || image === "") {
 			setFormValues({...formValues, message: true});
 			setTimeout(() => {
 				setFormValues({...formValues, message: false});
@@ -68,28 +68,9 @@ const CategoriesForm = () => {
 				image,
 			})
 				.then((response) => {
-					if (response.data.error === "No base64 string provided") {
-						setFormValues({...formValues, message: true});
-						setTimeout(() => {
-							setFormValues({...formValues, message: false});
-						}, 1500);
-						return response;
-					} else {
-						setFormValues({
-							name: "",
-							description: "",
-							message: "",
-							image: "",
-						});
-					}
+					return response;
 				})
 				.catch((error) => {
-					if (error) {
-						setFormValues({...formValues, message: true});
-					}
-					setTimeout(() => {
-						setFormValues({...formValues, message: false});
-					}, 1500);
 					return error;
 				});
 		} else {
@@ -99,23 +80,15 @@ const CategoriesForm = () => {
 				image,
 			})
 				.then((response) => {
-					if (response.data.message === "Category saved successfully") {
-						setFormValues({
-							name: "",
-							description: "",
-							message: "",
-							image: "",
-						});
-					}
+					setFormValues({
+						name: "",
+						description: "",
+						message: "",
+						image: "",
+					});
 					return response;
 				})
 				.catch((error) => {
-					if (error) {
-						setFormValues({...formValues, message: true});
-					}
-					setTimeout(() => {
-						setFormValues({...formValues, message: false});
-					}, 1500);
 					return error;
 				});
 		}
@@ -128,7 +101,7 @@ const CategoriesForm = () => {
 					<Error>
 						{id
 							? "Debe llenar todos los campos para poder editar"
-							: "Todos los ca,pos son obligatorios"}
+							: "Todos los campos son obligatorios"}
 					</Error>
 				) : null}
 				<div>
