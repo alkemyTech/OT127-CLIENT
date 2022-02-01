@@ -58,8 +58,8 @@ export const updateSlide = async (data, id) => {
 export const deleteSlide = async (id) => {
     try {
         const response = await axios.delete(`http://ongapi.alkemy.org/api/slides/${id}`)
-        console.log(response)
+        return response
     } catch (error) {
-        console.log(error)
+        return error
     }
 } 
