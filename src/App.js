@@ -17,7 +17,7 @@ import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from "./Donations/Donacion";
 import Gracias from "./Donations/Gracias";
 import ContactForm from "./Components/Contact/ContactForm";
-import Home from "./Pages/Home";
+import Home from "./Pages/Home/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
 import NewsList from "./Components/News/NewsList";
