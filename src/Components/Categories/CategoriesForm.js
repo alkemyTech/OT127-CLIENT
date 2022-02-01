@@ -27,7 +27,8 @@ const CategoriesForm = () => {
 	const getCategoryData = async () => {
 		if (id) {
 			try {
-				const {name, description, image} = await Axios.get(`${urlApiCategories}/${id}`);
+				const {data} = await Axios.get(`${urlApiCategories}/${id}`);
+				const {name, description, image} = data.data;
 				setFormValues({
 					...formValues,
 					name: name,
@@ -35,7 +36,7 @@ const CategoriesForm = () => {
 					image: image,
 				});
 			} catch (error) {
-				// To do
+				return error;
 			}
 		}
 	};
@@ -47,8 +48,10 @@ const CategoriesForm = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		const {name, description, image} = formValues;
+
 		// Validaciones
-		if (Object.keys(formValues).length === 0) {
+		if ([name, description, image].includes("")) {
 			setFormValues({...formValues, message: true});
 			setTimeout(() => {
 				setFormValues({...formValues, message: false});
@@ -56,8 +59,6 @@ const CategoriesForm = () => {
 
 			return;
 		}
-
-		const {name, description, image} = formValues;
 
 		if (id) {
 			Axios.put(`${urlApiCategories}/${id}`, {
@@ -67,10 +68,29 @@ const CategoriesForm = () => {
 				image,
 			})
 				.then((response) => {
-					return response
+					if (response.data.error === "No base64 string provided") {
+						setFormValues({...formValues, message: true});
+						setTimeout(() => {
+							setFormValues({...formValues, message: false});
+						}, 1500);
+						return response;
+					} else {
+						setFormValues({
+							name: "",
+							description: "",
+							message: "",
+							image: "",
+						});
+					}
 				})
 				.catch((error) => {
-					return error
+					if (error) {
+						setFormValues({...formValues, message: true});
+					}
+					setTimeout(() => {
+						setFormValues({...formValues, message: false});
+					}, 1500);
+					return error;
 				});
 		} else {
 			Axios.post(urlApiCategories, {
@@ -79,10 +99,24 @@ const CategoriesForm = () => {
 				image,
 			})
 				.then((response) => {
-					return response
+					if (response.data.message === "Category saved successfully") {
+						setFormValues({
+							name: "",
+							description: "",
+							message: "",
+							image: "",
+						});
+					}
+					return response;
 				})
 				.catch((error) => {
-					return error
+					if (error) {
+						setFormValues({...formValues, message: true});
+					}
+					setTimeout(() => {
+						setFormValues({...formValues, message: false});
+					}, 1500);
+					return error;
 				});
 		}
 	};
@@ -91,7 +125,11 @@ const CategoriesForm = () => {
 		<div className="form-container">
 			<form onSubmit={handleSubmit}>
 				{formValues.message ? (
-					<Error>Todos los campos son obligatorios</Error>
+					<Error>
+						{id
+							? "Debe llenar todos los campos para poder editar"
+							: "Todos los ca,pos son obligatorios"}
+					</Error>
 				) : null}
 				<div>
 					<label htmlFor="name">Nombre:</label>
