@@ -63,7 +63,7 @@ const NewsForm = () => {
       });
   };
 
-  const getSlideById = async (id) => {
+  const getDataID = async (id) => {
     setLoading(true);
 
     await axios
@@ -77,6 +77,7 @@ const NewsForm = () => {
             image: image,
             id: true,
           });
+          console.log(description);
         } else {
           const { status } = res.data;
           alert(status.message);
@@ -91,7 +92,7 @@ const NewsForm = () => {
 
   useEffect(() => {
     if (id) {
-      getSlideById(id);
+      getDataID(id);
     }
     getCategorieData();
     // se obtiene un arreglo de orders ya usados
