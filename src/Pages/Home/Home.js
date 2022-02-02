@@ -7,7 +7,6 @@ const Home = () => {
 
   return (
 	  <>
-		  
       <h2>{welcomeText}</h2>
       <SliderHome />
       <News />
