@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
 import '../Activities/Style.scss';
-import Activities from './Activities';
 
 
 
@@ -26,19 +25,13 @@ const ActivitiesForm = () => {
         return initialValues;
     }
 
-    const formattedMessage = `
-        <h1> hola mensage!</h1>
-        <p>esto es un parrafo Lorem.</p>
-    `;
+    
             
     return (
         <form className="form-container" onSubmit={handleSubmit}>
             <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Activity Title"></input>
             <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some activity description"></input>
             <textarea type="text" name="area"  defaultValue={ initialValues.area } onChange={handleChange} ></textarea>
-            
-            <Activities mensage={formattedMessage} />
-           
             <button className="submit-btn" type="submit"  >Submit</button><br/>
         </form>
     );
