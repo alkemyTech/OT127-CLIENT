@@ -4,6 +4,34 @@
 $outfit: "Outfit", sans-serif;
 $roboto: "Roboto", sans-serif;
 
-$size-title: 2rem;
-$size-sub-title: 1.4rem;
+$size-title: 1.6rem;
+$size-subtitle: 1.2rem;
 $size-regular: 1rem;
+
+@mixin outfit-title {
+  font-family: $outfit;
+  font-size: $size-title;
+  font-weight: bold;
+}
+@mixin outfit-subtitle {
+  font-family: $outfit;
+  font-size: $size-subtitle;
+}
+@mixin outfit-regular-bold {
+  font-family: $outfit;
+  font-weight: bold;
+}
+
+@mixin roboto-title {
+  font-family: $roboto;
+  font-size: $size-title;
+  font-weight: bold;
+}
+@mixin roboto-subtitle {
+  font-family: $roboto;
+  font-size: $size-subtitle;
+}
+@mixin roboto-regular-bold {
+  font-family: $roboto;
+  font-weight: bold;
+}

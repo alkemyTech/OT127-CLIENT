@@ -1,12 +1,13 @@
+@import "../../sass/main.scss";
+
 .form {
   display: flex;
   flex-direction: column;
-  //   background-color: aquamarine;
+  background-color: $font-white-transparent;
   margin: 0 auto;
   width: 400px;
   padding: 10px 30px;
   border-radius: 10px;
-  border: 2px solid black;
 
   &__divider {
     width: 100%;
@@ -27,22 +28,26 @@
     flex-direction: column;
   }
   &__button {
-    height: 30px;
-    width: 300px;
     margin: 20px auto;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   &__title {
-    font-size: 1.5rem;
-    font-weight: bold;
+    @include outfit-title();
+  }
+  &__subtitle {
+    @include outfit-subtitle();
+    color: $font-gray;
   }
   &__sliders-title {
     margin-top: 30px;
     font-weight: bold;
     font-size: 1.2rem;
   }
+  &__label {
+    @include roboto-regular-bold();
+  }
+}
+
+.HomeForm {
+  background-color: $light-blue;
 }

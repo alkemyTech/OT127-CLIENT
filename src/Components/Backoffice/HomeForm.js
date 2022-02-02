@@ -92,69 +92,71 @@ const HomeForm = () => {
     }, [])
 
     return (
-        <Formik
-            enableReinitialize={true}
-            initialValues={initialValues}
-            validationSchema={
-                Yup.object().shape({
-                    welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('El campo Texto de Bienvenida es obligatorio'),
-                    slides: Yup.array().of(
-                        Yup.object().shape({
-                            name: Yup.string().required('El campo Titulo es obligatorio').nullable(),
-                            description: Yup.string().required('El campo Descripción es obligatorio').nullable(),
-                            image: Yup.string().required('El campo URL de la imagen es obligatorio').nullable(),
-                        })
-                    )
-                })
-            }
-            onSubmit={(values) => {
-                compareValues(values)
-            }}
-        >
-            {({
-                values,
-            }) => (<Form className='form'>
-                <p className='form__title'>Formulario de Edición Home</p>
-                <p>Modifique los campos que desee editar</p>
-                <label htmlFor="welcome">
-                    Texto de Bienvenida
-                </label>
-                <Field name="welcome" className='form__input' />
-                <ErrorMessage name="welcome" />
-                <p className='form__sliders-title'>Sliders</p>
-                <div className='form__sliders'>
-                    <FieldArray name="slides">
-                        {() => (values.slides.map((slide, i) => {
-                            return (
-                                <div key={i} className='form__slide'>
-                                    <hr className='form__divider' />
-                                    <p>ID: {slide.id}</p>
-                                    <label>Titulo</label>
-                                    <Field
-                                        name={`slides.${i}.name`}
-                                        className='form__input'
-                                    />
-                                    <ErrorMessage name={`slides.${i}.name`} component="div" />
-                                    <label>Descripción</label >
-                                    <Field
-                                        name={`slides.${i}.description`}
-                                        className='form__input'
-                                    />
-                                    <ErrorMessage name={`slides.${i}.description`} component="div" />
-                                    <label>URL de la imagen</label>
-                                    <Field
-                                        name={`slides.${i}.image`}
-                                        className='form__input'
-                                    />
-                                    <ErrorMessage name={`slides.${i}.image`} component="div" />
-                                </div>
-                            )
-                        }))}
-                    </FieldArray>
-                </div>
-                <button type='submit' className='form__button'>GUARDAR CAMBIOS</button>
-            </Form>)}
-        </Formik >
+        <div className="HomeForm">
+            <Formik
+                enableReinitialize={true}
+                initialValues={initialValues}
+                validationSchema={
+                    Yup.object().shape({
+                        welcome: Yup.string().min(20, 'Debe tener por lo menos 20 caracteres.').required('El campo Texto de Bienvenida es obligatorio'),
+                        slides: Yup.array().of(
+                            Yup.object().shape({
+                                name: Yup.string().required('El campo Titulo es obligatorio').nullable(),
+                                description: Yup.string().required('El campo Descripción es obligatorio').nullable(),
+                                image: Yup.string().required('El campo URL de la imagen es obligatorio').nullable(),
+                            })
+                        )
+                    })
+                }
+                onSubmit={(values) => {
+                    compareValues(values)
+                }}
+            >
+                {({
+                    values,
+                }) => (<Form className='form'>
+                    <p className='form__title'>Formulario de Edición Home</p>
+                    <p className='form__subtitle'>Modifique los campos que desee editar</p>
+                    <label htmlFor="welcome" className="form__label">
+                        Texto de Bienvenida
+                    </label>
+                    <Field name="welcome" className='form__input' />
+                    <ErrorMessage name="welcome" />
+                    <p className='form__sliders-title'>Sliders</p>
+                    <div className='form__sliders'>
+                        <FieldArray name="slides">
+                            {() => (values.slides.map((slide, i) => {
+                                return (
+                                    <div key={i} className='form__slide'>
+                                        <hr className='form__divider' />
+                                        <p className="form__label">ID: {slide.id}</p>
+                                        <label className="form__label">Titulo</label>
+                                        <Field
+                                            name={`slides.${i}.name`}
+                                            className='form__input'
+                                        />
+                                        <ErrorMessage name={`slides.${i}.name`} component="div" />
+                                        <label className="form__label">Descripción</label >
+                                        <Field
+                                            name={`slides.${i}.description`}
+                                            className='form__input'
+                                        />
+                                        <ErrorMessage name={`slides.${i}.description`} component="div" />
+                                        <label className="form__label">URL de la imagen</label>
+                                        <Field
+                                            name={`slides.${i}.image`}
+                                            className='form__input'
+                                        />
+                                        <ErrorMessage name={`slides.${i}.image`} component="div" />
+                                    </div>
+                                )
+                            }))}
+                        </FieldArray>
+                    </div>
+                    <button type='submit' className='form__button button'>GUARDAR CAMBIOS</button>
+                </Form>)}
+            </Formik >
+        </div>
     )
 }
 
