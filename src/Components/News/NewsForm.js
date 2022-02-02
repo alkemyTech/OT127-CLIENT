@@ -16,7 +16,7 @@ import "../FormStyles.css";
 
 
 
-const SlidesForm = () => {
+const NewsForm = () => {
   const [initialValues, setInitialValues] = useState({
     name: "",
     description: "",
@@ -33,19 +33,19 @@ const SlidesForm = () => {
 
   const getCategorieData = () => {
     if (id) {
-            axios.get(urlCategories)
-                .then((response) => {
-                    const dataCategorie = response.data.data;
-                    setDataCategorie(dataCategorie);
-                })
-                .catch((error) => {
-                    return error;
-            });
+          axios.get(urlCategories)
+              .then((response) => {
+                  const dataCategorie = response.data.data;
+                  setDataCategorie(dataCategorie);
+              })
+              .catch((error) => {
+                  return error;
+          });
 
-        } else {
-            return alert('error peticion');
-        }
-    }
+      } else {
+          return alert('error peticion');
+      }
+  }
 
   const getOrdersList = async () => {
     await axios
@@ -237,4 +237,4 @@ const SlidesForm = () => {
   );
 };
 
-export default SlidesForm;
+export default NewsForm;
