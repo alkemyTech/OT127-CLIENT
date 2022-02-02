@@ -6,7 +6,8 @@ const Home = () => {
   const [welcomeText, setWelcomeText] = useState("Bienvenido");
 
   return (
-    <>
+	  <>
+		  
       <h2>{welcomeText}</h2>
       <SliderHome />
       <News />
