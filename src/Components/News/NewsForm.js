@@ -1,29 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
-
 import axios from "axios";
-
 import "../FormStyles.css";
-
-
-
-
 
 const NewsForm = () => {
   const [initialValues, setInitialValues] = useState({
     name: "",
-    description: "",
+    contenido: "",
     categorie:"",
     image: "",
   });
-  const [ordersList, setOrdersList] = useState([]); // para validar order
+  const [ordersList, setOrdersList] = useState([]); 
   const [loading, setLoading] = useState(false);
   const [dataCategorie, setDataCategorie] = useState([]);
 
@@ -42,9 +34,7 @@ const NewsForm = () => {
                   return error;
           });
 
-      } else {
-          return alert('error peticion');
-      }
+      } 
   }
 
   const getOrdersList = async () => {
@@ -52,7 +42,6 @@ const NewsForm = () => {
       .get(url)
       .then((res) => {
         let data = res.data.data;
-        // arreglo de order utilizados
         const orderBlackList = data
           .map((data) => data.order)
           .filter((order) => order !== initialValues.order);
@@ -70,14 +59,13 @@ const NewsForm = () => {
       .get(`${url}/${id}`)
       .then((res) => {
         if (res.data.success) {
-          const { name, description, image } = res.data.data;
+          const { name, contenido, image } = res.data.data;
           setInitialValues({
             name: name,
-            description: description,
+            contenido: contenido,
             image: image,
             id: true,
           });
-          console.log(description);
         } else {
           const { status } = res.data;
           alert(status.message);
@@ -86,7 +74,6 @@ const NewsForm = () => {
       .catch((err) => {
         alert(err.message);
       });
-
     setLoading(false);
   };
 
@@ -94,10 +81,9 @@ const NewsForm = () => {
     if (id) {
       getDataID(id);
     }
-    getCategorieData();
-    // se obtiene un arreglo de orders ya usados
     getOrdersList();
-  }, []); // eslint-disable-line
+    getCategorieData();
+  }, []); 
 
   const toBase64 = (file) => {
     return new Promise((resolve) => {
@@ -120,15 +106,20 @@ const NewsForm = () => {
     }
 
     if (id) {
-      await axios.put(`${url}/${id}`, formValues).catch((err) => {
+      await axios
+      .put(`${url}/${id}`, formValues)
+      .catch((err) => {
         alert(err.message);
       });
     } else {
-      await axios.post(url, formValues).catch((err) => {
+      await axios
+      .post(url, formValues)
+      .catch((err) => {
         alert(err.message);
       });
     }
   };
+
 
   const inputFileRef = useRef();
 
@@ -136,7 +127,7 @@ const NewsForm = () => {
     name: Yup.string()
       .min(4, "Debe tener al menos 4 caracteres")
       .required("Este campo es obligatorio"),
-    description: Yup.string().required("Este campo es obligatorio"),
+    contenido: Yup.string().required("Este campo es obligatorio"),
     id: Yup.boolean(),
     order: Yup.number()
       .moreThan(0, "Debe ser un numero mayor o igual a cero")
@@ -158,7 +149,7 @@ const NewsForm = () => {
           onSubmit={async (values, { resetForm }) => {
             let formValues = {
               name: values.name,
-              description: values.description,
+              contenido: values.contenido,
               categorie: values.categorie,
               image: values.image,
             };
@@ -177,12 +168,12 @@ const NewsForm = () => {
                 className="input-field"
                 type="text"
                 name="name"
-                placeholder="Slide Title"
+                placeholder="titulo"
               />
               <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
               
-              <label htmlFor="description">Contenido</label>
-              <Field name="description">
+              <label htmlFor="contenido">Contenido</label>
+              <Field name="contenido">
                 {({ field }) => (
                   <>
                     <CKEditor
@@ -199,7 +190,7 @@ const NewsForm = () => {
                 )}
               </Field>
               <ErrorMessage
-                name="description"
+                name="contenido"
                 render={(msg) => <div>{msg}</div>}
               />
 
