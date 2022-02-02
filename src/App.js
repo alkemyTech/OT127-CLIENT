@@ -24,9 +24,11 @@ import NewsList from "./Components/News/NewsList";
 import BackOffice from "./Components/Backoffice/BackOffice";
 import MembersList from "./Components/Members/MembersList";
 import About from "./Components/About/About";
+import SlideList from "./Pages/Slides/SlideList";
 import ActivityDetail from "./Components/Activities/ActivityDetail";
 import NewsDetails from "./Components/News/Detail/NewsDetails";
 import UsersList from "./Components/Users/UsersList";
+import CategoriesList from "./Components/Categories/CategoriesList";
 
 function App() {
   return (
@@ -35,12 +37,12 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Home} />
-
+        
           <Route
             path="/backoffice/create-activity"
             component={ActivitiesForm}
           />
-
+          <Route path="/categories" component={CategoriesList}/>
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
           <Route
@@ -50,9 +52,9 @@ function App() {
           <Route path="/novedades" component={News} />
           <Route path="/actividades/:id" component={ActivityDetail} />
           <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice/slides/creacion" component={SlidesForm} />
-          <Route path="/backoffice/users" component={UsersList} />
+          <Route path="/backoffice/slides/create" component={SlidesForm} />
           <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
+          <Route path="/backoffice/slides" component={SlideList} />
           <Route path="/backoffice/organization" component={OrganizationData} />
           <Route
             path="/backoffice/organization/edit"
@@ -61,6 +63,7 @@ function App() {
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/backoffice/create-user" exact component={UserForm} />
           <Route path="/backoffice/create-user/:id" component={UserForm} />
+          <Route path="/backoffice/users" component={UsersList} />
           <Route path="/backoffice/members" exact component={MembersList} />
           <Route path="/backoffice/news" component={NewsList} />
           <Route path="/create-member" component={MembersForm} />
