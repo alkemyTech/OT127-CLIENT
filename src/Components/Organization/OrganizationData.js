@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 
 const OrganizationData = () => {
   const [organizationData, setOrganizationData] = useState({});
+	const url = process.env.REACT_APP_API
 
   const getOrgData = () => {
     axios
-      .get(" http://ongapi.alkemy.org/api/organization")
+		 .get(`${url}/${process.env.REACT_APP_API_ORGANIZATION}`)
       .then((response) => {
         setOrganizationData(response.data.data);
       })
