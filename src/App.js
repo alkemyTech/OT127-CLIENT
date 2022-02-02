@@ -29,6 +29,7 @@ import ActivityDetail from "./Components/Activities/ActivityDetail";
 import NewsDetails from "./Components/News/Detail/NewsDetails";
 import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 function App() {
   return (
@@ -37,12 +38,12 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Home} />
-        
+
           <Route
             path="/backoffice/create-activity"
             component={ActivitiesForm}
           />
-          <Route path="/categories" component={CategoriesList}/>
+          <Route path="/categories" component={CategoriesList} />
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/contact" component={ContactForm} />
           <Route
