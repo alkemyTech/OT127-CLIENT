@@ -16,7 +16,7 @@ import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from "./Donations/Donacion";
 import Gracias from "./Donations/Gracias";
-import ContactForm from "./Components/Contact/ContactForm";
+import Contact from "./Components/Contact/Contact";
 import Home from "./Pages/Home/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
@@ -42,10 +42,16 @@ function App() {
 					<Route path="/actividades" component={Activities} />
 					<Route path="/create-category" component={CategoriesForm} />
 					<Route path="/novedades" component={News} />
-					<Route path="/contact" component={ContactForm} />
+					<Route path="/contacto" component={Contact} />
 					<Route path="/create-news" component={NewsForm} />
 					<Route path="/actividades/:id" component={ActivityDetail} />
 					<Route path="/backoffice/users" component={UsersList} />
+					<Route
+						path="/backoffice/create-activity"
+						component={ActivitiesForm}
+					/>
+					<Route path="/contacto" component={Contact} />
+					<Route path="/novedades" component={News} />
 					<Route
 						path="/novedades/:id"
 						component={() => (
@@ -54,11 +60,11 @@ function App() {
 					/>
 					<Route path="/categories" component={CategoriesList} />
 					<Route path="/backoffice/slides" component={SlideList} />
+					<Route path="/create-news" component={NewsForm} />
 					<Route
 						path="/backoffice/create-slide"
 						component={SlidesForm}
 					/>
-					<Route path="/backoffice/slides/create" component={SlidesForm} />
 					<Route
 						path="/backoffice/slides/creacion"
 						component={SlidesForm}
@@ -66,23 +72,6 @@ function App() {
 					<Route
 						path="/backoffice/slides/edicion/:id"
 						component={SlidesForm}
-					/>
-					<Route
-						path="/backoffice/organization"
-						component={OrganizationData}
-					/>
-					<Route
-						path="/backoffice/organization/edit"
-						component={OrganizationForm}
-					/>
-					<Route
-						path="/backoffice/create-user"
-						exact
-						component={UserForm}
-					/>
-					<Route
-						path="/backoffice/create-user/:id"
-						component={UserForm}
 					/>
 					<Route
 						path="/create-testimonials"
@@ -99,15 +88,29 @@ function App() {
 					/>
 					<Route
 						path="/backoffice/members"
-						exact
 						component={MembersList}
 					/>
+					<Route path="/create-project" component={ProjectsForm} />
 					<Route path="/backoffice/news" component={NewsList} />
 					<Route path="/create-member" component={MembersForm} />
-					<Route path="/create-project" component={ProjectsForm} />
+					<Route path="/school-campaign" component={SchoolCampaign} />
+					<Route path="/toys-campaign" component={ToysCampaign} />
+					<Route path="/login" component={LoginForm} />
+					<Route path="/register" component={RegisterForm} />
+					<Route path="/backoffice/slides/create" component={SlidesForm} />
+					<Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
+					<Route path="/backoffice/slides" component={SlideList} />
+					<Route path="/backoffice/organization" component={OrganizationData} />
+					<Route
+						path="/backoffice/organization/edit"
+						component={OrganizationForm}
+					/>
+					<Route
+						path="/backoffice/activities/:id"
+						component={ActivitiesForm}
+					/>
 					<Route
 						path="/backoffice/projects/:id"
-						component={ProjectsForm}
 					/>
 					<Route
 						path="/backoffice/create-project"
@@ -118,12 +121,13 @@ function App() {
 					<Route path="/login" component={LoginForm} />
 					<Route path="/register" component={RegisterForm} />
 					<Route
-						path="/backoffice/activities/:id"
-						component={ActivitiesForm}
-					/>
-					<Route
 						path="/donar"
-						component={() => <Donacion message="Quieres donar?" />}
+						component={() => <Donacion message="Quieres donar?" />} />
+					<Route
+						path="/novedades/:id"
+						component={() => (
+							<NewsDetails title="Titulo recibido por props" />
+						)}
 					/>
 					<Route
 						path="/nosotros"
