@@ -16,7 +16,7 @@ import RegisterForm from "./Components/Auth/RegisterForm";
 import LoginForm from "./Components/Auth/LoginForm";
 import Donacion from "./Donations/Donacion";
 import Gracias from "./Donations/Gracias";
-import ContactForm from "./Components/Contact/ContactForm";
+import Contact from "./Components/Contact/Contact";
 import Home from "./Pages/Home/Home";
 import OrganizationData from "./Components/Organization/OrganizationData";
 import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
@@ -31,65 +31,114 @@ import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
 
 function App() {
-  return (
-    // Agregar newsletter en footer
-    <>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact component={Home} />
-        
-          <Route
-            path="/backoffice/create-activity"
-            component={ActivitiesForm}
-          />
-          <Route path="/categories" component={CategoriesList}/>
-          <Route path="/create-category" component={CategoriesForm} />
-          <Route path="/contact" component={ContactForm} />
-          <Route
-            path="/novedades/:id"
-            component={() => <NewsDetails title="Titulo recibido por props" />}
-          />
-          <Route path="/novedades" component={News} />
-          <Route path="/actividades/:id" component={ActivityDetail} />
-          <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice/slides/create" component={SlidesForm} />
-          <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
-          <Route path="/backoffice/slides" component={SlideList} />
-          <Route path="/backoffice/organization" component={OrganizationData} />
-          <Route
-            path="/backoffice/organization/edit"
-            component={OrganizationForm}
-          />
-          <Route path="/create-testimonials" component={TestimonialForm} />
-          <Route path="/backoffice/create-user" exact component={UserForm} />
-          <Route path="/backoffice/create-user/:id" component={UserForm} />
-          <Route path="/backoffice/users" component={UsersList} />
-          <Route path="/backoffice/members" exact component={MembersList} />
-          <Route path="/backoffice/news" component={NewsList} />
-          <Route path="/create-member" component={MembersForm} />
-          <Route path="/backoffice/create-project" component={ProjectsForm} />
-          <Route path="/school-campaign" component={SchoolCampaign} />
-          <Route path="/toys-campaign" component={ToysCampaign} />
-          <Route path="/login" component={LoginForm} />
-          <Route path="/register" component={RegisterForm} />
-          <Route path="/backoffice/activities/:id" component={ActivitiesForm} />
-          <Route path="/backoffice/projects/:id" component={ProjectsForm} />
-          <Route
-            path="/nosotros"
-            component={() => <About text="Sobre Nosotros" />}
-          />
-          <Route
-            path="/donar"
-            component={() => <Donacion message="Quieres donar?" />}
-          />
-          <Route path="/gracias" component={Gracias} />
-          <Route path="/backoffice" component={BackOffice} />
-        </Switch>
-      </BrowserRouter>
-
-      <div className="App"></div>
-    </>
-  );
+	return (
+		// Agregar newsletter en footer
+		<>
+			<BrowserRouter>
+				<Switch>
+					<Route path="/" exact component={Home} />
+					<Route
+						path="/backoffice/create-activity"
+						component={ActivitiesForm}
+					/>
+					<Route path="/create-category" component={CategoriesForm} />
+					<Route path="/actividades/:id" component={ActivityDetail} />
+					<Route path="/categories" component={CategoriesList} />
+					<Route path="/contacto" component={Contact} />
+					<Route path="/novedades" component={News} />
+					<Route
+						path="/novedades/:id"
+						component={() => (
+							<NewsDetails title="Titulo recibido por props" />
+						)}
+					/>
+					<Route path="/create-news" component={NewsForm} />
+					<Route
+						path="/backoffice/create-slide"
+						component={SlidesForm}
+					/>
+					<Route
+						path="/backoffice/slides/creacion"
+						component={SlidesForm}
+					/>
+					<Route
+						path="/backoffice/slides/edicion/:id"
+						component={SlidesForm}
+					/>
+					<Route
+						path="/backoffice/organization"
+						component={OrganizationData}
+					/>
+					<Route
+						path="/backoffice/organization/edit"
+						component={OrganizationForm}
+					/>
+					<Route
+						path="/create-testimonials"
+						component={TestimonialForm}
+					/>
+					<Route
+						path="/backoffice/create-user"
+						exact
+						component={UserForm}
+					/>
+					<Route
+						path="/backoffice/create-user/:id"
+						component={UserForm}
+					/>
+					<Route path="/backoffice/news" component={NewsList} />
+					<Route path="/create-member" component={MembersForm} />
+					<Route path="/create-project" component={ProjectsForm} />
+					<Route path="/school-campaign" component={SchoolCampaign} />
+					<Route path="/toys-campaign" component={ToysCampaign} />
+					<Route path="/login" component={LoginForm} />
+					<Route path="/register" component={RegisterForm} />
+					<Route path="/backoffice/slides/create" component={SlidesForm} />
+					<Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
+					<Route path="/backoffice/slides" component={SlideList} />
+					<Route path="/backoffice/organization" component={OrganizationData} />
+					<Route
+						path="/backoffice/organization/edit"
+						component={OrganizationForm}
+					/>
+					<Route
+						path="/backoffice/activities/:id"
+						component={ActivitiesForm}
+					/>
+					<Route
+						path="/backoffice/projects/:id"
+						component={ProjectsForm}
+					/>
+					<Route
+						path="/backoffice/create-project"
+						component={ProjectsForm}
+					/>
+					<Route path="/backoffice/users" component={UsersList} />
+					<Route
+						path="/novedades/:id"
+						component={() => (
+							<NewsDetails title="Titulo recibido por props" />
+						)}
+					/>
+					<Route
+						path="/backoffice/members"
+						exact
+						component={MembersList}
+					/>
+					<Route
+						path="/nosotros"
+						component={() => <About text="Sobre Nosotros" />}
+					/>
+					<Route
+						path="/donar"
+						component={() => <Donacion message="Quieres donar?" />}
+					/>
+					<Route path="/gracias" component={Gracias} />
+					<Route path="/backoffice" component={BackOffice} />
+				</Switch>
+			</BrowserRouter>
+			<div className="App"></div>
+		</>
+	);
 }
-
-export default App;
+export default App
