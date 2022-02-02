@@ -10,7 +10,7 @@ const initialState = {
   },
 };
 
-export const loginReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOGIN_USER": // Éstas strings en un futuro se pueden sacar de un archivo de constantes.
       return {
