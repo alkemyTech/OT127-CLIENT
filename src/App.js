@@ -53,6 +53,7 @@ function App() {
 						)}
 					/>
 					<Route path="/create-news" component={NewsForm} />
+          <Route path="/news/:id" component={NewsForm} />
 					<Route
 						path="/backoffice/create-slide"
 						component={SlidesForm}
