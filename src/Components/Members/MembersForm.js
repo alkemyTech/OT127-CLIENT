@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../FormStyles.css';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -7,9 +7,11 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import './Members.scss';
+import { useParams } from 'react-router-dom';
+
 
 const NewsForm = () => {
-
+    const {id} = useParams();
     const [loading, setLoading] = useState(false);
     const [formValues, setFormValues] = useState({name: "", description: "", facebookUrl: "", linkedinUrl: "", file: ""});
     const baseUrl = 'http://ongapi.alkemy.org/api/members';
@@ -22,23 +24,45 @@ const NewsForm = () => {
         const facebookUrl = setFormValues.facebookUrl;
         const linkedinUrl = setFormValues.linkedinUrl;
         const image = setFormValues.file;
-
-        axios
-        .post( 
-            baseUrl, {
-                name, description, facebookUrl, linkedinUrl, image
-            }
-         )
-        .then(function (response) {
-            // To do
-            return response.config.data;
-        })
-        .catch(function (error) {
-            return error;
-        });
+        
+        
+        const getDataById = async (id) => {
+            
+            console.log(id);
+            if (id) {
+                await axios.put(`${baseUrl}/${id}`, setFormValues).catch((err) => {
+                    console.log(formValues);
+                  alert(err.message);
+                });
+              } else {
+                await axios.post(baseUrl, setFormValues).catch((err) => {
+                    console.log(formValues);
+                  alert(err.message);
+                });
+            };
+            
+            // await axios
+            // .post( 
+            //     baseUrl, {
+            //         name, description, facebookUrl, linkedinUrl, image
+            //     }
+            //     )
+            // .then(function (response) {
+            //     // To do
+            //     return response.config.data;
+            // })
+            // .catch(function (error) {
+            //     return error;
+            // });
+        }
         setLoading(false);
     };
-    
+    useEffect(() => {
+        if (id) {
+            getSlideById(id);
+        }
+    },[]);
+
     return (
         <>
             {loading ? (
@@ -61,8 +85,9 @@ const NewsForm = () => {
                     .email('No coloco un formato valido'),
                 })}
 
-                onSubmit={(setFormValues, {resetForm}) => {
-                    handleSubmit(setFormValues);
+                onSubmit={(formValues, {resetForm}) => {
+
+                    handleSubmit(formValues);
                     resetForm();
                 }}    
             >
@@ -83,7 +108,7 @@ const NewsForm = () => {
                                 editor={ClassicEditor}
                                 data={field.value}
                                 onChange={(event, editor) => {
-                                    setFieldValue(field.name, editor.handleSubmit());
+                                    setFieldValue(field.name, editor.getData());
                                 }}
                                 />
                             </>
