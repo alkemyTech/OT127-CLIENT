@@ -8,9 +8,8 @@ const MemberListUs = () => {
 	const [ members, setMembers ] = useState([])
 	const [ loading, setLoading ] = useState(true)
 
-
-	useEffect(() => {
-		axios.get(url)
+	const getMembers = async () => {
+		await	axios.get(url)
 			.then(res => {
 				setMembers(res.data.data)
 				setLoading(false)
@@ -18,6 +17,9 @@ const MemberListUs = () => {
 			.catch(err => {
 				alert(err)
 			})
+	}
+	useEffect(() => {
+	getMembers()
 	}, [])
 
 	return (
