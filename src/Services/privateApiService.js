@@ -67,3 +67,21 @@ export const getPrivate = async (route, id = null) => {
     return error;
   }
 };
+
+export const privateDelete = (route, id) => {
+  const url = `${route}/${id}`
+  let token = getSecureHeader()
+  const { Authorization, error } = token
+
+  if (Authorization) {
+    axios.delete(url, {
+      header: {
+        ...config.headers,
+        Authorization,
+      }
+    })
+
+  } else {
+    return error
+  }
+}
