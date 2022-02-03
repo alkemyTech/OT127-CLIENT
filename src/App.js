@@ -30,6 +30,7 @@ import NewsDetails from "./Components/News/Detail/NewsDetails";
 import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
 import Activities from "./Components/Activities/Activities";
+import Prueba from './Components/Prueba'
 
 function App() {
 	return (
@@ -136,6 +137,7 @@ function App() {
 					/>
 					<Route path="/gracias" component={Gracias} />
 					<Route path="/backoffice" component={BackOffice} />
+					<Route path="/prueba" component={Prueba} />
 				</Switch>
 			</BrowserRouter>
 			<div className="App"></div>

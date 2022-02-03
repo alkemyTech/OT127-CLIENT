@@ -9,34 +9,36 @@ export const getNews = createAsyncThunk("get/getNews", async () => {
 export const newsSlice = createSlice({
   name: "news",
   initialState: {
-    status: 'idle',
-    news: {},
-    error: {}
+    news: {
+      status: "idle",
+      data: {},
+      error: {},
+    },
   },
   reducers: {},
   extraReducers: {
     [getNews.pending.type]: (state, action) => {
-        state.playerList = {
-          status: "loading",
-          data: {},
-          error: {},
-        };
-      },
-      [getNews.fulfilled.type]: (state, action) => {
-        state.playerList = {
-          status: "idle",
-          data: action.payload,
-          error: {},
-        };
-      },
-      [getNews.rejected.type]: (state, action) => {
-        state.playerList = {
-          status: "idle",
-          data: {},
-          error: action.payload,
-        };
-      },
-  }
+      state.news = {
+        status: "loading",
+        data: {},
+        error: {},
+      };
+    },
+    [getNews.fulfilled.type]: (state, action) => {
+      state.news = {
+        status: "idle",
+        data: action.payload,
+        error: {},
+      };
+    },
+    [getNews.rejected.type]: (state, action) => {
+      state.news = {
+        status: "idle",
+        data: {},
+        error: action.payload,
+      };
+    },
+  },
 });
 
 export default newsSlice.reducer;
