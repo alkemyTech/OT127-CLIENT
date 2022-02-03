@@ -1,6 +1,13 @@
 import React from "react";
 
-const Skeleton = ({ mode }) => {
+const Skeleton = ({ mode, quantity }) => {
+  const renderGroupCards = () => {
+    let cards = []
+    for(let i = 0; i < +quantity; i++){
+      cards.push(<div className="skeleton_card"></div>)
+    }
+    return cards
+  }
   return (
     <div>
       {mode === "singleCard" && (
@@ -10,14 +17,7 @@ const Skeleton = ({ mode }) => {
       )}
       {mode === "groupCards" && (
         <div className="skeleton_card_container">
-          <div className="skeleton_card"></div>
-          <div className="skeleton_card"></div>
-          <div className="skeleton_card"></div>
-          <div className="skeleton_card"></div>
-          <div className="skeleton_card"></div>
-          <div className="skeleton_card"></div>
-          <div className="skeleton_card"></div>
-          <div className="skeleton_card"></div>
+          {renderGroupCards()}
         </div>
       )}
       {mode === "list" && (
