@@ -1,0 +1,14 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+
+.skeleton-card:empty {
+  border-radius: 20px;
+  height: 40vh;
+  width: 15em;
+  background-image: radial-gradient(circle 1.7em, #ccc 100%, transparent),
+    linear-gradient(#ccc, #ccc), linear-gradient(#ccc, #ccc),
+    linear-gradient(#f1f1f1, #f1f1f1);
+  background-size: 10em 6em, 12em 2em, 12em 2em, 100% 100%;
+  background-position: 50% 24px, 50% 7.5em, 50% 11em, 0 0;
+  background-repeat: no-repeat;
+}
