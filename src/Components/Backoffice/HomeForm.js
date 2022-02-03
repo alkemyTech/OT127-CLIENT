@@ -4,7 +4,6 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import './HomeForm.scss'
 const HomeForm = () => {
-    const [slidesData, setSlidesData] = useState([])
     const [welcomeText, setWelcomeText] = useState('')
     const [initialValues, setInitialValues] = useState({
         welcome: '',
@@ -67,7 +66,6 @@ const HomeForm = () => {
             const welcomeText = welcomeResponse.data.data
             // Guardamos la informacion original aparte, para luego hacer una comparacion
             // con la informacion que venga del formulario y ver que se modifico
-            setSlidesData(slides)
             setWelcomeText(welcomeText)
 
             // guardamos los valores iniciales que va a usar formik
