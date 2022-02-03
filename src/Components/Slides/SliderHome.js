@@ -76,7 +76,7 @@ const SliderHome = () => {
             const response = await getSlidesData()
             setSliderData(response.data.data)
         } catch (error) {
-            console.error(error)
+            return error
         }
     }
     useEffect(() => {
