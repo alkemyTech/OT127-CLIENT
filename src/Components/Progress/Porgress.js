@@ -1,13 +1,27 @@
 import * as React from "react";
-import Stack from "@mui/material/Stack";
-import LinearProgress from "@mui/material/LinearProgress";
+import { styled } from "@mui/material/styles";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
 
-const Progress = ({ color = "#1e3a8a" }) => {
-  return (
-    <Stack sx={{ width: "100%", color: { color } }}>
-      <LinearProgress color="inherit" />
-    </Stack>
-  );
+const Progress = ({
+  primaryColor = "#2563eb",
+  backgroundColor = "#93c5fd",
+  height,
+  borderRadius,
+}) => {
+  const CustomLinearProgress = styled(LinearProgress)(() => ({
+    height: height,
+    borderRadius: borderRadius,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: backgroundColor,
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: borderRadius,
+      backgroundColor: primaryColor,
+    },
+  }));
+  return <CustomLinearProgress />;
 };
 
 export default Progress;
