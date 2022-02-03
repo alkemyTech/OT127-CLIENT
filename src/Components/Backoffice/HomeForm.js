@@ -135,19 +135,19 @@ const HomeForm = () => {
                                             name={`slides.${i}.name`}
                                             className='input'
                                         />
-                                        <ErrorMessage name={`slides.${i}.name`} component="div" />
+                                        <ErrorMessage className='form__error' name={`slides.${i}.name`} component="div" />
                                         <label className="form__label">Descripción</label >
                                         <Field
                                             name={`slides.${i}.description`}
                                             className='input'
                                         />
-                                        <ErrorMessage name={`slides.${i}.description`} component="div" />
+                                        <ErrorMessage className='form__error' name={`slides.${i}.description`} component="div" />
                                         <label className="form__label">URL de la imagen</label>
                                         <Field
                                             name={`slides.${i}.image`}
                                             className='input'
                                         />
-                                        <ErrorMessage name={`slides.${i}.image`} component="div" />
+                                        <ErrorMessage className='form__error' name={`slides.${i}.image`} component="div" />
                                     </div>
                                 )
                             }))}
