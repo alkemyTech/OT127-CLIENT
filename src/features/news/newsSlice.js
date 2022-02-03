@@ -17,13 +17,6 @@ export const newsSlice = createSlice({
   },
   reducers: {},
   extraReducers: {
-    [getNews.pending.type]: (state, action) => {
-      state.news = {
-        status: "loading",
-        data: {},
-        error: {},
-      };
-    },
     [getNews.fulfilled.type]: (state, action) => {
       state.news = {
         status: "idle",

@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
-import getNews from "../../Services/newsService";
+import React, {useEffect} from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import {getNews} from '../../features/news/newsSlice'
 
 const News = () => {
-  const [news, setNews] = useState([]);
-
+  const dispatch = useDispatch()
+  
   useEffect(() => {
-    getNews(setNews);
-  }, []);
+    dispatch(getNews())
+  }, []); //eslint-disable-line
+
+  const news = useSelector(state => state.news.news.data.data)
 
   const newsList = () => {
-    return news.length ? (
+    return news ? (
       news.map((element) => (
         <li className="card-info" key={element.id}>
           <h3>{element.name}</h3>
