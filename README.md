@@ -38,6 +38,11 @@ Importar el componente Skeleton, está ubicado en carpeta /features/skeleton/Ske
     import Skeleton from './features/skeleton/Skeleton'
 
 El componente recibe el parametro 'mode' para responder varios tipos de estructuras.
+Adicional en el caso de usar el modo 'groupCards', se puede enviar por props la cantidad de tarjetas que se quiere renderizar, en el parametro 'quantity'. Ej:
+
+    <Skeleton mode='groupCards' quantity='5'>
+    ó
+    <Skeleton mode='groupCards' quantity={5}>
 
 Listado de modos del componente:
 
