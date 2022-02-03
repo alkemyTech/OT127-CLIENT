@@ -4,6 +4,9 @@ import Axios from "axios";
 import Error from "../Error/Error";
 
 const CategoriesForm = () => {
+
+	const endPointCategories = process.env.REACT_APP_ENDPOINT_CATEGORIES
+
 	const [formValues, setFormValues] = useState({
 		name: "",
 		description: "",
@@ -12,7 +15,6 @@ const CategoriesForm = () => {
 	});
 
 	const {id} = useParams();
-	const urlApiCategories = `http://ongapi.alkemy.org/api/categories`;
 
 	const send_image = (files) => {
 		const fileReader = new FileReader();
@@ -27,7 +29,7 @@ const CategoriesForm = () => {
 	const getCategoryData = async () => {
 		if (id) {
 			try {
-				const {data} = await Axios.get(`${urlApiCategories}/${id}`);
+				const {data} = await Axios.get(`${endPointCategories}${id}`);
 				const {name, description, image} = data.data;
 				setFormValues({
 					...formValues,
@@ -61,7 +63,7 @@ const CategoriesForm = () => {
 		}
 
 		if (id) {
-			Axios.put(`${urlApiCategories}/${id}`, {
+			Axios.put(`${endPointCategories}${id}`, {
 				id,
 				name,
 				description,
@@ -74,7 +76,7 @@ const CategoriesForm = () => {
 					return error;
 				});
 		} else {
-			Axios.post(urlApiCategories, {
+			Axios.post(endPointCategories, {
 				name,
 				description,
 				image,
