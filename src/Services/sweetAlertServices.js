@@ -18,3 +18,11 @@ export const sweetAlertError = (text) => {
     text,
   });
 };
+
+export const sweetAlertInfo = (text) => {
+  MySwal.fire({
+    icon: "info",
+    title: "Información",
+    text,
+  });
+};
