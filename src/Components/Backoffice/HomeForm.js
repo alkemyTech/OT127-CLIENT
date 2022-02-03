@@ -23,14 +23,14 @@ const HomeForm = () => {
             reader.readAsDataURL(blob);
         });
 
-    const updateSlides = (slide, id) => {
+    const updateSlides = (slide) => {
         // Primero tenemos que pasar la URL de la imagen a un string base64
         axios
             .get(slide.image, { responseType: "blob" })
             .then((response) => toDataURL(response.data))
             .then((encoded) => {
                 slide.image = encoded
-                axios.put(`http://ongapi.alkemy.org/api/slides/${id}`, slide)
+                axios.put(`http://ongapi.alkemy.org/api/slides/${slide.id}`, slide)
             });
     }
 
@@ -44,19 +44,13 @@ const HomeForm = () => {
     }
 
     const compareValues = (values) => {
-
-        //Comparo los slides originales con los que vienen del formulario
-        slidesData.forEach((slide) => {
-            for (let i = 0; i < values.slides.length; i++) {
-                if (slide.id === values.slides[i].id) {
-                    if (slide.image !== values.slides[i].image || slide.name !== values.slides[i].name || slide.description !== values.slides[i].description) {
-                        // cuando detecta los slides que fueron modificados realizamos la peticion "PUT"
-                        // con todos los datos que ya tenia el slides mas el nuevo campo modificado
-                        updateSlides(values.slides[i], values.slides[i].id)
-                    }
-                }
+        values.slides.filter((slide, i) => {
+            if (slide !== initialValues.slides[i]) {
+                // solo se van a hacer una peticion de update los slides modificados 
+                updateSlides(slide)
             }
         })
+
         // Comparo el mensaje que viene del formulario con el original
         if (values.welcome !== welcomeText.welcome_text) {
             // si son diferentes realizamos la peticion "PUT" con todos los datos originales excepto el mensaje modificado
