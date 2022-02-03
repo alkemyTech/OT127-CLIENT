@@ -31,7 +31,7 @@ const Skeleton = ({ mode }) => {
         </div>
       )}
       {mode === "form" && (
-        <div clasName="skeleton_form_container">
+        <div className="skeleton_form_container">
           <div className="skeleton_form"></div>
         </div>
       )}

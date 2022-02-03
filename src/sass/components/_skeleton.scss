@@ -115,6 +115,48 @@
   animation: loadingGradient 1s infinite;
 }
 
+.skeleton_form_container {
+    display: flex;
+    margin: 8vh 0 0 0;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .skeleton_form {
+    position: relative;
+    margin: 1em 1em 1em 1em;
+  }
+  
+  .skeleton_form:empty {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 80vh;
+    width: 30em;
+    background-image: radial-gradient(circle 3em, #ccc 100%, transparent),
+      linear-gradient($skeleton-input, $skeleton-input),
+      linear-gradient($skeleton-input, $skeleton-input),
+      linear-gradient($skeleton-input, $skeleton-input),
+      linear-gradient($skeleton-input, $skeleton-input),
+      linear-gradient($font-white, $font-white);
+    background-size: 10em 6em, 60% 2em, 60% 2em, 60% 2em, 25% 2em, 100% 100%;
+    background-position: 50% 20%, 50% 50%, 50% 60%, 50% 70%, 73% 80%, 0 0;
+    background-repeat: no-repeat;
+  }
+  
+  .skeleton_form:empty:after {
+    content: "";
+    height: 6px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(to left, $light-green 0, $light-blue);
+    background-size: 200% 200%;
+    animation: loadingGradient 1s infinite;
+  }
+  
+
 @keyframes loadingGradient {
   0% {
     background-position: 0% 50%;
