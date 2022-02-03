@@ -28,3 +28,24 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### Componente Skeleton
+
+Para usar el componente Skeleton personalizado seguir estos pasos.
+
+Importar el componente Skeleton, está ubicado en carpeta /features/skeleton/Skeleton.
+
+    import Skeleton from './features/skeleton/Skeleton'
+
+El componente recibe el parametro 'mode' para responder varios tipos de estructuras.
+
+Listado de modos del componente:
+
+    -singleCard : Renderiza una sola tarjeta en carga
+    -groupCards : Renderiza un grupo de tarjetas en carga
+    -list : Renderiza una lista o tabla en carga
+    -form: Renderiza un formulario en carga
+
+El objetivo es renderizar este componente según la necesidad mientras hay una espera o carga por una respuesta de peticiones.
+
+

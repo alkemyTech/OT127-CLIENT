@@ -29,7 +29,6 @@ import ActivityDetail from "./Components/Activities/ActivityDetail";
 import NewsDetails from "./Components/News/Detail/NewsDetails";
 import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
-import Skeleton from "./features/skeleton/Skeleton"
 
 function App() {
 	return (
@@ -136,7 +135,6 @@ function App() {
 					/>
 					<Route path="/gracias" component={Gracias} />
 					<Route path="/backoffice" component={BackOffice} />
-          <Route path="/prueba" component={() => <Skeleton mode='form'/>} />
 				</Switch>
 			</BrowserRouter>
 			<div className="App"></div>
