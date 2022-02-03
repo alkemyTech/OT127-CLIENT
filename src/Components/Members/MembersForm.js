@@ -22,7 +22,6 @@ const NewsForm = () => {
         const facebookUrl = setFormValues.facebookUrl;
         const linkedinUrl = setFormValues.linkedinUrl;
         const image = setFormValues.file;
-        console.log(name);
 
         axios
         .post( 
@@ -31,7 +30,6 @@ const NewsForm = () => {
             }
          )
         .then(function (response) {
-            console.log(response);
             // To do
             return response.config.data;
         })
