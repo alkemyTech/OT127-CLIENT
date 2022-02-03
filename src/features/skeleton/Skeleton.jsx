@@ -25,8 +25,16 @@ const Skeleton = ({ mode }) => {
           <div className="skeleton_list"></div>
         </div>
       )}
-      {mode === "image" && <div className="skeleton-image"></div>}
-      {mode === "form" && <div className="skeleton-image"></div>}
+      {mode === "image" && (
+        <div className="skeleton_image_container">
+          <div className="skeleton_image"></div>
+        </div>
+      )}
+      {mode === "form" && (
+        <div clasName="skeleton_form_container">
+          <div className="skeleton_form"></div>
+        </div>
+      )}
     </div>
   );
 };

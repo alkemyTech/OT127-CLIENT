@@ -136,7 +136,7 @@ function App() {
 					/>
 					<Route path="/gracias" component={Gracias} />
 					<Route path="/backoffice" component={BackOffice} />
-          <Route path="/prueba" component={() => <Skeleton mode='list'/>} />
+          <Route path="/prueba" component={() => <Skeleton mode='image'/>} />
 				</Switch>
 			</BrowserRouter>
 			<div className="App"></div>

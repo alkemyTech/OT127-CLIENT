@@ -83,6 +83,38 @@
   animation: loadingGradient 1s infinite;
 }
 
+.skeleton_image_container {
+  width: 100%;
+  justify-content: center;
+}
+
+.skeleton_image {
+  position: relative;
+  margin: 2em 0 1em 0;
+}
+
+.skeleton_image:empty {
+  height: 90vh;
+  width: 90%;
+  margin-left: 5%;
+  background-image: linear-gradient($skeleton-input, $skeleton-input);
+  background-size: 100% 100%;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
+
+.skeleton_image:empty:after {
+  content: "";
+  height: 6px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(to left, $light-green 0, $light-blue);
+  background-size: 200% 200%;
+  animation: loadingGradient 1s infinite;
+}
+
 @keyframes loadingGradient {
   0% {
     background-position: 0% 50%;
