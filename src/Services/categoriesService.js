@@ -1,10 +1,10 @@
 import Axios from "axios";
 
-const url = `http://ongapi.alkemy.org/api/categories`;
+const endPointCategories = process.env.REACT_APP_ENDPOINT_CATEGORIES
 
 export const getCategory = async (id) => {
 	try {
-		const {data} = await Axios.get(url + "/" + id);
+		const {data} = await Axios.get(`${endPointCategories}${id}`);
 		return data;
 	} catch (error) {
 		return error;
@@ -13,7 +13,7 @@ export const getCategory = async (id) => {
 
 export const putCategory = (id, name, description, image) => {
 	try {
-		Axios.put(url + "/" + id, {name, description, image});
+		Axios.put(`${endPointCategories}${id}`, {name, description, image});
 	} catch (error) {
 		return error;
 	}
@@ -21,7 +21,7 @@ export const putCategory = (id, name, description, image) => {
 
 export const postCategory = (name, description, image) => {
 	try {
-		Axios.post(url, {name, description, image});
+		Axios.post(`${endPointCategories}`, {name, description, image});
 	} catch (error) {
 		return error;
 	}
