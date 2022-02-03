@@ -10,3 +10,11 @@ export const sweetAlertSuccess = (text) => {
     text,
   });
 };
+
+export const sweetAlertError = (text) => {
+  MySwal.fire({
+    icon: "error",
+    title: "Hubo un problema!",
+    text,
+  });
+};
