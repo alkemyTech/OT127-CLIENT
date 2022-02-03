@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import "../CardListStyles.css";
 import Table from "@mui/material/Table";
@@ -9,34 +9,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import {getNews} from '../../features/news/newsSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 const NewsList = () => {
-  const newsMock = [
-    {
-      id: 2,
-      name: "Titulo de prueba",
-      image:
-        "https://us.123rf.com/450wm/alhovik/alhovik1709/alhovik170900031/86481591-antecedentes-de-las-noticias-de-%C3%BAltima-hora-world-global-tv-news-banner-design.jpg?ver=6",
-      description: "Descripcion de prueba",
-      createdAt: "26-01-2022",
-    },
-    {
-      id: 1,
-      name: "Titulo de prueba",
-      image:
-        "https://us.123rf.com/450wm/alhovik/alhovik1709/alhovik170900031/86481591-antecedentes-de-las-noticias-de-%C3%BAltima-hora-world-global-tv-news-banner-design.jpg?ver=6",
-      description: "Descripcion de prueba",
-      createdAt: "26-01-2022",
-    },
-    {
-      id: 3,
-      name: "Titulo de prueba",
-      image:
-        "https://us.123rf.com/450wm/alhovik/alhovik1709/alhovik170900031/86481591-antecedentes-de-las-noticias-de-%C3%BAltima-hora-world-global-tv-news-banner-design.jpg?ver=6",
-      description: "Descripcion de prueba",
-      createdAt: "26-01-2022",
-    },
-  ];
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    dispatch(getNews())
+  }, []); //eslint-disable-line
+
+  const news = useSelector(state => state.news.news.data.data)
 
   const handleClickEdit = () => {
       //TODO, acciones editar novedades 
@@ -60,18 +43,19 @@ const NewsList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {newsMock.map((mock) => (
+            {news &&
+              news.map((element) => (
               <TableRow
-                key={mock.name}
+                key={element.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {mock.name}
+                  {element.name}
                 </TableCell>
                 <TableCell align="right">
-                  <img src={mock.image} alt="News_image" width="150em" />
+                  <img src={element.image} alt="News_image" width="150em" />
                 </TableCell>
-                <TableCell align="right">{mock.createdAt}</TableCell>
+                <TableCell align="right">{element.created_at}</TableCell>
                 <TableCell align="right">
                   <Button variant="outlined" style={{ marginRight: "1em" }} onClick={handleClickEdit}>
                     Edit
