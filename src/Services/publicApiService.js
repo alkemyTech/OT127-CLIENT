@@ -26,9 +26,8 @@ export const Post = async (url, data) => {
 	//README:
 	//Ingresar la url del endpoint a utilizar
 	//Pasar objeto como argum para enviarlo en el body
-	const response = await axios
+	await axios
 	.post(url, data, config)
-	.catch((err) => err.message)
-
-  return response
+	.then(res => res)
+	.catch(err => err.message)
 }
