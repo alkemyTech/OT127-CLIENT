@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import getNews from "../../Services/newsService";
+import Spinner from "../Loaders/Spinner";
+
 
 const News = () => {
   const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+
+  
   useEffect(() => {
     getNews(setNews);
   }, []);
