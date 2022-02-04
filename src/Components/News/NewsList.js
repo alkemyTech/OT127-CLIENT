@@ -19,7 +19,7 @@ const NewsList = () => {
     dispatch(getNews())
   }, []); //eslint-disable-line
 
-  const news = useSelector(state => state.news.news.data.data)
+  const news = useSelector(state => state.newsReducer.news.data)
 
   const handleClickEdit = () => {
       //TODO, acciones editar novedades 
@@ -43,7 +43,7 @@ const NewsList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {news &&
+            {news.length &&
               news.map((element) => (
               <TableRow
                 key={element.id}
