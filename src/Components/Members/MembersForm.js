@@ -18,50 +18,42 @@ const NewsForm = () => {
     const inputFileRef = useRef();
     
     const handleSubmit = async(setFormValues) => {
-        setLoading(true);
         const name = setFormValues.name;
         const description = setFormValues.description;
         const facebookUrl = setFormValues.facebookUrl;
         const linkedinUrl = setFormValues.linkedinUrl;
-        const image = setFormValues.file;
+        const image = setFormValues.file;  
         
-        
-        const getDataById = async (id) => {
-            
-            console.log(id);
-            if (id) {
-                await axios.put(`${baseUrl}/${id}`, setFormValues).catch((err) => {
-                    console.log(formValues);
-                  alert(err.message);
-                });
-              } else {
-                await axios.post(baseUrl, setFormValues).catch((err) => {
-                    console.log(formValues);
-                  alert(err.message);
-                });
-            };
-            
-            // await axios
-            // .post( 
-            //     baseUrl, {
-            //         name, description, facebookUrl, linkedinUrl, image
-            //     }
-            //     )
-            // .then(function (response) {
-            //     // To do
-            //     return response.config.data;
-            // })
-            // .catch(function (error) {
-            //     return error;
-            // });
-        }
-        setLoading(false);
     };
-    useEffect(() => {
+
+    const getDataById = async (formValues) => {
+        setLoading(true);
         if (id) {
-            getSlideById(id);
+            axios.get(`${baseUrl}/${id}`).then((res) => {
+            setFormValues(res.data.data);
+          });
         }
-    },[]);
+
+        if (id) {
+            await axios
+            .put(`${baseUrl}/${id}`, formValues)
+            .catch((err) => {
+                alert(err.message);
+            });
+        } else {
+            await axios
+            .post(baseUrl, formValues)
+            .catch((err) => {
+                alert(err.message);
+            });
+        };
+        setLoading(false);
+        
+    }
+    
+    useEffect(() => {
+        getDataById();
+    }, []);
 
     return (
         <>
@@ -74,20 +66,20 @@ const NewsForm = () => {
                 validationSchema={Yup.object({
                 name: Yup.string()
                     .min(4, "Debe tener por lo menos 4 caracteres.")
-                    .required("Este campo es obligatorio"),
+                    .required("Campo obligatorio"),
                 description: Yup.string()
-                    .required("Este campo es obligatorio"),
+                    .required("Campo obligatorio"),
                 facebookUrl: Yup.string()
-                    .required("Este campo es obligatorio")
-                    .email('No coloco un formato valido'),
+                    .required("Campo obligatorio")
+                    .email('Formato invalido'),
                 linkedinUrl: Yup.string()
-                    .required("Este campo es obligatorio")
-                    .email('No coloco un formato valido'),
+                    .required("Campo obligatorio")
+                    .email('Formato invalido'),
                 })}
 
                 onSubmit={(formValues, {resetForm}) => {
-
                     handleSubmit(formValues);
+                    getDataById(formValues);
                     resetForm();
                 }}    
             >
