@@ -17,15 +17,6 @@ const NewsForm = () => {
     const baseUrl = 'http://ongapi.alkemy.org/api/members';
     const inputFileRef = useRef();
     
-    const handleSubmit = async(setFormValues) => {
-        const name = setFormValues.name;
-        const description = setFormValues.description;
-        const facebookUrl = setFormValues.facebookUrl;
-        const linkedinUrl = setFormValues.linkedinUrl;
-        const image = setFormValues.file;  
-        
-    };
-
     const getDataById = async (formValues) => {
         setLoading(true);
         if (id) {
@@ -78,7 +69,6 @@ const NewsForm = () => {
                 })}
 
                 onSubmit={(formValues, {resetForm}) => {
-                    handleSubmit(formValues);
                     getDataById(formValues);
                     resetForm();
                 }}    
@@ -131,7 +121,7 @@ const NewsForm = () => {
                         <Field name="linkedinUrl" type="linkedinUrl" className='input-container' />
                         <ErrorMessage name="linkedinUrl"/>
                         
-                        <button type="submit">Enviar</button>
+                        <button className='bntSubmit' type="submit">Enviar</button>
                     </Form>
                 )}
             </Formik>

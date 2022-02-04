@@ -1,9 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .container {
     width: 100%;
     height: 100vh;
@@ -41,7 +35,7 @@
             left: 30px;
         }
     }
-    button {
+    .bntSubmit {
         width: 100%;
         height: 50px;
         font-size: 1.2rem;
