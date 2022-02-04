@@ -138,6 +138,7 @@ function App() {
 					/>
 					<Route path="/gracias" component={Gracias} />
 					<Route path="/backoffice" component={BackOffice} />
+
 				</Switch>
 			</BrowserRouter>
 			<div className="App"></div>
