@@ -1,40 +1,88 @@
-import React, { useState } from 'react';
-import '../FormStyles.css';
-import '../Activities/Style.scss';
+import React, { useState, useEffect } from "react";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { useParams } from "react-router-dom";
+import "../FormStyles.css";
+import { activitiesController } from "../../Services/publicActivityService";
 
-
+const toDataURL = (blob) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
 
 const ActivitiesForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        name: '',
-        description: '',
-        area: ''
-    });
-    const handleChange = (e) => {
-        if(e.target.name === 'name'){
-            setInitialValues({...initialValues, name: e.target.value})
-        } if(e.target.name === 'description'){
-            setInitialValues({...initialValues, description: e.target.value})
-        } if (e.target.area === 'area')(
-            setInitialValues({...initialValues, area: e.target.value})
-        )
-    }
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // To do
-        return initialValues;
-    }
+  const { id } = useParams();
+  const [activity, setActivity] = useState({});
+  const { name, description, image } = activity;
 
-    
-            
-    return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Activity Title"></input>
-            <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some activity description"></input>
-            <textarea type="text" name="area"  defaultValue={ initialValues.area } onChange={handleChange} ></textarea>
-            <button className="submit-btn" type="submit"  >Submit</button><br/>
-        </form>
-    );
-}
- 
+  useEffect(() => {
+    if (id) {
+      activitiesController.getById(id).then((res) => setActivity(res));
+    }
+  }, []); //eslint-disable-line
+
+  const handleChangeName = (e) => {
+    setActivity((prevActivity) => ({ ...prevActivity, name: e.target.value }));
+  };
+
+  const handleChangeImage = (e) => {
+    const img = URL.createObjectURL(e.target.files[0]);
+    activitiesController
+      .changeImage(img)
+      .then((response) => toDataURL(response))
+      .then((encoded) => {
+        setActivity((prevActivity) => ({ ...prevActivity, image: encoded }));
+      });
+  };
+
+  const handleChangeDescription = (e, editor) => {
+    const data = editor.getData();
+    setActivity((prevActivity) => ({ ...prevActivity, description: data }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (id) {
+      activitiesController.put(id, name, description, image).then(() => {
+        alert("Actualizado");
+      });
+    } else {
+      activitiesController.post(name, description, image).then(() => {
+        alert("Actividad creada");
+      });
+    }
+  };
+
+  return (
+    <form className="form-container" onSubmit={handleSubmit}>
+      <input
+        className="input-field"
+        type="text"
+        name="name"
+        value={name}
+        onChange={handleChangeName}
+        placeholder="Activity Title"
+      />
+      <CKEditor
+        editor={ClassicEditor}
+        data={description}
+        onChange={(event, editor) => handleChangeDescription(event, editor)}
+      />
+      <input
+        type="file"
+        name="file"
+        accept=".png, .jpg"
+        onChange={handleChangeImage}
+      />
+      <img src={image} alt="" />
+      <button className="submit-btn" type="submit">
+        Send
+      </button>
+    </form>
+  );
+};
+
 export default ActivitiesForm;

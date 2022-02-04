@@ -1,0 +1,21 @@
+@mixin border-rounded() {
+  border-radius: 10px;
+}
+
+@mixin shadow() {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+//SE PUEDEN HACER KEYFRAMES
+
+// @mixin fade-in() {
+//   @keyframes fadeIn {
+//     0% {
+//       opacity: 0;
+//     }
+//     100% {
+//       opacity: 1;
+//     }
+//   }
+//   animation: fadeIn 1s linear infinite alternate;
+// }

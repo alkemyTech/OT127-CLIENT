@@ -1,0 +1,45 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+
+.button {
+  @include border-rounded;
+  border: none;
+  background-color: variables.$dark-blue;
+  color: variables.$font-white;
+  width: 160px;
+  height: 40px;
+  transition: variables.$transition-time;
+  &:hover {
+    cursor: pointer;
+    background-color: variables.$light-blue;
+  }
+}
+
+.button-sm {
+  @include border-rounded;
+  @include shadow;
+  border: none;
+  background-color: variables.$dark-blue;
+  color: variables.$font-white;
+  width: 120px;
+  height: 30px;
+  transition: variables.$transition-time;
+  &:hover {
+    cursor: pointer;
+    background-color: variables.$light-blue;
+  }
+}
+
+.button-lg {
+  @include border-rounded;
+  border: none;
+  background-color: variables.$dark-blue;
+  color: variables.$font-white;
+  width: 200px;
+  height: 50px;
+  transition: variables.$transition-time;
+  &:hover {
+    cursor: pointer;
+    background-color: variables.$light-blue;
+  }
+}
