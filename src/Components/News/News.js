@@ -9,10 +9,10 @@ const News = () => {
     dispatch(getNews())
   }, []); //eslint-disable-line
 
-  const news = useSelector(state => state.news.news.data.data)
-
+  const news = useSelector(state => state.newsReducer.news.data)
+  
   const newsList = () => {
-    return news ? (
+    return news.length ? (
       news.map((element) => (
         <li className="card-info" key={element.id}>
           <h3>{element.name}</h3>
@@ -20,7 +20,9 @@ const News = () => {
         </li>
       ))
     ) : (
+      <div>
       <p>No hay novedades</p>
+      </div>
     );
   };
 

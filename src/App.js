@@ -107,7 +107,6 @@ function App() {
           <Route path="/backoffice" component={BackOffice} />
         </Switch>
       </BrowserRouter>
-      <div className="App"></div>
     </>
   );
 }
