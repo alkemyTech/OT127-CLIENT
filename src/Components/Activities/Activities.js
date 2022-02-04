@@ -1,10 +1,10 @@
 import React from "react";
 
-const Activities = ({Activity}) => {
+const Activity = ({ message }) => {
     return(
         <div 
             className='textHTML'
-            dangerouslySetInnerHTML={{ __html: Activity }} 
+            dangerouslySetInnerHTML={{ __html: message }} 
         />
     )
 }
