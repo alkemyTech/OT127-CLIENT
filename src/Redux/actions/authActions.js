@@ -8,20 +8,8 @@
 //   profile_image: string,
 // }
 
-export const loginUser = (user) => {
-  return {
-    type: "LOGIN_USER",
-    payload: user,
-  };
-};
-export const registerUser = (user) => {
-  return {
-    type: "REGISTER_USER",
-    payload: user,
-  };
-};
-export const logoutUser = () => {
-  return {
-    type: "LOGOUT_USER",
-  };
-};
+import { createAction } from "@reduxjs/toolkit";
+
+export const loginUser = createAction("LOGIN_USER");
+export const registerUser = createAction("REGISTER_USER");
+export const logoutUser = createAction("LOGOUT_USER");
