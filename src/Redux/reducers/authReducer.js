@@ -1,16 +1,20 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { loginUser, registerUser, logoutUser } from "../actions/authActions";
+import {
+  loginUser,
+  registerUser,
+  logoutUser,
+  setToken,
+} from "../actions/authActions";
 
 const initialState = {
   userIsLogged: false,
   userData: {
     name: "",
+    lastName: "",
     email: "",
-    role_id: "",
-    remember_token: "", //TOKEN OBTENIDO DE LA API
-    address: "",
-    profile_image: "",
+    password: "",
   },
+  authToken: "",
 };
 
 export const authReducer = createReducer(initialState, (builder) => {
@@ -21,11 +25,9 @@ export const authReducer = createReducer(initialState, (builder) => {
         userIsLogged: true,
         userData: {
           name: action.payload.name,
+          lastName: action.payload.lastName,
           email: action.payload.email,
-          role_id: action.payload.role_id,
-          remember_token: action.payload.remember_token,
-          address: action.payload.address,
-          profile_image: action.payload.profile_image,
+          password: action.payload.password,
         },
       };
     })
@@ -34,11 +36,9 @@ export const authReducer = createReducer(initialState, (builder) => {
         ...state,
         userData: {
           name: action.payload.name,
+          lastName: action.payload.lastName,
           email: action.payload.email,
-          role_id: action.payload.role_id,
-          remember_token: action.payload.remember_token,
-          address: action.payload.address,
-          profile_image: action.payload.profile_image,
+          password: action.payload.password,
         },
       };
     })
@@ -48,12 +48,16 @@ export const authReducer = createReducer(initialState, (builder) => {
         userIsLogged: false,
         userData: {
           name: "",
+          lastName: "",
           email: "",
-          role_id: "",
-          remember_token: "",
-          address: "",
-          profile_image: "",
+          password: "",
         },
+      };
+    })
+    .addCase(setToken, (state, action) => {
+      return {
+        ...state,
+        authToken: action.payload.token,
       };
     })
     .addDefaultCase((state) => {
