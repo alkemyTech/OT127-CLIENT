@@ -1,3 +1,6 @@
+import { createReducer } from "@reduxjs/toolkit";
+import { loginUser, registerUser, logoutUser } from "../actions/authActions";
+
 const initialState = {
   userIsLogged: false,
   userData: {
@@ -10,11 +13,11 @@ const initialState = {
   },
 };
 
-export const authReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "LOGIN_USER": // Éstas strings en un futuro se pueden sacar de un archivo de constantes.
+export const authReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loginUser, (state, action) => {
       return {
-        // Si la accion es LOGIN_USER, userIsLogged pasa a ser true y se cargan los datos del usuario
+        ...state,
         userIsLogged: true,
         userData: {
           name: action.payload.name,
@@ -25,9 +28,9 @@ export const authReducer = (state = initialState, action) => {
           profile_image: action.payload.profile_image,
         },
       };
-    case "REGISTER_USER":
+    })
+    .addCase(registerUser, (state, action) => {
       return {
-        // Si la accion es REGISTER_USER, se cargan los datos del usuario pero no se loguea a ningún usuario
         ...state,
         userData: {
           name: action.payload.name,
@@ -38,9 +41,10 @@ export const authReducer = (state = initialState, action) => {
           profile_image: action.payload.profile_image,
         },
       };
-    case "LOGOUT_USER":
+    })
+    .addCase(logoutUser, (state, action) => {
       return {
-        // Si la accion es LOGOUT_USER, los campos se vacían
+        ...state,
         userIsLogged: false,
         userData: {
           name: "",
@@ -51,7 +55,8 @@ export const authReducer = (state = initialState, action) => {
           profile_image: "",
         },
       };
-    default:
+    })
+    .addDefaultCase((state) => {
       return state;
-  }
-};
+    });
+});
