@@ -2,7 +2,7 @@ const axios = require("axios");
 
 class ActivitiesService {
   constructor() {
-    this.API_URL = process.example.env.REACT_APP_ACTIVITIES_ENDPOINT;
+    this.API_URL = process.env.REACT_APP_ACTIVITIES_ENDPOINT;
   }
 
   getAll = async () => {
