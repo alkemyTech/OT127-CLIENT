@@ -42,7 +42,7 @@ export const authReducer = createReducer(initialState, (builder) => {
         },
       };
     })
-    .addCase(logoutUser, (state, action) => {
+    .addCase(logoutUser, (state) => {
       return {
         ...state,
         userIsLogged: false,
