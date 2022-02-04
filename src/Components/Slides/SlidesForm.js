@@ -8,9 +8,9 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
-import axios from "axios";
 
 import "../FormStyles.css";
+import { getSlidesData, getSlidesDataById, updateSlide, createNewSlide } from "../../Services/slidesApiService";
 
 const SlidesForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -23,11 +23,9 @@ const SlidesForm = () => {
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
-  const url = "http://ongapi.alkemy.org/api/slides";
 
   const getOrdersList = async () => {
-    await axios
-      .get(url)
+    await getSlidesData()
       .then((res) => {
         let data = res.data.data;
         // arreglo de order utilizados
@@ -44,8 +42,8 @@ const SlidesForm = () => {
   const getSlideById = async (id) => {
     setLoading(true);
 
-    await axios
-      .get(`${url}/${id}`)
+
+    await getSlidesDataById(id)
       .then((res) => {
         if (res.data.success) {
           const { name, description, order, image } = res.data.data;
@@ -97,11 +95,11 @@ const SlidesForm = () => {
     }
 
     if (id) {
-      await axios.put(`${url}/${id}`, formValues).catch((err) => {
+      await updateSlide(formValues, id).catch((err) => {
         alert(err.message);
       });
     } else {
-      await axios.post(url, formValues).catch((err) => {
+      await createNewSlide(formValues).catch((err) => {
         alert(err.message);
       });
     }
