@@ -31,7 +31,7 @@ import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
 import Activities from "./Components/Activities/Activities";
 import HomeForm from "./Components/Backoffice/HomeForm";
-
+import Skeleton from "./features/skeleton/Skeleton"
 function App() {
 	return (
 		// Agregar newsletter en footer
@@ -138,6 +138,10 @@ function App() {
 					/>
 					<Route path="/gracias" component={Gracias} />
 					<Route path="/backoffice" component={BackOffice} />
+					<Route
+						path="/prueba"
+						component={() => <Skeleton mode='singleCard' />}
+					/>
 				</Switch>
 			</BrowserRouter>
 			<div className="App"></div>

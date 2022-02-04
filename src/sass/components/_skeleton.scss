@@ -1,17 +1,16 @@
 @use "../abstracts/variables";
 @use "../abstracts/mixins";
 
-.skeleton_card_container {
-  display: flex;
-  margin: 2em 0 0 0;
-  width: 100%;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .skeleton_card {
   position: relative;
   margin: 1em 1em 1em 1em;
+  &_container {
+    display: flex;
+    margin: 2em 0 0 0;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   &:empty {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -38,14 +37,13 @@
   }
 }
 
-.skeleton_list_container {
-  width: 100%;
-  justify-content: center;
-}
-
 .skeleton_list {
   position: absolute;
   margin: 2em 0 1em 0;
+  &_container{
+    width: 100%;
+    justify-content: center;
+  }
   &:empty {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -79,14 +77,13 @@
   }
 }
 
-.skeleton_image_container {
-  width: 100%;
-  justify-content: center;
-}
-
 .skeleton_image {
   position: relative;
   margin: 2em 0 1em 0;
+  &_image{
+    width: 100%;
+    justify-content: center;
+  }
   & :empty {
     height: 90vh;
     width: 90%;
@@ -109,17 +106,16 @@
   }
 }
 
-.skeleton_form_container {
-  display: flex;
-  margin: 8vh 0 0 0;
-  width: 100%;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
 .skeleton_form {
   position: relative;
   margin: 1em 1em 1em 1em;
+  &_container{
+    display: flex;
+    margin: 8vh 0 0 0;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   &:empty {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
