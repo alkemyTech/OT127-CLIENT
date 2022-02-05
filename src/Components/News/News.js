@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react"
-import getNews from "../../Services/newsService"
-import Spinner from "../Loaders/Spinner"
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { getNews } from '../../Redux/reducers/newsSlice'
+import Spinner from "../Loaders/Spinner";
 
 const News = () => {
-	const [news, setNews] = useState([])
+	const dispatch = useDispatch()
+	const [ isLoading, setIsLoading ] = useState(true)
 
 	useEffect(() => {
-		getNews(setNews)
-	}, [])
+		dispatch(getNews())
+		setIsLoading(false)
+	}, []); //eslint-disable-line
+
+	const news = useSelector(state => state.newsReducer.news.data)
 
 	const newsList = () => {
 		return news.length ? (
@@ -18,16 +23,19 @@ const News = () => {
 				</li>
 			))
 		) : (
-			<Spinner />
-		)
-	}
+			null
+		);
+	};
 
 	return (
 		<>
-				<div>
+			{isLoading
+				? <Spinner />
+				: (<div>
 					<h1>Novedades</h1>
 					<ul className="list-container">{newsList()}</ul>
 				</div>
+				)}
 		</>
 	)
 }
