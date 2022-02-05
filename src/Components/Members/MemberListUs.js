@@ -1,18 +1,26 @@
-import { useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "./styles.scss";
 
-//redux
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMembers } from "../../Redux/reducers/membersSlice";
-
 const MemberListUs = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchMembers());
-  }, []); //eslint-disable-line
+  const url = "http://ongapi.alkemy.org/api/members";
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const { members, loading } = useSelector((state) => state.membersReducer);
+  const getMembers = async () => {
+    await axios
+      .get(url)
+      .then((res) => {
+        setMembers(res.data.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+  useEffect(() => {
+    getMembers();
+  }, []);
 
   return (
     <>
