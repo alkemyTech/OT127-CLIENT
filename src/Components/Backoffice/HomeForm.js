@@ -4,8 +4,6 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import './HomeForm.scss'
 
-import ActivityList from './Activities';
-
 const HomeForm = () => {
     const [welcomeText, setWelcomeText] = useState('')
     const [initialValues, setInitialValues] = useState({
@@ -151,7 +149,6 @@ const HomeForm = () => {
                     <button type='submit' className='form__button button'>GUARDAR CAMBIOS</button>
                 </Form>)}
             </Formik >
-            <ActivityList></ActivityList>
         </div>
     )
 }
