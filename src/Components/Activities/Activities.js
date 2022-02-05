@@ -1,6 +1,6 @@
 import React from "react";
 
-const Activity = ({ message }) => {
+const Activities = ({ message }) => {
     return(
         <div 
             className='textHTML'
