@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Get } from "../../Services/publicApiService";
 
 export const getUsers = createAsyncThunk("get/getUsers", async () => {
-    const response = await Get("http://ongapi.alkemy.org/api/testimonials");
+    const response = await Get("http://ongapi.alkemy.org/api/users");
     return response.data.data;
 })
 
