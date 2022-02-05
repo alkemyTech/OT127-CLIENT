@@ -15,17 +15,16 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMembers } from "../../Redux/reducers/membersSlice";
+
 const MembersList = () => {
-  const [membersList, setMembersList] = useState([]);
-
-  const getMembersList = async () => {
-    const res = await getMembers();
-    setMembersList(res.data.data);
-  };
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    getMembersList();
-  }, []);
+    dispatch(fetchMembers());
+  }, []); //eslint-disable-line
+
+  const { list } = useSelector((state) => state.membersReducer);
 
   const handleEdit = (id) => {
     // Logica a desarrollar
@@ -73,7 +72,7 @@ const MembersList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {membersList.map((member) => (
+            {list.map((member) => (
               <StyledTableRow key={member.id}>
                 <StyledTableCell scope="row">{member.name}</StyledTableCell>
                 <StyledTableCell>
