@@ -30,6 +30,7 @@ import NewsDetails from "./Components/News/Detail/NewsDetails";
 import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
 import Activities from "./Components/Activities/Activities";
+import HomeForm from "./Components/Backoffice/HomeForm";
 
 function App() {
 	return (
@@ -61,7 +62,8 @@ function App() {
 					<Route path="/categories" component={CategoriesList} />
 					<Route path="/backoffice/slides" component={SlideList} />
 					<Route path="/create-news" component={NewsForm} />
-          <Route path="/news/:id" component={NewsForm} />
+					<Route path="/backoffice/home" component={HomeForm} />
+					<Route path="/news/:id" component={NewsForm} />
 					<Route
 						path="/backoffice/create-slide"
 						component={SlidesForm}
