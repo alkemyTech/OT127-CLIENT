@@ -20,13 +20,14 @@ export const getSecureHeader = () => {
     : { error: "No token found" };
 };
 
+//metodo post tarjeta 70
 export const privateServicePatch = (route, id, data) => {
   let url = id ? `${route}/${id}` : route;
   let token = getSecureHeader();
   const { Authorization, error } = token;
 
   if (Authorization) {
-    axios.patch(url, data, {
+    axios.post(url, data, {
       header: {
         ...config.headers,
         Authorization,
