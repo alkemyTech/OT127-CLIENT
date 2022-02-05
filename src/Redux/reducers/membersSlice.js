@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getMembers } from "../../Services/membersService";
 
+const initialState = {
+  members: [],
+  loading: false,
+  status: null,
+};
+
 export const fetchMembers = createAsyncThunk(
   "members/fetchMembers",
   async () => {
@@ -11,11 +17,7 @@ export const fetchMembers = createAsyncThunk(
 
 const membersSlice = createSlice({
   name: "members",
-  initialState: {
-    list: [],
-    loading: false,
-    status: null,
-  },
+  initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -26,7 +28,7 @@ const membersSlice = createSlice({
         state.loading = false;
         state.status = "success";
         // agrega todos los miembros obtenidos al array
-        state.list = action.payload;
+        state.members = action.payload;
       })
       .addCase(fetchMembers.rejected, (state, action) => {
         state.loading = false;
