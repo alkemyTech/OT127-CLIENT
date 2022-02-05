@@ -8,4 +8,4 @@ const Activity = ({ message }) => {
         />
     )
 }
-export default Activities;
+export default Activity;
