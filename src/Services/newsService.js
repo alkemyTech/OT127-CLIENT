@@ -8,7 +8,13 @@ const getNews = async (setMethod) => {
     let newsFromAPI = await Get(url, null);
     let data = newsFromAPI.data.data;
     setMethod(data);
-  } catch (error) {}
+  } catch (error) {
+    if (error.response.status === 500) {
+      sweetAlertError("Ha ocurrido un problema en el servidor!");
+    } else {
+      sweetAlertError("Ha ocurrido un problema!");
+    }
+  }
 };
 
 export default getNews;
