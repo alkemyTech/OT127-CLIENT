@@ -12,7 +12,7 @@ const initialState = {
     error: null
 }
 // el "status" puede ser "idle", "loading", "succeded", "failed", nos sirve para el userfeedback
-const postsSlice = createSlice({
+const usersSlice = createSlice({
     name: "users",
     initialState,
     reducers: {},
