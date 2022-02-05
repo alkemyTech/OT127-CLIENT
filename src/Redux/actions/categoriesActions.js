@@ -35,8 +35,8 @@ export const getCategoriesAction = (id) => async (dispatch) => {
 	try {
 		dispatch(startFetchingCategories());
 		const data = await getCategory(id);
-		const {name, description, image} = data.data;
-		dispatch(startFetchingCategories({name, description, image}));
+		// const {name, description, image} = data.data;
+		dispatch(startFetchingCategories({data}));
 	} catch (error) {
 		dispatch(errorFetchingCategories({error}));
 	}
