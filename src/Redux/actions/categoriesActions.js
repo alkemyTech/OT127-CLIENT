@@ -14,4 +14,21 @@ export const errorFetchingCategories = createAction(
 	"ERROR_FETCGING_CATEGORIES"
 );
 
- 
+//* creamos el thunk para el get(luego puedo levantar las banderas en cada una de las acciones)
+export const fetchCategories = (id) => async(dispatch) => {
+  try {
+    dispatch(startFetchingCategories())
+    const data = await getCategory(id)
+    const {name, description, image} = data.data;
+    dispatch(startFetchingCategories({name, description, image}))
+  } catch (error) {
+    dispatch(errorFetchingCategories({error}))
+  }
+}
+
+
+
+//* creamos el thunk para el put
+
+
+//* creamos el thunk para el post
