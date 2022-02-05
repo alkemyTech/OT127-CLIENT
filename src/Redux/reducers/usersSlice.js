@@ -8,23 +8,28 @@ export const getUsers = createAsyncThunk("get/getUsers", async () => {
 
 const initialState = {
     users: [],
-    status: 'idle',
+    status: "idle", // el "status" puede ser "idle", "loading", "succeded", "failed", nos sirve para el userfeedback
     error: null
 }
-// el "status" puede ser "idle", "loading", "succeded", "failed", nos sirve para el userfeedback
+
 const usersSlice = createSlice({
     name: "users",
     initialState,
     reducers: {},
     extraReducers: {
+        // los siguientes bloques de codigo se ejecutaran segun el estado de la peticion "getUsers"
         [getUsers.pending.type]: (state, action) => {
-
+            state.status = "loading"
         },
         [getUsers.fulfilled.type]: (state, action) => {
-
+            state.status = "succeeded"
+            state.users = action.payload
         },
         [getUsers.rejected.type]: (state, action) => {
-
+            state.status = "failed"
+            state.error = action.payload
         },
     },
-});
+})
+
+export default usersSlice.reducer
