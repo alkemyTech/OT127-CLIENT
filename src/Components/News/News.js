@@ -4,11 +4,9 @@ import Spinner from "../Loaders/Spinner"
 
 const News = () => {
 	const [news, setNews] = useState([])
-	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		getNews(setNews)
-		setLoading(false)
 	}, [])
 
 	const newsList = () => {
@@ -20,20 +18,16 @@ const News = () => {
 				</li>
 			))
 		) : (
-			<p>No hay novedades</p>
+			<Spinner />
 		)
 	}
 
 	return (
 		<>
-			{loading ? (
-				<Spinner />
-			) : (
 				<div>
 					<h1>Novedades</h1>
 					<ul className="list-container">{newsList()}</ul>
 				</div>
-			)}
 		</>
 	)
 }
