@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {authReducer} from "../reducers/authReducer";
+import { authReducer } from "../reducers/authReducer";
 import newsReducer from "../reducers/newsSlice"
+import usersReducer from "../reducers/usersSlice"
 
 export default configureStore({
   reducer: {
     authReducer: authReducer,
-    newsReducer: newsReducer
+    newsReducer: newsReducer,
+    usersReducer: usersReducer
   },
 });
