@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { getSlides } from "../../Redux/reducers/slidesSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,8 +10,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./SlideList.css";
-import { getSlides } from "../../Redux/reducers/slidesSlice";
-import { useSelector, useDispatch } from "react-redux";
 
 const SlideList = () => {
   const dispatch = useDispatch();
