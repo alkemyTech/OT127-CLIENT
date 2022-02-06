@@ -2,7 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getSlidesData } from "../../Services/slidesApiService";
 
 export const getSlides = createAsyncThunk("slides/getSlides", () => {
-  getSlidesData().then((res) => res.data.data);
+  return getSlidesData().then((res) => {
+    return res.data.data;
+  });
 });
 
 export const slidesSlice = createSlice({
@@ -10,25 +12,27 @@ export const slidesSlice = createSlice({
   initialState: {
     slides: {
       status: "idle",
-      data: {},
+      data: [],
       error: {},
     },
   },
   reducers: {},
   extraReducers: {
-    [getSlides.fulfilled.type]: (state, action) => {
+    [getSlides.fulfilled]: (state, action) => {
       state.slides = {
         status: "idle",
         data: action.payload,
         error: {},
       };
     },
-    [getSlides.rejected.type]: (state, action) => {
+    [getSlides.rejected]: (state, action) => {
       state.slides = {
         status: "idle",
-        data: {},
+        data: [],
         error: action.payload,
       };
     },
   },
 });
+
+export default slidesSlice.reducer;
