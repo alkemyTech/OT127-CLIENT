@@ -68,7 +68,7 @@ export const getPrivate = async (route, id = null) => {
   }
 };
 
-export const privateServicePost = (route, data) => {
+export const privatePost = (route, data) => {
   let url = route;
   let token = getSecureHeader();
   const { Authorization, error } = token;
