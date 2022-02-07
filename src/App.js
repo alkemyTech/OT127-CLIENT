@@ -52,7 +52,6 @@ function App() {
             component={ActivitiesForm}
           />
           <Route path="/contacto" component={Contact} />
-          <Route path="/novedades" component={News} />
           <Route
             path="/novedades/:id"
             component={() => <NewsDetails title="Titulo recibido por props" />}
