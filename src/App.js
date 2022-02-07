@@ -29,7 +29,6 @@ import ActivityDetail from "./Components/Activities/ActivityDetail";
 import NewsDetails from "./Components/News/Detail/NewsDetails";
 import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Activities from "./Components/Activities/Activities";
 import HomeForm from "./Components/Backoffice/HomeForm";
 
