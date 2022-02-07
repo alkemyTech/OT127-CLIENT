@@ -3,7 +3,7 @@ const { sweetAlertError } = require("./sweetAlertServices");
 
 class ActivitiesService {
   constructor() {
-    this.API_URL = "http://ongapi.alkemy.org/api/activites";
+    this.API_URL = process.env.REACT_APP_ACTIVITIES_ENDPOINT;
   }
 
   getAll = async () => {

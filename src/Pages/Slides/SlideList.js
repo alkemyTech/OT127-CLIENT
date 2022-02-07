@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { getSlides } from "../../Redux/reducers/slidesSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,43 +12,13 @@ import Paper from "@mui/material/Paper";
 import "./SlideList.css";
 
 const SlideList = () => {
-  const slideList = {
-    data: [
-      {
-        id: 1,
-        name: "Ignacio",
-        image: "http://ongapi.alkemy.org/storage/j8Uo4skOTP.jpeg",
-        order: 5454,
-      },
-      {
-        id: 2,
-        name: "Roman",
-        image: "http://ongapi.alkemy.org/storage/rEZJhWbxCx.jpeg",
-        order: 8989,
-      },
-      {
-        id: 3,
-        name: "Título de prueba",
-        image: "http://ongapi.alkemy.org/storage/tRMcq6w2JV.jpeg",
-        order: 1,
-      },
-      {
-        id: 4,
-        name: "myslide",
-        image: "http://ongapi.alkemy.org/storage/ae5LYQeuId.png",
-        order: 4555,
-      },
-    ],
-  };
-  const [slides, setSlides] = useState([]);
-
-  const getSlidesData = () => {
-    setSlides(slideList.data);
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getSlidesData();
+    dispatch(getSlides());
   }, []);
+
+  const slides = useSelector((state) => state.slidesReducer.slides.data);
 
   const rows = slides;
 
@@ -64,31 +36,26 @@ const SlideList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows &&
-              rows.map(({ id, name, image, order }) => (
-                <TableRow key={id}>
-                  <TableCell align="center">{name}</TableCell>
-                  <TableCell align="center">
-                    <img src={image} alt="" className="imageTable" />
-                  </TableCell>
-                  <TableCell align="center">{order}</TableCell>
-                  <TableCell>
-                    <button>
-                      <Link to={`/backoffice/slides/edicion/${id}`}>
-                        Editar
-                      </Link>
-                    </button>
-                  </TableCell>
-                  <TableCell align="center">
-                    <button>
-                      {/*TODO: Crear ruta*/}
-                      <Link to={`/backoffice/slides/delete/${id}`}>
-                        Eliminar
-                      </Link>
-                    </button>
-                  </TableCell>
-                </TableRow>
-              ))}
+            {rows.map(({ id, name, image, order }) => (
+              <TableRow key={id}>
+                <TableCell align="center">{name}</TableCell>
+                <TableCell align="center">
+                  <img src={image} alt="" className="imageTable" />
+                </TableCell>
+                <TableCell align="center">{order}</TableCell>
+                <TableCell>
+                  <button>
+                    <Link to={`/backoffice/slides/edicion/${id}`}>Editar</Link>
+                  </button>
+                </TableCell>
+                <TableCell align="center">
+                  <button>
+                    {/*TODO: Crear ruta*/}
+                    <Link to={`/backoffice/slides/delete/${id}`}>Eliminar</Link>
+                  </button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
