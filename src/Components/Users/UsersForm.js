@@ -107,12 +107,12 @@ const UserForm = () => {
         <Form>
           <div>
             <label htmlFor="name">Nombre</label>
-            <Field name="name" type="text" />
+            <Field name="name" type="text" className="input" />
             <ErrorMessage name="name" />
           </div>
           <div>
             <label htmlFor="email">Email</label>
-            <Field name="email" type="email" />
+            <Field name="email" type="email" className="input" />
             <ErrorMessage name="email" />
           </div>
           <div>
@@ -130,7 +130,7 @@ const UserForm = () => {
           </div>
           <div>
             <label htmlFor="password">Contraseña</label>
-            <Field name="password" type="password"></Field>
+            <Field name="password" type="password" className="input"></Field>
             <ErrorMessage name="password" />
           </div>
           <div>
