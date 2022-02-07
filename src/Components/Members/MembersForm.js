@@ -10,20 +10,21 @@ import './Members.scss';
 import { useParams } from 'react-router-dom';
 
 
+
 const NewsForm = () => {
-    const {id} = useParams();
+    const id = useParams();
     const [loading, setLoading] = useState(false);
     const [formValues, setFormValues] = useState({name: "", description: "", facebookUrl: "", linkedinUrl: "", file: ""});
     const baseUrl = 'http://ongapi.alkemy.org/api/members';
     const inputFileRef = useRef();
-    
-    const getDataById = async (formValues) => {
+
+    const handleSubmit = async(setFormValues) => {
         setLoading(true);
-        if (id) {
-            axios.get(`${baseUrl}/${id}`).then((res) => {
-            setFormValues(res.data.data);
-          });
-        }
+        const name = setFormValues.name;
+        const description = setFormValues.description;
+        const facebookUrl = setFormValues.facebookUrl;
+        const linkedinUrl = setFormValues.linkedinUrl;
+        const image = setFormValues.file;
 
         if (id) {
             await axios
@@ -39,7 +40,29 @@ const NewsForm = () => {
             });
         };
         setLoading(false);
-        
+    }
+
+    const handleChange = (e) => {
+        if (e.target.name === "name") {
+          setFormValues({ ...formValues, name: e.target.value });
+        }
+        if (e.target.name === "description") {
+            setFormValues({ ...formValues, description: e.target.value });
+        }
+    }
+
+    const getDataById = async (setFormValues) => {
+        setLoading(true);
+        if (id) {
+            axios
+            .get(`${baseUrl}/${id}`)
+            .then((res) => {
+                setFormValues(res.data.data);
+            }).catch((err) => {
+                alert(err.message);
+            });
+        }
+        setLoading(false);
     }
     
     useEffect(() => {
@@ -69,7 +92,7 @@ const NewsForm = () => {
                 })}
 
                 onSubmit={(formValues, {resetForm}) => {
-                    getDataById(formValues);
+                    handleSubmit(formValues);
                     resetForm();
                 }}    
             >
