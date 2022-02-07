@@ -33,7 +33,6 @@ import UserForm from "./Components/Users/UsersForm";
 import UsersList from "./Components/Users/UsersList";
 
 function App() {
-<<<<<<< HEAD
 	return (
 		// Agregar newsletter en footer
 		<>
