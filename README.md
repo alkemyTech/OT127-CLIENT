@@ -107,3 +107,27 @@ Ejemplo de uso:
 primaryColor y backgroundColor reciben valores hexadecimales y rgb en formato string.
 
 height y borderRadius reciben valores numericos que se representan en px. height={10} borderRadius={5} representa 10px y 5px respectivamente.
+
+### Componente Spinner
+
+Muestra una animación cuando se cargan los componentes, para darle feedback al usuario.
+
+El componente ya viene con valores por defecto y se puede utilizar solo.
+
+![Spinner](./public/images/spinner.gif)
+
+```
+<Spinner />
+```
+
+Si se desea personalizar se puede hacer mediante props. Se puede modificar el color principal con color, la altura con height y el ancho con width.
+
+Ejemplo de uso:
+
+```
+<Spinner color= "#faf" height={10} width={5} />
+```
+
+color recibe un valor hexadecimal.
+
+height y width reciben valores numericos que se representan en px.
