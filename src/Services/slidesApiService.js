@@ -2,8 +2,6 @@ import axios from "axios";
 
 const url = process.env.REACT_APP_ENDPOINT_SLIDES;
 
-console.log(url);
-
 const toDataURL = (blob) =>
   // Para convertir los links de imagenes a base64
   new Promise((resolve, reject) => {
