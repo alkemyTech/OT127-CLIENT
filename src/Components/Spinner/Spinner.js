@@ -1,9 +1,9 @@
 import React from "react";
-import { Rings } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 
-const Spinner = ({ color, height, width }) => {
+const Spinner = ({ color = "#000", height = 100, width = 100 }) => {
   //Cuando sea implementado, es importante revisar el color y el tamaño por posibles retoques
-  return <Rings color={color} height={height} width={width} />;
+  return <TailSpin color={color} height={height} width={width} />;
 };
 
 export default Spinner;
