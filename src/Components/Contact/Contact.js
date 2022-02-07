@@ -11,7 +11,7 @@ const Contact = ({name, short_description, address, phone, cellphone}) => {
 	return (
 		<>
 			{error ? (
-				<Error>En estos momento no podemos procesar su solicitud por favor intente nuevamente</Error>
+				sweetAlertError()
 			) : (
 				<div className="contact">
 					<div className="contact__title-text">
