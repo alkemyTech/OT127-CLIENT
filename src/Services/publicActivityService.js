@@ -11,7 +11,7 @@ class ActivitiesService {
     await axios
       .get(this.API_URL)
       .then((response) => (data = response.data.data))
-      .catch((error) => sweetAlertError(error.message));
+      .catch(() => sweetAlertError("No se pudo cargar las actividades"));
     return data;
   };
 
@@ -21,7 +21,7 @@ class ActivitiesService {
       await axios
         .get(`${this.API_URL}/${id}`)
         .then((response) => (data = response.data.data))
-        .catch((error) => sweetAlertError(error.message));
+        .catch(() => sweetAlertError("No se pudo cargar la actividad"));
       return data;
     }
   };
@@ -34,7 +34,7 @@ class ActivitiesService {
         image,
       })
       .then((response) => response.data)
-      .catch((error) => sweetAlertError(error.message));
+      .catch(() => sweetAlertError("No se pudo crear la actividad"));
   };
 
   put = async (id, name, description, image) => {
@@ -46,7 +46,7 @@ class ActivitiesService {
           image,
         })
         .then((response) => response.data)
-        .catch((error) => sweetAlertError(error.message));
+        .catch(() => sweetAlertError("No se pudo editar la actividad"));
     }
   };
 
@@ -55,7 +55,7 @@ class ActivitiesService {
       await axios
         .delete(`${this.API_URL}/${id}`)
         .then((response) => response.data)
-        .catch((error) => error.message);
+        .catch(sweetAlertError("No se pudo eliminar la actividad"));
     }
   };
 
