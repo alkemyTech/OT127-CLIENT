@@ -33,6 +33,7 @@ import UserForm from "./Components/Users/UsersForm";
 import UsersList from "./Components/Users/UsersList";
 
 function App() {
+<<<<<<< HEAD
 	return (
 		// Agregar newsletter en footer
 		<>
@@ -110,7 +111,7 @@ function App() {
 					<Route path="/gracias" component={Gracias} />
 					<Route path="/login" component={LoginForm} />
 					<Route path="/news/:id" component={NewsForm} />
-					<Route path="/novedades" component={News} />
+					<Route path="/novedades" exact component={News} />
 					<Route
 						path="/novedades/:id"
 						component={() => (

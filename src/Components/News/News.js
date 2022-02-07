@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
-import getNews from "../../Services/newsService";
+import React, {useEffect} from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import {getNews} from '../../Redux/reducers/newsSlice'
 
 const News = () => {
-  const [news, setNews] = useState([]);
-
+  const dispatch = useDispatch()
+  
   useEffect(() => {
-    getNews(setNews);
-  }, []);
+    dispatch(getNews())
+  }, []); //eslint-disable-line
 
+  const news = useSelector(state => state.newsReducer.news.data)
+  
   const newsList = () => {
     return news.length ? (
       news.map((element) => (
@@ -17,7 +20,9 @@ const News = () => {
         </li>
       ))
     ) : (
+      <div>
       <p>No hay novedades</p>
+      </div>
     );
   };
 
