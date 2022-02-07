@@ -114,7 +114,7 @@ Muestra una animación cuando se cargan los componentes, para darle feedback al 
 
 El componente ya viene con valores por defecto y se puede utilizar solo.
 
-![Spinner](./public/images/spinner.gif)
+![Spinner](./public/images/spinner2.gif)
 
 ```
 <Spinner />
