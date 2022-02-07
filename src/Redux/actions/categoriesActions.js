@@ -8,7 +8,7 @@ export const successFetchingCategories = createAction(
 	"SUCCESS_FETCHING_CATEGORIES"
 );
 export const errorFetchingCategories = createAction(
-	"ERROR_FETCGING_CATEGORIES"
+	"ERROR_FETCHING_CATEGORIES"
 );
 
 export const getCategoriesAction = () => async (dispatch) => {
