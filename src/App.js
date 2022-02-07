@@ -51,6 +51,9 @@ function App() {
 						path="/backoffice/activities/:id"
 						component={ActivitiesForm}
 					/>
+					<Route path="/backoffice/create-category" component={CategoriesForm} />
+					<Route path="/backoffice/create-member" component={MembersForm} />
+					<Route path="/backoffice/create-news" component={NewsForm} />
 					<Route
 						path="/backoffice/create-project"
 						component={ProjectsForm}
@@ -58,6 +61,10 @@ function App() {
 					<Route
 						path="/backoffice/create-slide"
 						component={SlidesForm}
+					/>
+					<Route
+						path="/backoffice/create-testimonials"
+						component={TestimonialForm}
 					/>
 					<Route
 						path="/backoffice/create-user"
@@ -95,15 +102,6 @@ function App() {
 					<Route path="/backoffice/users" component={UsersList} />
 					<Route path="/categories" component={CategoriesList} />
 					<Route path="/contacto" component={Contact} />
-					<Route path="/create-activity" component={ActivitiesForm} />
-					<Route path="/create-category" component={CategoriesForm} />
-					<Route path="/create-member" component={MembersForm} />
-					<Route path="/create-news" component={NewsForm} />
-					<Route path="/create-project" component={ProjectsForm} />
-					<Route
-						path="/create-testimonials"
-						component={TestimonialForm}
-					/>
 					<Route
 						path="/donar"
 						component={() => <Donacion message="Quieres donar?" />}
