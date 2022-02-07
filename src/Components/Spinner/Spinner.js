@@ -1,9 +1,9 @@
 import React from "react";
 import { Rings } from "react-loader-spinner";
 
-const Spinner = () => {
+const Spinner = ({ color, height, width }) => {
   //Cuando sea implementado, es importante revisar el color y el tamaño por posibles retoques
-  return <Rings color="#000" height={80} width={80} />;
+  return <Rings color={color} height={height} width={width} />;
 };
 
 export default Spinner;
