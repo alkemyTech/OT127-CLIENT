@@ -7,7 +7,7 @@ const OrganizationData = () => {
 
 	const getOrgData = () => {
 		axios
-			.get(`${process.env.REACT_APP_API}/${process.env.REACT_APP_API_ORGANIZATION}`)
+			.get(`${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_ORGANIZATION}`)
 			.then((response) => {
 				setOrganizationData(response.data.data);
 			})
