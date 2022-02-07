@@ -1,7 +1,7 @@
 import {useState} from "react";
 import Title from "../Titulosynovedades/Title";
 import "./contact.scss";
-import Error from "../Error/Error";
+import {sweetAlertError} from "../../Services/sweetAlertServices"
 
 const Contact = ({name, short_description, address, phone, cellphone}) => {
 
