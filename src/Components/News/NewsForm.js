@@ -6,36 +6,37 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import axios from "axios";
+import { sweetAlertError } from "../../Services/sweetAlertServices";
 import "../FormStyles.css";
 
 const NewsForm = () => {
   const [initialValues, setInitialValues] = useState({
     name: "",
     contenido: "",
-    categorie:"",
+    categorie: "",
     image: "",
   });
-  const [ordersList, setOrdersList] = useState([]); 
+  const [ordersList, setOrdersList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dataCategorie, setDataCategorie] = useState([]);
 
   const { id } = useParams();
   const url = "http://ongapi.alkemy.org/api/news";
-  const urlCategories = 'http://ongapi.alkemy.org/api/categories';
+  const urlCategories = "http://ongapi.alkemy.org/api/categories";
 
   const getCategorieData = () => {
     if (id) {
-          axios.get(urlCategories)
-              .then((response) => {
-                  const dataCategorie = response.data.data;
-                  setDataCategorie(dataCategorie);
-              })
-              .catch((error) => {
-                  return error;
-          });
-
-      } 
-  }
+      axios
+        .get(urlCategories)
+        .then((response) => {
+          const dataCategorie = response.data.data;
+          setDataCategorie(dataCategorie);
+        })
+        .catch((error) => {
+          return error;
+        });
+    }
+  };
 
   const getOrdersList = async () => {
     await axios
@@ -83,7 +84,7 @@ const NewsForm = () => {
     }
     getOrdersList();
     getCategorieData();
-  }, []); 
+  }, []);
 
   const toBase64 = (file) => {
     return new Promise((resolve) => {
@@ -106,20 +107,15 @@ const NewsForm = () => {
     }
 
     if (id) {
-      await axios
-      .put(`${url}/${id}`, formValues)
-      .catch((err) => {
-        alert(err.message);
+      await axios.put(`${url}/${id}`, formValues).catch((err) => {
+        sweetAlertError("No se pudo actualizar esta novedad.");
       });
     } else {
-      await axios
-      .post(url, formValues)
-      .catch((err) => {
-        alert(err.message);
+      await axios.post(url, formValues).catch((err) => {
+        sweetAlertError("No se pudo crear esta novedad.");
       });
     }
   };
-
 
   const inputFileRef = useRef();
 
@@ -171,7 +167,7 @@ const NewsForm = () => {
                 placeholder="titulo"
               />
               <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
-              
+
               <label htmlFor="contenido">Contenido</label>
               <Field name="contenido">
                 {({ field }) => (
@@ -194,16 +190,21 @@ const NewsForm = () => {
                 render={(msg) => <div>{msg}</div>}
               />
 
-              <label htmlFor="categorie">Categorias</label> 
-                <Field component="select" as='select' name="categorie" type="categorie">
-                    {dataCategorie.map(element => {
-                        return (
-                            <option key={element.id} value={element.id}>
-                                {element.name}
-                            </option>
-                        )
-                    })}
-                </Field>
+              <label htmlFor="categorie">Categorias</label>
+              <Field
+                component="select"
+                as="select"
+                name="categorie"
+                type="categorie"
+              >
+                {dataCategorie.map((element) => {
+                  return (
+                    <option key={element.id} value={element.id}>
+                      {element.name}
+                    </option>
+                  );
+                })}
+              </Field>
               <ErrorMessage name="categorie" />
 
               <label htmlFor="categorie">Cargar Imagen</label>
