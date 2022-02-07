@@ -40,8 +40,8 @@ function App() {
 			<BrowserRouter>
 				<Switch>
 					<Route path="/" exact component={Home} />
-					<Route path="/actividades" component={Activities} />
 					<Route path="/actividades/:id" component={ActivityDetail} />
+					<Route path="/actividades" component={Activities} />
 					<Route path="/backoffice" component={BackOffice} />
 					<Route
 						path="/backoffice/create-activity"
@@ -67,12 +67,12 @@ function App() {
 						component={TestimonialForm}
 					/>
 					<Route
-						path="/backoffice/create-user"
-						exact
+						path="/backoffice/create-user/:id"
 						component={UserForm}
 					/>
 					<Route
-						path="/backoffice/create-user/:id"
+						path="/backoffice/create-user"
+						exact
 						component={UserForm}
 					/>
 					<Route path="/backoffice/home" component={HomeForm} />
@@ -109,13 +109,13 @@ function App() {
 					<Route path="/gracias" component={Gracias} />
 					<Route path="/login" component={LoginForm} />
 					<Route path="/news/:id" component={NewsForm} />
-					<Route path="/novedades" exact component={News} />
 					<Route
 						path="/novedades/:id"
 						component={() => (
 							<NewsDetails title="Titulo recibido por props" />
 						)}
 					/>
+					<Route path="/novedades" exact component={News} />
 					<Route
 						path="/nosotros"
 						component={() => <About text="Sobre Nosotros" />}
