@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// Material UI
 import {
   Container,
   Table,
@@ -14,39 +15,23 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 
-const MembersList = () => {
-  const membersMock = [
-    {
-      id: 1,
-      name: "Nombre y Apellido",
-      photo:
-        "https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    },
-    {
-      id: 2,
-      name: "Nombre y Apellido",
-      photo:
-        "https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    },
-    {
-      id: 3,
-      name: "Nombre",
-      photo:
-        "https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    },
-    {
-      id: 4,
-      name: "Nombre",
-      photo:
-        "https://images.unsplash.com/photo-1585670210693-e7fdd16b142e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    },
-  ];
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMembers } from "../../Redux/reducers/membersSlice";
 
-  const handleEdit = {
+const MembersList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchMembers());
+  }, []); //eslint-disable-line
+
+  const { members } = useSelector((state) => state.membersReducer);
+
+  const handleEdit = (id) => {
     // Logica a desarrollar
   };
 
-  const handleDelete = {
+  const handleDelete = (id) => {
     // Logica a desarrollar
   };
 
@@ -74,7 +59,7 @@ const MembersList = () => {
       border: 0,
     },
   }));
-  // fin de stilos
+  // fin de estilos
   return (
     <Container maxWidth="md">
       <Link to="/backoffice/members/create">Create Member</Link>
@@ -88,17 +73,17 @@ const MembersList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {membersMock.map((member) => (
+            {members.map((member) => (
               <StyledTableRow key={member.id}>
                 <StyledTableCell scope="row">{member.name}</StyledTableCell>
                 <StyledTableCell>
-                  <img src={member.photo} alt={member.name} width="50px" />
+                  <img src={member.image} alt={member.name} width="50px" />
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "25%" }}>
-                  <Button color="success" onClick={handleEdit}>
+                  <Button color="success" onClick={() => handleEdit(member.id)}>
                     Editar
                   </Button>{" "}
-                  <Button color="error" onClick={handleDelete}>
+                  <Button color="error" onClick={() => handleDelete(member.id)}>
                     Eliminar
                   </Button>
                 </StyledTableCell>
