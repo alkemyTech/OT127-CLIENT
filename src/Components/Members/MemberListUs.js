@@ -3,13 +3,13 @@ import axios from "axios";
 import "./styles.scss";
 
 const MemberListUs = () => {
-  const url = "http://ongapi.alkemy.org/api/members";
+  const endPointMenbers = process.env.REACT_APP_ENDPOINT_MENBERS;
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const getMembers = async () => {
     await axios
-      .get(url)
+      .get(endPointMenbers)
       .then((res) => {
         setMembers(res.data.data);
         setLoading(false);
