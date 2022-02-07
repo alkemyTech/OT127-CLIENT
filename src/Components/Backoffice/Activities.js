@@ -14,7 +14,7 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 
-const ActivityList = () => {
+const ActivitiesMock = () => {
   const categoryMock = [
     {
       id: 1,
@@ -111,4 +111,4 @@ const ActivityList = () => {
   );
 };
 
-export default ActivityList;
+export default ActivitiesMock;
