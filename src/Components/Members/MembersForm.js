@@ -11,14 +11,14 @@ import { useParams } from 'react-router-dom';
 
 
 
-const NewsForm = () => {
+const MemberForm = () => {
     const id = useParams();
     const [loading, setLoading] = useState(false);
     const [formValues, setFormValues] = useState({name: "", description: "", facebookUrl: "", linkedinUrl: "", file: ""});
     const baseUrl = 'http://ongapi.alkemy.org/api/members';
     const inputFileRef = useRef();
 
-    const handleSubmit = async(setFormValues) => {
+    const handleSubmit = async(formValues) => {
         setLoading(true);
         const name = setFormValues.name;
         const description = setFormValues.description;
@@ -42,16 +42,15 @@ const NewsForm = () => {
         setLoading(false);
     }
 
-    const handleChange = (e) => {
-        if (e.target.name === "name") {
-          setFormValues({ ...formValues, name: e.target.value });
-        }
-        if (e.target.name === "description") {
-            setFormValues({ ...formValues, description: e.target.value });
-        }
-    }
+    const handleChange = (e, setFieldValue) => {
+        let reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onloadend = () => {
+          setFieldValue("img", reader.result);
+        };
+    };
 
-    const getDataById = async (setFormValues) => {
+    const getDataById = async (formValues) => {
         setLoading(true);
         if (id) {
             axios
@@ -66,7 +65,9 @@ const NewsForm = () => {
     }
     
     useEffect(() => {
-        getDataById();
+        if (id) {
+            getDataById(id);
+        }
     }, []);
 
     return (
@@ -99,7 +100,12 @@ const NewsForm = () => {
                 {({ setFieldValue }) => (
                     <Form className='form'>
                         <label htmlFor="name">Nombre</label>
-                        <Field name="name" type="titulo" className='input-container' />
+                        <Field 
+                            name="name" 
+                            type="titulo" 
+                            className='input-container' 
+                            
+                        />
                         <ErrorMessage name="name" />
 
                         <label htmlFor="description">Descripcion</label>
@@ -126,22 +132,33 @@ const NewsForm = () => {
 
                         <label htmlFor="categorie">Cargar Imagen</label>
                         <input
+                            name="img"
                             ref={inputFileRef}
                             className='inputs'
                             type="file"
                             onChange={(e) => {
-                            setFieldValue("image", e.currentTarget.files[0]);
+                                handleChange(e, setFieldValue);
                             }}
                             accept=".jpg, .png"
                         />
                         <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
 
                         <label htmlFor="facebookUrl">Facebook</label> 
-                        <Field name="facebookUrl" type="facebookUrl" className='input-container' />
+                        <Field 
+                            name="facebookUrl" 
+                            type="facebookUrl" 
+                            className='input-container'
+                            
+                        />
                         <ErrorMessage name="facebookUrl"/>
 
                         <label htmlFor="linkedinUrl">LinkedIn</label> 
-                        <Field name="linkedinUrl" type="linkedinUrl" className='input-container' />
+                        <Field 
+                            name="linkedinUrl" 
+                            type="linkedinUrl" 
+                            className='input-container'
+                            
+                        />
                         <ErrorMessage name="linkedinUrl"/>
                         
                         <button className='bntSubmit' type="submit">Enviar</button>
@@ -152,4 +169,4 @@ const NewsForm = () => {
         </>
     );
 }
-export default NewsForm;
+export default MemberForm;
