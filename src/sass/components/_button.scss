@@ -1,45 +1,71 @@
 @use "../abstracts/variables";
 @use "../abstracts/mixins";
+@use "../base/typography";
 
-.button {
+@mixin button-base() {
+  @include outfit-regular-bold;
   @include border-rounded;
+  @include shadow;
   border: none;
+  transition: variables.$transition-time;
+}
+
+@mixin button-md() {
+  @include button-base();
   background-color: variables.$dark-blue;
   color: variables.$font-white;
   width: 160px;
   height: 40px;
-  transition: variables.$transition-time;
   &:hover {
     cursor: pointer;
     background-color: variables.$light-blue;
   }
 }
 
-.button-sm {
-  @include border-rounded;
-  @include shadow;
-  border: none;
+@mixin button-sm() {
+  @include button-base();
   background-color: variables.$dark-blue;
   color: variables.$font-white;
   width: 120px;
   height: 30px;
-  transition: variables.$transition-time;
   &:hover {
     cursor: pointer;
     background-color: variables.$light-blue;
   }
 }
 
-.button-lg {
-  @include border-rounded;
-  border: none;
+@mixin button-lg() {
+  @include button-base();
   background-color: variables.$dark-blue;
   color: variables.$font-white;
   width: 200px;
   height: 50px;
-  transition: variables.$transition-time;
   &:hover {
     cursor: pointer;
     background-color: variables.$light-blue;
+  }
+}
+
+@mixin button-success() {
+  @include button-base();
+  background-color: variables.$med-green;
+  color: variables.$font-white;
+  width: 160px;
+  height: 40px;
+  &:hover {
+    cursor: pointer;
+    background-color: variables.$light-green;
+  }
+}
+
+@mixin button-danger() {
+  @include button-base();
+  background-color: variables.$med-red;
+  color: variables.$font-white;
+  width: 160px;
+  height: 40px;
+  &:hover {
+    cursor: pointer;
+    background-color: variables.$light-red;
   }
 }
