@@ -35,7 +35,7 @@ import HomeForm from "./Components/Backoffice/HomeForm";
 function App() {
   return (
     // Agregar newsletter en footer
-    <>
+    <div className="App">
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -107,7 +107,7 @@ function App() {
           <Route path="/backoffice" component={BackOffice} />
         </Switch>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 export default App;
