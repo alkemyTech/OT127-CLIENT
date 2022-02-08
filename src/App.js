@@ -43,7 +43,7 @@ function App() {
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/actividades" component={Activities} />
           <Route path="/create-category" component={CategoriesForm} />
-          {/* <Route path="/novedades" component={News} /> */}
+          <Route path="/novedades" component={News} />
           <Route path="/contacto" component={Contact} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/actividades/:id" component={ActivityDetail} />
