@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Skeleton from "../../features/skeleton/Skeleton";
 
 const Commentaries = () => {
   const [comments, setComments] = useState([]);
-  useEffect(() => {
-    axios
+ 
+  axios
       .get("http://ongapi.alkemy.org/api/comments")
       .then((res) => {
         setTimeout(function () {
@@ -15,7 +15,6 @@ const Commentaries = () => {
       .catch((error) => {
         return error;
       });
-  }, []);
 
   return (
     <div>
