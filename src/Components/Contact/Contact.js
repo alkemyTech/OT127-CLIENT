@@ -9,10 +9,12 @@ const Contact = () => {
 	const [error, setError] = useState(false);
 	const [contacts, setContacts] = useState([]);
 
+	const endPointContacts = process.env.REACT_APP_ENDPOINT_CONTACTS
+
 	// Peticion a la API
 	const getContact = async () => {
 		try {
-			const {data} = await axios.get(`http://ongapi.alkemy.org/api/contacts`);
+			const {data} = await axios.get(endPointContacts);
 			const contactsAPI = data.data;
 			// Utilice un filter para no guardar tantos datos en el estado local ya que hay como 700 contactos
 			const filterData = contactsAPI.filter((contact) => contact.id < 25);
