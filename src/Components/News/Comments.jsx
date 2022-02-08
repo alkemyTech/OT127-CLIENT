@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Skeleton from "../../features/skeleton/Skeleton";
 
-const Commentaries = () => {
+const Comments = () => {
   const [comments, setComments] = useState([]);
  
   axios
@@ -30,4 +30,4 @@ const Commentaries = () => {
   );
 };
 
-export default Commentaries;
+export default Comments;
