@@ -1,34 +1,30 @@
-import React from "react";
+import {useEffect} from "react";
 import {Link} from "react-router-dom";
 
+import {useDispatch} from "react-redux";
+import {useSelector, shallowEqual} from "react-redux";
+import {getCategoriesAction} from "../../Redux/actions/categoriesActions";
+import {
+	isFetchingCategoriesSel,
+	categoriesSel,
+	messageCategoriesSel,
+	errorCategoriesSel,
+} from "../../Redux/selector/selectorCategories";
+
 const CategoriesList = () => {
-	const categories = [
-		{
-			id: 1541,
-			name: "edit category",
-			created_at: "2022-01-06T14:47:01.000000Z",
-		},
-		{
-			id: 1544,
-			name: "cat create",
-			created_at: "2022-01-06T20:13:01.000000Z",
-		},
-		{
-			id: 1552,
-			name: "probando probando",
-			created_at: "2022-01-07T03:31:07.000000Z",
-		},
-		{
-			id: 1595,
-			name: "members",
-			created_at: "2022-01-27T00:19:53.000000Z",
-		},
-		{
-			id: 1604,
-			name: "nuevos123123",
-			created_at: "2022-01-27T12:14:26.000000Z",
-		},
-	];
+
+	const dispatch = useDispatch();
+	const isFetchingCategories = useSelector(
+		isFetchingCategoriesSel,
+		shallowEqual
+	);
+	const categories = useSelector(categoriesSel, shallowEqual);
+	const messageCategories = useSelector(messageCategoriesSel, shallowEqual);
+	const errorCategories = useSelector(errorCategoriesSel, shallowEqual);
+
+	useEffect(() => {
+		dispatch(getCategoriesAction());
+	}, []);
 
 	const handleDate = (fecha) => {
 		const newDate = new Date(fecha);
@@ -64,7 +60,7 @@ const CategoriesList = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{categories.map((categori) => (
+					{categories?.data.map((categori) => (
 						<tr key={categori.id}>
 							<td>{categori.name}</td>
 							<td>{handleDate(categori.created_at)}</td>
