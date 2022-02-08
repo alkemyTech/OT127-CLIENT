@@ -21,7 +21,7 @@ const Skeleton = ({ mode, quantity }) => {
         </div>
       )}
       {mode === "list" && (
-        <div clasName="skeleton_list_container">
+        <div className="skeleton_list_container">
           <div className="skeleton_list"></div>
         </div>
       )}
