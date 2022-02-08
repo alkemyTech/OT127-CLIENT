@@ -1,7 +1,5 @@
 # Ong Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -109,3 +107,27 @@ Ejemplo de uso:
 primaryColor y backgroundColor reciben valores hexadecimales y rgb en formato string.
 
 height y borderRadius reciben valores numericos que se representan en px. height={10} borderRadius={5} representa 10px y 5px respectivamente.
+
+### Componente Spinner
+
+Muestra una animación cuando se cargan los componentes, para darle feedback al usuario.
+
+El componente ya viene con valores por defecto y se puede utilizar solo.
+
+![Spinner](./public/images/spinner2.gif)
+
+```
+<Spinner />
+```
+
+Si se desea personalizar se puede hacer mediante props. Se puede modificar el color principal con color, el tamaño con size, y el color secundario con secondaryColor.
+
+Ejemplo de uso:
+
+```
+<Spinner color= "#faf" size={100} secondaryColor="#000" />
+```
+
+color y secondaryColor recibe un valor hexadecimal.
+
+size recibe un número.
