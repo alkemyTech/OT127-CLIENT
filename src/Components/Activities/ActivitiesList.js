@@ -3,8 +3,8 @@ import '../CardListStyles.css';
 
 const ActivitiesList = () => {
     const activitiesMock = [
-        {id: 2, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
         {id: 1, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
+        {id: 2, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
         {id: 3, name: 'Titulo de prueba', description: 'Descripcion de prueba'}
     ];
 
