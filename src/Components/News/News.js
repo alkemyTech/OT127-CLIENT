@@ -20,7 +20,7 @@ const News = () => {
       news.map((element) => (
         <li className="card-info" key={element.id}>
           <h3>{element.name}</h3>
-          <p>{element.description}</p>
+          <p>{element.content}</p>
         </li>
       ))
     ) : (
