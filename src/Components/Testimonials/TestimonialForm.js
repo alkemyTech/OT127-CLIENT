@@ -6,7 +6,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react"
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
 import axios from "axios"
 
-import "../FormStyles.css"
+import "../../sass/components/_form.scss"
 import "./styles.scss"
 
 const TestimonialForm = () => {
@@ -81,7 +81,7 @@ const TestimonialForm = () => {
 					values
 				)
 				formik.setSubmitting(false)
-			alert("Testimonio actualizado correctamente")
+				alert("Testimonio actualizado correctamente")
 			} catch (error) {
 				alert(error)
 			}
@@ -184,11 +184,11 @@ const TestimonialForm = () => {
 										handleChange(event, props)
 									}}
 								/>
-								 <img
-										className="form__image-preview"
-										src={props.values.image}
-										alt="imgPreview"
-									/>
+								<img
+									className="form__image-preview"
+									src={props.values.image}
+									alt="imgPreview"
+								/>
 							</div>
 							<small className="form__text-error">
 								{props.initialTouched.image && props.errors.image}
@@ -223,15 +223,15 @@ const TestimonialForm = () => {
 									Actualizar
 								</button>
 							) : (
-									<button
-										type="submit"
-										disabled={
-											!(props.isValid && props.dirty) ||
-											props.isSubmitting
-										}
-									>
-										Crear
-									</button>
+								<button
+									type="submit"
+									disabled={
+										!(props.isValid && props.dirty) ||
+										props.isSubmitting
+									}
+								>
+									Crear
+								</button>
 							)}
 						</Form>
 					)

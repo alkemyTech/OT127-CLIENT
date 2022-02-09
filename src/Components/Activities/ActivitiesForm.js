@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useParams } from "react-router-dom";
-import "../FormStyles.css";
-import axios from "axios";
+import "../../sass/components/_form.scss";
+import { activitiesController } from "../../Services/publicActivityService";
 
 const toDataURL = (blob) =>
   new Promise((resolve, reject) => {
@@ -13,8 +13,6 @@ const toDataURL = (blob) =>
     reader.readAsDataURL(blob);
   });
 
-const API_URL = "http://ongapi.alkemy.org/api/activities";
-
 const ActivitiesForm = () => {
   const { id } = useParams();
   const [activity, setActivity] = useState({});
@@ -22,11 +20,9 @@ const ActivitiesForm = () => {
 
   useEffect(() => {
     if (id) {
-      axios.get(`${API_URL}/${id}`).then((res) => {
-        setActivity(res.data.data);
-      });
+      activitiesController.getById(id).then((res) => setActivity(res));
     }
-  }, []);
+  }, []); //eslint-disable-line
 
   const handleChangeName = (e) => {
     setActivity((prevActivity) => ({ ...prevActivity, name: e.target.value }));
@@ -34,9 +30,9 @@ const ActivitiesForm = () => {
 
   const handleChangeImage = (e) => {
     const img = URL.createObjectURL(e.target.files[0]);
-    axios
-      .get(img, { responseType: "blob" })
-      .then((response) => toDataURL(response.data))
+    activitiesController
+      .changeImage(img)
+      .then((response) => toDataURL(response))
       .then((encoded) => {
         setActivity((prevActivity) => ({ ...prevActivity, image: encoded }));
       });
@@ -50,17 +46,13 @@ const ActivitiesForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      axios.put(`${API_URL}/${id}`, {
-        name,
-        description,
-        image,
-      }); //TODO: Controlar errores (Catch)
+      activitiesController.put(id, name, description, image).then(() => {
+        alert("Actualizado");
+      });
     } else {
-      axios.post(API_URL, {
-        name,
-        description,
-        image,
-      }); //TODO: Controlar errores (Catch)
+      activitiesController.post(name, description, image).then(() => {
+        alert("Actividad creada");
+      });
     }
   };
 

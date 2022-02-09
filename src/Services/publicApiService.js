@@ -2,7 +2,7 @@ import axios from "axios";
 
 const config = {
   headers: {
-    Group: 127, //Aqui va el ID del equipo!!
+    group_id: 127, //Aqui va el ID del equipo!!
   },
 };
 
@@ -21,3 +21,13 @@ const Get = async (url, id) => {
 };
 
 export { Get };
+	
+export const Post = async (url, data) => {
+	//README:
+	//Ingresar la url del endpoint a utilizar
+	//Pasar objeto como argum para enviarlo en el body
+	await axios
+	.post(url, data, config)
+	.then(res => res)
+	.catch(err => err.message)
+}

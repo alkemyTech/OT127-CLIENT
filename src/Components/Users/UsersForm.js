@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
-import "../FormStyles.css";
+import "../../sass/components/_form.scss";
 
 const UserForm = () => {
   const { id } = useParams();
@@ -56,11 +56,11 @@ const UserForm = () => {
   const handleSubmit = (values) => {
     id
       ? axios.put(`${urlUsers}/${id}`, values).catch((error) => {
-          //TODO
-        })
+        //TODO
+      })
       : axios.post(urlUsers, values).catch((error) => {
-          //TODO
-        });
+        //TODO
+      });
   };
 
   const handleChange = (e, setFieldValue) => {
@@ -144,7 +144,9 @@ const UserForm = () => {
             />
             <ErrorMessage name="profilePhoto" />
           </div>
-          <button type="submit">{id ? "Guardar" : "Crear"}</button>
+          <button className="button-sm" type="submit">
+            {id ? "Guardar" : "Crear"}
+          </button>
         </Form>
       )}
     </Formik>
