@@ -96,70 +96,73 @@ const MemberForm = () => {
                 }}    
             >
                 {({ setFieldValue }) => (
-                    <Form className='form'>
-                        <label htmlFor="name">Nombre</label>
-                        <Field 
-                            name="name" 
-                            type="titulo" 
-                            className='input-container' 
-                            
-                        />
-                        <ErrorMessage name="name" />
+                    <Form className='member__container'>
+                        <div className='member__form'>
 
-                        <label htmlFor="description">Descripcion</label>
-                        <Field name="description" className='input-container'>
-                            {({ field }) => (
-                            <>
-                                <CKEditor
-                                config={{
-                                    language: "es",
+                            <label htmlFor="name">Nombre</label>
+                            <Field 
+                                name="name" 
+                                type="titulo" 
+                                className='input-container' 
+                                
+                            />
+                            <ErrorMessage name="name" />
+
+                            <label htmlFor="description">Descripcion</label>
+                            <Field name="description" className='input-container'>
+                                {({ field }) => (
+                                <>
+                                    <CKEditor
+                                    config={{
+                                        language: "es",
+                                    }}
+                                    editor={ClassicEditor}
+                                    data={field.value}
+                                    onChange={(event, editor) => {
+                                        setFieldValue(field.name, editor.getData());
+                                    }}
+                                    />
+                                </>
+                                )}
+                            </Field>
+                            <ErrorMessage
+                                name="description"
+                                render={(msg) => <div>{msg}</div>} 
+                            />
+
+                            <label htmlFor="image">Cargar Imagen</label>
+                            <input
+                                name="image"
+                                ref={inputFileRef}
+                                className='member__input'
+                                type="file"
+                                accept=".jpg, .png"
+                                onChange={(e) => {
+                                    handleImage(e, setFieldValue);
                                 }}
-                                editor={ClassicEditor}
-                                data={field.value}
-                                onChange={(event, editor) => {
-                                    setFieldValue(field.name, editor.getData());
-                                }}
-                                />
-                            </>
-                            )}
-                        </Field>
-                        <ErrorMessage
-                            name="description"
-                            render={(msg) => <div>{msg}</div>} 
-                        />
+                            />
+                            <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
 
-                        <label htmlFor="image">Cargar Imagen</label>
-                        <input
-                            name="image"
-                            ref={inputFileRef}
-                            className='inputs'
-                            type="file"
-                            accept=".jpg, .png"
-                            onChange={(e) => {
-                                handleImage(e, setFieldValue);
-                            }}
-                        />
-                        <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
+                            <label htmlFor="facebookUrl">Facebook</label> 
+                            <Field 
+                                name="facebookUrl" 
+                                type="facebookUrl" 
+                                className='input-container'
+                                
+                            />
+                            <ErrorMessage name="facebookUrl"/>
 
-                        <label htmlFor="facebookUrl">Facebook</label> 
-                        <Field 
-                            name="facebookUrl" 
-                            type="facebookUrl" 
-                            className='input-container'
+                            <label htmlFor="linkedinUrl">LinkedIn</label> 
+                            <Field 
+                                name="linkedinUrl" 
+                                type="linkedinUrl" 
+                                className='input-container'
+                                
+                            />
+                            <ErrorMessage name="linkedinUrl"/>
                             
-                        />
-                        <ErrorMessage name="facebookUrl"/>
-
-                        <label htmlFor="linkedinUrl">LinkedIn</label> 
-                        <Field 
-                            name="linkedinUrl" 
-                            type="linkedinUrl" 
-                            className='input-container'
-                            
-                        />
-                        <ErrorMessage name="linkedinUrl"/>
-                        
-                        <button className='bntSubmit' type="submit">Enviar</button>
+                            <button className='bntSubmit' type="submit">Enviar</button>
+                        </div>
                     </Form>
                 )}
             </Formik>
