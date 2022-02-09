@@ -29,7 +29,6 @@ import ActivityDetail from "./Components/Activities/ActivityDetail";
 import NewsDetails from "./Components/News/Detail/NewsDetails";
 import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Activities from "./Components/Activities/Activities";
 import HomeForm from "./Components/Backoffice/HomeForm";
 
@@ -53,11 +52,11 @@ function App() {
             component={ActivitiesForm}
           />
           <Route path="/contacto" component={Contact} />
-          <Route path="/novedades" component={News} />
           <Route
             path="/novedades/:id"
             component={() => <NewsDetails title="Titulo recibido por props" />}
           />
+          <Route path="/novedades" component={News} />
           <Route path="/categories" component={CategoriesList} />
           <Route path="/backoffice/slides" component={SlideList} />
           <Route path="/create-news" component={NewsForm} />
