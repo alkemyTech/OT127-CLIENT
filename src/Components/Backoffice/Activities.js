@@ -14,8 +14,8 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 
-const ActivitiesMock = () => {
-  const categoryMock = [
+const ActivitiesList  = () => {
+  const activitiesMock = [
     {
       id: 1,
       name: "Nombre y Apellido",
@@ -88,7 +88,7 @@ const ActivitiesMock = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {categoryMock.map((category) => (
+            {activitiesMock.map((category) => (
               <StyledTableRow key={category.id}>
                 <StyledTableCell scope="row">{category.name}</StyledTableCell>
                 <StyledTableCell>
@@ -111,4 +111,4 @@ const ActivitiesMock = () => {
   );
 };
 
-export default ActivitiesMock;
+export default ActivitiesList ;
