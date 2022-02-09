@@ -13,5 +13,6 @@ export default configureStore({
     membersReducer: membersReducer,
     slidesReducer,
     usersReducer: usersReducer,
+    categoriesReducer
   },
 });
