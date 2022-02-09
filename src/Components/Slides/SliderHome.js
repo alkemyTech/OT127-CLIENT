@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { getSlides } from "../../Redux/reducers/slidesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import "../../sass/components/_carousel.scss";
+import "../../sass/components/_slider.scss";
 
 const SliderHome = () => {
   const carousel = useRef(null);
