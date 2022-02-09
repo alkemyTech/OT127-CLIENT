@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../sass/pages/newsletter.scss";
+import "../../sass/components/newsletter.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
