@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../FormStyles.scss';
+import '../../sass/components/_form.scss';
 
 const TestimonialForm = () => {
     const [initialValues, setInitialValues] = useState({

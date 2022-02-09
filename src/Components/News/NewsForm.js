@@ -7,7 +7,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import axios from "axios";
 import { sweetAlertError } from "../../Services/sweetAlertServices";
-import "../FormStyles.scss";
+import "../../sass/components/_form.scss";
 
 const NewsForm = () => {
   const [initialValues, setInitialValues] = useState({

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../FormStyles.scss";
+import "../../sass/components/_form.scss";
 
 // Todo: extender servicios http members cuando el componente este listo
 

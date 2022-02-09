@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../FormStyles.scss";
+import "../../sass/components/_form.scss";
 
 const RegisterForm = () => {
   return (
