@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import "./UsersList.scss"
+import "../../sass/pages/UsersList.scss"
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../Redux/reducers/usersSlice';
