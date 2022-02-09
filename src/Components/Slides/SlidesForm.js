@@ -9,7 +9,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 
-import "../FormStyles.css";
+import "../FormStyles.scss";
 import { getSlidesData, getSlidesDataById, updateSlide, createNewSlide } from "../../Services/slidesApiService";
 
 const SlidesForm = () => {
