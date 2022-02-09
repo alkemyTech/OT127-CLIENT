@@ -26,58 +26,57 @@ import About from "./Components/About/About";
 import NewsDetails from "./Components/News/Detail/NewsDetails";
 
 function App() {
-  return (
-    // Agregar newsletter en footer
-    <>
-      <BrowserRouter>
-        <Switch>
-				  <Route path="/" exact component={TestimonialForm} />
+	return (
+		// Agregar newsletter en footer
+		<>
+			<BrowserRouter>
+				<Switch>
+					<Route path="/" exact component={Home} />
 
-          <Route
-            path="/backoffice/create-activity"
-            component={ActivitiesForm}
-          />
+					<Route
+						path="/backoffice/create-activity"
+						component={ActivitiesForm}
+					/>
+					<Route path="/create-category" component={CategoriesForm} />
+					<Route path="/contact" component={ContactForm} />
+					<Route path="/novedades/:id" component={() => <NewsDetails title="Titulo recibido por props" />} />
+					<Route path="/novedades" component={News} />
+					<Route path="/create-news" component={NewsForm} />
+					<Route path="/backoffice/slides/creacion" component={SlidesForm} />
+					<Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
+					<Route path="/backoffice/organization" component={OrganizationData} />
+					<Route
+						path="/backoffice/organization/edit"
+						component={OrganizationForm}
+					/>
+					<Route path="/create-testimonials" component={TestimonialForm} />
+					<Route path="/backoffice/create-user" exact component={UserForm} />
+					<Route path="/backoffice/create-user/:id" component={UserForm} />
+					<Route path="/backoffice/news" component={NewsList} />
+					<Route path="/create-member" component={MembersForm} />
+					<Route path="/backoffice/create-project" component={ProjectsForm} />
+					<Route path="/school-campaign" component={SchoolCampaign} />
+					<Route path="/toys-campaign" component={ToysCampaign} />
+					<Route path="/login" component={LoginForm} />
+					<Route path="/register" component={RegisterForm} />
+					<Route path="/backoffice/activities/:id" component={ActivitiesForm} />
+					<Route path="/backoffice/projects/:id" component={ProjectsForm} />
+					<Route
+						path="/nosotros"
+						component={() => <About text="Sobre Nosotros" />}
+					/>
+					<Route
+						path="/donar"
+						component={() => <Donacion message="Quieres donar?" />}
+					/>
+					<Route path="/gracias" component={Gracias} />
+					<Route path="/backoffice" component={BackOffice} />
+				</Switch>
+			</BrowserRouter>
 
-          <Route path="/create-category" component={CategoriesForm} />
-          <Route path="/contact" component={ContactForm} />
-          <Route path="/novedades/:id" component={() => <NewsDetails title="Titulo recibido por props" />} />
-          <Route path="/novedades" component={News} />
-          <Route path="/create-news" component={NewsForm} />
-          <Route path="/backoffice/slides/creacion" component={SlidesForm} />
-          <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
-          <Route path="/backoffice/organization" component={OrganizationData} />
-          <Route
-            path="/backoffice/organization/edit"
-            component={OrganizationForm}
-          />
-          <Route path="/create-testimonials" component={TestimonialForm} />
-          <Route path="/backoffice/create-user" exact component={UserForm} />
-          <Route path="/backoffice/create-user/:id" component={UserForm} />
-          <Route path="/backoffice/news" component={NewsList} />
-          <Route path="/create-member" component={MembersForm} />
-          <Route path="/backoffice/create-project" component={ProjectsForm} />
-          <Route path="/school-campaign" component={SchoolCampaign} />
-          <Route path="/toys-campaign" component={ToysCampaign} />
-          <Route path="/login" component={LoginForm} />
-          <Route path="/register" component={RegisterForm} />
-          <Route path="/backoffice/activities/:id" component={ActivitiesForm} />
-          <Route path="/backoffice/projects/:id" component={ProjectsForm} />
-          <Route
-            path="/nosotros"
-            component={() => <About text="Sobre Nosotros" />}
-          />
-          <Route
-            path="/donar"
-            component={() => <Donacion message="Quieres donar?" />}
-          />
-          <Route path="/gracias" component={Gracias} />
-          <Route path="/backoffice" component={BackOffice} />
-        </Switch>
-      </BrowserRouter>
-
-      <div className="App"></div>
-    </>
-  );
+			<div className="App"></div>
+		</>
+	);
 }
 
 export default App;

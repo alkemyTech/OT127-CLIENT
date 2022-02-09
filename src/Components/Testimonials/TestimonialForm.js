@@ -17,7 +17,6 @@ const TestimonialForm = () => {
 	const url = "http://ongapi.alkemy.org/api/testimonials"
 
 	const { id } = useParams()
-	// const id = 78
 
 	const Post = async (url, body) => {
 		try {
@@ -71,7 +70,6 @@ const TestimonialForm = () => {
 				)
 				formik.setSubmitting(false)
 				alert("Testimonio creado correctamente")
-				resetForm()
 			} catch (error) {
 				alert(error)
 			}
@@ -83,8 +81,7 @@ const TestimonialForm = () => {
 					values
 				)
 				formik.setSubmitting(false)
-				resetForm()
-				return alert("Testimonio actualizado correctamente")
+			alert("Testimonio actualizado correctamente")
 			} catch (error) {
 				alert(error)
 			}
@@ -130,17 +127,9 @@ const TestimonialForm = () => {
 		}
 	}
 
-	const handleChangeDescription = (event, editor, props) => {
+	const handleChangeCKE = (event, editor, props) => {
 		const data = editor.getData()
 		props.setFieldValue("description", data)
-	}
-	const resetForm = (props) => {
-		const clear = ""
-		props.setFieldValue("name", clear)
-		props.setFieldValue("image", clear)
-		props.setFieldValue("description", clear)
-
-		inputFileRef.current.value = ""
 	}
 
 	const inputFileRef = useRef()
@@ -148,18 +137,22 @@ const TestimonialForm = () => {
 	const ErrorYup = Yup.object().shape({
 		name: Yup.string()
 			.required("El campo nombre es requerido.")
-			.min(4, "El nombre de debe tener al menos 4 caracteres"),
+			.min(4, "El nombre debe tener al menos 4 caracteres"),
 		description: Yup.string().required("El campo descripcion es requerido."),
 		image: Yup.string().required("La imagen es requerida."),
 	})
+
+	const resetForm = (e, propsFormik) => {
+		propsFormik.resetForm()
+		inputFileRef.current.value = null
+	}
 
 	return (
 		<div>
 			<Formik
 				initialValues={{ name, description, image }}
 				onSubmit={(values, formik) => {
-					submitForm(values, formik,{resetForm})
-					resetForm({values:""})
+					submitForm(values, formik)
 				}}
 				validationSchema={ErrorYup}
 				enableReinitialize={true}
@@ -169,7 +162,7 @@ const TestimonialForm = () => {
 					return (
 						<Form className="form">
 							<h3 className="form__header-title">Testimonial Form</h3>
-							<label className="form__label">Name: </label>
+							<label className="form__label">Nombre: </label>
 							<Field
 								name="name"
 								type="text"
@@ -179,7 +172,7 @@ const TestimonialForm = () => {
 								{props.initialTouched && props.errors.name}
 							</small>
 							<label className="form__label">
-								Image:
+								Imagen:
 							</label>
 							<div className="form__image-container">
 								<input
@@ -191,26 +184,22 @@ const TestimonialForm = () => {
 										handleChange(event, props)
 									}}
 								/>
-								<img
-									className="form__image-preview"
-									src={props.values.image}
-									alt="ImgPreview"
-									onError={(e) => {
-										e.target.src =
-											"/images/placeholder/370x240.png"
-									}}
-								/>
+								 <img
+										className="form__image-preview"
+										src={props.values.image}
+										alt="imgPreview"
+									/>
 							</div>
 							<small className="form__text-error">
 								{props.initialTouched.image && props.errors.image}
 							</small>
-							<label className="form__label">Description: </label>
+							<label className="form__label">Descripcion: </label>
 							<CKEditor
 								name="description"
 								editor={ClassicEditor}
 								data={description}
 								onChange={(event, editor) => {
-									handleChangeDescription(
+									handleChangeCKE(
 										event,
 										editor,
 										props
@@ -220,7 +209,10 @@ const TestimonialForm = () => {
 							<small className="form__text-error">
 								{props.initialTouched.description && props.errors.description}
 							</small>
-
+							<button type="button"
+								onClick={(event) => resetForm(event, props)}>
+								Reset
+							</button>
 							{!create ? (
 								<button
 									type="submit"
@@ -228,20 +220,18 @@ const TestimonialForm = () => {
 										!props.isValid || props.isSubmitting
 									}
 								>
-									{" "}
 									Actualizar
 								</button>
 							) : (
-								<button
-									type="submit"
-									disabled={
-										!(props.isValid && props.dirty) ||
-										props.isSubmitting
-									}
-								>
-									{" "}
-									Crear
-								</button>
+									<button
+										type="submit"
+										disabled={
+											!(props.isValid && props.dirty) ||
+											props.isSubmitting
+										}
+									>
+										Crear
+									</button>
 							)}
 						</Form>
 					)
