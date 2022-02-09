@@ -56,7 +56,6 @@ function App() {
             path="/novedades/:id"
             component={() => <NewsDetails title="Titulo recibido por props" />}
           />
-          <Route path="/novedades" component={News} />
           <Route path="/categories" component={CategoriesList} />
           <Route path="/backoffice/slides" component={SlideList} />
           <Route path="/create-news" component={NewsForm} />
