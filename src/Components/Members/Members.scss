@@ -1,3 +1,9 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+
+
+
 .container {
     width: 100%;
     height: 100vh;
@@ -9,7 +15,7 @@
 .form {
     width: 40%;
     height: 80%;
-    box-shadow: 0 0 5px rgb(#0000, .5);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -39,8 +45,8 @@
         width: 100%;
         height: 50px;
         font-size: 1.2rem;
-        color: rgb(0, 0, 0);
-        background-color: rgb(99, 184, 99);
+        color: $font-black;
+        background-color: $med-green;
         border: none;
         outline: none;
         border-radius: 5px;

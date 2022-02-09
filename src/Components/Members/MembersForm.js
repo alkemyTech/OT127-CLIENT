@@ -12,9 +12,9 @@ import { useParams } from 'react-router-dom';
 
 
 const MemberForm = () => {
-    const id = useParams();
+    const {id} = useParams();
     const [loading, setLoading] = useState(false);
-    const [formValues, setFormValues] = useState({name: "", description: "", facebookUrl: "", linkedinUrl: "", photo: "",});
+    const [formValues, setFormValues] = useState({name: "", description: "", facebookUrl: "", linkedinUrl: "", image: ""});
     const baseUrl = 'http://ongapi.alkemy.org/api/members';
     const inputFileRef = useRef();
 
@@ -24,7 +24,7 @@ const MemberForm = () => {
         const description = setFormValues.description;
         const facebookUrl = setFormValues.facebookUrl;
         const linkedinUrl = setFormValues.linkedinUrl;
-        const image = setFormValues.photo;
+        const image = setFormValues.image;
 
         if (id) {
             await axios
@@ -46,21 +46,19 @@ const MemberForm = () => {
         let reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = () => {
-          setFieldValue("photo", reader.result);
+          setFieldValue("image", reader.result);
         };
     };
 
     const getDataById = async (formValues) => {
         setLoading(true);
-        if (id) {
-            axios
-            .get(`${baseUrl}/${id}`)
-            .then((res) => {
-                setFormValues(res.data.data);
-            }).catch((err) => {
-                alert(err.message);
-            });
-        }
+        await axios
+        .get(`${baseUrl}/${id}`)
+        .then((res) => {
+            setFormValues(res.data.data);
+        }).catch((err) => {
+            alert(err.message);
+        });
         setLoading(false);
     }
     
@@ -130,9 +128,9 @@ const MemberForm = () => {
                             render={(msg) => <div>{msg}</div>} 
                         />
 
-                        <label htmlFor="photo">Cargar Imagen</label>
+                        <label htmlFor="image">Cargar Imagen</label>
                         <input
-                            name="photo"
+                            name="image"
                             ref={inputFileRef}
                             className='inputs'
                             type="file"
@@ -141,7 +139,7 @@ const MemberForm = () => {
                                 handleImage(e, setFieldValue);
                             }}
                         />
-                        <ErrorMessage name="photo" render={(msg) => <div>{msg}</div>} />
+                        <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
 
                         <label htmlFor="facebookUrl">Facebook</label> 
                         <Field 

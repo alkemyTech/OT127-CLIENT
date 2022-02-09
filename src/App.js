@@ -72,7 +72,7 @@ function App() {
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/backoffice/news" component={NewsList} />
           <Route path="/create-member" component={MembersForm} />
-          <Route path="/create-member/:id" component={MembersForm} />
+          <Route path="/member/:id" component={MembersForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/login" component={LoginForm} />
