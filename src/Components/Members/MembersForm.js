@@ -14,7 +14,7 @@ import { useParams } from 'react-router-dom';
 const MemberForm = () => {
     const id = useParams();
     const [loading, setLoading] = useState(false);
-    const [formValues, setFormValues] = useState({name: "", description: "", facebookUrl: "", linkedinUrl: "", file: ""});
+    const [formValues, setFormValues] = useState({name: "", description: "", facebookUrl: "", linkedinUrl: "", photo: "",});
     const baseUrl = 'http://ongapi.alkemy.org/api/members';
     const inputFileRef = useRef();
 
@@ -24,7 +24,7 @@ const MemberForm = () => {
         const description = setFormValues.description;
         const facebookUrl = setFormValues.facebookUrl;
         const linkedinUrl = setFormValues.linkedinUrl;
-        const image = setFormValues.file;
+        const image = setFormValues.photo;
 
         if (id) {
             await axios
@@ -42,11 +42,11 @@ const MemberForm = () => {
         setLoading(false);
     }
 
-    const handleChange = (e, setFieldValue) => {
+    const handleImage = (e, setFieldValue) => {
         let reader = new FileReader();
         reader.readAsDataURL(e.target.files[0]);
         reader.onloadend = () => {
-          setFieldValue("img", reader.result);
+          setFieldValue("photo", reader.result);
         };
     };
 
@@ -127,21 +127,21 @@ const MemberForm = () => {
                         </Field>
                         <ErrorMessage
                             name="description"
-                            render={(msg) => <div>{msg}</div>}
+                            render={(msg) => <div>{msg}</div>} 
                         />
 
-                        <label htmlFor="categorie">Cargar Imagen</label>
+                        <label htmlFor="photo">Cargar Imagen</label>
                         <input
-                            name="img"
+                            name="photo"
                             ref={inputFileRef}
                             className='inputs'
                             type="file"
-                            onChange={(e) => {
-                                handleChange(e, setFieldValue);
-                            }}
                             accept=".jpg, .png"
+                            onChange={(e) => {
+                                handleImage(e, setFieldValue);
+                            }}
                         />
-                        <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
+                        <ErrorMessage name="photo" render={(msg) => <div>{msg}</div>} />
 
                         <label htmlFor="facebookUrl">Facebook</label> 
                         <Field 
