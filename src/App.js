@@ -6,7 +6,7 @@ import CategoriesForm from "./Components/Categories/CategoriesForm";
 import NewsForm from "./Components/News/NewsForm";
 import News from "./Components/News/News";
 import SlidesForm from "./Components/Slides/SlidesForm";
-import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
+import TestimonialForm from "./Components/Testimonials/TestimonialForm";
 import UserForm from "./Components/Users/UsersForm";
 import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
 import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
@@ -31,7 +31,7 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={Home} />
+				  <Route path="/" exact component={TestimonialForm} />
 
           <Route
             path="/backoffice/create-activity"
