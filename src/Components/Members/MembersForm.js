@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../FormStyles.css';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
@@ -8,6 +7,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import './Members.scss';
 import { useParams } from 'react-router-dom';
+import "../../sass/components/_form.scss";
 
 
 

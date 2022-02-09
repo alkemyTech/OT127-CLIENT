@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../FormStyles.css";
+import "../../sass/components/_form.scss";
 
 const RegisterForm = () => {
   return (
@@ -35,7 +35,7 @@ const RegisterForm = () => {
             .required("Confirmá tu contraseña"),
         })}
         onSubmit={(values) => {      // eslint-disable-next-line
-          const user = { 
+          const user = {
             // Este es el objeto que va a ser enviado
             name: values.name,
             lastName: values.lastName,
