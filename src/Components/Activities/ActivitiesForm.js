@@ -57,9 +57,9 @@ const ActivitiesForm = () => {
   };
 
   return (
-    <form className="activitiesForm" onSubmit={handleSubmit}>
+    <form className="form-container" onSubmit={handleSubmit}>
       <input
-        className="activitiesForm__input"
+        className="input-field"
         type="text"
         name="name"
         value={name}
@@ -78,7 +78,7 @@ const ActivitiesForm = () => {
         onChange={handleChangeImage}
       />
       <img src={image} alt="" />
-      <button className="activitiesForm__button" type="submit">
+      <button className="submit-btn" type="submit">
         Send
       </button>
     </form>

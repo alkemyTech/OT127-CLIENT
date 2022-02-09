@@ -1,4 +1,4 @@
-.activitiesForm {
+.form-container {
   width: 60%;
   margin: 15px auto;
   display: flex;
@@ -6,7 +6,7 @@
   gap: 15px;
 }
 
-.activitiesForm__input {
+.input-field {
   padding: 15px 30px;
   border: 1px solid #c1c1c1;
 }
@@ -16,14 +16,14 @@
   border: 1px solid #c1c1c1;
 }
 
-.activitiesForm__button {
+.submit-btn {
   background-color: #2e86c1;
   padding: 10px 15px;
   border: none;
   color: #fff;
 }
 
-.activitiesForm__button:hover {
+.submit-btn:hover {
   cursor: pointer;
   background-color: #3498db;
 }
