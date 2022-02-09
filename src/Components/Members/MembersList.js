@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getMembers } from "../../Services/membersService";
 
+// Material UI
 import {
   Container,
   Table,
@@ -15,17 +15,17 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMembers } from "../../Redux/reducers/membersSlice";
+
 const MembersList = () => {
-  const [membersList, setMembersList] = useState([]);
-
-  const getMembersList = async () => {
-    const res = await getMembers();
-    setMembersList(res.data.data);
-  };
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    getMembersList();
-  }, []);
+    dispatch(fetchMembers());
+  }, []); //eslint-disable-line
+
+  const { members } = useSelector((state) => state.membersReducer);
 
   const handleEdit = (id) => {
     // Logica a desarrollar
@@ -73,7 +73,7 @@ const MembersList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {membersList.map((member) => (
+            {members.map((member) => (
               <StyledTableRow key={member.id}>
                 <StyledTableCell scope="row">{member.name}</StyledTableCell>
                 <StyledTableCell>

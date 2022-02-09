@@ -1,9 +1,13 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import {getNews} from '../../Redux/reducers/newsSlice'
+import { useBottomScrollListener } from "react-bottom-scroll-listener";
+import Comments from "./Comments";
 
 const News = () => {
   const dispatch = useDispatch()
+  const [showComments, setShowComments] = useState(false);
+  useBottomScrollListener(() => setShowComments(true));
   
   useEffect(() => {
     dispatch(getNews())
@@ -16,7 +20,7 @@ const News = () => {
       news.map((element) => (
         <li className="card-info" key={element.id}>
           <h3>{element.name}</h3>
-          <p>{element.description}</p>
+          <p>{element.content}</p>
         </li>
       ))
     ) : (
@@ -30,6 +34,7 @@ const News = () => {
     <>
       <h1>Novedades</h1>
       <ul className="list-container">{newsList()}</ul>
+      {showComments && <Comments />}
     </>
   );
 };
