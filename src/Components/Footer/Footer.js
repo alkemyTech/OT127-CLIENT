@@ -16,7 +16,14 @@ const Footer = () => {
   const { logo, name, facebook_url, linkedin_url, instagram_url, twitter_url } =
     organization;
 
-  return <></>;
+  return (
+    <>
+      <div>
+        <img src={logo} alt="" style={{ width: "100%" }} />
+        <h2>{name}</h2>
+      </div>
+    </>
+  );
 };
 
 export default Footer;
