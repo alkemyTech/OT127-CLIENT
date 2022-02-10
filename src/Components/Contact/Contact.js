@@ -1,5 +1,6 @@
 import Title from '../Titulosynovedades/Title'
 import "../../sass/pages/_contact.scss";
+import Leaflet from '../../features/leaflet/Leaflet';
 const Contact = ({ name, short_description, address, phone, cellphone }) => {
 	return (
 		<>
@@ -38,6 +39,7 @@ const Contact = ({ name, short_description, address, phone, cellphone }) => {
 					</p>
 				</div>
 			</div>
+			<Leaflet/>
 		</>
 	)
 }
