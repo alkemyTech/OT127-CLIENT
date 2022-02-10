@@ -1,9 +1,15 @@
-.offcanvasButton {
-  position: fixed;
-  height: 100%;
-  left: 0;
-  top: 0;
-  width: 0.5px !important;
-  border-width: 1px;
-  border-style: none;
+.offcanvas {
+  &__controller {
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 0.5px !important;
+    border-width: 1px;
+    border-style: none;
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
 }
