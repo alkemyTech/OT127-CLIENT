@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 const BackOffice = () => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShow(!show);
 
   const backofficeRoutes = [
     { name: "Home", router: "/backoffice/home" },
@@ -26,7 +25,7 @@ const BackOffice = () => {
       <div className="offcanvas__controller" onMouseOver={handleShow}></div>
       <h1>Bienvenido!</h1>
 
-      <Offcanvas show={show} onHide={handleClose}>
+      <Offcanvas show={show} onHide={handleShow}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Backoffice Routes</Offcanvas.Title>
         </Offcanvas.Header>
