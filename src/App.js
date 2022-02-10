@@ -31,6 +31,7 @@ import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
 import Activities from "./Components/Activities/Activities";
 import HomeForm from "./Components/Backoffice/HomeForm";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
