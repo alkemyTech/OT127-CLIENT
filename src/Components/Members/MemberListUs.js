@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./styles.scss";
+import "../../sass/pages/MemberListUs.js";
 
 const MemberListUs = () => {
   const endPointMenbers = process.env.REACT_APP_ENDPOINT_MENBERS;
@@ -32,10 +32,10 @@ const MemberListUs = () => {
           <div className="members__container">
             {members.map((member) => (
               <li className="members__item" key={member.id}>
-                <div className="members__item__img">
+                <div className="members__img">
                   <img src={member.image} alt={member.name} />
                 </div>
-                <div className="members__item__body">
+                <div className="members__body">
                   <div>
                     <h2>{member.name}</h2>
                     <p>{member.description}</p>

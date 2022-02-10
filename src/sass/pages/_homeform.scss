@@ -1,6 +1,6 @@
 @import "../../sass/main.scss";
 
-.form {
+.homeForm {
   display: flex;
   flex-direction: column;
   background-color: $font-white-transparent;
@@ -8,6 +8,7 @@
   width: 400px;
   padding: 10px 30px;
   border-radius: 10px;
+  background-color: $light-blue;
 
   &__error {
     color: red;
@@ -48,8 +49,4 @@
     @include roboto-regular-bold();
     margin: 5px 0;
   }
-}
-
-.HomeForm {
-  background-color: $light-blue;
 }
