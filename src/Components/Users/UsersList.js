@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import "./UsersList.scss"
+import React, { useEffect } from 'react';
+import "../../sass/pages/_userslist.scss"
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { getUsers } from '../../Redux/reducers/usersSlice';
+
 
 const UsersList = () => {
-    const [users, setUsers] = useState([])
-
-    const getUsersData = async () => {
-        const response = await axios.get("http://ongapi.alkemy.org/api/users")
-        setUsers(response.data.data)
-    }
+    const dispatch = useDispatch()
+    const users = useSelector(state => state.usersReducer.users)
 
     useEffect(() => {
-        getUsersData()
+        dispatch(getUsers())
     }, []);
+
 
     const handleEdit = (values) => {
         // TO DO: Logica para editar un usuario
