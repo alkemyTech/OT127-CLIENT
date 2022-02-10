@@ -9,9 +9,9 @@ const Home = () => {
   return (
     <>
       <BackofficeHeader></BackofficeHeader>
-      {/* <h2>{welcomeText}</h2>
+      <h2>{welcomeText}</h2>
       <SliderHome />
-      <News /> */}
+      <News />
     </>
   );
 };
