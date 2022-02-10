@@ -31,6 +31,7 @@ import UsersList from "./Components/Users/UsersList";
 import CategoriesList from "./Components/Categories/CategoriesList";
 import Activities from "./Components/Activities/Activities";
 import HomeForm from "./Components/Backoffice/HomeForm";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -42,7 +43,7 @@ function App() {
           <Route path="/create-activity" component={ActivitiesForm} />
           <Route path="/actividades" component={Activities} />
           <Route path="/create-category" component={CategoriesForm} />
-          <Route path="/novedades" component={News} />
+          <Route path="/novedades" exact component={News} />
           <Route path="/contacto" component={Contact} />
           <Route path="/create-news" component={NewsForm} />
           <Route path="/actividades/:id" component={ActivityDetail} />
@@ -56,7 +57,6 @@ function App() {
             path="/novedades/:id"
             component={() => <NewsDetails title="Titulo recibido por props" />}
           />
-          <Route path="/novedades" component={News} />
           <Route path="/categories" component={CategoriesList} />
           <Route path="/backoffice/slides" component={SlideList} />
           <Route path="/create-news" component={NewsForm} />

@@ -130,7 +130,7 @@ const MemberForm = () => {
                             <input
                                 name="image"
                                 ref={inputFileRef}
-                                className='__inputImg'
+                                className='member__inputImg'
                                 type="file"
                                 accept=".jpg, .png"
                                 onChange={(e) => {
