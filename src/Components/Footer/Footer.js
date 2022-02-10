@@ -13,6 +13,9 @@ const Footer = () => {
     );
   }, []);
 
+  const { logo, name, facebook_url, linkedin_url, instagram_url, twitter_url } =
+    organization;
+
   return <></>;
 };
 
