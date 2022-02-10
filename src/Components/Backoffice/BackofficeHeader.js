@@ -1,8 +1,6 @@
 import React from "react";
 import { bubble as Menu } from "react-burger-menu";
 
-//TODO Desinstalar MUI ICONS, no fue necesario
-
 const BackofficeHeader = () => {
   return (
     <Menu isOpen={false} className={"sidebar"}>
