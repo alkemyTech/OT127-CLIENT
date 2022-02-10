@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 
+//TODO Separar componentes
+//TODO Darle estilos a los botones y a la barra de play y volumen
+//TODO Revisar tamaños
+
 const VideoControls = ({ playing, handlePlay, volume, handleVolume }) => {
   return (
     <div>
