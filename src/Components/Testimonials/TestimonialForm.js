@@ -28,9 +28,8 @@ const TestimonialForm = () => {
 	}
 
 	const Put = async (url, id, body) => {
-		const bUrl = `${url}/${id}`
 		try {
-			const res = await axios.put(bUrl, body)
+			const res = await axios.put(`${url}/${id}`, body)
 			return res.data
 		} catch (error) {
 			return { success: false, error }
@@ -38,10 +37,8 @@ const TestimonialForm = () => {
 	}
 
 	const Get = async (url, id) => {
-		const bUrl = `${url}/${id}`
-
 		try {
-			const res = await axios.get(bUrl)
+			const res = await axios.get(`${url}/${id}`)
 			return res.data
 		} catch (error) {
 			return { success: false, error }
