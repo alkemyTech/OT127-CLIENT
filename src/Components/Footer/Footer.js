@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Get } from "../../Services/publicApiService";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -21,6 +22,13 @@ const Footer = () => {
       <div>
         <img src={logo} alt="" style={{ width: "100%" }} />
         <h2>{name}</h2>
+      </div>
+      <div>
+        {/*TODO: Controlar rutas*/}
+        <Link to={"/news"}>Novedades</Link>
+        <Link to={"/activities"}>Actividades</Link>
+        <Link to={"/contact"}>Contacto</Link>
+        <Link to={"/about"}>Nosotros</Link>
       </div>
     </>
   );
