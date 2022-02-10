@@ -20,12 +20,8 @@ const MemberForm = () => {
 
     const handleSubmit = async(formValues) => {
         setLoading(true);
-        const name = setFormValues.name;
-        const description = setFormValues.description;
-        const facebookUrl = setFormValues.facebookUrl;
-        const linkedinUrl = setFormValues.linkedinUrl;
-        const image = setFormValues.image;
-
+        const name = formValues.name;
+        console.log(name);
         if (id) {
             await axios
             .put(`${baseUrl}/${id}`, formValues)
@@ -90,8 +86,8 @@ const MemberForm = () => {
                     .email('Formato invalido'),
                 })}
 
-                onSubmit={(formValues, {resetForm}) => {
-                    handleSubmit(formValues);
+                onSubmit={({resetForm}) => {
+                    handleSubmit();
                     resetForm();
                 }}    
             >
@@ -103,13 +99,13 @@ const MemberForm = () => {
                             <Field 
                                 name="name" 
                                 type="titulo" 
-                                className='input-container' 
+                                className='member__input' 
                                 
                             />
                             <ErrorMessage name="name" />
 
                             <label htmlFor="description">Descripcion</label>
-                            <Field name="description" className='input-container'>
+                            <Field name="description" className='member__input'>
                                 {({ field }) => (
                                 <>
                                     <CKEditor
@@ -134,7 +130,7 @@ const MemberForm = () => {
                             <input
                                 name="image"
                                 ref={inputFileRef}
-                                className='member__input'
+                                className='__inputImg'
                                 type="file"
                                 accept=".jpg, .png"
                                 onChange={(e) => {
@@ -147,7 +143,7 @@ const MemberForm = () => {
                             <Field 
                                 name="facebookUrl" 
                                 type="facebookUrl" 
-                                className='input-container'
+                                className='member__input'
                                 
                             />
                             <ErrorMessage name="facebookUrl"/>
@@ -156,7 +152,7 @@ const MemberForm = () => {
                             <Field 
                                 name="linkedinUrl" 
                                 type="linkedinUrl" 
-                                className='input-container'
+                                className='member__input'
                                 
                             />
                             <ErrorMessage name="linkedinUrl"/>
