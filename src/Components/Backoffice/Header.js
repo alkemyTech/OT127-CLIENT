@@ -1,11 +1,13 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({ handleShow }) => {
   return (
-    <div>
-      <button>Menu</button>
-      <h1>Somos más</h1>
-    </div>
+    <header className="backofficeheader">
+      <button onClick={handleShow} className="backofficeheader__button">
+        Menu
+      </button>
+      <h1 className="backofficeheader__title">Somos más</h1>
+    </header>
   );
 };
 
