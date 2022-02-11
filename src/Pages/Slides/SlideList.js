@@ -16,7 +16,7 @@ const SlideList = () => {
 
   useEffect(() => {
     dispatch(getSlides());
-  }, []);
+  }, []); //eslint-disable-line
 
   const slides = useSelector((state) => state.slidesReducer.slides.data);
 
