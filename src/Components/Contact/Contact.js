@@ -1,5 +1,5 @@
-import Title  from '../Titulosynovedades/Title'
-import "./contact.scss";
+import Title from '../Titulosynovedades/Title'
+import "../../sass/pages/_contact.scss";
 const Contact = ({ name, short_description, address, phone, cellphone }) => {
 	return (
 		<>
