@@ -10,16 +10,16 @@ const VideoControls = ({
   volume,
   handleVolume,
   handleMute,
-  handleUnmute,
+  muted,
 }) => {
   return (
     <div className="videocontrols">
       <button onClick={(e) => handlePlay(e)} className="videocontrols__button">
         {playing ? <PauseIcon /> : <PlayArrowIcon />}
       </button>
-      <p className="videocontrols__text">
-        {volume === 0 ? <VolumeOffIcon /> : <VolumeUpIcon />}
-      </p>
+      <button onClick={handleMute} className="videocontrols__button">
+        {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+      </button>
       <input
         type="range"
         min={0}

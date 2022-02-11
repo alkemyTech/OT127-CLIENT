@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import VideoControls from "./VideoControls";
 
-//TODO Separar componentes
-//TODO Darle estilos a los botones y a la barra de play y volumen
-//TODO Revisar tamaños
-
 const VideoPlayer = () => {
   const [volume, setVolume] = useState(0);
   const [volumeBar, setVolumeBar] = useState(0);
   const [isPlay, setIsPlay] = useState(false);
+  const [muted, setMuted] = useState(false);
 
   const handleVolume = (e) => {
     setVolume(e.target.value / 100);
@@ -19,17 +16,17 @@ const VideoPlayer = () => {
     setIsPlay(!isPlay);
   };
   const handleMute = () => {
-    setVolume(0);
-  };
-  const handleUnmute = () => {
-    setVolume(50);
+    setMuted(!muted);
   };
   return (
     <div className="videoplayer">
       <ReactPlayer
         url="https://www.youtube.com/watch?v=4YnSk1gI_Oo"
+        width="650px"
+        height="400px"
         volume={volume}
         playing={isPlay}
+        muted={muted}
         config={{
           youtube: {
             playerVars: {
@@ -49,7 +46,7 @@ const VideoPlayer = () => {
         volume={volumeBar}
         handleVolume={handleVolume}
         handleMute={handleMute}
-        handleUnmute={handleUnmute}
+        muted={muted}
       ></VideoControls>
     </div>
   );
