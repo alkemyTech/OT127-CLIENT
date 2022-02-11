@@ -3,36 +3,42 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/main.scss";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import About from "./Components/About/About";
-import Activities from "./Components/Activities/Activities";
-import ActivitiesForm from "./Components/Activities/ActivitiesForm";
-import ActivityDetail from "./Components/Activities/ActivityDetail";
-import BackOffice from "./Components/Backoffice/BackOffice";
-import CategoriesForm from "./Components/Categories/CategoriesForm";
-import CategoriesList from "./Components/Categories/CategoriesList";
-import Contact from "./Components/Contact/Contact";
-import Donacion from "./Donations/Donacion";
-import Gracias from "./Donations/Gracias";
-import Home from "./Pages/Home/Home";
-import HomeForm from "./Components/Backoffice/HomeForm";
-import LoginForm from "./Components/Auth/LoginForm";
-import MembersForm from "./Components/Members/MembersForm";
-import MembersList from "./Components/Members/MembersList";
-import News from "./Components/News/News";
-import NewsDetails from "./Components/News/Detail/NewsDetails";
-import NewsForm from "./Components/News/NewsForm";
-import NewsList from "./Components/News/NewsList";
-import OrganizationData from "./Components/Organization/OrganizationData";
-import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
-import ProjectsForm from "./Components/Projects/ProjectsForm";
-import RegisterForm from "./Components/Auth/RegisterForm";
-import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
-import SlidesForm from "./Components/Slides/SlidesForm";
-import SlideList from "./Pages/Slides/SlideList";
-import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
-import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
-import UserForm from "./Components/Users/UsersForm";
-import UsersList from "./Components/Users/UsersList";
+const About = lazy(import("./Components/About/About"));
+const Activities = lazy(import("./Components/Activities/Activities"));
+const ActivitiesForm = lazy(import("./Components/Activities/ActivitiesForm"));
+const ActivityDetail = lazy(import("./Components/Activities/ActivityDetail"));
+const BackOffice = lazy(import("./Components/Backoffice/BackOffice"));
+const CategoriesForm = lazy(import("./Components/Categories/CategoriesForm"));
+const CategoriesList = lazy(import("./Components/Categories/CategoriesList"));
+const Contact = lazy(import("./Components/Contact/Contact"));
+const Donacion = lazy(import("./Donations/Donacion"));
+const Gracias = lazy(import("./Donations/Gracias"));
+const Home = lazy(import("./Pages/Home/Home"));
+const HomeForm = lazy(import("./Components/Backoffice/HomeForm"));
+const LoginForm = lazy(import("./Components/Auth/LoginForm"));
+const MembersForm = lazy(import("./Components/Members/MembersForm"));
+const MembersList = lazy(import("./Components/Members/MembersList"));
+const News = lazy(import("./Components/News/News"));
+const NewsDetails = lazy(import("./Components/News/Detail/NewsDetails"));
+const NewsForm = lazy(import("./Components/News/NewsForm"));
+const NewsList = lazy(import("./Components/News/NewsList"));
+const OrganizationData = lazy(
+  import("./Components/Organization/OrganizationData")
+);
+const OrganizationForm = lazy(
+  import("./Components/Organization/EditOrganizationDataForm")
+);
+const ProjectsForm = lazy(import("./Components/Projects/ProjectsForm"));
+const RegisterForm = lazy(import("./Components/Auth/RegisterForm"));
+const SchoolCampaign = lazy(import("./Campaigns/School/SchoolCampaign"));
+const SlidesForm = lazy(import("./Components/Slides/SlidesForm"));
+const SlideList = lazy(import("./Pages/Slides/SlideList"));
+const TestimonialForm = lazy(
+  import("./Components/Testimonials/TestimonialsForm")
+);
+const ToysCampaign = lazy(import("./Campaigns/Toys/ToysCampaign"));
+const UserForm = lazy(import("./Components/Users/UsersForm"));
+const UsersList = lazy(import("./Components/Users/UsersList"));
 
 function App() {
   return (
