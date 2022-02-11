@@ -18,7 +18,7 @@ const Leaflet = () => {
     let organizationApi = process.env.REACT_APP_ENDPOINT_ORGANIZATION;
     axios
       .get(`${organizationApi}`)
-      .then((response) => setOrgData(response.data))
+      .then((response) => setOrgData(response.data.data))
       .catch((error) => error);
   };
 
@@ -36,11 +36,11 @@ const Leaflet = () => {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={position} icon={myIcon}>
           <Popup>
-            {orgData.data ? (
+            {orgData.address? (
               <>
                 <strong>Somos Mas</strong>
                 <br />
-                {orgData.data.address}
+                {orgData.address}
               </>
             ) : (
               <>No se encontró la ubicación.</>
