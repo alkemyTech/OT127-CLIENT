@@ -6,8 +6,12 @@ const Donacion = ({ message }) => {
   return (
     <div>
       {message && <p>{message}</p>}
-      <a className="button-lg" href={mercadoPagoCheckout}>
-        Mercado Pago
+      <a as="button" href={mercadoPagoCheckout}>
+        <img
+          src={process.env.PUBLIC_URL + "/images/mercadopago-button.png"}
+          alt="mercado pago"
+          width="100"
+        />
       </a>
     </div>
   );
