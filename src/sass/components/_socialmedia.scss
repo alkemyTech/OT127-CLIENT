@@ -1,0 +1,20 @@
+@import "../main.scss";
+.socialMedia {
+  &__text {
+    @include roboto-title;
+  }
+  &__social-container {
+    width: 90%;
+    background-color: aquamarine;
+  }
+  &__button {
+    display: block;
+    width: 200px;
+    line-height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.6);
+    margin: 20px 0;
+    text-decoration: none;
+    text-align: center;
+  }
+}
