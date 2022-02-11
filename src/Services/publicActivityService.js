@@ -69,8 +69,5 @@ class ActivitiesService {
   };
 }
 
-const activitiesController = new ActivitiesService();
+export const activitiesController = new ActivitiesService();
 
-module.exports = {
-  activitiesController,
-};
