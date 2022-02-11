@@ -10,6 +10,8 @@ import "../../sass/components/_socialmedia.scss"
 
 const SocialMedia = () => {
     const tweetId = "1491420665198841856"
+    const tweetId2 = "1492152852965433347"
+    const linkedInId = 42854645
     return (
         <>
             <Separator image={socialMediaImg}>
@@ -19,11 +21,7 @@ const SocialMedia = () => {
             <p className='socialMedia__text'>Encontranos En</p>
 
             <div className='socialMedia__social-container'>
-                <LinkedinFollowCompany
-                    companyId={42854645}
-                    counter="top" // Or "right"
-                    lang="en_US"
-                />
+
 
                 <TwitterButton
                     hashtags="one,two"
@@ -32,20 +30,51 @@ const SocialMedia = () => {
                     type="Mention"
                     size="large"
                     via="alkemy__"
+                    className="socialMedia__button"
                 />
 
-                <a href="#" class="socialMedia__button facebook"><i class="fa fa-facebook"></i>Facebook</a>
+                <a
+                    href="https://www.facebook.com/AlkemyLATAM/"
+                    className="socialMedia__button socialMedia__button--facebook"
+                    target="_blank"
+                >
+                    <i className="socialMedia__icon fa fa-facebook" />
+                    Facebook
+                </a>
 
-                <a href="#" class="socialMedia__button instagram"><i class="fa fa-instagram"></i>Instagram</a>
+                <a
+                    href="https://www.instagram.com/alkemy__/"
+                    className="socialMedia__button socialMedia__button--instagram"
+                    target="_blank"
+                >
+                    <i className="socialMedia__icon fa fa-instagram" />
+                    Instagram
+                </a>
+
+                <LinkedinFollowCompany
+                    companyId={linkedInId}
+                    counter="top" // Or "right"
+                    lang="en_US"
+                    className="socialMedia__button"
+                />
             </div>
 
-            <TwitterTweet
-                align='left'
-                coversation='none'
-                tweetId={tweetId}
-                theme='light'
-                width={325}
-            />
+            <div className='socialMedia__tweets'>
+                <TwitterTweet
+                    align='left'
+                    coversation='none'
+                    tweetId={tweetId}
+                    theme='light'
+                    width={325}
+                />
+                <TwitterTweet
+                    align='left'
+                    coversation='none'
+                    tweetId={tweetId2}
+                    theme='light'
+                    width={325}
+                />
+            </div>
         </>
     )
 }
