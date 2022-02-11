@@ -1,29 +1,10 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import PauseIcon from "@material-ui/icons/Pause";
+import VideoControls from "./VideoControls";
 
 //TODO Separar componentes
 //TODO Darle estilos a los botones y a la barra de play y volumen
 //TODO Revisar tamaños
-
-const VideoControls = ({ playing, handlePlay, volume, handleVolume }) => {
-  return (
-    <div>
-      <button onClick={(e) => handlePlay(e)}>
-        {playing ? <PauseIcon /> : <PlayArrowIcon />}
-      </button>
-
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={volume}
-        onInput={(e) => handleVolume(e)}
-      />
-    </div>
-  );
-};
 
 const VideoPlayer = () => {
   const [volume, setVolume] = useState(0);
@@ -37,8 +18,14 @@ const VideoPlayer = () => {
   const handlePlay = (e) => {
     setIsPlay(!isPlay);
   };
+  const handleMute = () => {
+    setVolume(0);
+  };
+  const handleUnmute = () => {
+    setVolume(50);
+  };
   return (
-    <div>
+    <div className="videoplayer">
       <ReactPlayer
         url="https://www.youtube.com/watch?v=4YnSk1gI_Oo"
         volume={volume}
@@ -61,6 +48,8 @@ const VideoPlayer = () => {
         handlePlay={handlePlay}
         volume={volumeBar}
         handleVolume={handleVolume}
+        handleMute={handleMute}
+        handleUnmute={handleUnmute}
       ></VideoControls>
     </div>
   );
