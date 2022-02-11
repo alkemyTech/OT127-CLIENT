@@ -3,9 +3,9 @@ import "../../sass/components/_separator.scss"
 
 const Separator = (props) => {
     return (
-        <div>
+        <div className='separator' style={{ backgroundColor: "red" }} >
             {props.children}
-        </div>
+        </div >
     )
 }
 

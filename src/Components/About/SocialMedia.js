@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React from 'react'
 import {
     LinkedinFollowCompany,
@@ -5,14 +6,18 @@ import {
     TwitterTweet
 } from 'react-social-plugins';
 import Separator from '../Card/Separator';
+import socialMediaImg from "../../../public/images/social-media.jpg"
 
 const SocialMedia = () => {
     const tweetId = "1491420665198841856"
     return (
         <>
-            <Separator>
-                <p>Beunas</p>
+
+            <Separator img={socialMediaImg}>
+                <p>Nuestras Redes</p>
+                <Button variant="outlined">Dummy Button</Button>
             </Separator>
+
             <p>Seccion de Redes Sociales</p>
             <LinkedinFollowCompany
                 companyId={42854645}
