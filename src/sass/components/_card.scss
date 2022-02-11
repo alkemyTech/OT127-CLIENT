@@ -1,3 +1,7 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+@use "../base/typography";
+
 .card {
   &__wrapper {
     width: 279px;
@@ -5,7 +9,7 @@
     position: relative;
     overflow: hidden;
 
-    @include breakpoint(phone) {
+    @include mixins.breakpoint(phone) {
       box-shadow: 6px 6px 22px 6px rgba(0, 0, 0, 0.3);
     }
   }
@@ -41,7 +45,7 @@
     &:not(:hover) {
       transition: margin-bottom 0.4s ease-out;
     }
-    @include breakpoint(phone) {
+    @include mixins.breakpoint(phone) {
       width: 100%;
       left: 0;
       margin-bottom: -10px;
@@ -50,11 +54,11 @@
   &__title {
     margin: 0;
     padding-top: 5px;
-    @include roboto-subtitle;
-    color: $dark-blue;
+    @include typography.roboto-subtitle;
+    color: variables.$dark-blue;
   }
   &__text {
-    @include roboto-regular-bold;
-    color: $light-blue;
+    @include typography.roboto-regular-bold;
+    color: variables.$light-blue;
   }
 }
