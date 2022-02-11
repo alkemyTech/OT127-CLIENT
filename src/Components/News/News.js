@@ -39,4 +39,30 @@ const News = () => {
   );
 };
 
-export default News;
+	const newsList = () => {
+		return news.length ? (
+			news.map((element) => (
+				<li className="card-info" key={element.id}>
+					<h3>{element.name}</h3>
+					<p>{element.description}</p>
+				</li>
+			))
+		) : (
+			null
+		);
+	};
+
+	return (
+		<>
+			{isLoading
+				? <Spinner />
+				: (<div>
+					<h1>Novedades</h1>
+					<ul className="list-container">{newsList()}</ul>
+				</div>
+				)}
+		</>
+	)
+}
+
+export default News
