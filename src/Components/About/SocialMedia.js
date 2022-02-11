@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import React from 'react'
 import {
     LinkedinFollowCompany,
@@ -7,46 +6,45 @@ import {
 } from 'react-social-plugins';
 import Separator from '../Card/Separator';
 import socialMediaImg from "../Image/social-media.jpg"
+import "../../sass/components/_socialmedia.scss"
 
 const SocialMedia = () => {
     const tweetId = "1491420665198841856"
     return (
         <>
-
             <Separator image={socialMediaImg}>
                 <p>Nuestras Redes</p>
             </Separator>
 
-            <p>Encontranos En</p>
-            <LinkedinFollowCompany
-                companyId={42854645}
-                counter="top" // Or "right"
-                lang="en_US"
-            />
+            <p className='socialMedia__text'>Encontranos En</p>
+
+            <div className='socialMedia__social-container'>
+                <LinkedinFollowCompany
+                    companyId={42854645}
+                    counter="top" // Or "right"
+                    lang="en_US"
+                />
+
+                <TwitterButton
+                    hashtags="one,two"
+                    target="alkemy__"
+                    text="Hello World"
+                    type="Mention"
+                    size="large"
+                    via="alkemy__"
+                />
+
+                <a href="#" class="socialMedia__button facebook"><i class="fa fa-facebook"></i>Facebook</a>
+
+                <a href="#" class="socialMedia__button instagram"><i class="fa fa-instagram"></i>Instagram</a>
+            </div>
+
             <TwitterTweet
                 align='left'
                 coversation='none'
                 tweetId={tweetId}
                 theme='light'
                 width={325}
-            />
-
-            <TwitterButton
-                hashtags="one,two"
-                target="alkemy__"
-                text="Hello World"
-                type="Mention"
-                size="large"
-                via="alkemy__"
-            />
-
-            <TwitterButton
-                hashtags="one,two"
-                target="username"
-                text="Hello World"
-                type="Hashtag"
-                size="large"
-                via="username"
             />
         </>
     )
