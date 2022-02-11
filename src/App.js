@@ -1,6 +1,7 @@
 import React from "react";
 import "./sass/main.scss";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import About from "./Components/About/About";
 import Activities from "./Components/Activities/Activities";
