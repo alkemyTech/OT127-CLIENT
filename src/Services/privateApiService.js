@@ -74,11 +74,9 @@ export const privatePost = (route, data) => {
   const { Authorization, error } = token;
 
   if (Authorization) {
-    axios.post(url, data, {
-      header: {
-        ...config.headers,
-        Authorization,
-      },
-    }); 
+    axios
+    .post(url, data)
+    .then((res) => res)
+    .catch((err) => err); 
   }
 };
