@@ -15,10 +15,9 @@ const SocialMedia = () => {
 
             <Separator image={socialMediaImg}>
                 <p>Nuestras Redes</p>
-                <Button variant="outlined">Dummy Button</Button>
             </Separator>
 
-            <p>Seccion de Redes Sociales</p>
+            <p>Encontranos En</p>
             <LinkedinFollowCompany
                 companyId={42854645}
                 counter="top" // Or "right"
