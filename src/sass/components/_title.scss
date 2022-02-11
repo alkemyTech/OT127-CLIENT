@@ -1,6 +1,10 @@
+@use "../abstracts/variables";
+@use "../base/typography";
+
 .title {
+  @include roboto-title;
   &__header {
     text-align: center;
-    color: #fff;
+    color: variables.$font-black;
   }
 }
