@@ -33,7 +33,11 @@ const BackOffice = () => {
         </Offcanvas.Header>
         <Offcanvas.Body className="offcanvas__body">
           {backofficeRoutes.map((element) => {
-            return <Link to={element.router}>{element.name}</Link>;
+            return (
+              <Link to={element.router} key={element.router}>
+                {element.name}
+              </Link>
+            );
           })}
         </Offcanvas.Body>
       </Offcanvas>
