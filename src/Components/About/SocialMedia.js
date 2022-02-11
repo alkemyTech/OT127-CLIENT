@@ -6,14 +6,14 @@ import {
     TwitterTweet
 } from 'react-social-plugins';
 import Separator from '../Card/Separator';
-import socialMediaImg from "../../../public/images/social-media.jpg"
+import socialMediaImg from "../Image/social-media.jpg"
 
 const SocialMedia = () => {
     const tweetId = "1491420665198841856"
     return (
         <>
 
-            <Separator img={socialMediaImg}>
+            <Separator image={socialMediaImg}>
                 <p>Nuestras Redes</p>
                 <Button variant="outlined">Dummy Button</Button>
             </Separator>

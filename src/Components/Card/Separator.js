@@ -3,7 +3,7 @@ import "../../sass/components/_separator.scss"
 
 const Separator = (props) => {
     return (
-        <div className='separator' style={{ backgroundColor: "red" }} >
+        <div className='separator' style={{ backgroundImage: `url(${props.image})` }} >
             {props.children}
         </div >
     )
