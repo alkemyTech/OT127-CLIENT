@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import PauseIcon from "@material-ui/icons/Pause";
 
 //TODO Separar componentes
 //TODO Darle estilos a los botones y a la barra de play y volumen
@@ -8,20 +10,17 @@ import ReactPlayer from "react-player";
 const VideoControls = ({ playing, handlePlay, volume, handleVolume }) => {
   return (
     <div>
-      <div>
-        <button onClick={(e) => handlePlay(e)}>
-          {playing ? "pause" : "play"}
-        </button>
-      </div>
-      <div>
-        <input
-          type="range"
-          min={0}
-          max={100}
-          value={volume}
-          onInput={(e) => handleVolume(e)}
-        />
-      </div>
+      <button onClick={(e) => handlePlay(e)}>
+        {playing ? <PauseIcon /> : <PlayArrowIcon />}
+      </button>
+
+      <input
+        type="range"
+        min={0}
+        max={100}
+        value={volume}
+        onInput={(e) => handleVolume(e)}
+      />
     </div>
   );
 };
@@ -30,7 +29,6 @@ const VideoPlayer = () => {
   const [volume, setVolume] = useState(0);
   const [volumeBar, setVolumeBar] = useState(0);
   const [isPlay, setIsPlay] = useState(false);
-  // const [videoDuration, setvideoDuration] = useState(0)
 
   const handleVolume = (e) => {
     setVolume(e.target.value / 100);
