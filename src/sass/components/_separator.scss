@@ -1,0 +1,10 @@
+@import "../main.scss";
+.separator {
+  @include outfit-title();
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 20vh;
+  background-color: aquamarine;
+}
