@@ -1,36 +1,49 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import '../../sass/layout/_header.scss'
 
 const Header = () => {
-	const [ isLogged, setIsLogged ] = useState(false)
+	const isLogged = useSelector(state => state.authReducer.userIsLogged)
 	const menu = {
-		inicio: "/",
-		campaigns: "/campaigns",
-		nosotros: "/nosotros",
-		contacto: "/contacto"
+		"School Campaign": "/school-campaign",
+		"Toys Campaign": "/toys-campaign",
+		"About Us": "/nosotros",
+		"Contact": "/contacto"
 	}
 
 	return (
 		<>
 			<header className="header">
-				<div className="header__home">
-					<Link to="/">Inicio</Link>
-				</div>
 				<nav className="header__nav">
-					<ul className="header__nav-list">
-						<li className="header__nav-item">
-							<Link to="/about">Campaña</Link>
-						</li>
-					</ul>
+					<div className="header__nav-left">
+						<NavLink
+							className="links"
+							activeClassName="active"
+							to="/">Home
+						</NavLink>
+					</div>
+					<div className="header__nav-right">
+						{isLogged
+							? (
+								<ul className="header__nav-list">
+									{Object.keys(menu).map((key, index) => (
+										<li key={index} className="header__nav-item">
+											<NavLink
+												to={menu[ key ]}
+												className="links"
+												activeClassName="active"
+											>
+												{key}
+											</NavLink>
+										</li>
+									))}
+								</ul>)
+							: null //Login/Register ?
+						}
+					</div>
 				</nav>
 			</header>
-
-			inicio -active
-			campañas
-			nosotros
-			contacto
 		</>
 	)
 }
