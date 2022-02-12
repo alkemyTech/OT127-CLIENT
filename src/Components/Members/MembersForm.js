@@ -20,8 +20,6 @@ const MemberForm = () => {
 
     const handleSubmit = async(formValues) => {
         setLoading(true);
-        const name = formValues.name;
-        console.log(name);
         if (id) {
             await axios
             .put(`${baseUrl}/${id}`, formValues)
