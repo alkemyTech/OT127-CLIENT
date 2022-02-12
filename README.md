@@ -114,20 +114,20 @@ Muestra una animación cuando se cargan los componentes, para darle feedback al 
 
 El componente ya viene con valores por defecto y se puede utilizar solo.
 
-![Spinner](./public/images/spinner.gif)
+![Spinner](./public/images/spinner2.gif)
 
 ```
 <Spinner />
 ```
 
-Si se desea personalizar se puede hacer mediante props. Se puede modificar el color principal con color, la altura con height y el ancho con width.
+Si se desea personalizar se puede hacer mediante props. Se puede modificar el color principal con color, el tamaño con size, y el color secundario con secondaryColor.
 
 Ejemplo de uso:
 
 ```
-<Spinner color= "#faf" height={10} width={5} />
+<Spinner color= "#faf" size={100} secondaryColor="#000" />
 ```
 
-color recibe un valor hexadecimal.
+color y secondaryColor recibe un valor hexadecimal.
 
-height y width reciben valores numericos que se representan en px.
+size recibe un número.
