@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import image1 from "../../images/jugetes1.jpg"
-import image2 from "../../images/jugetes2.png"
-import image3 from "../../images/jugetes3.jpg"
+import image1 from "../../images/juguetes1.jpg"
+import image2 from "../../images/juguetes2.png"
+import image3 from "../../images/juguetes3.jpg"
 
 const Slider = () => {
   const carousel = useRef(null);
