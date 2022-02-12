@@ -5,7 +5,7 @@ import {
     TwitterTweet
 } from 'react-social-plugins';
 import Separator from '../Card/Separator';
-import socialMediaImg from "../Image/social-media.jpg"
+import socialMediaImg from "../../images/social-media.jpg"
 import "../../sass/components/_socialmedia.scss"
 
 const SocialMedia = () => {
