@@ -9,9 +9,9 @@ import socialMediaImg from "../Image/social-media.jpg"
 import "../../sass/components/_socialmedia.scss"
 
 const SocialMedia = () => {
-    const tweetId = "1491420665198841856"
-    const tweetId2 = "1492152852965433347"
-    const linkedInId = 42854645
+    const tweetId = "1492562845325791241"
+    const tweetId2 = "1492565246996881422"
+    const linkedInId = 68737437
     return (
         <>
             <Separator image={socialMediaImg}>
@@ -24,17 +24,14 @@ const SocialMedia = () => {
 
 
                 <TwitterButton
-                    hashtags="one,two"
-                    target="alkemy__"
-                    text="Hello World"
+                    target="SomosmasO"
                     type="Mention"
                     size="large"
-                    via="alkemy__"
                     className="socialMedia__button"
                 />
 
                 <a
-                    href="https://www.facebook.com/AlkemyLATAM/"
+                    href="https://www.facebook.com/profile.php?id=100077792335889"
                     className="socialMedia__button socialMedia__button--facebook"
                     target="_blank"
                 >
@@ -43,7 +40,7 @@ const SocialMedia = () => {
                 </a>
 
                 <a
-                    href="https://www.instagram.com/alkemy__/"
+                    href="https://www.instagram.com/p/somosmasongok/"
                     className="socialMedia__button socialMedia__button--instagram"
                     target="_blank"
                 >
