@@ -8,9 +8,9 @@ const Slider = () => {
   const intervalCarousel = useRef(null);
 
   const sliderData = [
-    { id: 1, image: image1, name: "1", description: "1d" },
-    { id: 2, image: image2, name: "2", description: "2d" },
-    { id: 3, image: image3, name: "3", description: "3d" }
+    { id: 1, image: image1, name: "Dona tus viejos juguetes", description: "Con tan solo donar juguetes viejos que ya no se utilicen, vas a hacer feliz a muchos niños y niñas que se encuentran en situaciones de vulnerabilidad" },
+    { id: 2, image: image2, name: "¿Por qué donar juguetes?", description: "Los juguetes no son solo entretenimiento para los niños y niñas, juega un rol fundamental para desarrollar sus mentes" },
+    { id: 3, image: image3, name: "¿Donde puedo dejar mis juguetes?", description: "Tenemos centros de recolección por toda la ciudad, contáctenos para averiguar más" }
   ]
 
   const nextSlide = () => {
