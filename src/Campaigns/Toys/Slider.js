@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import image1 from "../../images/jugetes1.jpg"
+import image2 from "../../images/jugetes2.png"
+import image3 from "../../images/jugetes3.jpg"
 
 const Slider = () => {
   const carousel = useRef(null);
   const intervalCarousel = useRef(null);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getSlides());
-  }, []);
-
-  const sliderData = useSelector((state) => state.slidesReducer.slides.data);
+  const sliderData = [
+    { id: 1, image: image1, name: "1", description: "1d" },
+    { id: 2, image: image2, name: "2", description: "2d" },
+    { id: 3, image: image3, name: "3", description: "3d" }
+  ]
 
   const nextSlide = () => {
     // Me aseguro que se ejecute solo cuando el carrusel tenga contenido
