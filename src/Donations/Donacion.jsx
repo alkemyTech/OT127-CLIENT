@@ -11,7 +11,6 @@ const Donacion = ({ message }) => {
           className="donation__image"
           src={process.env.PUBLIC_URL + "/images/mercadopago-button.png"}
           alt="mercado pago"
-          width="150"
         />
       </a>
     </div>
