@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
 import Title from "../Titulosynovedades/Title";
-import "./contact.scss";
 import {sweetAlertError} from "../../Services/sweetAlertServices";
 
 const Contact = () => {
