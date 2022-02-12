@@ -8,10 +8,11 @@ import Comments from "../Comments";
 const NewsDetails = ({ title }) => {
     const [news, setNews] = useState({});
     const { id } = useParams()
+    const newsEndpoint = process.env.REACT_APP_ENDPOINTS_NEWS;
     const [showComments, setShowComments] = useState(false);
     useBottomScrollListener(() => setShowComments(true));
     const getNewsData = async () => {
-        const response = await axios.get(`http://ongapi.alkemy.org/api/news/${id}`)
+        const response = await axios.get(`${newsEndpoint}/${id}`)
         setNews(response.data.data);
     }
     useEffect(() => {
