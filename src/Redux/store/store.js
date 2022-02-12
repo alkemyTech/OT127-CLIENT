@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer } from "../reducers/authReducer";
+import authReducer from "../reducers/authReducer";
 import membersReducer from "../reducers/membersSlice";
 import newsReducer from "../reducers/newsSlice";
 import categoriesReducer from "../reducers/categoriesReducer";
