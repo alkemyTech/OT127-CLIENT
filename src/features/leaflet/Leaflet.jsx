@@ -29,9 +29,9 @@ const Leaflet = () => {
   return (
     <div id="map">
       <MapContainer
+        className='map__container'
         center={position}
         zoom={20}
-        style={{ height: "50vh", width: "50%" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={position} icon={myIcon}>
