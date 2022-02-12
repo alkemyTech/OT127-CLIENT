@@ -52,7 +52,8 @@ function App() {
             path="/backoffice/create-category"
             component={CategoriesForm}
           />
-          <Route path="/backoffice/create-member" component={MembersForm} />
+          <Route path="/create-member" component={MembersForm} />
+          <Route path="/member/:id" component={MembersForm} />
           <Route path="/backoffice/create-news" component={NewsForm} />
           <Route path="/backoffice/create-project" component={ProjectsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
