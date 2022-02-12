@@ -6,7 +6,7 @@ const Donacion = ({ message }) => {
   return (
     <div className="donation__container">
       {message && <p>{message}</p>}
-      <a className="danation__link" as="button" href={mercadoPagoCheckout}>
+      <a className="donation__link" as="button" href={mercadoPagoCheckout}>
         <img
           className="donation__image"
           src={process.env.PUBLIC_URL + "/images/mercadopago-button.png"}
