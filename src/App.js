@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/main.scss";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Progress from "./Components/Progress/Porgress";
 const About = lazy(() => import("./Components/About/About"));
