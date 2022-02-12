@@ -20,30 +20,32 @@ const PublicFooter = () => {
 
   return (
     <>
-      <div>
-        <img src={logo} alt="" />
-        <h2>{name}</h2>
-      </div>
-      <div>
-        {/*TODO: Controlar rutas*/}
-        <Link to={"/news"}>Novedades</Link>
-        <Link to={"/activities"}>Actividades</Link>
-        <Link to={"/contact"}>Contacto</Link>
-        <Link to={"/about"}>Nosotros</Link>
-      </div>
-      <div>
-        <a href={facebook_url} target="_blank" rel="noopener noreferrer">
-          Facebook
-        </a>
-        <a href={linkedin_url} target="_blank" rel="noopener noreferrer">
-          Linkedin
-        </a>
-        <a href={instagram_url} target="_blank" rel="noopener noreferrer">
-          Instagram
-        </a>
-        <a href={twitter_url} target="_blank" rel="noopener noreferrer">
-          Twitter
-        </a>
+      <div className="publicFooter">
+        <div>
+          <img src={logo} alt="" className="publicFooter__logo" />
+          <h2>{name}</h2>
+        </div>
+        <div>
+          {/*TODO: Controlar rutas*/}
+          <Link to={"/news"}>Novedades</Link>
+          <Link to={"/activities"}>Actividades</Link>
+          <Link to={"/contact"}>Contacto</Link>
+          <Link to={"/about"}>Nosotros</Link>
+        </div>
+        <div>
+          <a href={facebook_url} target="_blank" rel="noopener noreferrer">
+            Facebook
+          </a>
+          <a href={linkedin_url} target="_blank" rel="noopener noreferrer">
+            Linkedin
+          </a>
+          <a href={instagram_url} target="_blank" rel="noopener noreferrer">
+            Instagram
+          </a>
+          <a href={twitter_url} target="_blank" rel="noopener noreferrer">
+            Twitter
+          </a>
+        </div>
       </div>
     </>
   );
