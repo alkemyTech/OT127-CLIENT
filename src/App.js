@@ -55,11 +55,11 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          <Suspense fallback={<Progress />}>
+          <Suspense fallback={<Progress height={8} />}>
             <Route path="/" exact component={Home} />
             <Route path="/actividades/:id" component={ActivityDetail} />
             <Route path="/actividades" component={Activities} />
-            <Route path="/backoffice" component={BackOffice} />
+            <Route exact path="/backoffice" component={BackOffice} />
             <Route
               path="/backoffice/create-activity"
               component={ActivitiesForm}
@@ -82,8 +82,8 @@ function App() {
             <Route path="/backoffice/create-user/:id" component={UserForm} />
             <Route path="/backoffice/create-user" exact component={UserForm} />
             <Route path="/backoffice/home" component={HomeForm} />
-            <Route path="/backoffice/members" component={MembersList} />
-            <Route path="/backoffice/news" component={NewsList} />
+            <Route exact path="/backoffice/members" component={MembersList} />
+            <Route exact path="/backoffice/news" component={NewsList} />
             <Route
               path="/backoffice/organization"
               component={OrganizationData}
@@ -93,14 +93,14 @@ function App() {
               component={OrganizationForm}
             />
             <Route path="/backoffice/projects/:id" component={ProjectsForm} />
-            <Route path="/backoffice/slides" component={SlideList} />
+            <Route exact path="/backoffice/slides" component={SlideList} />
             <Route path="/backoffice/slides/creacion" component={SlidesForm} />
             <Route
               path="/backoffice/slides/edicion/:id"
               component={SlidesForm}
             />
-            <Route path="/backoffice/users" component={UsersList} />
-            <Route path="/categories" component={CategoriesList} />
+            <Route exact path="/backoffice/users" component={UsersList} />
+            <Route exact path="/categories" component={CategoriesList} />
             <Route path="/contacto" component={Contact} />
             <Route
               path="/donar"
