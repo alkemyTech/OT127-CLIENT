@@ -6,7 +6,7 @@ import "../../sass/layout/_footer.scss";
 const API_URL = process.env.REACT_APP_API_URL;
 const ORGANIZATION_ENDPOINT = process.env.REACT_APP_API_ORGANIZATION;
 
-const Footer = () => {
+const PublicFooter = () => {
   const [organization, setOrganization] = useState({});
 
   useEffect(() => {
@@ -49,4 +49,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default PublicFooter;
