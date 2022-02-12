@@ -4702,17 +4702,10 @@
   "resolved" "https://registry.npmjs.org/diff-sequences/-/diff-sequences-26.6.2.tgz"
   "version" "26.6.2"
 
-<<<<<<< HEAD
-"diff-sequences@^27.5.1":
-  "integrity" "sha512-k1gCAXAsNgLwEL+Y8Wvl+M6oEFj5bgazfZULpS5CneoPPXRaCCW7dm+q21Ky2VEE5X+VeRDBVg1Pcvvsr4TtNQ=="
-  "resolved" "https://registry.npmjs.org/diff-sequences/-/diff-sequences-27.5.1.tgz"
-  "version" "27.5.1"
-=======
 "diff-sequences@^27.5.0":
   "integrity" "sha512-ZsOBWnhXiH+Zn0DcBNX/tiQsqrREHs/6oQsEVy2VJJjrTblykPima11pyHMSA/7PGmD+fwclTnKVKL/qtNREDQ=="
   "resolved" "https://registry.npmjs.org/diff-sequences/-/diff-sequences-27.5.0.tgz"
   "version" "27.5.0"
->>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
 
 "diffie-hellman@^5.0.0":
   "integrity" "sha512-kqag/Nl+f3GwyK25fhUMYj81BUOrZ9IuJsjIcDE5icNM9FJHAVm3VcUDxdLPoQtTuUylWm6ZIknYJwwaPxsUzg=="
@@ -7049,15 +7042,9 @@
   "version" "27.5.1"
   dependencies:
     "chalk" "^4.0.0"
-<<<<<<< HEAD
-    "diff-sequences" "^27.5.1"
-    "jest-get-type" "^27.5.1"
-    "pretty-format" "^27.5.1"
-=======
     "diff-sequences" "^27.5.0"
     "jest-get-type" "^27.5.0"
     "pretty-format" "^27.5.0"
->>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
 
 "jest-docblock@^26.0.0":
   "integrity" "sha512-RDZ4Iz3QbtRWycd8bUEPxQsTlYazfYn/h5R65Fc6gOfwozFhoImx+affzky/FFBuqISPTqjXomoIGJVKBWoo0w=="
@@ -7107,17 +7094,10 @@
   "resolved" "https://registry.npmjs.org/jest-get-type/-/jest-get-type-26.3.0.tgz"
   "version" "26.3.0"
 
-<<<<<<< HEAD
-"jest-get-type@^27.5.1":
-  "integrity" "sha512-2KY95ksYSaK7DMBWQn6dQz3kqAf3BB64y2udeG+hv4KfSOb9qwcYQstTJc1KCbsix+wLZWZYN8t7nwX3GOBLRw=="
-  "resolved" "https://registry.npmjs.org/jest-get-type/-/jest-get-type-27.5.1.tgz"
-  "version" "27.5.1"
-=======
 "jest-get-type@^27.5.0":
   "integrity" "sha512-Vp6O8a52M/dahXRG/E0EJuWQROps2mDQ0sJYPgO8HskhdLwj9ajgngy2OAqZgV6e/RcU67WUHq6TgfvJb8flbA=="
   "resolved" "https://registry.npmjs.org/jest-get-type/-/jest-get-type-27.5.0.tgz"
   "version" "27.5.0"
->>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
 
 "jest-haste-map@^26.6.2":
   "integrity" "sha512-easWIJXIw71B2RdR8kgqpjQrbMRWQBgiBwXYEhtGUTaX+doCjBheluShdDMeR8IMfJiTqH4+zfhtg29apJf/8w=="
