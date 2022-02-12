@@ -7,7 +7,7 @@ import Input from "@mui/material/Input";
 import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 
-const OrganizationForm = () => {
+const OrganizationDataForm = () => {
   const [organizationData, setOrganizationData] = useState({
     name: "",
     logo: "",
@@ -180,4 +180,4 @@ const OrganizationForm = () => {
   );
 };
 
-export default OrganizationForm;
+export default OrganizationDataForm;
