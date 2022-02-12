@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
-import Header from "./Header";
+import BackofficeHeader from "./BackofficeHeader";
 
 const BackOffice = () => {
   const [show, setShow] = useState(false);
@@ -24,7 +24,7 @@ const BackOffice = () => {
   return (
     <div>
       <div className="offcanvas__controller"></div>
-      <Header handleShow={handleShow}></Header>
+      <BackofficeHeader handleShow={handleShow}></BackofficeHeader>
       <h1>Bienvenido!</h1>
 
       <Offcanvas show={show} onHide={handleShow}>

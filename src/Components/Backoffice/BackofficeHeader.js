@@ -1,7 +1,7 @@
 import React from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 
-const Header = ({ handleShow }) => {
+const BackofficeHeader = ({ handleShow }) => {
   return (
     <header className="backofficeheader">
       <h1 className="backofficeheader__title">Somos más</h1>
@@ -12,4 +12,4 @@ const Header = ({ handleShow }) => {
   );
 };
 
-export default Header;
+export default BackofficeHeader;
