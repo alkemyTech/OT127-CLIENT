@@ -1028,9 +1028,15 @@
     "@babel/plugin-transform-typescript" "^7.16.7"
 
 "@babel/runtime-corejs3@^7.10.2":
+<<<<<<< HEAD
   "integrity" "sha512-NcKtr2epxfIrNM4VOmPKO46TvDMCBhgi2CrSHaEarrz+Plk2K5r9QemmOFTGpZaoKnWoGH5MO+CzeRsih/Fcgg=="
   "resolved" "https://registry.npmjs.org/@babel/runtime-corejs3/-/runtime-corejs3-7.17.2.tgz"
   "version" "7.17.2"
+=======
+  "integrity" "sha512-qeydncU80ravKzovVncW3EYaC1ji3GpntdPgNcJy9g7hHSY6KX+ne1cbV3ov7Zzm4F1z0+QreZPCuw1ynkmYNg=="
+  "resolved" "https://registry.npmjs.org/@babel/runtime-corejs3/-/runtime-corejs3-7.17.0.tgz"
+  "version" "7.17.0"
+>>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
   dependencies:
     "core-js-pure" "^3.20.2"
     "regenerator-runtime" "^0.13.4"
@@ -1643,7 +1649,7 @@
     "collect-v8-coverage" "^1.0.0"
     "exit" "^0.1.2"
     "glob" "^7.1.2"
-    "graceful-fs" "^4.2.4"
+    "graceful-fs" "^4.2.9"
     "istanbul-lib-coverage" "^3.0.0"
     "istanbul-lib-instrument" "^4.0.3"
     "istanbul-lib-report" "^3.0.0"
@@ -1667,7 +1673,7 @@
   "version" "26.6.2"
   dependencies:
     "callsites" "^3.0.0"
-    "graceful-fs" "^4.2.4"
+    "graceful-fs" "^4.2.9"
     "source-map" "^0.6.0"
 
 "@jest/test-result@^26.6.0", "@jest/test-result@^26.6.2":
@@ -3077,7 +3083,7 @@
     "babel-plugin-istanbul" "^6.0.0"
     "babel-preset-jest" "^26.6.2"
     "chalk" "^4.0.0"
-    "graceful-fs" "^4.2.4"
+    "graceful-fs" "^4.2.9"
     "slash" "^3.0.0"
 
 "babel-loader@8.1.0":
@@ -4696,10 +4702,17 @@
   "resolved" "https://registry.npmjs.org/diff-sequences/-/diff-sequences-26.6.2.tgz"
   "version" "26.6.2"
 
+<<<<<<< HEAD
 "diff-sequences@^27.5.1":
   "integrity" "sha512-k1gCAXAsNgLwEL+Y8Wvl+M6oEFj5bgazfZULpS5CneoPPXRaCCW7dm+q21Ky2VEE5X+VeRDBVg1Pcvvsr4TtNQ=="
   "resolved" "https://registry.npmjs.org/diff-sequences/-/diff-sequences-27.5.1.tgz"
   "version" "27.5.1"
+=======
+"diff-sequences@^27.5.0":
+  "integrity" "sha512-ZsOBWnhXiH+Zn0DcBNX/tiQsqrREHs/6oQsEVy2VJJjrTblykPima11pyHMSA/7PGmD+fwclTnKVKL/qtNREDQ=="
+  "resolved" "https://registry.npmjs.org/diff-sequences/-/diff-sequences-27.5.0.tgz"
+  "version" "27.5.0"
+>>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
 
 "diffie-hellman@^5.0.0":
   "integrity" "sha512-kqag/Nl+f3GwyK25fhUMYj81BUOrZ9IuJsjIcDE5icNM9FJHAVm3VcUDxdLPoQtTuUylWm6ZIknYJwwaPxsUzg=="
@@ -6987,7 +7000,7 @@
     "@jest/types" "^26.6.2"
     "chalk" "^4.0.0"
     "exit" "^0.1.2"
-    "graceful-fs" "^4.2.4"
+    "graceful-fs" "^4.2.9"
     "import-local" "^3.0.2"
     "is-ci" "^2.0.0"
     "jest-config" "^26.6.3"
@@ -7036,9 +7049,15 @@
   "version" "27.5.1"
   dependencies:
     "chalk" "^4.0.0"
+<<<<<<< HEAD
     "diff-sequences" "^27.5.1"
     "jest-get-type" "^27.5.1"
     "pretty-format" "^27.5.1"
+=======
+    "diff-sequences" "^27.5.0"
+    "jest-get-type" "^27.5.0"
+    "pretty-format" "^27.5.0"
+>>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
 
 "jest-docblock@^26.0.0":
   "integrity" "sha512-RDZ4Iz3QbtRWycd8bUEPxQsTlYazfYn/h5R65Fc6gOfwozFhoImx+affzky/FFBuqISPTqjXomoIGJVKBWoo0w=="
@@ -7088,10 +7107,17 @@
   "resolved" "https://registry.npmjs.org/jest-get-type/-/jest-get-type-26.3.0.tgz"
   "version" "26.3.0"
 
+<<<<<<< HEAD
 "jest-get-type@^27.5.1":
   "integrity" "sha512-2KY95ksYSaK7DMBWQn6dQz3kqAf3BB64y2udeG+hv4KfSOb9qwcYQstTJc1KCbsix+wLZWZYN8t7nwX3GOBLRw=="
   "resolved" "https://registry.npmjs.org/jest-get-type/-/jest-get-type-27.5.1.tgz"
   "version" "27.5.1"
+=======
+"jest-get-type@^27.5.0":
+  "integrity" "sha512-Vp6O8a52M/dahXRG/E0EJuWQROps2mDQ0sJYPgO8HskhdLwj9ajgngy2OAqZgV6e/RcU67WUHq6TgfvJb8flbA=="
+  "resolved" "https://registry.npmjs.org/jest-get-type/-/jest-get-type-27.5.0.tgz"
+  "version" "27.5.0"
+>>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
 
 "jest-haste-map@^26.6.2":
   "integrity" "sha512-easWIJXIw71B2RdR8kgqpjQrbMRWQBgiBwXYEhtGUTaX+doCjBheluShdDMeR8IMfJiTqH4+zfhtg29apJf/8w=="
@@ -7291,7 +7317,7 @@
   "version" "26.6.2"
   dependencies:
     "@types/node" "*"
-    "graceful-fs" "^4.2.4"
+    "graceful-fs" "^4.2.9"
 
 "jest-snapshot@^26.6.0", "jest-snapshot@^26.6.2":
   "integrity" "sha512-OLhxz05EzUtsAmOMzuupt1lHYXCNib0ECyuZ/PZOx9TrZcC8vL0x+DUG3TL+GLX3yHG45e6YGjIm0XwDc3q3og=="
@@ -9606,10 +9632,17 @@
     "ansi-styles" "^4.0.0"
     "react-is" "^17.0.1"
 
+<<<<<<< HEAD
 "pretty-format@^27.0.0", "pretty-format@^27.0.2", "pretty-format@^27.5.1":
   "integrity" "sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ=="
   "resolved" "https://registry.npmjs.org/pretty-format/-/pretty-format-27.5.1.tgz"
   "version" "27.5.1"
+=======
+"pretty-format@^27.0.0", "pretty-format@^27.0.2", "pretty-format@^27.5.0":
+  "integrity" "sha512-xEi6BRPZ+J1AIS4BAtFC/+rh5jXlXObGZjx5+OSpM95vR/PGla78bFVHMy5GdZjP9wk3AHAMHROXq/r69zXltw=="
+  "resolved" "https://registry.npmjs.org/pretty-format/-/pretty-format-27.5.0.tgz"
+  "version" "27.5.0"
+>>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
   dependencies:
     "ansi-regex" "^5.0.1"
     "ansi-styles" "^5.0.0"
