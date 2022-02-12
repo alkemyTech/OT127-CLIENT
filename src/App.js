@@ -38,16 +38,13 @@ function App() {
     // Agregar newsletter en footer
     <>
       <BrowserRouter>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/actividades/:id" component={ActivityDetail} />
-          <Route path="/actividades" component={Activities} />
-          <Route path="/backoffice" component={BackOffice} />
+        {/* RUTAS BACKOFFICE
+          
           <Route
             path="/backoffice/create-activity"
             component={ActivitiesForm}
           />
-          <Route path="/backoffice/activities/:id" component={ActivitiesForm} />
+          <Route path="/backoffice/activities/:id" component={ActivitiesForm} />       
           <Route
             path="/backoffice/create-category"
             component={CategoriesForm}
@@ -75,25 +72,45 @@ function App() {
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
           <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
           <Route path="/backoffice/users" component={UsersList} />
+      */}
+
+        {/* Switch Nuevo */}
+
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/activities" component={Activities} />
+          <Route path="/login" component={LoginForm} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/register" component={RegisterForm} />
+          <Route path="/news" exact component={News} />
+          <Route path="/news/:id" exact component={NewsDetails} />
+          {/* BACKOFFICE */}
+          <Route path="/backoffice" component={BackOffice} />
+        </Switch>
+
+        {/* Switch viejo, dejo cosas por las dudas */}
+        <Switch>
+          {/* No está aclarado en el sitemap */}
+          <Route path="/actividades/:id" component={ActivityDetail} />
+          {/* No tiene front */}
           <Route path="/categories" component={CategoriesList} />
-          <Route path="/contacto" component={Contact} />
+
           <Route
             path="/donar"
             component={() => <Donacion message="Quieres donar?" />}
           />
           <Route path="/gracias" component={Gracias} />
-          <Route path="/login" component={LoginForm} />
+
           <Route path="/news/:id" component={NewsForm} />
           <Route
             path="/novedades/:id"
             component={() => <NewsDetails title="Titulo recibido por props" />}
           />
-          <Route path="/novedades" exact component={News} />
+
           <Route
             path="/nosotros"
             component={() => <About text="Sobre Nosotros" />}
           />
-          <Route path="/register" component={RegisterForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
         </Switch>
