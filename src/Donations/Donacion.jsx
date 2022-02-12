@@ -4,13 +4,14 @@ const Donacion = ({ message }) => {
   const mercadoPagoCheckout = "https://mpago.la/1NKGewb";
 
   return (
-    <div>
+    <div className="donation__container">
       {message && <p>{message}</p>}
-      <a as="button" href={mercadoPagoCheckout}>
+      <a className="danation__link" as="button" href={mercadoPagoCheckout}>
         <img
+          className="donation__image"
           src={process.env.PUBLIC_URL + "/images/mercadopago-button.png"}
           alt="mercado pago"
-          width="100"
+          width="150"
         />
       </a>
     </div>
