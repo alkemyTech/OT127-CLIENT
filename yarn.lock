@@ -1028,15 +1028,9 @@
     "@babel/plugin-transform-typescript" "^7.16.7"
 
 "@babel/runtime-corejs3@^7.10.2":
-<<<<<<< HEAD
-  "integrity" "sha512-NcKtr2epxfIrNM4VOmPKO46TvDMCBhgi2CrSHaEarrz+Plk2K5r9QemmOFTGpZaoKnWoGH5MO+CzeRsih/Fcgg=="
-  "resolved" "https://registry.npmjs.org/@babel/runtime-corejs3/-/runtime-corejs3-7.17.2.tgz"
-  "version" "7.17.2"
-=======
   "integrity" "sha512-qeydncU80ravKzovVncW3EYaC1ji3GpntdPgNcJy9g7hHSY6KX+ne1cbV3ov7Zzm4F1z0+QreZPCuw1ynkmYNg=="
   "resolved" "https://registry.npmjs.org/@babel/runtime-corejs3/-/runtime-corejs3-7.17.0.tgz"
   "version" "7.17.0"
->>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
   dependencies:
     "core-js-pure" "^3.20.2"
     "regenerator-runtime" "^0.13.4"
@@ -9612,17 +9606,10 @@
     "ansi-styles" "^4.0.0"
     "react-is" "^17.0.1"
 
-<<<<<<< HEAD
-"pretty-format@^27.0.0", "pretty-format@^27.0.2", "pretty-format@^27.5.1":
-  "integrity" "sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ=="
-  "resolved" "https://registry.npmjs.org/pretty-format/-/pretty-format-27.5.1.tgz"
-  "version" "27.5.1"
-=======
 "pretty-format@^27.0.0", "pretty-format@^27.0.2", "pretty-format@^27.5.0":
   "integrity" "sha512-xEi6BRPZ+J1AIS4BAtFC/+rh5jXlXObGZjx5+OSpM95vR/PGla78bFVHMy5GdZjP9wk3AHAMHROXq/r69zXltw=="
   "resolved" "https://registry.npmjs.org/pretty-format/-/pretty-format-27.5.0.tgz"
   "version" "27.5.0"
->>>>>>> eb23071dbb1caf8860e8bafd488e4a1a6ca055e5
   dependencies:
     "ansi-regex" "^5.0.1"
     "ansi-styles" "^5.0.0"
