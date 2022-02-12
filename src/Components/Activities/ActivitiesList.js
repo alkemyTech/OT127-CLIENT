@@ -1,11 +1,11 @@
 import React from 'react';
-import '../CardListStyles.css';
+import '../../sass/components/_card.scss';
 
 const ActivitiesList = () => {
     const activitiesMock = [
-        {id: 1, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
-        {id: 2, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
-        {id: 3, name: 'Titulo de prueba', description: 'Descripcion de prueba'}
+        { id: 2, name: 'Titulo de prueba', description: 'Descripcion de prueba' },
+        { id: 1, name: 'Titulo de prueba', description: 'Descripcion de prueba' },
+        { id: 3, name: 'Titulo de prueba', description: 'Descripcion de prueba' }
     ];
 
     return (
@@ -14,19 +14,19 @@ const ActivitiesList = () => {
             <ul className="list-container">
                 {activitiesMock.length > 0 ?
                     activitiesMock.map((activity) => {
-                        return(
+                        return (
                             <li className="card-info" key={activity.id}>
                                 <h3>{activity.name}</h3>
                                 <p>{activity.description}</p>
                             </li>
                         )
                     })
-                :
+                    :
                     <p>No hay actividades</p>
                 }
             </ul>
         </div>
     );
 }
- 
+
 export default ActivitiesList;

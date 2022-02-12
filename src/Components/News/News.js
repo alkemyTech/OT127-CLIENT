@@ -1,32 +1,49 @@
-import React, { useState, useEffect } from "react";
-import getNews from "../../Services/newsService";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { getNews } from '../../Redux/reducers/newsSlice'
+import { useBottomScrollListener } from "react-bottom-scroll-listener";
+import Spinner from '../Spinner/Spinner';
+import Comments from "./Comments";
 
 const News = () => {
-  const [news, setNews] = useState([]);
+	const dispatch = useDispatch()
+	const [ showComments, setShowComments ] = useState(false);
+	const [ isLoading, setIsLoading ] = useState(true);
+	useBottomScrollListener(() => setShowComments(true));
 
-  useEffect(() => {
-    getNews(setNews);
-  }, []);
 
-  const newsList = () => {
-    return news.length ? (
-      news.map((element) => (
-        <li className="card-info" key={element.id}>
-          <h3>{element.name}</h3>
-          <p>{element.description}</p>
-        </li>
-      ))
-    ) : (
-      <p>No hay novedades</p>
-    );
-  };
+	useEffect(() => {
+		dispatch(getNews())
+		setIsLoading(false)
+	}, []); //eslint-disable-line
 
-  return (
-    <>
-      <h1>Novedades</h1>
-      <ul className="list-container">{newsList()}</ul>
-    </>
-  );
-};
+	const news = useSelector(state => state.newsReducer.news.data)
 
-export default News;
+	const newsList = () => {
+		return news.length ? (
+			news.map((element) => (
+				<li className="card-info" key={element.id}>
+					<h3>{element.name}</h3>
+					<p>{element.description}</p>
+				</li>
+			))
+		) : (
+			null
+		);
+	};
+
+	return (
+		<>
+			{isLoading
+				? <Spinner />
+				: (<div>
+					<h1>Novedades</h1>
+					<ul className="list-container">{newsList()}</ul>
+					{showComments && <Comments />}
+				</div>
+				)}
+		</>
+	)
+}
+
+export default News
