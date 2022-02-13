@@ -17,6 +17,10 @@
     height: max-content;
     background-color: cornsilk;
   }
+  &__subcontainer {
+    display: flex;
+    flex-direction: column;
+  }
   &__input {
     @include input-height;
     @include border-rounded;
@@ -44,11 +48,6 @@
       background-color: variables.$light-green;
     }
   }
-}
-
-.body__form--subcontainer {
-  display: flex;
-  flex-direction: column;
 }
 
 .body__form--option {

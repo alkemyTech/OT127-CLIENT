@@ -5,7 +5,7 @@ import "../FormStyles.css";
 
 const RegisterForm = () => {
   return (
-    <div className="body">
+    <div className="form__container">
       <Formik
         initialValues={{
           name: "",
@@ -45,73 +45,65 @@ const RegisterForm = () => {
           };
         }}
       >
-        <Form className="body__form">
+        <Form className="form">
           {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
           {/*Los componentes ErrorMessage tienen un atributo render, eso va a servir para cuando agreguemos los estilos, solo hay que agregar la clase*/}
-          <div className="body__form--subcontainer">
-            <label htmlFor="name" className="body__form--label">
+          <div className="form__subcontainer">
+            <label htmlFor="name" className="form__label">
               Nombre
             </label>
-            <Field name="name" type="text" className="body__form--input" />
+            <Field name="name" type="text" className="form__input" />
             <ErrorMessage
               name="name"
-              render={(msg) => <div className="body__form--error">{msg}</div>}
+              render={(msg) => <div className="form__error">{msg}</div>}
             />
           </div>
-          <div className="body__form--subcontainer">
-            <label htmlFor="lastName" className="body__form--label">
+          <div className="form__subcontainer">
+            <label htmlFor="lastName" className="form__label">
               Apellido
             </label>
-            <Field name="lastName" type="text" className="body__form--input" />
+            <Field name="lastName" type="text" className="form__input" />
             <ErrorMessage
               name="lastName"
-              render={(msg) => <div className="body__form--error">{msg}</div>}
-              className="body__form--error"
+              render={(msg) => <div className="form__error">{msg}</div>}
             />
           </div>
-          <div className="body__form--subcontainer">
-            <label htmlFor="email" className="body__form--label">
+          <div className="form__subcontainer">
+            <label htmlFor="email" className="form__label">
               Email
             </label>
-            <Field name="email" type="email" className="body__form--input" />
+            <Field name="email" type="email" className="form__input" />
             <ErrorMessage
               name="email"
-              render={(msg) => <div className="body__form--error">{msg}</div>}
-              className="body__form--error"
+              render={(msg) => <div className="form__error">{msg}</div>}
             />
           </div>
-          <div className="body__form--subcontainer">
-            <label htmlFor="password" className="body__form--label">
+          <div className="form__subcontainer">
+            <label htmlFor="password" className="form__label">
               Contraseña
             </label>
-            <Field
-              name="password"
-              type="password"
-              className="body__form--input"
-            />
+            <Field name="password" type="password" className="form__input" />
             <ErrorMessage
               name="password"
-              render={(msg) => <div className="body__form--error">{msg}</div>}
-              className="body__form--error"
+              render={(msg) => <div className="form__error">{msg}</div>}
             />
           </div>
-          <div className="body__form--subcontainer">
-            <label htmlFor="confirmPassword" className="body__form--label">
+          <div className="form__subcontainer">
+            <label htmlFor="confirmPassword" className="form__label">
               Confirmar contraseña
             </label>
             <Field
               name="confirmPassword"
               type="password"
-              className="body__form--input"
+              className="form__input"
             />
             <ErrorMessage
               name="confirmPassword"
-              render={(msg) => <div className="body__form--error">{msg}</div>}
-              className="body__form--error"
+              render={(msg) => <div className="form__error">{msg}</div>}
             />
           </div>
 
-          <button type="submit" className="body__form--submit">
+          <button type="submit" className="form__button">
             Registrar
           </button>
         </Form>
