@@ -32,7 +32,6 @@ import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
 import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import UserForm from "./Components/Users/UsersForm";
 import UsersList from "./Components/Users/UsersList";
-import Slider from "./Campaigns/School/Slider";
 
 function App() {
   return (
@@ -40,7 +39,6 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          <Route path="/prueba" exact component={Slider} />
           <Route path="/" exact component={Home} />
           <Route path="/actividades/:id" component={ActivityDetail} />
           <Route path="/actividades" component={Activities} />
