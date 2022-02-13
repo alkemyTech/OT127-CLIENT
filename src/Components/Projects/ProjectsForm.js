@@ -52,10 +52,10 @@ const ProjectsForm = () => {
   };
 
   return (
-    <div className="body">
-    <form className="body__form" onSubmit={handleSubmit}>
+    <div className="form__container">
+    <form className="form" onSubmit={handleSubmit}>
       <input
-        className="body__form--input"
+        className="form__input"
         type="text"
         name="title"
         value={title}
@@ -64,7 +64,7 @@ const ProjectsForm = () => {
         required
       ></input>
       <input
-        className="body__form--input"
+        className="form__input"
         type="text"
         name="description"
         value={description}
@@ -73,7 +73,7 @@ const ProjectsForm = () => {
         required
       ></input>
       <input
-        className="body__form--input"
+        className="form__input"
         type="date"
         name="due_date"
         value={due_date && due_date.split("T")[0]}
@@ -86,7 +86,7 @@ const ProjectsForm = () => {
         onChange={(e) => handleChange(e, "image")}
       ></input>
       <img src={image} alt="" />
-      <button className="body__form--submit" type="submit">
+      <button className="form__button" type="submit">
         Send
       </button>
     </form>

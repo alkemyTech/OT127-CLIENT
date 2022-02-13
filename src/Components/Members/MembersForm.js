@@ -98,7 +98,9 @@ const MemberForm = () => {
                   render={(msg) => <div className="form__error">{msg}</div>}
                 />
 
-                <label className="form__label" htmlFor="description">Descripcion</label>
+                <label className="form__label" htmlFor="description">
+                  Descripcion
+                </label>
                 <Field name="description">
                   {({ field }) => (
                     <>
@@ -120,7 +122,9 @@ const MemberForm = () => {
                   render={(msg) => <div className="form__error">{msg}</div>}
                 />
 
-                <label className="form__label" htmlFor="image">Cargar Imagen</label>
+                <label className="form__label" htmlFor="image">
+                  Cargar Imagen
+                </label>
                 <input
                   name="image"
                   ref={inputFileRef}
@@ -130,23 +134,36 @@ const MemberForm = () => {
                     handleImage(e, setFieldValue);
                   }}
                 />
-                <ErrorMessage name="image" render={(msg) => <div className="form__error">{msg}</div>} />
+                <ErrorMessage
+                  name="image"
+                  render={(msg) => <div className="form__error">{msg}</div>}
+                />
 
-                <label className="form__label" htmlFor="facebookUrl">Facebook</label>
+                <label className="form__label" htmlFor="facebookUrl">
+                  Facebook
+                </label>
                 <Field
                   name="facebookUrl"
                   type="facebookUrl"
                   className="form__input"
                 />
-                <ErrorMessage name="facebookUrl" render={(msg) => <div className="form__error">{msg}</div>} />
+                <ErrorMessage
+                  name="facebookUrl"
+                  render={(msg) => <div className="form__error">{msg}</div>}
+                />
 
-                <label className="form__label" htmlFor="linkedinUrl">LinkedIn</label>
+                <label className="form__label" htmlFor="linkedinUrl">
+                  LinkedIn
+                </label>
                 <Field
                   name="linkedinUrl"
                   type="linkedinUrl"
                   className="form__input"
                 />
-                <ErrorMessage name="linkedinUrl" render={(msg) => <div className="form__error">{msg}</div>} />
+                <ErrorMessage
+                  name="linkedinUrl"
+                  render={(msg) => <div className="form__error">{msg}</div>}
+                />
 
                 <button className="form__button" type="submit">
                   Enviar
