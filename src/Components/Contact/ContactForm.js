@@ -1,6 +1,11 @@
 import React from "react";
+<<<<<<< HEAD
 import { Formik, Form, Field, ErrorMessage } from "formik";
+=======
+import { Formik, Form, Field } from "formik";
+>>>>>>> 03ed2e218d3cb49b7dfc00d802e2e4412a317482
 import * as Yup from "yup";
+import { postContact } from "../../Services/contactServices";
 
 function ContactForm() {
   const phoneValidate =
@@ -24,11 +29,19 @@ function ContactForm() {
   });
 
   const handleSubmit = (values) => {
+<<<<<<< HEAD
     // to do (logica pendiente)
   };
 
   return (
     <div className="form__container">
+=======
+    postContact(values);
+  };
+
+  return (
+    <div className="form-container">
+>>>>>>> 03ed2e218d3cb49b7dfc00d802e2e4412a317482
       <Formik
         initialValues={{
           name: "",
@@ -43,6 +56,7 @@ function ContactForm() {
       >
         {({ errors, touched }) => {
           return (
+<<<<<<< HEAD
             <Form className="form">
               <div className="form__subcontainer">
                 <label className="form__label" htmlFor="name">
@@ -50,11 +64,19 @@ function ContactForm() {
                 </label>
                 <Field
                   className="form__input"
+=======
+            <Form>
+              <div>
+                <label htmlFor="name">Nombre:</label>
+                <Field
+                  className="input-field"
+>>>>>>> 03ed2e218d3cb49b7dfc00d802e2e4412a317482
                   name="name"
                   id="name"
                   type="text"
                   placeholder="Ingrese su nombre"
                 />
+<<<<<<< HEAD
                 <ErrorMessage
                   name="name"
                   render={(msg) => (
@@ -69,11 +91,22 @@ function ContactForm() {
                 </label>
                 <Field
                   className="form__input"
+=======
+                {/* Cambiar el div del mensaje de error por el componente creado para form category */}
+                {errors.name && touched.name ? <div>{errors.name}</div> : null}
+              </div>
+
+              <div>
+                <label htmlFor="email">Email:</label>
+                <Field
+                  className="input-field"
+>>>>>>> 03ed2e218d3cb49b7dfc00d802e2e4412a317482
                   name="email"
                   id="email"
                   type="text"
                   placeholder="Ingrese correo electronico"
                 />
+<<<<<<< HEAD
                 <ErrorMessage
                   name="email"
                   render={(msg) => (
@@ -88,11 +121,24 @@ function ContactForm() {
                 </label>
                 <Field
                   className="form__input"
+=======
+                {/* Cambiar el div del mensaje de error por el componente creado para form category */}
+                {errors.email && touched.email ? (
+                  <div>{errors.email}</div>
+                ) : null}
+              </div>
+
+              <div>
+                <label htmlFor="phone">Teléfono:</label>
+                <Field
+                  className="input-field"
+>>>>>>> 03ed2e218d3cb49b7dfc00d802e2e4412a317482
                   name="phone"
                   id="phone"
                   type="text"
                   placeholder="Ingrese su número de teléfono"
                 />
+<<<<<<< HEAD
                 <ErrorMessage
                   name="phone"
                   render={(msg) => (
@@ -107,11 +153,24 @@ function ContactForm() {
                 </label>
                 <Field
                   className="form__input"
+=======
+                {/* Cambiar el div del mensaje de error por el componente creado para form category */}
+                {errors.phone && touched.phone ? (
+                  <div>{errors.phone}</div>
+                ) : null}
+              </div>
+
+              <div>
+                <label htmlFor="message">Mensaje:</label>
+                <Field
+                  className="input-field"
+>>>>>>> 03ed2e218d3cb49b7dfc00d802e2e4412a317482
                   name="message"
                   type="text"
                   id="message"
                   placeholder="Mensaje"
                 />
+<<<<<<< HEAD
                 <ErrorMessage
                   name="message"
                   render={(msg) => (
@@ -121,6 +180,15 @@ function ContactForm() {
               </div>
 
               <button className="form__button" type="submit">
+=======
+                {/* Cambiar el div del mensaje de error por el componente creado para form category */}
+                {errors.message && touched.message ? (
+                  <div>{errors.message}</div>
+                ) : null}
+              </div>
+
+              <button className="submit-btn" type="submit">
+>>>>>>> 03ed2e218d3cb49b7dfc00d802e2e4412a317482
                 Enviar
               </button>
             </Form>

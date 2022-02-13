@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "../FormStyles.css";
+import "../../sass/components/_form.scss";
 
 const API_URL = "http://ongapi.alkemy.org/api/projects";
 

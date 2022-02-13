@@ -80,23 +80,23 @@ const OrganizationForm = () => {
   };
 
   return (
-    <div className="body">
-      <form className="body__form">
+    <div className="form__container">
+      <form className="form">
         <FormControl>
-          <label className="body__form--label" htmlFor="name" required>
+          <label className="form__label" htmlFor="name" required>
             Name
           </label>
           <input
-            className="body__form--input"
+            className="form__input"
             value={organizationData.name}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "name")}
           />
         </FormControl>
-        <label className="body__form--label">Logo</label>
+        <label className="form__label">Logo</label>
         <FormControl>
           <input
-            className="body__form--input"
+            className="form__input"
             value={organizationData.logo}
             type="file"
             accept="image/x-png, image/jpeg"
@@ -118,26 +118,26 @@ const OrganizationForm = () => {
         />
         <FormControl>
           <label
-            className="body__form--label"
+            className="form__label"
             htmlFor="longDescription"
             required
           >
             Long description
           </label>
           <input
-            className="body__form--input"
+            className="form__input"
             value={organizationData.longDescription}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "longDescription")}
           />
         </FormControl>
-        <label className="body__form--label">Redes sociales</label>
+        <label className="form__label">Redes sociales</label>
         <FormControl>
-          <label className="body__form--label" htmlFor="facebook">
+          <label className="form__label" htmlFor="facebook">
             Facebook
           </label>
           <input
-            className="body__form--input"
+            className="form__input"
             value={organizationData.facebook}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "facebook")}
@@ -148,11 +148,11 @@ const OrganizationForm = () => {
           </FormHelperText>
         </FormControl>
         <FormControl>
-          <label className="body__form--label" htmlFor="linkedin">
+          <label className="form__label" htmlFor="linkedin">
             Linkedin
           </label>
           <input
-            className="body__form--input"
+            className="form__input"
             value={organizationData.linkedin}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "linkedin")}
@@ -163,11 +163,11 @@ const OrganizationForm = () => {
           </FormHelperText>
         </FormControl>
         <FormControl>
-          <label className="body__form--label" htmlFor="instagram">
+          <label className="form__label" htmlFor="instagram">
             Instagram
           </label>
           <input
-            className="body__form--input"
+            className="form__input"
             value={organizationData.instagram}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "instagram")}
@@ -178,11 +178,11 @@ const OrganizationForm = () => {
           </FormHelperText>
         </FormControl>
         <FormControl>
-          <label className="body__form--label" htmlFor="twitter">
+          <label className="form__label" htmlFor="twitter">
             Twitter
           </label>
           <input
-            className="body__form--input"
+            className="form__input"
             value={organizationData.twitter}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "twitter")}
@@ -194,7 +194,7 @@ const OrganizationForm = () => {
         </FormControl>
         <FormControl>
           <input
-            className="body__form--submit"
+            className="form__button"
             id="submit"
             type="submit"
             onClick={handleSubmit}

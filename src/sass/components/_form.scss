@@ -22,8 +22,8 @@
     flex-direction: column;
   }
   &__input {
-    @include input-height;
-    @include border-rounded;
+    height: 2.5em;
+    border-radius: 10px;
     margin: 0 0 1em 0;
     border-style: none;
   }
@@ -33,17 +33,17 @@
     font-weight: bold;
   }
   &__error {
-    color: $med-red;
+    color: variables.$med-red;
   }
   &__option {
     font-size: 1rem;
   }  
   &__button {
-    @include input-height;
-    @include border-rounded;
-    background-color: $green-blue;
+    height: 2.5em;
+    border-radius: 10px;
+    background-color: variables.$green-blue;
     border-style: none;
-    color: $font-white;
+    color: variables.$font-white;
     margin-top: 1em !important;
     font-weight: bold;
     &:hover {
