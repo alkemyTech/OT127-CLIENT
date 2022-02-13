@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import axios from "axios";
 import Title from "../Titulosynovedades/Title";
 import {sweetAlertError} from "../../Services/sweetAlertServices";
+import Leaflet from "../../features/leaflet/Leaflet";
 
 const Contact = () => {
 	// Estados para guardar los datos y las banderas
@@ -16,7 +17,7 @@ const Contact = () => {
 			const {data} = await axios.get(endPointContacts);
 			const contactsAPI = data.data;
 			// Utilice un filter para no guardar tantos datos en el estado local ya que hay como 700 contactos
-			const filterData = contactsAPI.filter((contact) => contact.id < 25);
+			const filterData = contactsAPI.filter((contact) => contact.id === 13);
 			setContacts(filterData);
 			setError(false);
 		} catch (error) {
@@ -70,6 +71,7 @@ const Contact = () => {
 					</div>
 				</div>
 			))}
+			<Leaflet/>
 		</>
 	);
 };
