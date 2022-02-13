@@ -15,7 +15,7 @@ import UserForm from "../Users/UsersForm";
 import NewsForm from "../News/NewsForm";
 import NewsList from "../News/NewsList";
 import OrganizationData from "../Organization/OrganizationData";
-import OrganizationDataForm from "../Organization/EditOrganizationDataForm";
+import OrganizationDataForm from "../Organization/OrganizationDataForm";
 import ProjectsForm from "../Projects/ProjectsForm";
 
 const BackOffice = () => {
@@ -56,31 +56,55 @@ const BackOffice = () => {
 
       <Switch>
         <Route path="/backoffice/home" component={HomeForm} />
-        <Route path="/backoffice/create-activity" component={ActivitiesForm} />
+        <Route
+          path="/backoffice/create-activity"
+          exact
+          component={ActivitiesForm}
+        />
         <Route
           path="/backoffice/create-activity/:id"
           component={ActivitiesForm}
         />
         <Route path="/backoffice/activities" component={ActivitiesList} />
-        <Route path="/backoffice/categories" component={CategoriesList} />
+        <Route path="/backoffice/categories" exact component={CategoriesList} />
         <Route
           path="/backoffice/categories/create"
           component={CategoriesForm}
         />
-        <Route path="/backoffice/categories" component={CategoriesList} />
-        <Route path="/backoffice/members" component={MembersList} />
-        <Route path="/backoffice/members/create" component={MembersForm} />
+        {/* PROBLEMA
+        members no carga los miembros
+        */}
+        <Route path="/backoffice/members" exact component={MembersList} />
+        <Route
+          path="/backoffice/members/create"
+          exact
+          component={MembersForm}
+        />
+        {/* PROBLEMA
+        MembersForm no detecta si le pasamos un id en la url
+        */}
         <Route path="/backoffice/members/edit/:id" component={MembersForm} />
-        <Route path="/backoffice/slides" component={SlideList} />
-        <Route path="/backoffice/slides/create" component={SlidesForm} />
+        <Route path="/backoffice/slides" exact component={SlideList} />
+        {/* PROBLEMA
+        Res.data is undefined en create y edit slides
+        */}
+        <Route path="/backoffice/slides/create" exact component={SlidesForm} />
         <Route path="/backoffice/slides/edit/:id" component={SlidesForm} />
-        <Route path="/backoffice/users" component={UsersList} />
-        <Route path="/backoffice/users/create" component={UserForm} />
+        <Route path="/backoffice/users" exact component={UsersList} />
+        <Route path="/backoffice/users/create" exact component={UserForm} />
         <Route path="/backoffice/users/edit/:id" component={UserForm} />
-        <Route path="/backoffice/news" component={NewsList} />
-        <Route path="/backoffice/news/create" component={NewsForm} />
+        <Route path="/backoffice/news" exact component={NewsList} />
+        <Route path="/backoffice/news/create" exact component={NewsForm} />
         <Route path="/backoffice/news/edit/:id" component={NewsForm} />
-        <Route path="/backoffice/organization" component={OrganizationData} />
+        {/* PROBLEMA
+          Parsed is undefined (?)
+        */}
+        <Route
+          path="/backoffice/organization"
+          exact
+          component={OrganizationData}
+        />
+        {/* PROBLEMA se rompe todo */}
         <Route
           path="/backoffice/organization/edit"
           component={OrganizationDataForm}
