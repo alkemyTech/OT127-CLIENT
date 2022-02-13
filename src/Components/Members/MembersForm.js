@@ -1,51 +1,167 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from 'react';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import axios from 'axios';
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import "@ckeditor/ckeditor5-build-classic/build/translations/es";
+import './Members.scss';
+import { useParams } from 'react-router-dom';
 import "../../sass/components/_form.scss";
 
-// Todo: extender servicios http members cuando el componente este listo
 
-const MembersForm = () => {
-  const [initialValues, setInitialValues] = useState({
-    name: "",
-    description: "",
-  });
 
-  const handleChange = (e) => {
-    if (e.target.name === "name") {
-      setInitialValues({ ...initialValues, name: e.target.value });
+const MemberForm = () => {
+    const {id} = useParams();
+    const [loading, setLoading] = useState(false);
+    const [formValues, setFormValues] = useState({name: "", description: "", facebookUrl: "", linkedinUrl: "", image: ""});
+    const baseUrl = 'http://ongapi.alkemy.org/api/members';
+    const inputFileRef = useRef();
+
+    const handleSubmit = async(formValues) => {
+        setLoading(true);
+        if (id) {
+            await axios
+            .put(`${baseUrl}/${id}`, formValues)
+            .catch((err) => {
+                alert(err.message);
+            });
+        } else {
+            await axios
+            .post(baseUrl, formValues)
+            .catch((err) => {
+                alert(err.message);
+            });
+        };
+        setLoading(false);
     }
-    if (e.target.name === "description") {
-      setInitialValues({ ...initialValues, description: e.target.value });
+
+    const handleImage = (e, setFieldValue) => {
+        let reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onloadend = () => {
+          setFieldValue("image", reader.result);
+        };
+    };
+
+    const getDataById = async (formValues) => {
+        setLoading(true);
+        await axios
+        .get(`${baseUrl}/${id}`)
+        .then((res) => {
+            setFormValues(res.data.data);
+        }).catch((err) => {
+            alert(err.message);
+        });
+        setLoading(false);
     }
-  };
+    
+    useEffect(() => {
+        if (id) {
+            getDataById(id);
+        }
+    }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(initialValues);
-  };
+    return (
+        <>
+            {loading ? (
+                <p>LOADING..</p>
+            ) : (
+            <Formik
+                enableReinitialize={true}
+                initialValues={formValues}
+                validationSchema={Yup.object({
+                name: Yup.string()
+                    .min(4, "Debe tener por lo menos 4 caracteres.")
+                    .required("Campo obligatorio"),
+                description: Yup.string()
+                    .required("Campo obligatorio"),
+                facebookUrl: Yup.string()
+                    .required("Campo obligatorio")
+                    .email('Formato invalido'),
+                linkedinUrl: Yup.string()
+                    .required("Campo obligatorio")
+                    .email('Formato invalido'),
+                })}
 
-  return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <input
-        className="input-field"
-        type="text"
-        name="name"
-        value={initialValues.name}
-        onChange={handleChange}
-        placeholder="Name"
-      ></input>
-      <input
-        className="input-field"
-        type="text"
-        name="description"
-        value={initialValues.description}
-        onChange={handleChange}
-        placeholder="Write some description"
-      ></input>
-      <button className="submit-btn" type="submit">
-        Send
-      </button>
-    </form>
-  );
-};
+                onSubmit={({resetForm}) => {
+                    handleSubmit();
+                    resetForm();
+                }}    
+            >
+                {({ setFieldValue }) => (
+                    <Form className='member__container'>
+                        <div className='member__form'>
 
-export default MembersForm;
+                            <label htmlFor="name">Nombre</label>
+                            <Field 
+                                name="name" 
+                                type="titulo" 
+                                className='member__input' 
+                                
+                            />
+                            <ErrorMessage name="name" />
+
+                            <label htmlFor="description">Descripcion</label>
+                            <Field name="description" className='member__input'>
+                                {({ field }) => (
+                                <>
+                                    <CKEditor
+                                    config={{
+                                        language: "es",
+                                    }}
+                                    editor={ClassicEditor}
+                                    data={field.value}
+                                    onChange={(event, editor) => {
+                                        setFieldValue(field.name, editor.getData());
+                                    }}
+                                    />
+                                </>
+                                )}
+                            </Field>
+                            <ErrorMessage
+                                name="description"
+                                render={(msg) => <div>{msg}</div>} 
+                            />
+
+                            <label htmlFor="image">Cargar Imagen</label>
+                            <input
+                                name="image"
+                                ref={inputFileRef}
+                                className='member__inputImg'
+                                type="file"
+                                accept=".jpg, .png"
+                                onChange={(e) => {
+                                    handleImage(e, setFieldValue);
+                                }}
+                            />
+                            <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
+
+                            <label htmlFor="facebookUrl">Facebook</label> 
+                            <Field 
+                                name="facebookUrl" 
+                                type="facebookUrl" 
+                                className='member__input'
+                                
+                            />
+                            <ErrorMessage name="facebookUrl"/>
+
+                            <label htmlFor="linkedinUrl">LinkedIn</label> 
+                            <Field 
+                                name="linkedinUrl" 
+                                type="linkedinUrl" 
+                                className='member__input'
+                                
+                            />
+                            <ErrorMessage name="linkedinUrl"/>
+                            
+                            <button className='bntSubmit' type="submit">Enviar</button>
+                        </div>
+                    </Form>
+                )}
+            </Formik>
+            )}
+        </>
+    );
+}
+export default MemberForm;

@@ -54,7 +54,7 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          <Suspense fallback={<Progress height={8} />}>
+          <Suspense fallback={<Progress height={7} />}>
             <Route path="/" exact component={Home} />
             <Route path="/actividades/:id" component={ActivityDetail} />
             <Route path="/actividades" component={Activities} />

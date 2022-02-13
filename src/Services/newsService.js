@@ -1,7 +1,7 @@
 import { Get } from "./publicApiService";
 import { sweetAlertError } from "./sweetAlertServices";
 
-const url = "http://ongapi.alkemy.org/api/news";
+const url = process.env.REACT_APP_ENDPOINTS_NEWS;
 
 const getNews = async (setMethod) => {
   try {
