@@ -28,7 +28,7 @@ function ContactForm() {
   };
 
   return (
-    <div className="body">
+    <div className="form__container">
       <Formik
         initialValues={{
           name: "",
@@ -43,72 +43,84 @@ function ContactForm() {
       >
         {({ errors, touched }) => {
           return (
-            <Form className="body__form">
-              <div className="body__form--subcontainer">
-                <label className="body__form--label" htmlFor="name">Nombre:</label>
+            <Form className="form">
+              <div className="form__subcontainer">
+                <label className="form__label" htmlFor="name">
+                  Nombre:
+                </label>
                 <Field
-                  className="body__form--input"
+                  className="form__input"
                   name="name"
                   id="name"
                   type="text"
                   placeholder="Ingrese su nombre"
                 />
                 <ErrorMessage
-				name="name"
-				render={(msg) => <div className="body__form--error">{msg}</div>}
-				className="body__form--error"
-				/>
+                  name="name"
+                  render={(msg) => (
+                    <div className="form__error">{msg}</div>
+                  )}
+                />
               </div>
 
-              <div className="body__form--subcontainer">
-                <label className="body__form--label" htmlFor="email">Email:</label>
+              <div className="form__subcontainer">
+                <label className="form__label" htmlFor="email">
+                  Email:
+                </label>
                 <Field
-                  className="body__form--input"
+                  className="form__input"
                   name="email"
                   id="email"
                   type="text"
                   placeholder="Ingrese correo electronico"
                 />
                 <ErrorMessage
-				name="email"
-				render={(msg) => <div className="body__form--error">{msg}</div>}
-				className="body__form--error"
-				/>
+                  name="email"
+                  render={(msg) => (
+                    <div className="form__error">{msg}</div>
+                  )}
+                />
               </div>
 
-              <div className="body__form--subcontainer">
-                <label className="body__form--label" htmlFor="phone">Teléfono:</label>
+              <div className="form__subcontainer">
+                <label className="form__label" htmlFor="phone">
+                  Teléfono:
+                </label>
                 <Field
-                  className="body__form--input"
+                  className="form__input"
                   name="phone"
                   id="phone"
                   type="text"
                   placeholder="Ingrese su número de teléfono"
                 />
-				<ErrorMessage
-				name="phone"
-				render={(msg) => <div className="body__form--error">{msg}</div>}
-				className="body__form--error"
-				/>
+                <ErrorMessage
+                  name="phone"
+                  render={(msg) => (
+                    <div className="form__error">{msg}</div>
+                  )}
+                />
               </div>
 
-              <div className="body__form--subcontainer">
-                <label className="body__form--label" htmlFor="message">Mensaje:</label>
+              <div className="form__subcontainer">
+                <label className="form__label" htmlFor="message">
+                  Mensaje:
+                </label>
                 <Field
-                  className="body__form--input"
+                  className="form__input"
                   name="message"
                   type="text"
                   id="message"
                   placeholder="Mensaje"
                 />
                 <ErrorMessage
-				name="message"
-				render={(msg) => <div className="body__form--error">{msg}</div>}
-				className="body__form--error"
-				/>
+                  name="message"
+                  render={(msg) => (
+                    <div className="form__error">{msg}</div>
+                  )}
+                />
               </div>
 
-              <button className="body__form--submit" type="submit">
+              <button className="form__button" type="submit">
                 Enviar
               </button>
             </Form>
