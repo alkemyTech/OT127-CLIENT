@@ -39,10 +39,6 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-        <Route
-            path="/backoffice/organization/edit"
-            component={OrganizationForm}
-          />
           <Route path="/" exact component={Home} />
           <Route path="/actividades/:id" component={ActivityDetail} />
           <Route path="/actividades" component={Activities} />
@@ -71,7 +67,10 @@ function App() {
           <Route path="/backoffice/members" component={MembersList} />
           <Route path="/backoffice/news" component={NewsList} />
           <Route path="/backoffice/organization" component={OrganizationData} />
-          
+          <Route
+            path="/backoffice/organization/edit"
+            component={OrganizationForm}
+          />
           <Route path="/backoffice/projects/:id" component={ProjectsForm} />
           <Route path="/backoffice/slides" component={SlideList} />
           <Route path="/backoffice/slides/creacion" component={SlidesForm} />
