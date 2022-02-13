@@ -42,7 +42,6 @@ const BackOffice = () => {
       <div className="offcanvas__controller" onMouseOver={handleShow}></div>
       <h1>Bienvenido!</h1>
 
-      {/* TODO MODULARIZAR ESTO */}
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Backoffice Routes</Offcanvas.Title>
@@ -71,23 +70,17 @@ const BackOffice = () => {
           path="/backoffice/categories/create"
           component={CategoriesForm}
         />
-        {/* PROBLEMA
-        members no carga los miembros
-        */}
+        {/* PROBLEMA members no carga los miembros */}
         <Route path="/backoffice/members" exact component={MembersList} />
         <Route
           path="/backoffice/members/create"
           exact
           component={MembersForm}
         />
-        {/* PROBLEMA
-        MembersForm no detecta si le pasamos un id en la url
-        */}
+        {/* PROBLEMA MembersForm no detecta si le pasamos un id en la url */}
         <Route path="/backoffice/members/edit/:id" component={MembersForm} />
         <Route path="/backoffice/slides" exact component={SlideList} />
-        {/* PROBLEMA
-        Res.data is undefined en create y edit slides
-        */}
+        {/* PROBLEMA Res.data is undefined en create y edit slides */}
         <Route path="/backoffice/slides/create" exact component={SlidesForm} />
         <Route path="/backoffice/slides/edit/:id" component={SlidesForm} />
         <Route path="/backoffice/users" exact component={UsersList} />
@@ -96,15 +89,13 @@ const BackOffice = () => {
         <Route path="/backoffice/news" exact component={NewsList} />
         <Route path="/backoffice/news/create" exact component={NewsForm} />
         <Route path="/backoffice/news/edit/:id" component={NewsForm} />
-        {/* PROBLEMA
-          Parsed is undefined (?)
-        */}
+        {/* PROBLEMA Parsed is undefined (?) */}
         <Route
           path="/backoffice/organization"
           exact
           component={OrganizationData}
         />
-        {/* PROBLEMA se rompe todo */}
+        {/* PROBLEMA se rompe todo el layout*/}
         <Route
           path="/backoffice/organization/edit"
           component={OrganizationDataForm}

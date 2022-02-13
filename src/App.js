@@ -23,19 +23,14 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact component={Home} />
-          {/* PROBLEMA 
-          El componente activities no muestra ningun listado
-          */}
+          {/* PROBLEMA El componente activities no muestra ningun listado */}
           <Route path="/activities" exact component={Activities} />
           <Route path="/activities/:id" component={ActivityDetail} />
           <Route path="/login" component={LoginForm} />
-          {/* PROBLEMA
-          Problemas para obtener datos de la API, me tira error
-          */}
+          {/* PROBLEMA Problemas para obtener datos de la API, me tira error */}
           <Route path="/contact" component={Contact} />
           <Route path="/register" component={RegisterForm} />
           <Route path="/news" exact component={News} />
-
           <Route
             path="/news/:id"
             exact
@@ -52,8 +47,6 @@ function App() {
           />
           {/* BACKOFFICE */}
           <Route path="/backoffice" component={BackOffice} />
-
-          {/* QUE PASA CON ËSTO?? */}
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
         </Switch>
