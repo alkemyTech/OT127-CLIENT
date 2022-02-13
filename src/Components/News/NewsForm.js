@@ -26,10 +26,10 @@ const NewsForm = () => {
   };
 
   return (
-    <div className="body">
-      <form className="body__form" onSubmit={handleSubmit}>
+    <div className="form__container">
+      <form className="form" onSubmit={handleSubmit}>
         <input
-          className="body__form--input"
+          className="form__input"
           type="text"
           name="title"
           value={initialValues.title || ""}
@@ -37,7 +37,7 @@ const NewsForm = () => {
           placeholder="Title"
         ></input>
         <input
-          className="body__form--input"
+          className="form__input"
           type="text"
           name="content"
           value={initialValues.content || ""}
@@ -45,19 +45,19 @@ const NewsForm = () => {
           placeholder="Content"
         ></input>
         <select
-          className="body__form--input"
+          className="form__input"
           name="category"
           value={initialValues.category || ""}
           onChange={handleChange}
         >
-          <option className="body__form--option" value="" disabled>
+          <option className="form__option" value="" disabled>
             Select category
           </option>
-          <option className="body__form--option" value="1">Demo option 1</option>
-          <option className="body__form--option" value="2">Demo option 2</option>
-          <option className="body__form--option" value="3">Demo option 3</option>
+          <option className="form__option" value="1">Demo option 1</option>
+          <option className="form__option" value="2">Demo option 2</option>
+          <option className="form__option" value="3">Demo option 3</option>
         </select>
-        <button className="body__form--submit" type="submit">
+        <button className="form__button" type="submit">
           Send
         </button>
       </form>
