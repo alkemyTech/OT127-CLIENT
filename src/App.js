@@ -1,9 +1,5 @@
 import React from "react";
 import "./sass/main.scss";
-<<<<<<< HEAD
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-=======
->>>>>>> 03ed2e218d3cb49b7dfc00d802e2e4412a317482
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import About from "./Components/About/About";
