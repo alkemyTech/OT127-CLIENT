@@ -17,7 +17,7 @@ const initialState = {
   authToken: "",
 };
 
-export const authReducer = createReducer(initialState, (builder) => {
+const authReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loginUser, (state, action) => {
       return {
@@ -64,3 +64,4 @@ export const authReducer = createReducer(initialState, (builder) => {
       return state;
     });
 });
+export default authReducer;

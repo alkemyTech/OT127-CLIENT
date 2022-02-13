@@ -1,0 +1,68 @@
+@import "../main.scss";
+.socialMedia {
+  &__text {
+    @include roboto-title;
+    margin-left: 5%;
+  }
+  &__social-container {
+    @include shadow();
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(186px, 1fr));
+    align-items: center;
+    justify-items: center;
+    grid-gap: 10px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  &__button {
+    display: block;
+    width: 168px;
+    line-height: 28px;
+    border-radius: 50px;
+    color: $font-white;
+    text-decoration: none;
+    text-align: center;
+
+    &--facebook {
+      background-color: #2374e1;
+      &:hover {
+        background-color: #22508c;
+      }
+    }
+    &--instagram {
+      background: linear-gradient(
+        45deg,
+        #405de6,
+        #5851db,
+        #833ab4,
+        #c13584,
+        #e1306c,
+        #fd1d1d
+      );
+      &:hover {
+        background: linear-gradient(
+          -45deg,
+          #405de6,
+          #5851db,
+          #833ab4,
+          #c13584,
+          #e1306c,
+          #fd1d1d
+        );
+      }
+    }
+  }
+  &__icon {
+    margin-right: 15px;
+  }
+  &__tweets {
+    @include shadow();
+    @include border-rounded();
+    margin-top: 20px;
+    background-color: $light-blue;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: 20px auto;
+  }
+}

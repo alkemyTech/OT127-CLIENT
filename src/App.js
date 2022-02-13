@@ -35,6 +35,7 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/register" component={RegisterForm} />
           <Route path="/news" exact component={News} />
+
           <Route
             path="/news/:id"
             exact
