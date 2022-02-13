@@ -1,57 +1,57 @@
 @use "../abstracts/variables";
 @use "../abstracts/mixins";
 
-.body{
+.form {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: 2em;
+  background-color: rgba(255, 255, 255, 0.459);
+  margin-top: 3%;
+  margin-left: 34%;
+  margin-right: 35%;
+  margin-bottom: 2em;
+  &__container {
     min-height: 100vh;
     height: max-content;
     background-color: cornsilk;
-}
-.body__form{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    padding: 2em;
-    background-color: rgba(255, 255, 255, 0.459);
-    margin-top: 3%;
-    margin-left: 34%;
-    margin-right: 35%;
-    margin-bottom: 2em;
-}
-.body__form--subcontainer{
-    display: flex;
-    flex-direction: column;
-}
-.body__form--label{
-    margin: .5em 0 .5em 0;
-    text-align: left;
-    font-weight: bold
-}
-.body__form--input{
-    @include input-height;
-    @include border-rounded;
-    margin: 0 0 1em 0;
-    border-style: none;
-}
-
-.body__form--submit{
-    @include input-height;
-    @include border-rounded;
-    background-color: $green-blue;
-    border-style: none;
-    color: $font-white;
-    margin-top: 1em;
-    font-weight: bold;
-    &:hover {
+    &__input {
+      @include input-height;
+      @include border-rounded;
+      margin: 0 0 1em 0;
+      border-style: none;
+    }
+    &__button {
+      @include input-height;
+      @include border-rounded;
+      background-color: $green-blue;
+      border-style: none;
+      color: $font-white;
+      margin-top: 1em;
+      font-weight: bold;
+      &:hover {
         cursor: pointer;
         background-color: variables.$light-green;
       }
+    }
+  }
 }
 
-.body__form--error{
-    color: $med-red;
+.body__form--subcontainer {
+  display: flex;
+  flex-direction: column;
+}
+.body__form--label {
+  margin: 0.5em 0 0.5em 0;
+  text-align: left;
+  font-weight: bold;
 }
 
-.body__form--option{
-    font-size: 1rem;
+.body__form--error {
+  color: $med-red;
+}
+
+.body__form--option {
+  font-size: 1rem;
 }

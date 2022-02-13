@@ -57,10 +57,10 @@ const ActivitiesForm = () => {
   };
 
   return (
-    <div className="body">
-    <form className="body__form" onSubmit={handleSubmit}>
+    <div className="form__container">
+    <form className="form" onSubmit={handleSubmit}>
       <input
-        className="body__form--input"
+        className="form__input"
         type="text"
         name="name"
         value={name}
@@ -73,14 +73,14 @@ const ActivitiesForm = () => {
         onChange={(event, editor) => handleChangeDescription(event, editor)}
       />
       <input
-        className="body__form--input"
+        className="form__input"
         type="file"
         name="file"
         accept=".png, .jpg"
         onChange={handleChangeImage}
       />
       <img src={image} alt="" />
-      <button className="body__form--submit" type="submit">
+      <button className="form__button" type="submit">
         Send
       </button>
     </form>
