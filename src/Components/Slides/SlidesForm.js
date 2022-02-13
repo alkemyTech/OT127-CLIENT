@@ -8,8 +8,6 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
-
-import "../../sass/components/_form.scss";
 import { getSlidesData, getSlidesDataById, updateSlide, createNewSlide } from "../../Services/slidesApiService";
 
 const SlidesForm = () => {
@@ -122,7 +120,7 @@ const SlidesForm = () => {
   });
 
   return (
-    <div className="body">
+    <div className="form__container">
       {loading ? (
         <p>LOADING...</p>
       ) : (
@@ -145,13 +143,13 @@ const SlidesForm = () => {
           }}
         >
           {({ setFieldValue }) => (
-            <Form className="body__form">
-              <label className="body__form--label" htmlFor="name">
+            <Form className="form">
+              <label className="form__label" htmlFor="name">
                 Titulo
               </label>
               <Field
                 id="name"
-                className="body__form--input"
+                className="form__input"
                 type="text"
                 name="name"
                 placeholder="Slide Title"
@@ -159,9 +157,9 @@ const SlidesForm = () => {
 
               <ErrorMessage
                 name="name"
-                render={(msg) => <div className="body__form--error">{msg}</div>}
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
-              <label className="body__form--label" htmlFor="description">
+              <label className="form__label" htmlFor="description">
                 Descripcion
               </label>
               <Field name="description">
@@ -183,14 +181,14 @@ const SlidesForm = () => {
 
               <ErrorMessage
                 name="description"
-                render={(msg) => <div className="body__form--error">{msg}</div>}
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
-              <label className="body__form--label" htmlFor="order">
+              <label className="form__label" htmlFor="order">
                 Numero de orden
               </label>
               <Field
                 id="order"
-                className="body__form--input"
+                className="form__input"
                 type="number"
                 name="order"
                 onChange={(e) => {
@@ -200,9 +198,9 @@ const SlidesForm = () => {
               />
               <ErrorMessage
                 name="order"
-                render={(msg) => <div className="body__form--error">{msg}</div>}
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
-              <label className="body__form--label" htmlFor="order">
+              <label className="form__label" htmlFor="order">
                 Cargar Imagen
               </label>
               <input
@@ -215,9 +213,9 @@ const SlidesForm = () => {
               />
               <ErrorMessage
                 name="image"
-                render={(msg) => <div className="body__form--error">{msg}</div>}
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
-              <button type="submit" className="body__form--submit">
+              <button type="submit" className="form__button">
                 Enviar
               </button>
             </Form>
