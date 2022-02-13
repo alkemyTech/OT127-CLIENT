@@ -38,7 +38,7 @@ function App() {
     // Agregar newsletter en footer
     <>
       <BrowserRouter>
-        <Switch>
+        <Switch><Route path="/backoffice/create-news" component={NewsForm} />
           <Route path="/" exact component={Home} />
           <Route path="/actividades/:id" component={ActivityDetail} />
           <Route path="/actividades" component={Activities} />
@@ -54,7 +54,7 @@ function App() {
           />
           <Route path="/create-member" component={MembersForm} />
           <Route path="/member/:id" component={MembersForm} />
-          <Route path="/backoffice/create-news" component={NewsForm} />
+          
           <Route path="/backoffice/create-project" component={ProjectsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route

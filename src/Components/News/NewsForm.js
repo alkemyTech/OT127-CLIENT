@@ -1,4 +1,4 @@
-/* import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -7,7 +7,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import axios from "axios";
 import { sweetAlertError } from "../../Services/sweetAlertServices";
-import "../../sass/components/_form.scss";
 
 const NewsForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -84,7 +83,7 @@ const NewsForm = () => {
     }
     getOrdersList();
     getCategorieData();
-  }, []);
+  }, []); //eslint-disable-line
 
   const toBase64 = (file) => {
     return new Promise((resolve) => {
@@ -105,47 +104,6 @@ const NewsForm = () => {
         ...rest,
       };
     }
-  };
-
-  return (
-    <div className="form__container">
-      <form className="form" onSubmit={handleSubmit}>
-        <input
-          className="form__input"
-          type="text"
-          name="title"
-          value={initialValues.title || ""}
-          onChange={handleChange}
-          placeholder="Title"
-        ></input>
-        <input
-          className="form__input"
-          type="text"
-          name="content"
-          value={initialValues.content || ""}
-          onChange={handleChange}
-          placeholder="Content"
-        ></input>
-        <select
-          className="form__input"
-          name="category"
-          value={initialValues.category || ""}
-          onChange={handleChange}
-        >
-          <option className="form__option" value="" disabled>
-            Select category
-          </option>
-          <option className="form__option" value="1">Demo option 1</option>
-          <option className="form__option" value="2">Demo option 2</option>
-          <option className="form__option" value="3">Demo option 3</option>
-        </select>
-        <button className="form__button" type="submit">
-          Send
-        </button>
-      </form>
-    </div>
-  );
-};
 
     if (id) {
       await axios.put(`${url}/${id}`, formValues).catch((err) => {
@@ -175,7 +133,7 @@ const NewsForm = () => {
   });
 
   return (
-    <>
+    <div className="form__container">
       {loading ? (
         <p>LOADING...</p>
       ) : (
@@ -198,18 +156,25 @@ const NewsForm = () => {
           }}
         >
           {({ setFieldValue }) => (
-            <Form className="form-container">
-              <label htmlFor="name">Titulo</label>
+            <Form className="form">
+              <label className="form__label" htmlFor="name">
+                Titulo
+              </label>
               <Field
                 id="name"
-                className="input-field"
+                className="form__input"
                 type="text"
                 name="name"
                 placeholder="titulo"
               />
-              <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
+              <ErrorMessage
+                name="name"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
 
-              <label htmlFor="contenido">Contenido</label>
+              <label className="form__label" htmlFor="contenido">
+                Contenido
+              </label>
               <Field name="contenido">
                 {({ field }) => (
                   <>
@@ -228,11 +193,14 @@ const NewsForm = () => {
               </Field>
               <ErrorMessage
                 name="contenido"
-                render={(msg) => <div>{msg}</div>}
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
 
-              <label htmlFor="categorie">Categorias</label>
+              <label className="form__label" htmlFor="categorie">
+                Categorias
+              </label>
               <Field
+                className="form__input"
                 component="select"
                 as="select"
                 name="categorie"
@@ -240,36 +208,43 @@ const NewsForm = () => {
               >
                 {dataCategorie.map((element) => {
                   return (
-                    <option key={element.id} value={element.id}>
+                    <option
+                      className="form__option"
+                      key={element.id}
+                      value={element.id}
+                    >
                       {element.name}
                     </option>
                   );
                 })}
               </Field>
-              <ErrorMessage name="categorie" />
+              <ErrorMessage
+                name="categorie"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
 
-              <label htmlFor="categorie">Cargar Imagen</label>
+              <label className="form__label" htmlFor="categorie">
+                Cargar Imagen
+              </label>
               <input
                 ref={inputFileRef}
-                className="input-field"
                 type="file"
                 onChange={(e) => {
                   setFieldValue("image", e.currentTarget.files[0]);
                 }}
                 accept=".jpg, .png"
               />
-              <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
+              <ErrorMessage name="image" render={(msg) => <div className="form__error">{msg}</div>} />
 
-              <button type="submit" className="submit-btn">
+              <button type="submit" className="form__button">
                 Enviar
               </button>
             </Form>
           )}
         </Formik>
       )}
-    </>
+    </div>
   );
 };
 
 export default NewsForm;
- */
