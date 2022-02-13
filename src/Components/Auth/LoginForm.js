@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../../sass/components/_form.scss";
 
 const LoginForm = () => {
   const [userData, setUserData] = useState([]);
