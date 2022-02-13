@@ -25,7 +25,7 @@ function ContactForm() {
   });
 
   const handleSubmit = (values) => {
-    // to do (logica pendiente)
+    postContact(values);
   };
 
   return (
