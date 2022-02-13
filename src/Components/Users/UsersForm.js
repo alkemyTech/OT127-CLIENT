@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
-import "../../sass/components/_form.scss";
 
 const UserForm = () => {
   const { id } = useParams();
@@ -80,7 +79,7 @@ const UserForm = () => {
   }, []); //eslint-disable-line
 
   return (
-    <div className="body">
+    <div className="form__container">
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
@@ -105,38 +104,36 @@ const UserForm = () => {
         }}
       >
         {({ setFieldValue }) => (
-          <Form className="body__form">
-            <div className="body__form--subcontainer">
-              <label htmlFor="name" className="body__form--label">
+          <Form className="form">
+            <div className="form__subcontainer">
+              <label htmlFor="name" className="form__label">
                 Nombre
               </label>
-              <Field className="body__form--input" name="name" type="text" />
+              <Field className="form__input" name="name" type="text" />
               <ErrorMessage
                 name="name"
-                render={(msg) => <div className="body__form--error">{msg}</div>}
-                className="body__form--error"
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
             </div>
-            <div className="body__form--subcontainer">
-              <label htmlFor="email" className="body__form--label">
+            <div className="form__subcontainer">
+              <label htmlFor="email" className="form__label">
                 Email
               </label>
-              <Field className="body__form--input" name="email" type="email" />
+              <Field className="form__input" name="email" type="email" />
               <ErrorMessage
                 name="email"
-                render={(msg) => <div className="body__form--error">{msg}</div>}
-                className="body__form--error"
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
             </div>
-            <div className="body__form--subcontainer">
-              <label htmlFor="name" className="body__form--label">
+            <div className="form__subcontainer">
+              <label htmlFor="name" className="form__label">
                 Rol
               </label>
-              <Field className="body__form--input" name="role" as="select">
+              <Field className="form__input" name="role" as="select">
                 {roles.map((item) => {
                   return (
                     <option
-                      className="body__form--option"
+                      className="form__option"
                       value={item.id}
                       key={item.id}
                     >
@@ -147,26 +144,24 @@ const UserForm = () => {
               </Field>
               <ErrorMessage
                 name="role"
-                render={(msg) => <div className="body__form--error">{msg}</div>}
-                className="body__form--error"
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
             </div>
-            <div className="body__form--subcontainer">
-              <label htmlFor="password" className="body__form--label">
+            <div className="form__subcontainer">
+              <label htmlFor="password" className="form__label">
                 Contraseña
               </label>
               <Field
-                className="body__form--input"
+                className="form__input"
                 name="password"
                 type="password"
               ></Field>
               <ErrorMessage
                 name="password"
-                render={(msg) => <div className="body__form--error">{msg}</div>}
-                className="body__form--error"
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
             </div>
-            <div className="body__form--subcontainer">
+            <div className="form__subcontainer">
               <input
                 type="file"
                 name="profilePhoto"
@@ -177,11 +172,10 @@ const UserForm = () => {
               />
               <ErrorMessage
                 name="profilePhoto"
-                render={(msg) => <div className="body__form--error">{msg}</div>}
-                className="body__form--error"
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
             </div>
-            <button className="body__form--submit" type="submit">
+            <button className="form__button" type="submit">
               {id ? "Guardar" : "Crear"}
             </button>
           </Form>
