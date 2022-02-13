@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { postContact } from "../../Services/contactServices";
 
@@ -29,7 +29,7 @@ function ContactForm() {
   };
 
   return (
-    <div className="form-container">
+    <div className="form__container">
       <Formik
         initialValues={{
           name: "",
@@ -44,66 +44,84 @@ function ContactForm() {
       >
         {({ errors, touched }) => {
           return (
-            <Form>
-              <div>
-                <label htmlFor="name">Nombre:</label>
+            <Form className="form">
+              <div className="form__subcontainer">
+                <label className="form__label" htmlFor="name">
+                  Nombre:
+                </label>
                 <Field
-                  className="input-field"
+                  className="form__input"
                   name="name"
                   id="name"
                   type="text"
                   placeholder="Ingrese su nombre"
                 />
-                {/* Cambiar el div del mensaje de error por el componente creado para form category */}
-                {errors.name && touched.name ? <div>{errors.name}</div> : null}
+                <ErrorMessage
+                  name="name"
+                  render={(msg) => (
+                    <div className="form__error">{msg}</div>
+                  )}
+                />
               </div>
 
-              <div>
-                <label htmlFor="email">Email:</label>
+              <div className="form__subcontainer">
+                <label className="form__label" htmlFor="email">
+                  Email:
+                </label>
                 <Field
-                  className="input-field"
+                  className="form__input"
                   name="email"
                   id="email"
                   type="text"
                   placeholder="Ingrese correo electronico"
                 />
-                {/* Cambiar el div del mensaje de error por el componente creado para form category */}
-                {errors.email && touched.email ? (
-                  <div>{errors.email}</div>
-                ) : null}
+                <ErrorMessage
+                  name="email"
+                  render={(msg) => (
+                    <div className="form__error">{msg}</div>
+                  )}
+                />
               </div>
 
-              <div>
-                <label htmlFor="phone">Teléfono:</label>
+              <div className="form__subcontainer">
+                <label className="form__label" htmlFor="phone">
+                  Teléfono:
+                </label>
                 <Field
-                  className="input-field"
+                  className="form__input"
                   name="phone"
                   id="phone"
                   type="text"
                   placeholder="Ingrese su número de teléfono"
                 />
-                {/* Cambiar el div del mensaje de error por el componente creado para form category */}
-                {errors.phone && touched.phone ? (
-                  <div>{errors.phone}</div>
-                ) : null}
+                <ErrorMessage
+                  name="phone"
+                  render={(msg) => (
+                    <div className="form__error">{msg}</div>
+                  )}
+                />
               </div>
 
-              <div>
-                <label htmlFor="message">Mensaje:</label>
+              <div className="form__subcontainer">
+                <label className="form__label" htmlFor="message">
+                  Mensaje:
+                </label>
                 <Field
-                  className="input-field"
+                  className="form__input"
                   name="message"
                   type="text"
                   id="message"
                   placeholder="Mensaje"
                 />
-                {/* Cambiar el div del mensaje de error por el componente creado para form category */}
-                {errors.message && touched.message ? (
-                  <div>{errors.message}</div>
-                ) : null}
+                <ErrorMessage
+                  name="message"
+                  render={(msg) => (
+                    <div className="form__error">{msg}</div>
+                  )}
+                />
               </div>
 
-              <button className="submit-btn" type="submit">
+              <button className="form__button" type="submit">
                 Enviar
               </button>
             </Form>
