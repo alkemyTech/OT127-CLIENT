@@ -35,6 +35,9 @@
   &__error {
     color: $med-red;
   }
+  &__option {
+    font-size: 1rem;
+  }  
   &__button {
     @include input-height;
     @include border-rounded;
@@ -48,8 +51,4 @@
       background-color: variables.$light-green;
     }
   }
-}
-
-.body__form--option {
-  font-size: 1rem;
 }

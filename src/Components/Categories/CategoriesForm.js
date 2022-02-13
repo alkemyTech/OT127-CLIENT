@@ -43,7 +43,7 @@ const CategoriesForm = () => {
 
 	useEffect(() => {
 		getCategoryData(id);
-	}, []);
+	}, []); //eslint-disable-line
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -95,8 +95,8 @@ const CategoriesForm = () => {
 	};
 
 	return (
-		<div className="body">
-			<form className="body__form" onSubmit={handleSubmit}>
+		<div className="form__container">
+			<form className="form" onSubmit={handleSubmit}>
 				{formValues.message ? (
 					<Error>
 						{id
@@ -104,10 +104,10 @@ const CategoriesForm = () => {
 							: "Todos los campos son obligatorios"}
 					</Error>
 				) : null}
-				<div className="body__form--subcontainer">
-					<label className="body__form--label" htmlFor="name">Nombre:</label>
+				<div className="form__subcontainer">
+					<label className="form__label" htmlFor="name">Nombre:</label>
 					<input
-						className="body__form--input"
+						className="form__input"
 						type="text"
 						placeholder="Nombre de la Categoría"
 						id="name"
@@ -118,10 +118,10 @@ const CategoriesForm = () => {
 						}
 					/>
 				</div>
-				<div className="body__form--subcontainer">
-					<label className="body__form--label" htmlFor="description">Descripción:</label>
+				<div className="form__subcontainer">
+					<label className="form__label" htmlFor="description">Descripción:</label>
 					<input
-						className="body__form--input"
+						className="form__input"
 						type="text"
 						placeholder="Descripción de la Categoría"
 						id="description"
@@ -133,8 +133,8 @@ const CategoriesForm = () => {
 					/>
 				</div>
 
-				<div className="body__form--subcontainer">
-					<label className="body__form--label" htmlFor="image">Imagen:</label>
+				<div className="form__subcontainer">
+					<label className="form__label" htmlFor="image">Imagen:</label>
 					<input
 						type="file"
 						id="image"
@@ -153,7 +153,7 @@ const CategoriesForm = () => {
 				</div>
 
 				<input
-					className="body__form--submit"
+					className="form__button"
 					type="submit"
 					value={id ? "Editar" : "Guardar"}
 				/>
