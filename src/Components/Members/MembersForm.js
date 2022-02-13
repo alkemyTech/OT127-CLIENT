@@ -24,9 +24,10 @@ const MembersForm = () => {
   };
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
+    <div className="form__container">
+    <form className="form" onSubmit={handleSubmit}>
       <input
-        className="input-field"
+        className="form__input"
         type="text"
         name="name"
         value={initialValues.name}
@@ -34,17 +35,18 @@ const MembersForm = () => {
         placeholder="Name"
       ></input>
       <input
-        className="input-field"
+        className="form__input"
         type="text"
         name="description"
         value={initialValues.description}
         onChange={handleChange}
         placeholder="Write some description"
       ></input>
-      <button className="submit-btn" type="submit">
+      <button className="form__button" type="submit">
         Send
       </button>
     </form>
+    </div>
   );
 };
 
