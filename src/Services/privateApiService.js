@@ -69,7 +69,7 @@ export const getPrivate = async (route, id = null) => {
 };
 
 export const privateDelete = (route, id) => {
-  const url = ${route}/${id}
+  const url = `${route}/${id}`
   let token = getSecureHeader()
   const { Authorization, error } = token
 
