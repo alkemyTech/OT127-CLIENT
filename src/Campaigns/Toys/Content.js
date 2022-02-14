@@ -1,10 +1,18 @@
 import React from "react";
+import Countdown from "react-countdown";
 
 const Content = () => {
+  const renderer = ({ days, hours, minutes, seconds, completed }) => {
+    return (
+      <span>
+        {days}D : {hours}H : {minutes}M : {seconds}S
+      </span>
+    );
+  };
   return (
     <div className="content__container">
-      <h2 className="content__date">
-        25/02/2022 calle 123, barrio La Cava, Buenos Aires
+      <h2 className="content__title">
+        25/02/2022 15hs calle 123, barrio La Cava, Buenos Aires
       </h2>
       <img
         src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-1.jpg"}
@@ -22,12 +30,14 @@ const Content = () => {
         className="content__img"
       />
       <p className="content__description">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta
-        similique consectetur, necessitatibus eaque maxime architecto earum
-        neque. Sapiente perspiciatis eligendi, non a minima odio nihil velit
-        vero incidunt iure eius.
+        Dona tus juguetes nuevo o usados en buenas condiciones. Los juguetes son
+        indispensables en el aprendizaje de los niños, fomentan su desarrollo
+        cognitivo, su imaginación, su diversión y, en definitiva, su felicidad.
       </p>
-      <h3 className="content__countdown"></h3>
+      <h3 className="content__countdown">
+        {" "}
+        <Countdown date={new Date(2022, 1, 25, 0, 0, 0)} renderer={renderer} />
+      </h3>
       <img
         src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-4.jpg"}
         alt=""
