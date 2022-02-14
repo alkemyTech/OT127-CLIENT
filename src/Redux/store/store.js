@@ -8,13 +8,13 @@ import usersReducer from "../reducers/usersSlice";
 import usReducer from "../reducers/usSlice";
 
 export default configureStore({
-  reducer: {
-    authReducer: authReducer,
-    newsReducer: newsReducer,
-    membersReducer: membersReducer,
-    slidesReducer,
-    usersReducer: usersReducer,
-    usReducer: usReducer,
-    categoriesReducer,
-  },
+	reducer: {
+		authReducer,
+		newsReducer,
+		membersReducer,
+		slidesReducer,
+		usersReducer,
+		usReducer,
+		categoriesReducer
+	},
 });

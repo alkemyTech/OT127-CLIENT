@@ -2,8 +2,16 @@ import React from "react";
 
 const Gracias = () => {
   return (
-    <div>
-      <p>Texto de agradecimiento.</p>
+    <div className="thanks__container">
+      <div className="thanks__content">
+        <h1 className="thanks__title">Muchas Gracias por tu Ayuda!!</h1>
+        <p className="thanks__text">
+          Mediante nuestros programas educativos, buscamos incrementar la
+          capacidad intelectual, moral y afectiva de las personas de acuerdo con
+          la cultura y las normas de convivencia de la sociedad a la que
+          pertenecen.
+        </p>
+      </div>
     </div>
   );
 };
