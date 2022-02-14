@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
+import { Put } from '../../Services/privateApiService'
+import {Get}  from '../../Services/publicApiService'
+
 import '../../sass/pages/_homeform.scss'
 const HomeForm = () => {
     const [welcomeText, setWelcomeText] = useState('')
@@ -33,14 +36,13 @@ const HomeForm = () => {
             });
     }
 
-
-    const updateWelcomeText = async (values) => {
-        try {
-            await axios.put('http://ongapi.alkemy.org/api/organization/1', { name: welcomeText.name, welcome_text: values.welcome })
-        } catch (error) {
-            // TO DO
-        }
-    }
+	const updateWelcomeText = async (values) => {
+		try {
+			Put('http://ongapi.alkemy.org/api/organization', 1, { name: welcomeText.name, welcome_text: values.welcome })
+		} catch (error) {
+			// TO DO
+		}
+	}
 
     const compareValues = (values) => {
         values.slides.filter((slide, i) => {
@@ -60,8 +62,9 @@ const HomeForm = () => {
     const getDataToEdit = async () => {
         try {
             // Traemos la toda la informacion que podria ser editada
-            const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides')
-            const welcomeResponse = await axios.get('http://ongapi.alkemy.org/api/organization')
+			//   const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides')
+			  const slidesResponse = await Get('http://ongapi.alkemy.org/api/slides')
+            const welcomeResponse = await Get('http://ongapi.alkemy.org/api/organization')
             const slides = slidesResponse.data.data
             const welcomeText = welcomeResponse.data.data
             // Guardamos la informacion original aparte, para luego hacer una comparacion

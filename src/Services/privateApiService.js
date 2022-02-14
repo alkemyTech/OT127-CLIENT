@@ -30,8 +30,7 @@ export const privateServicePatch = (route, id, data) => {
 
 export const getPrivate = async (route, id = null) => {
 	try {
-		let url
-		id ? (url = route + "/" + id) : (url = route)
+		let url =id ? (url = route + "/" + id) : (url = route)
 		let token = getSecureHeader()
 		if (token.Authorization) {
 			config = {
@@ -67,25 +66,27 @@ export const privateDelete = (route, id) => {
 	}
 }
 
-export const Put = (url, id, data) => {
+export const Put = async (route, id, data) => {
 	//README:
 	//Ingresar la url completa  del tipo
 	//'http://ongapi.alkemy.org/api/activities'
 	//Pasar objeto como argum para enviarlo en el body
+	let url = id ? (url = route + "/" + id) : (url = route)
 	await axios
-		.put(`${url}/${id}`, data, {
+		.put(`${url}`, data, {
 			headers: getSecureHeader()
 		})
 		.then((res) => res)
 		.catch((err) => alert(err))
 }
 
-export const Delete = async (url, id) => {
+export const Delete = async (route, id) => {
 	//README:
 	//Ingresar la url completa  del tipo
 	//'http://ongapi.alkemy.org/api/activities' y el ID a eliminar
+	let url = id ? (url = route + "/" + id) : (url = route)
 	await axios
-		.delete(`${url}/${id}`, {
+		.delete(`${url}`, {
 			headers: getSecureHeader()
 		})
 		.then((res) => res)
@@ -104,3 +105,16 @@ export const Post = async (url, body) => {
 		.then((res) => res)
 		.catch((err) => alert(err))
 }
+
+export const privatePost = (route, data) => {
+	let url = route;
+	let token = getSecureHeader();
+	const { Authorization, error } = token;
+
+	if (Authorization) {
+		axios
+			.post(url, data)
+			.then((res) => res)
+			.catch((err) => err);
+	}
+};

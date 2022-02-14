@@ -1,0 +1,21 @@
+.donation {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+    text-align: center;
+    @include outfit-title;
+    color: $dark-blue;
+  }
+  &__link {
+    text-decoration: none;
+  }
+  &__image {
+    width: 150px;
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
