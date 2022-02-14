@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Title from "../Titulosynovedades/Title";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUs } from "../../Redux/reducers/usSlice";
+import SocialMedia from "./SocialMedia";
 
 
 const About = ({
@@ -21,6 +22,7 @@ const About = ({
 				<p>{info.name}</p>
 				<p>{info.short_description}</p>
 			</main>
+			<SocialMedia />
 		</>
 	);
 };
