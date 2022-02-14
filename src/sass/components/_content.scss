@@ -1,11 +1,11 @@
 .content {
-  max-width: 1200px;
   &__container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 50px;
+    max-width: 1300px;
   }
 
   &__title {
@@ -23,28 +23,22 @@
 
   &__img {
     display: none;
-    width: 300px;
   }
   &__countdown {
     display: none;
-    margin-top: 25px;
-    span {
-      @include outfit-title;
-      background-color: $med-yellow;
-      padding: 20px;
-      color: $font-white;
-      font-size: 2rem;
-      border-radius: 15px;
-    }
   }
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 667px) {
     &__countdown {
       display: block;
-    }
-  }
-  @media only screen and (min-width: 900px) {
-    &__img {
-      display: block;
+      margin-top: 25px;
+      span {
+        @include outfit-title;
+        background-color: $med-yellow;
+        padding: 20px;
+        color: $font-white;
+        font-size: 2rem;
+        border-radius: 15px;
+      }
     }
   }
 }
