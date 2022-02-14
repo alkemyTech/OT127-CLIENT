@@ -5,12 +5,13 @@ import '../../sass/layout/_header.scss'
 
 const Header = () => {
 	const isLogged = useSelector(state => state.authReducer.userIsLogged)
-	const menu = {
-		"School Campaign": "/school-campaign",
-		"Toys Campaign": "/toys-campaign",
-		"About Us": "/nosotros",
-		"Contact": "/contacto"
-	}
+
+	const menuItems = [
+		{ link: '/school-campaign', name: 'Campaña escolar' },
+		{ link: '/toys-campaign', name: 'Campaña de juguetes' },
+		{ link: '/nosotros', name: 'Nosotros' },
+		{ link: '/contacto', name: 'Contacto' }
+	]
 
 	return (
 		<>
@@ -20,25 +21,25 @@ const Header = () => {
 						<NavLink
 							className="links"
 							activeClassName="active"
-							to="/">Home
+							to="/">Inicio
 						</NavLink>
 					</div>
 					<div className="header__nav-right">
 						{isLogged
 							? (
 								<ul className="header__nav-list">
-									{Object.keys(menu).map((key, index) => (
-										<li key={index} className="header__nav-item">
+									{menuItems.map(item => (
+										<li key={item.name} className="header__nav-item">
 											<NavLink
-												to={menu[ key ]}
 												className="links"
 												activeClassName="active"
-											>
-												{key}
+												to={item.link}>
+												{item.name}
 											</NavLink>
 										</li>
 									))}
-								</ul>)
+								</ul>
+							)
 							: null //Login/Register ?
 						}
 					</div>
