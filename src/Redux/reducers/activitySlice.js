@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";  
-import { Get } from "../../Services/publicApiService";
+import { Get } from "../../Services/publicActivityService";
 
 export const getActivities = createAsyncThunk("get/getActivities", async () => {
   const response = await Get("http://ongapi.alkemy.org/api/activities", null);
