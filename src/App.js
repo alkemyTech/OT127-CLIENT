@@ -32,6 +32,8 @@ import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
 import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
 import UserForm from "./Components/Users/UsersForm";
 import UsersList from "./Components/Users/UsersList";
+import PageNotFound from './Components/PageNotFound/NotFound';
+
 
 function App() {
   return (
@@ -96,6 +98,7 @@ function App() {
           <Route path="/register" component={RegisterForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
+          <Route path="*" component={PageNotFound} />
         </Switch>
       </BrowserRouter>
     </>
