@@ -19,11 +19,9 @@ const Content = () => {
         alt=""
         className="content__img"
       />
-      <img
-        src={process.env.PUBLIC_URL + "/images/toys-campaign/niños-3.jpg"}
-        alt=""
-        className="content__img"
-      />
+      <h3 className="content__countdown">
+        <Countdown date={new Date(2022, 1, 25, 0, 0, 0)} renderer={renderer} />
+      </h3>
       <img
         src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-2.jpg"}
         alt=""
@@ -34,12 +32,13 @@ const Content = () => {
         indispensables en el aprendizaje de los niños, fomentan su desarrollo
         cognitivo, su imaginación, su diversión y, en definitiva, su felicidad.
       </p>
-      <h3 className="content__countdown">
-        {" "}
-        <Countdown date={new Date(2022, 1, 25, 0, 0, 0)} renderer={renderer} />
-      </h3>
       <img
         src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-4.jpg"}
+        alt=""
+        className="content__img"
+      />
+      <img
+        src={process.env.PUBLIC_URL + "/images/toys-campaign/niños-3.jpg"}
         alt=""
         className="content__img"
       />
