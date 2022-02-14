@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 50px;
+    margin: 70px;
     max-width: 1300px;
   }
 
@@ -30,7 +30,7 @@
   @media only screen and (min-width: 667px) {
     &__countdown {
       display: block;
-      margin-top: 25px;
+      margin: 50px 0;
       span {
         @include outfit-title;
         background-color: $med-yellow;
@@ -89,6 +89,13 @@
       &:hover {
         transform: scale(1.2);
       }
+    }
+  }
+
+  @media only screen and (min-width: 1300px) {
+    &__container {
+      background-color: rgb(161 136 136 / 13%);
+      padding: 40px;
     }
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Countdown from "react-countdown";
 
 const Content = () => {
-  const renderer = ({ days, hours, minutes, seconds, completed }) => {
+  const renderer = ({ days, hours, minutes, seconds }) => {
     return (
       <span>
         {days}D : {hours}H : {minutes}M : {seconds}S
