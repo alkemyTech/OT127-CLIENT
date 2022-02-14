@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/main.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Progress from "./Components/Progress/Porgress";
-import Footer from "./Campaigns/School/Footer";
 const About = lazy(() => import("./Components/About/About"));
 const Activities = lazy(() => import("./Components/Activities/Activities"));
 const ActivitiesForm = lazy(() =>
@@ -57,7 +56,6 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Suspense fallback={<Progress height={7} />}>
-            <Route path="/footer" component={Footer} />
             <Route path="/" exact component={Home} />
             <Route path="/actividades/:id" component={ActivityDetail} />
             <Route path="/actividades" component={Activities} />
