@@ -45,7 +45,7 @@ const CategoriesForm = () => {
 
 	useEffect(() => {
 		getCategoryData(id);
-	}, []);
+	}, []); //eslint-disable-line
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -97,8 +97,8 @@ const CategoriesForm = () => {
 	};
 
 	return (
-		<div className="form-container">
-			<form onSubmit={handleSubmit}>
+		<div className="form__container">
+			<form className="form" onSubmit={handleSubmit}>
 				{formValues.message ? (
 					<Error>
 						{id
@@ -106,10 +106,10 @@ const CategoriesForm = () => {
 							: "Todos los campos son obligatorios"}
 					</Error>
 				) : null}
-				<div>
-					<label htmlFor="name">Nombre:</label>
+				<div className="form__subcontainer">
+					<label className="form__label" htmlFor="name">Nombre:</label>
 					<input
-						className="input-field"
+						className="form__input"
 						type="text"
 						placeholder="Nombre de la Categoría"
 						id="name"
@@ -120,10 +120,10 @@ const CategoriesForm = () => {
 						}
 					/>
 				</div>
-				<div>
-					<label htmlFor="description">Descripción:</label>
+				<div className="form__subcontainer">
+					<label className="form__label" htmlFor="description">Descripción:</label>
 					<input
-						className="input-field"
+						className="form__input"
 						type="text"
 						placeholder="Descripción de la Categoría"
 						id="description"
@@ -135,8 +135,8 @@ const CategoriesForm = () => {
 					/>
 				</div>
 
-				<div>
-					<label htmlFor="image">Imagen:</label>
+				<div className="form__subcontainer">
+					<label className="form__label" htmlFor="image">Imagen:</label>
 					<input
 						type="file"
 						id="image"
@@ -155,7 +155,7 @@ const CategoriesForm = () => {
 				</div>
 
 				<input
-					className="submit-btn"
+					className="form__button"
 					type="submit"
 					value={id ? "Editar" : "Guardar"}
 				/>
