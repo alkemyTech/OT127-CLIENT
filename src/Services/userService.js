@@ -1,27 +1,39 @@
 import Axios from "axios";
 
-const endPointUser = 'http://ongapi.alkemy.org/api/users/';
+const endPointUser = 'http://ongapi.alkemy.org/api/users';
 
-export const getUser = async (id) => {
+export const getUserbyID = async (id) => {
 	try {
-		const {data} = await Axios.get(`${endPointUser}${id}`);
-		return data;
+		const response = await Axios.get(`${endPointUser}/${id}`);
+		return response;
+	} catch (error) {
+		return error;
+	}
+    
+};
+
+
+export const allUsers = async () => {
+	try {
+		const response = await Axios.get(endPointUser);
+		return response;
+	} catch (error) {
+		return error;
+	}
+    
+};
+
+export const putUser = (id, values) => {
+	try {
+		Axios.put(`${endPointUser}/${id}`, values);
 	} catch (error) {
 		return error;
 	}
 };
 
-export const putUser = (id, name, description, image) => {
+export const postUser = (values) => {
 	try {
-		Axios.put(`${endPointUser}${id}`, {name, description, image});
-	} catch (error) {
-		return error;
-	}
-};
-
-export const postUser = (name, description, image) => {
-	try {
-		Axios.post(`${endPointUser}`, {name, description, image});
+		Axios.post(`${endPointUser}`, values);
 	} catch (error) {
 		return error;
 	}
