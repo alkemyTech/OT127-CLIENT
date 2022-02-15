@@ -6,18 +6,18 @@ const PageNotFound = () => {
 
     return(
         <>
-            <div class="conten">
-                <div class="conten__img">
-                    <img src={img} alt="" />
-                    <p class="conten__number">
+            <div className="notFound">
+                <div className="notFound__imgContent">
+                    <img className="notFound__img" src={img} alt="" />
+                    <p className="notFound__number">
                         404
                     </p>
                 </div>
-                    <div class="conten__Description">
-                        <p class="conten__error">
+                    <div className="notFound__Description">
+                        <p className="notFound__error">
                             UPSSSS!!!! Pagina no encontrada.
                         </p>
-                    <a href="#" class="conten__button">SACAME DE AQUI!.</a>
+                    <a href="#" className="notFound__button">SACAME DE AQUI!.</a>
                 </div>
             </div>
         </>

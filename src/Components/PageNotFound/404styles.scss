@@ -6,17 +6,17 @@ body{
     padding: 0;
     background-color: $background;
 }
-.conten{
+.notFound{
     position: fixed;
     top: 4em;
     width: 100%;
     text-align: center;
-    &__img{
+    &__imgContent{
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        img{
+        &__img{
             width: 300px;
             display: block;
             animation:  animates 2s linear infinite alternate;
@@ -27,7 +27,7 @@ body{
         font-size: 5.5rem;
         font-family: $font;
         font-weight: 600;
-        top: 12rem;
+        top: 18rem;
         color: rgba(255,255,255,.5);
         
         animation:  animatestext 2s linear infinite alternate;
