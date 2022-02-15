@@ -59,35 +59,7 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          <Suspense fallback={<Progress height={7} />}>
-            <Route path="/" exact component={Home} />
-            <Route path="/activities" exact component={Activities} />
-            <Route path="/activities/:id" component={ActivityDetail} />
-            <Route path="/login" component={LoginForm} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/register" component={RegisterForm} />
-            <Route path="/news" exact component={News} />
-            <Route
-              path="/news/:id"
-              exact
-              component={() => (
-                <NewsDetails title="Titulo recibido por props" />
-              )}
-            />
-            <Route
-              path="/donate"
-              component={() => <Donacion message="Quieres donar?" />}
-            />
-            <Route path="/thanks" component={Gracias} />
-            <Route
-              path="/about"
-              component={() => <About text="Sobre Nosotros" />}
-            />
-            {/* BACKOFFICE */}
-            <Route path="/backoffice" component={BackOffice} />
-            <Route path="/school-campaign" component={SchoolCampaign} />
-            <Route path="/toys-campaign" component={ToysCampaign} />
-          </Suspense>
+          <Suspense fallback={<Progress height={7} />}></Suspense>
         </Switch>
       </BrowserRouter>
     </>
