@@ -1,7 +1,7 @@
-import React, { useState, lazy, Suspense } from "react";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import { Link, Switch, Route } from "react-router-dom";
-import Progress from "./Components/Progress/Porgress";
+import React, { lazy, Suspense } from "react";
+import { Switch, Route } from "react-router-dom";
+import Progress from "../Progress/Porgress";
+import LayoutBackOffice from "./LayoutBackOffice";
 
 const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
 const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
@@ -21,46 +21,11 @@ const OrganizationDataForm = lazy(() =>
   import("../Organization/OrganizationDataForm")
 );
 const ProjectsForm = lazy(() => import("../Projects/ProjectsForm"));
-const BackofficeHeader = lazy(() => import("./BackofficeHeader"));
 const BackOffice = () => {
-  const [show, setShow] = useState(false);
-
-  const handleShow = () => setShow(!show);
-
-  const backofficeRoutes = [
-    { name: "Home", router: "/backoffice/home" },
-    { name: "Backoffice", router: "/backoffice" },
-    { name: "Users", router: "/backoffice/users" },
-    { name: "Slides", router: "/backoffice/slides" },
-    { name: "Members", router: "/backoffice/members" },
-    { name: "News", router: "/backoffice/news" },
-    { name: "Organization", router: "/backoffice/organization" },
-    { name: "Create Project", router: "/backoffice/create-project" },
-    { name: "Create Slides", router: "/backoffice/create-slide" },
-    { name: "Create User", router: "/backoffice/create-user" },
-  ];
 
   return (
     <div>
-      <div className="offcanvas__controller"></div>
-      <BackofficeHeader handleShow={handleShow}></BackofficeHeader>
-      <h1>Bienvenido!</h1>
-
-      <Offcanvas show={show} onHide={handleShow}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Backoffice Routes</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body className="offcanvas__body">
-          {backofficeRoutes.map((element) => {
-            return (
-              <Link to={element.router} key={element.router}>
-                {element.name}
-              </Link>
-            );
-          })}
-        </Offcanvas.Body>
-      </Offcanvas>
-
+      <LayoutBackOffice />
       <Switch>
         <Suspense fallback={<Progress height={7} />}>
           <Route path="/backoffice/home" component={HomeForm} />
