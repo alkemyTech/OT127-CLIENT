@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer } from "../reducers/authReducer";
+import authReducer from "../reducers/authReducer";
 import membersReducer from "../reducers/membersSlice";
 import newsReducer from "../reducers/newsSlice";
 import categoriesReducer from "../reducers/categoriesReducer";
@@ -9,12 +9,12 @@ import usReducer from "../reducers/usSlice";
 
 export default configureStore({
 	reducer: {
-		authReducer: authReducer,
-		newsReducer: newsReducer,
-		membersReducer: membersReducer,
+		authReducer,
+		newsReducer,
+		membersReducer,
 		slidesReducer,
-		usersReducer: usersReducer,
-		usReducer: usReducer,
+		usersReducer,
+		usReducer,
 		categoriesReducer
 	},
 });

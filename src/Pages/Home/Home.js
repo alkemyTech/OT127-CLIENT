@@ -3,7 +3,7 @@ import SliderHome from "../../Components/Slides/SliderHome";
 import News from "../../Components/News/News";
 
 const Home = () => {
-  const [welcomeText, setWelcomeText] = useState("Bienvenido");
+  const [welcomeText, setWelcomeText] = useState("Bienvenido"); //eslint-disable-line
 
   return (
     <>

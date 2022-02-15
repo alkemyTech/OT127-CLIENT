@@ -85,3 +85,16 @@ export const privateDelete = (route, id) => {
     return error
   }
 }
+
+export const privatePost = (route, data) => {
+  let url = route;
+  let token = getSecureHeader();
+  const { Authorization, error } = token;
+
+  if (Authorization) {
+    axios
+    .post(url, data)
+    .then((res) => res)
+    .catch((err) => err); 
+  }
+};
