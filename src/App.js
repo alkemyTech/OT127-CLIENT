@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Progress from "./Components/Progress/Porgress";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -60,16 +60,21 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Suspense fallback={<Progress height={7} />}>
-            <div>
+            <Link to={"/"}>Home</Link>
+            <Link to={"/login"}>Login</Link>
+            <Link to={"/contact"}>Contact</Link>
+            <Link to={"/news"}>News</Link>
+            <div className="PageContainer">
               {routes.map(({ path, Component, title }) => (
                 <Route key={path} exact path={path}>
                   {({ match }) => (
                     <CSSTransition
                       in={match != null}
-                      timeout={300}
+                      timeout={500}
+                      classNames="PageContainer__page"
                       unmountOnExit
                     >
-                      <div>
+                      <div classNames="PageContainer__page">
                         {title ? <Component title={title} /> : <Component />}
                       </div>
                     </CSSTransition>
