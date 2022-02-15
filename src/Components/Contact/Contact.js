@@ -4,6 +4,7 @@ import Title from "../Titulosynovedades/Title";
 import { sweetAlertError } from "../../Services/sweetAlertServices";
 import Leaflet from "../../features/leaflet/Leaflet";
 
+
 const Contact = () => {
   // Estados para guardar los datos y las banderas
   const [error, setError] = useState(false);
