@@ -59,7 +59,25 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          <Suspense fallback={<Progress height={7} />}></Suspense>
+          <Suspense fallback={<Progress height={7} />}>
+            <div>
+              {routes.map(({ path, Component, title }) => (
+                <Route key={path} exact path={path}>
+                  {({ match }) => (
+                    <CSSTransition
+                      in={match != null}
+                      timeout={300}
+                      unmountOnExit
+                    >
+                      <div>
+                        {title ? <Component title={title} /> : <Component />}
+                      </div>
+                    </CSSTransition>
+                  )}
+                </Route>
+              ))}
+            </div>
+          </Suspense>
         </Switch>
       </BrowserRouter>
     </>
