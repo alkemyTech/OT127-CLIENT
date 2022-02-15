@@ -60,27 +60,27 @@
 		@media (min-width: 768px) {
 			display: block;
 		}
-	}
 
-	&__web-title {
-		color: $font-gray;
-		text-align: center;
-		font-size: $size-subtitle;
-		margin: 0;
-
-		@media (min-width: 1440px) {
-			font-size: $size-title;
-		}
-	}
-
-	&__web-link {
-		color: $font-gray;
-		text-align: center;
-		font-size: $size-regular;
-		margin: 0;
-
-		@media (min-width: 1440px) {
+		&-title {
+			color: $font-gray;
+			text-align: center;
 			font-size: $size-subtitle;
+			margin: 0;
+
+			@media (min-width: 1440px) {
+				font-size: $size-title;
+			}
+		}
+
+		&-link {
+			color: $font-gray;
+			text-align: center;
+			font-size: $size-regular;
+			margin: 0;
+
+			@media (min-width: 1440px) {
+				font-size: $size-subtitle;
+			}
 		}
 	}
 
@@ -90,16 +90,16 @@
 		@media (min-width: 1600px) {
 			display: block;
 		}
-	}
 
-	&__campaign-title {
-		color: $font-gray;
-		font-size: $size-title;
-	}
+		&-title {
+			color: $font-gray;
+			font-size: $size-title;
+		}
 
-	&__campaign-link {
-		color: $font-gray;
-		font-size: $size-subtitle;
+		&-link {
+			color: $font-gray;
+			font-size: $size-subtitle;
+		}
 	}
 
 	&__networks {
@@ -115,29 +115,29 @@
 		@media (min-width: 1440px) {
 			flex-direction: column;
 		}
-	}
 
-	&__networks-title {
-		color: $font-gray;
-		display: none;
+		&-title {
+			color: $font-gray;
+			display: none;
 
-		@media (min-width: 1440px) {
-			display: inline-block;
-		}
-	}
-
-	&__networks-logo {
-		display: block;
-		width: 35px;
-		object-fit: cover;
-		margin-left: 1rem;
-
-		@media (min-width: 768px) {
-			width: 50px;
+			@media (min-width: 1440px) {
+				display: inline-block;
+			}
 		}
 
-		@media (min-width: 1440px) {
-			display: inline;
+		&-logo {
+			display: block;
+			width: 35px;
+			object-fit: cover;
+			margin-left: 1rem;
+
+			@media (min-width: 768px) {
+				width: 50px;
+			}
+
+			@media (min-width: 1440px) {
+				display: inline;
+			}
 		}
 	}
 
@@ -149,18 +149,18 @@
 		@media (min-width: 1440px) {
 			height: 80px;
 		}
-	}
 
-	&__legal-text {
-		font-size: 14px;
-		font-family: $roboto;
-		color: #fff;
-		text-align: center;
-		padding: 10px;
+		&-text {
+			font-size: 14px;
+			font-family: $roboto;
+			color: #fff;
+			text-align: center;
+			padding: 10px;
 
-		@media (min-width: 1440px) {
-			font-size: $size-subtitle;
-			padding: 25px;
+			@media (min-width: 1440px) {
+				font-size: $size-subtitle;
+				padding: 25px;
+			}
 		}
 	}
 }
