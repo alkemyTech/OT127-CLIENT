@@ -6,9 +6,9 @@ import ongLogo from "../../images/LOGO-SOMOS_MAS.png";
 const Header = () => {
   return (
     <header>
-      <ImageLazyLoad src={campaignLogo} />
+      <ImageLazyLoad src={campaignLogo} alt={"Logo de campaña juguetes"} />
       <h1>Juguetes por más sonrisas</h1>
-      <ImageLazyLoad src={ongLogo} />
+      <ImageLazyLoad src={ongLogo} alt={"Logo de ONG"} />
     </header>
   );
 };
