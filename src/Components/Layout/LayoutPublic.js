@@ -2,11 +2,11 @@ import React from 'react'
 import PublicFooter from '../Footer/PublicFooter'
 import Header from '../Header/Header'
 
-const LayoutPublic = ({ children }) => {
+const LayoutPublic = (props) => {
     return (
         <>
             <Header />
-            {children}
+            {props.children}
             <PublicFooter />
         </>
     )
