@@ -10,12 +10,12 @@ import activityReducer from '../reducers/activitySlice';
 
 export default configureStore({
 	reducer: {
-		authReducer: authReducer,
-		newsReducer: newsReducer,
-		membersReducer: membersReducer,
+		authReducer,
+		newsReducer,
+		membersReducer,
 		slidesReducer,
-		usersReducer: usersReducer,
-		usReducer: usReducer,
+		usersReducer,
+		usReducer,
 		categoriesReducer,
 		activityReducer
 	},

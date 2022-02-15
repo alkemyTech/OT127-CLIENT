@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "../../sass/components/_form.scss";
 
 const LoginForm = () => {
   const [userData, setUserData] = useState([]);
@@ -14,7 +13,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="form__container">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({
@@ -33,16 +32,16 @@ const LoginForm = () => {
           handleSubmit(values);
         }}
       >
-        <Form>
-          <label htmlFor="email">Email</label>
-          <Field name="email" type="email" />
-          <ErrorMessage name="email" />
+        <Form className="form">
+          <label htmlFor="email" className="form__label">Email</label>
+          <Field name="email" type="email" className="form__input"/>
+          <ErrorMessage name="email" render={(msg) => <div className="form__error">{msg}</div>}/>
 
-          <label htmlFor="password">Contraseña</label>
-          <Field name="password" type="password" />
-          <ErrorMessage name="password" />
+          <label htmlFor="password" className="form__label">Contraseña</label>
+          <Field name="password" type="password" className="form__input"/>
+          <ErrorMessage name="password" render={(msg) => <div className="form__error">{msg}</div>}/>
 
-          <button type="submit">Entrar</button>
+          <button type="submit" className="form__button">Entrar</button>
         </Form>
       </Formik>
     </div>
