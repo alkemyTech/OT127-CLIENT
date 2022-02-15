@@ -1,0 +1,43 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+@use "../base/typography";
+
+.schoolcampaignheader {
+  width: 100%;
+  height: 20%;
+  padding: 20px;
+  background-color: variables.$light-green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: variables.$bp-tv) {
+    background-color: rgba(110, 231, 183, 0.8);
+    opacity: 0.5;
+  }
+  &__campaignlogo {
+    width: 150px;
+    height: 100px;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+  &__onglogo {
+    width: 150px;
+    margin-left: 20px;
+    display: none;
+    @media (min-width: variables.$bp-tablet) {
+      display: block;
+    }
+  }
+  &__slogan {
+    @include roboto-title;
+    font-size: 36px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: variables.$font-black;
+    display: none;
+    @media (min-width: variables.$bp-desktop) {
+      display: block;
+    }
+  }
+}
