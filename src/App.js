@@ -1,10 +1,10 @@
 import React, { lazy, Suspense } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./sass/main.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-
 import Progress from "./Components/Progress/Porgress";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./sass/main.scss";
+
 const About = lazy(() => import("./Components/About/About"));
 const Activities = lazy(() => import("./Components/Activities/Activities"));
 const ActivityDetail = lazy(() =>
