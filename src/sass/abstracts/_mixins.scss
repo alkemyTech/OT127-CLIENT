@@ -11,19 +11,23 @@
     @media screen and (max-width: 576px) {
       @content;
     }
-  } @else if $size == tablet-portrait {
+  }
+  @if $size == tablet-portrait {
     @media screen and (min-width: 577px) {
       @content;
     }
-  } @else if $size == tablet-landscape {
+  }
+  @if $size == tablet-landscape {
     @media screen and (min-width: 900px) {
       @content;
     }
-  } @else if $size == desktop {
+  }
+  @if $size == desktop {
     @media screen and (min-width: 1200px) {
       @content;
     }
-  } @else if $size == big-desktop {
+  }
+  @if $size == big-desktop {
     @media screen and (min-width: 1400px) {
       @content;
     }
