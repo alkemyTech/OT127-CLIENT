@@ -4,6 +4,7 @@ import "./sass/main.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Progress from "./Components/Progress/Porgress";
+import LayoutPublic from "./Components/Layout/LayoutPublic";
 const About = lazy(() => import("./Components/About/About"));
 const Activities = lazy(() => import("./Components/Activities/Activities"));
 const ActivityDetail = lazy(() =>
@@ -30,35 +31,37 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Suspense fallback={<Progress height={7} />}>
-            <Route path="/" exact component={Home} />
-            {/* PROBLEMA El componente activities no muestra ningun listado */}
-            <Route path="/activities" exact component={Activities} />
-            <Route path="/activities/:id" component={ActivityDetail} />
-            <Route path="/login" component={LoginForm} />
-            {/* PROBLEMA Problemas para obtener datos de la API, me tira error */}
-            <Route path="/contact" component={Contact} />
-            <Route path="/register" component={RegisterForm} />
-            <Route path="/news" exact component={News} />
-            <Route
-              path="/news/:id"
-              exact
-              component={() => (
-                <NewsDetails title="Titulo recibido por props" />
-              )}
-            />
-            <Route
-              path="/donate"
-              component={() => <Donacion message="Quieres donar?" />}
-            />
-            <Route path="/thanks" component={Gracias} />
-            <Route
-              path="/about"
-              component={() => <About text="Sobre Nosotros" />}
-            />
-            {/* BACKOFFICE */}
-            <Route path="/backoffice" component={BackOffice} />
-            <Route path="/school-campaign" component={SchoolCampaign} />
-            <Route path="/toys-campaign" component={ToysCampaign} />
+            <LayoutPublic>
+              <Route path="/" exact component={Home} />
+              {/* PROBLEMA El componente activities no muestra ningun listado */}
+              <Route path="/activities" exact component={Activities} />
+              <Route path="/activities/:id" component={ActivityDetail} />
+              <Route path="/login" component={LoginForm} />
+              {/* PROBLEMA Problemas para obtener datos de la API, me tira error */}
+              <Route path="/contact" component={Contact} />
+              <Route path="/register" component={RegisterForm} />
+              <Route path="/news" exact component={News} />
+              <Route
+                path="/news/:id"
+                exact
+                component={() => (
+                  <NewsDetails title="Titulo recibido por props" />
+                )}
+              />
+              <Route
+                path="/donate"
+                component={() => <Donacion message="Quieres donar?" />}
+              />
+              <Route path="/thanks" component={Gracias} />
+              <Route
+                path="/about"
+                component={() => <About text="Sobre Nosotros" />}
+              />
+              {/* BACKOFFICE */}
+              <Route path="/backoffice" component={BackOffice} />
+              <Route path="/school-campaign" component={SchoolCampaign} />
+              <Route path="/toys-campaign" component={ToysCampaign} />
+            </LayoutPublic>
           </Suspense>
         </Switch>
       </BrowserRouter>
