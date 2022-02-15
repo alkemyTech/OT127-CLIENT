@@ -76,7 +76,7 @@ function App() {
                   )}
                 </Route>
               ))}
-              <BackOffice path={"/backoffice"} componet={BackOffice} />
+              <Route path={"/backoffice"} component={BackOffice} />
             </div>
           </Suspense>
         </Switch>
