@@ -4,6 +4,7 @@ import { getNews } from "../../Redux/reducers/newsSlice";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import Spinner from "../Spinner/Spinner";
 import Comments from "./Comments";
+import VideoPlayer from "./VideoPlayer";
 
 const News = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,12 @@ const News = () => {
       ) : (
         <div>
           <h1>Novedades</h1>
+
+          <section>
+            <h1>Último evento</h1>
+            <VideoPlayer />
+          </section>
+
           <ul className="list-container">{newsList()}</ul>
           {showComments && <Comments />}
         </div>

@@ -1,0 +1,26 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+
+.videocontrols {
+  width: 100%;
+  background-color: variables.$font-gray;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  &__button {
+    width: 30px;
+    padding: 0;
+    border: none;
+    background: none;
+    &:hover {
+      cursor: pointer;
+      color: variables.$font-white;
+    }
+  }
+  svg {
+    &:hover {
+      cursor: pointer;
+      color: variables.$font-white;
+    }
+  }
+}

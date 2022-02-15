@@ -1,0 +1,26 @@
+.thanks {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+    text-align: center;
+  }
+  &__content {
+    margin: 15px;
+    border: 2px solid $med-blue;
+    max-width: 600px;
+    padding: 25px;
+    margin: 15px;
+  }
+  &__title {
+    @include outfit-title;
+    color: $dark-blue;
+    margin-bottom: 15px;
+  }
+  &__text {
+    @include outfit-regular-bold;
+    color: $light-blue;
+  }
+}
