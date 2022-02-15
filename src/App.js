@@ -60,6 +60,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Suspense fallback={<Progress height={7} />}>
+            {/*Estos links son solo para testear las animaciones*/}
             <Link to={"/"}>Home</Link>
             <Link to={"/login"}>Login</Link>
             <Link to={"/contact"}>Contact</Link>
