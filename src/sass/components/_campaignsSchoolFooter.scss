@@ -13,10 +13,26 @@
 		height: 300px;
 		margin: 0 auto;
 		font-family: $roboto;
+
+		@media (min-width: 768px) {
+			flex-direction: row;
+		}
+		@media (min-width: 1440px) {
+			align-items: flex-start;
+			padding-top: 2rem;
+		}
+		@media (min-width: 1600px) {
+			align-items: flex-start;
+			padding-top: 2rem;
+		}
 	}
 
 	&__img {
 		width: 50%;
+
+		@media (min-width: 768px) {
+			width: 20%;
+		}
 	}
 
 	&__logo {
@@ -28,36 +44,33 @@
 		margin: 0 auto;
 	}
 
-	&__separador {
+	&__separator {
 		width: 80%;
 		border: solid 1px #cccccc;
 		margin: 1rem auto;
+
+		@media (min-width: 768px) {
+			display: none;
+		}
 	}
 
 	&__web {
 		display: none;
+
+		@media (min-width: 768px) {
+			display: block;
+		}
 	}
 
-	&__web-titulo {
+	&__web-title {
 		color: $font-gray;
 		text-align: center;
 		font-size: $size-subtitle;
 		margin: 0;
-	}
 
-	&__campanas {
-		display: none;
-	}
-
-	&__redes {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 50%;
-	}
-
-	&__redes-titulo {
-		color: $font-gray;
+		@media (min-width: 1440px) {
+			font-size: $size-title;
+		}
 	}
 
 	&__web-link {
@@ -65,114 +78,89 @@
 		text-align: center;
 		font-size: $size-regular;
 		margin: 0;
+
+		@media (min-width: 1440px) {
+			font-size: $size-subtitle;
+		}
 	}
 
-	&__redes-logo {
-		display: block;
-		width: 35px;
-		object-fit: cover;
-		margin-left: 1rem;
-	}
-
-	&__redes-titulo {
-		color: $font-gray;
+	&__campaign {
 		display: none;
+
+		@media (min-width: 1600px) {
+			display: block;
+		}
 	}
 
-	&__campanas-titulo {
+	&__campaign-title {
 		color: $font-gray;
 		font-size: $size-title;
 	}
 
-	&__campanas-link {
+	&__campaign-link {
 		color: $font-gray;
 		font-size: $size-subtitle;
 	}
 
-	&__legales {
+	&__networks {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 50%;
+
+		@media (min-width: 768px) {
+			width: 25%;
+		}
+
+		@media (min-width: 1440px) {
+			flex-direction: column;
+		}
+	}
+
+	&__networks-title {
+		color: $font-gray;
+		display: none;
+
+		@media (min-width: 1440px) {
+			display: inline-block;
+		}
+	}
+
+	&__networks-logo {
+		display: block;
+		width: 35px;
+		object-fit: cover;
+		margin-left: 1rem;
+
+		@media (min-width: 768px) {
+			width: 50px;
+		}
+
+		@media (min-width: 1440px) {
+			display: inline;
+		}
+	}
+
+	&__legal {
 		width: 100%;
 		background: $dark-blue;
 		height: 50px;
+
+		@media (min-width: 1440px) {
+			height: 80px;
+		}
 	}
 
-	&__legales-texto {
+	&__legal-text {
 		font-size: 14px;
 		font-family: $roboto;
 		color: #fff;
 		text-align: center;
 		padding: 10px;
-	}
 
-	@media (min-width: 768px) {
-		&__container {
-			flex-direction: row;
-		}
-
-		&__img {
-			width: 20%;
-		}
-
-		&__separador {
-			display: none;
-		}
-
-		&__web {
-			display: block;
-		}
-
-		&__redes {
-			width: 25%;
-		}
-
-		&__redes-logo {
-			width: 50px;
-		}
-	}
-
-	@media (min-width: 1440px) {
-		&__container {
-			align-items: flex-start;
-			padding-top: 2rem;
-		}
-
-		&__web-titulo {
-			font-size: $size-title;
-		}
-
-		&__web-link {
-			font-size: $size-subtitle;
-		}
-
-		&__redes {
-			flex-direction: column;
-		}
-
-		&__redes-logo {
-			display: inline;
-		}
-
-		&__redes-titulo {
-			display: inline-block;
-		}
-
-		&__legales {
-			height: 80px;
-		}
-
-		&__legales-texto {
+		@media (min-width: 1440px) {
 			font-size: $size-subtitle;
 			padding: 25px;
-		}
-	}
-
-	@media (min-width: 1600px) {
-		&__container {
-			align-items: flex-start;
-			padding-top: 2rem;
-		}
-
-		&__campanas {
-			display: block;
 		}
 	}
 }

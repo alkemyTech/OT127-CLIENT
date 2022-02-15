@@ -13,46 +13,46 @@ const Footer = () => {
 					<img className="footer__logo" src={logo} alt="logo"></img>
 				</div>
 
-				<div className="footer__separador"></div>
+				<div className="footer__separator"></div>
 
 				<div className="footer__web">
-					<p className="footer__web-titulo">Stios Web</p>
+					<p className="footer__web-title">Stios Web</p>
 					<p className="footer__web-link">www.somasmas.com</p>
 				</div>
 
-				<div className="footer__campanas">
-					<p className="footer__campanas-titulo">Otras Campañas</p>
-					<p className="footer__campanas-link">www.campana1.com</p>
-					<p className="footer__campanas-link">www.campana2.com</p>
-					<p className="footer__campanas-link">www.campana3.com</p>
-					<p className="footer__campanas-link">www.campana4.com</p>
+				<div className="footer__campaign">
+					<p className="footer__campaign-title">Otras Campañas</p>
+					<p className="footer__campaign-link">www.campana1.com</p>
+					<p className="footer__campaign-link">www.campana2.com</p>
+					<p className="footer__campaign-link">www.campana3.com</p>
+					<p className="footer__campaign-link">www.campana4.com</p>
 				</div>
 
-				<div className="footer__redes">
+				<div className="footer__networks">
 					<div>
 						<img
-							className="footer__redes-logo"
+							className="footer__networks-logo"
 							src={instagram}
 							alt="instagram"
 						/>
-						<span className="footer__redes-titulo">@somosmas</span>
+						<span className="footer__networks-title">@somosmas</span>
 					</div>
 					<div>
-						<img className="footer__redes-logo" src={facebook} alt="facebbok" />
-						<span className="footer__redes-titulo">@somosmas</span>
+						<img className="footer__networks-logo" src={facebook} alt="facebbok" />
+						<span className="footer__networks-title">@somosmas</span>
 					</div>
 					<div>
-						<img className="footer__redes-logo" src={twitter} alt="twitter" />
-						<span className="footer__redes-titulo">@somosmas</span>
+						<img className="footer__networks-logo" src={twitter} alt="twitter" />
+						<span className="footer__networks-title">@somosmas</span>
 					</div>
 					<div>
-						<img className="footer__redes-logo" src={linkedin} alt="linkedin" />
-						<span className="footer__redes-titulo">@somosmas</span>
+						<img className="footer__networks-logo" src={linkedin} alt="linkedin" />
+						<span className="footer__networks-title">@somosmas</span>
 					</div>
 				</div>
 			</div>
-			<div className="footer__legales">
-				<p className="footer__legales-texto">
+			<div className="footer__legal">
+				<p className="footer__legal-text">
 					© 2022 Somos Más | All Rights Reserved
 				</p>
 			</div>
