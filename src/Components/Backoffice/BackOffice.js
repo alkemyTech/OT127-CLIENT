@@ -1,7 +1,7 @@
 import React, { useState, lazy, Suspense } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, Switch, Route } from "react-router-dom";
-import Progress from "./Components/Progress/Porgress";
+import Progress from "../Progress/Porgress";
 
 const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
 const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
