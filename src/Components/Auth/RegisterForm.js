@@ -5,7 +5,7 @@ import "../../sass/components/_form.scss";
 
 const RegisterForm = () => {
   return (
-    <>
+    <div className="form__container">
       <Formik
         initialValues={{
           name: "",
@@ -44,42 +44,70 @@ const RegisterForm = () => {
           };
         }}
       >
-        <Form>
+        <Form className="form">
           {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
           {/*Los componentes ErrorMessage tienen un atributo render, eso va a servir para cuando agreguemos los estilos, solo hay que agregar la clase*/}
-          <div>
-            <label htmlFor="name">Nombre</label>
-            <Field name="name" type="text" />
-            <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
+          <div className="form__subcontainer">
+            <label htmlFor="name" className="form__label">
+              Nombre
+            </label>
+            <Field name="name" type="text" className="form__input" />
+            <ErrorMessage
+              name="name"
+              render={(msg) => <div className="form__error">{msg}</div>}
+            />
           </div>
-          <div>
-            <label htmlFor="lastName">Apellido</label>
-            <Field name="lastName" type="text" />
-            <ErrorMessage name="lastName" render={(msg) => <div>{msg}</div>} />
+          <div className="form__subcontainer">
+            <label htmlFor="lastName" className="form__label">
+              Apellido
+            </label>
+            <Field name="lastName" type="text" className="form__input" />
+            <ErrorMessage
+              name="lastName"
+              render={(msg) => <div className="form__error">{msg}</div>}
+            />
           </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <Field name="email" type="email" />
-            <ErrorMessage name="email" render={(msg) => <div>{msg}</div>} />
+          <div className="form__subcontainer">
+            <label htmlFor="email" className="form__label">
+              Email
+            </label>
+            <Field name="email" type="email" className="form__input" />
+            <ErrorMessage
+              name="email"
+              render={(msg) => <div className="form__error">{msg}</div>}
+            />
           </div>
-          <div>
-            <label htmlFor="password">Contraseña</label>
-            <Field name="password" type="password" />
-            <ErrorMessage name="password" render={(msg) => <div>{msg}</div>} />
+          <div className="form__subcontainer">
+            <label htmlFor="password" className="form__label">
+              Contraseña
+            </label>
+            <Field name="password" type="password" className="form__input" />
+            <ErrorMessage
+              name="password"
+              render={(msg) => <div className="form__error">{msg}</div>}
+            />
           </div>
-          <div>
-            <label htmlFor="confirmPassword">Confirmar contraseña</label>
-            <Field name="confirmPassword" type="password" />
+          <div className="form__subcontainer">
+            <label htmlFor="confirmPassword" className="form__label">
+              Confirmar contraseña
+            </label>
+            <Field
+              name="confirmPassword"
+              type="password"
+              className="form__input"
+            />
             <ErrorMessage
               name="confirmPassword"
-              render={(msg) => <div>{msg}</div>}
+              render={(msg) => <div className="form__error">{msg}</div>}
             />
           </div>
 
-          <button type="submit">Registrar</button>
+          <button type="submit" className="form__button">
+            Registrar
+          </button>
         </Form>
       </Formik>
-    </>
+    </div>
   );
 };
 
