@@ -6,11 +6,11 @@ const Card = ({
   description,
 }) => {
   return (
-    <div className="card__wrapper">
-      <img className="card__image" src={imgSrc} alt={title} />
-      <div className="card__content">
-        <h3 className="card__title">{title}</h3>
-        <p className="card__text">{description}</p>
+    <div className="card-custom__wrapper">
+      <img className="card-custom__image" src={imgSrc} alt={title} />
+      <div className="card-custom__content">
+        <h3 className="card-custom__title">{title}</h3>
+        <p className="card-custom__text">{description}</p>
       </div>
     </div>
   );
