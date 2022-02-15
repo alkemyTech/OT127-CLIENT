@@ -24,6 +24,35 @@ const TestimonialForm = lazy(() =>
 );
 const ToysCampaign = lazy(() => import("./Campaigns/Toys/ToysCampaign"));
 
+const routes = [
+  { path: "/", Component: Home },
+  /* PROBLEMA El componente activities no muestra ningun listado */
+  { path: "/activities", Component: Activities },
+  { path: "/activities/:id", Component: ActivityDetail },
+  { path: "/login", Component: LoginForm },
+  /* PROBLEMA Problemas para obtener datos de la API, me tira error */
+  { path: "/contact", Component: Contact },
+  { path: "/register", Component: RegisterForm },
+  { path: "/news", Component: News },
+  {
+    path: "/news/:id",
+    Component: NewsDetails,
+    title: "Titulo recibido por props",
+  },
+  { path: "/thanks", Component: Gracias },
+  {
+    path: "/school-campaign",
+    Component: SchoolCampaign,
+  },
+  { path: "/toys-campaign", Component: ToysCampaign },
+  {
+    path: "/donate",
+    Component: Donacion,
+    title: "Quieres donar?",
+  },
+  { path: "/about", Component: About, title: "Sobre Nosotros" },
+];
+
 function App() {
   return (
     <>
@@ -31,11 +60,9 @@ function App() {
         <Switch>
           <Suspense fallback={<Progress height={7} />}>
             <Route path="/" exact component={Home} />
-            {/* PROBLEMA El componente activities no muestra ningun listado */}
             <Route path="/activities" exact component={Activities} />
             <Route path="/activities/:id" component={ActivityDetail} />
             <Route path="/login" component={LoginForm} />
-            {/* PROBLEMA Problemas para obtener datos de la API, me tira error */}
             <Route path="/contact" component={Contact} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/news" exact component={News} />
