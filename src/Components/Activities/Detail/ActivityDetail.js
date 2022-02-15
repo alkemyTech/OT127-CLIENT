@@ -1,6 +1,6 @@
-import Title from "../Titulosynovedades/Title";
-import ActivitiesForm from "./ActivitiesForm";
-import ActivitiesList from "./ActivitiesList";
+import Title from "../../Titulosynovedades/Title";
+import ActivitiesForm from "../ActivitiesForm";
+import ActivitiesList from "../ActivitiesList";
 
 const Detail = () => {
 	const titleFromAPI = "Desde la API Activities";

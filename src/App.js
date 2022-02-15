@@ -4,12 +4,12 @@ import "./sass/main.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Progress from "./Components/Progress/Porgress";
 const About = lazy(() => import("./Components/About/About"));
-const Activities = lazy(() => import("./Components/Activities/Activities"));
+const Activities = lazy(() => import("./Components/Activities/Activity"));
 const ActivitiesForm = lazy(() =>
   import("./Components/Activities/ActivitiesForm")
 );
 const ActivityDetail = lazy(() =>
-  import("./Components/Activities/ActivityDetail")
+  import("./Components/Activities/Detail/ActivityDetail")
 );
 const BackOffice = lazy(() => import("./Components/Backoffice/BackOffice"));
 const CategoriesForm = lazy(() =>
