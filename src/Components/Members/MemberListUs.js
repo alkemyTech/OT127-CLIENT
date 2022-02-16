@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "../../sass/pages/MemberListUs.js";
+
 
 const MemberListUs = () => {
   const endPointMenbers = process.env.REACT_APP_ENDPOINT_MENBERS;
