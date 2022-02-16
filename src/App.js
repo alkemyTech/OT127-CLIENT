@@ -8,7 +8,7 @@ import "./sass/main.scss";
 const About = lazy(() => import("./Components/About/About"));
 const Activities = lazy(() => import("./Components/Activities/Activities"));
 const ActivityDetail = lazy(() =>
-  import("./Components/Activities/ActivityDetail")
+    import("./Components/Activities/ActivityDetail")
 );
 const BackOffice = lazy(() => import("./Components/Backoffice/BackOffice"));
 const Contact = lazy(() => import("./Components/Contact/Contact"));
@@ -21,7 +21,7 @@ const NewsDetails = lazy(() => import("./Components/News/Detail/NewsDetails"));
 const RegisterForm = lazy(() => import("./Components/Auth/RegisterForm"));
 const SchoolCampaign = lazy(() => import("./Campaigns/School/SchoolCampaign"));
 const TestimonialForm = lazy(() =>
-  import("./Components/Testimonials/TestimonialsForm")
+    import("./Components/Testimonials/TestimonialForm")
 );
 const ToysCampaign = lazy(() => import("./Campaigns/Toys/ToysCampaign"));
 
