@@ -2,8 +2,8 @@ import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Progress from "./Components/Progress/Porgress";
-import "bootstrap/dist/css/bootstrap.min.css";
 import LayoutPublic from "./Components/Layout/LayoutPublic";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/main.scss";
 const About = lazy(() => import("./Components/About/About"));
 const Activities = lazy(() => import("./Components/Activities/Activities"));
@@ -59,29 +59,50 @@ function App() {
             <Link to={"/login"}>Login</Link>
             <Link to={"/contact"}>Contact</Link>
             <Link to={"/news"}>News</Link>
-            <LayoutPublic>
-              <div className="PageContainer">
-                {routes.map(({ path, Component, title }) => (
-                  <Route key={path} exact path={path}>
-                    {({ match }) => (
-                      <CSSTransition
-                        in={match != null}
-                        timeout={500}
-                        classNames="PageContainer__page"
-                        unmountOnExit
-                      >
-                        <div classNames="PageContainer__page">
-                          {title ? <Component title={title} /> : <Component />}
-                        </div>
-                      </CSSTransition>
-                    )}
-                  </Route>
-                ))}
-              </div>
-            </LayoutPublic>
+            <Route
+              exact
+              path={[
+                "/",
+                "/activities",
+                "/activities/:id",
+                "/login",
+                "/contact",
+                "/register",
+                "/news",
+                "/news/:id",
+                "/donate",
+                "/thanks",
+                "/about",
+              ]}
+            >
+              <LayoutPublic>
+                <div className="PageContainer">
+                  {routes.map(({ path, Component, title }) => (
+                    <Route key={path} exact path={path}>
+                      {({ match }) => (
+                        <CSSTransition
+                          in={match != null}
+                          timeout={500}
+                          classNames="PageContainer__page"
+                          unmountOnExit
+                        >
+                          <div classNames="PageContainer__page">
+                            {title ? (
+                              <Component title={title} />
+                            ) : (
+                              <Component />
+                            )}
+                          </div>
+                        </CSSTransition>
+                      )}
+                    </Route>
+                  ))}
+                </div>
+              </LayoutPublic>
+            </Route>
+            <Route path="/school-campaign" exact component={SchoolCampaign} />
+            <Route path="/toys-campaign" exact component={ToysCampaign} />
             <Route path="/backoffice" component={BackOffice} />
-            <Route path="/school-campaign" component={SchoolCampaign} />
-            <Route path="/toys-campaign" component={ToysCampaign} />
           </Suspense>
         </Switch>
       </BrowserRouter>
