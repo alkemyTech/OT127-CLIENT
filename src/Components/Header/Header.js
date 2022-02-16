@@ -19,20 +19,20 @@ const Header = () => {
 				<nav className="header__nav">
 					<div className="header__nav-left">
 						<NavLink
-							className="links"
-							activeClassName="active"
+                            className="header__nav-links"
+                            activeClassName="header__nav-links-active"
 							to="/">Inicio
 						</NavLink>
 					</div>
 					<div className="header__nav-right">
-						{isLogged
+						{!isLogged
 							? (
 								<ul className="header__nav-list">
 									{menuItems.map(item => (
 										<li key={item.name} className="header__nav-item">
 											<NavLink
-												className="links"
-												activeClassName="active"
+                                                className="header__nav-links"
+                                                activeClassName="header__nav-links-active"
 												to={item.link}>
 												{item.name}
 											</NavLink>
