@@ -17,22 +17,17 @@
   }
 
   &__title {
-    @include breakpoint(phone) {
-      display: none;
-    }
-
-    @include breakpoint(tablet-portrait) {
-      display: none;
-    }
-
+    display: none;
     @include breakpoint(desktop) {
       display: initial;
     }
   }
 
   &__ongLogo {
-    @include breakpoint(phone) {
-      display: none;
+    display: none;
+
+    @include breakpoint(tablet-portrait) {
+      display: initial;
     }
   }
 
