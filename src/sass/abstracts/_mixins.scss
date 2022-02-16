@@ -6,6 +6,34 @@
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
+@mixin breakpoint($size) {
+  @if $size == phone {
+    @media screen and (max-width: 576px) {
+      @content;
+    }
+  }
+  @if $size == tablet-portrait {
+    @media screen and (min-width: 577px) {
+      @content;
+    }
+  }
+  @if $size == tablet-landscape {
+    @media screen and (min-width: 900px) {
+      @content;
+    }
+  }
+  @if $size == desktop {
+    @media screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+  @if $size == big-desktop {
+    @media screen and (min-width: 1400px) {
+      @content;
+    }
+  }
+}
+
 //SE PUEDEN HACER KEYFRAMES
 
 // @mixin fade-in() {
