@@ -10,7 +10,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-
 const SlideList = () => {
   const dispatch = useDispatch();
 
@@ -45,7 +44,7 @@ const SlideList = () => {
                 <TableCell align="center">{order}</TableCell>
                 <TableCell>
                   <button>
-                    <Link to={`/backoffice/slides/edicion/${id}`}>Editar</Link>
+                    <Link to={`/backoffice/slides/edit/${id}`}>Editar</Link>
                   </button>
                 </TableCell>
                 <TableCell align="center">
