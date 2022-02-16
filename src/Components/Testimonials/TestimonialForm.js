@@ -8,12 +8,13 @@ import axios from "axios"
 
 import "../../sass/components/_form.scss"
 import "./styles.scss"
+import { sweetAlertError } from "../../Services/sweetAlertServices"
 
 const TestimonialForm = () => {
-    const [ name, setName ] = useState("")
-    const [ description, setDescription ] = useState("")
-    const [ image, setImage ] = useState("")
-    const [ create, setCreate ] = useState(true)
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [image, setImage] = useState("")
+    const [create, setCreate] = useState(true)
     const url = "http://ongapi.alkemy.org/api/testimonials"
 
     const { id } = useParams()
@@ -68,7 +69,7 @@ const TestimonialForm = () => {
                 formik.setSubmitting(false)
                 alert("Testimonio creado correctamente")
             } catch (error) {
-                alert(error)
+                sweetAlertError("No se pudo crear el testimonio")
             }
         } else {
             try {
@@ -80,7 +81,7 @@ const TestimonialForm = () => {
                 formik.setSubmitting(false)
                 alert("Testimonio actualizado correctamente")
             } catch (error) {
-                alert(error)
+                sweetAlertError("No se pudo actualizar el testimonio")
             }
         }
     }
@@ -102,7 +103,7 @@ const TestimonialForm = () => {
                     }
                 )
             } catch (error) {
-                alert(error)
+                sweetAlertError("No se pudo traer la informacion de los testimonios")
             }
         }
     }
@@ -115,12 +116,12 @@ const TestimonialForm = () => {
 
 
     const handleChange = (e, propsFormik) => {
-        if (e.currentTarget.files && e.currentTarget.files[ 0 ]) {
+        if (e.currentTarget.files && e.currentTarget.files[0]) {
             const reader = new FileReader()
             reader.onload = function (e) {
                 propsFormik.setFieldValue("image", e.target.result)
             }
-            reader.readAsDataURL(e.currentTarget.files[ 0 ])
+            reader.readAsDataURL(e.currentTarget.files[0])
         }
     }
 
