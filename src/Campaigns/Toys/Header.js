@@ -6,17 +6,13 @@ import ongLogo from "../../images/LOGO-SOMOS_MAS.png";
 const Header = () => {
   return (
     <header className="toysCampaignHeader">
-      <ImageLazyLoad
-        src={campaignLogo}
-        alt={"Logo de campaña juguetes"}
-        className="toysCampaignHeader__campaignLogo"
-      />
+      <div className="toysCampaignHeader__campaignLogo">
+        <ImageLazyLoad src={campaignLogo} alt={"Logo de campaña juguetes"} />
+      </div>
       <h1 className="toysCampaignHeader__title">Juguetes por más sonrisas</h1>
-      <ImageLazyLoad
-        src={ongLogo}
-        alt={"Logo de ONG"}
-        className="toysCampaignHeader__ongLogo"
-      />
+      <div className="toysCampaignHeader__ongLogo">
+        <ImageLazyLoad src={ongLogo} alt={"Logo de ONG"} />
+      </div>
     </header>
   );
 };
