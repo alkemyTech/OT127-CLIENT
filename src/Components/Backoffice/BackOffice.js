@@ -91,7 +91,6 @@ const BackOffice = () => {
             exact
             component={MembersForm}
           />
-          {/* PROBLEMA MembersForm no detecta si le pasamos un id en la url */}
           <Route path="/backoffice/members/edit/:id" component={MembersForm} />
           <Route path="/backoffice/slides" exact component={SlideList} />
           <Route
