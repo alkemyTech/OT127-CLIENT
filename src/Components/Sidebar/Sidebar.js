@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
+import BackofficeHeader from "../Backoffice/BackofficeHeader"
 
 const Sidebar = () => {
   const [show, setShow] = useState(false);
@@ -23,16 +24,16 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div className="offcanvas__controller" onMouseOver={handleShow}></div>
-      {/* <h1>Bienvenido!</h1> */}
-
+      <div className="offcanvas__controller"></div>
+      <h1>Bienvenido!</h1>
+      <BackofficeHeader handleShow={handleShow}></BackofficeHeader>
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Backoffice Routes</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="offcanvas__body">
           {backofficeRoutes.map((element) => {
-            return <Link to={element.router}>{element.name}</Link>;
+            return <Link to={element.router} key={element.router}>{element.name}</Link>;
           })}
         </Offcanvas.Body>
       </Offcanvas>
