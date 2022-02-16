@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Progress from "./Components/Progress/Porgress";
 import "bootstrap/dist/css/bootstrap.min.css";
+import LayoutPublic from "./Components/Layout/LayoutPublic";
 import "./sass/main.scss";
-
 const About = lazy(() => import("./Components/About/About"));
 const Activities = lazy(() => import("./Components/Activities/Activities"));
 const ActivityDetail = lazy(() =>
@@ -31,7 +31,6 @@ const routes = [
   { path: "/activities", Component: Activities },
   { path: "/activities/:id", Component: ActivityDetail },
   { path: "/login", Component: LoginForm },
-  /* PROBLEMA Problemas para obtener datos de la API, me tira error */
   { path: "/contact", Component: Contact },
   { path: "/register", Component: RegisterForm },
   { path: "/news", Component: News },
@@ -41,11 +40,6 @@ const routes = [
     title: "Titulo recibido por props",
   },
   { path: "/thanks", Component: Gracias },
-  {
-    path: "/school-campaign",
-    Component: SchoolCampaign,
-  },
-  { path: "/toys-campaign", Component: ToysCampaign },
   {
     path: "/donate",
     Component: Donacion,
@@ -65,25 +59,29 @@ function App() {
             <Link to={"/login"}>Login</Link>
             <Link to={"/contact"}>Contact</Link>
             <Link to={"/news"}>News</Link>
-            <div className="PageContainer">
-              {routes.map(({ path, Component, title }) => (
-                <Route key={path} exact path={path}>
-                  {({ match }) => (
-                    <CSSTransition
-                      in={match != null}
-                      timeout={500}
-                      classNames="PageContainer__page"
-                      unmountOnExit
-                    >
-                      <div classNames="PageContainer__page">
-                        {title ? <Component title={title} /> : <Component />}
-                      </div>
-                    </CSSTransition>
-                  )}
-                </Route>
-              ))}
-              <Route path={"/backoffice"} component={BackOffice} />
-            </div>
+            <LayoutPublic>
+              <div className="PageContainer">
+                {routes.map(({ path, Component, title }) => (
+                  <Route key={path} exact path={path}>
+                    {({ match }) => (
+                      <CSSTransition
+                        in={match != null}
+                        timeout={500}
+                        classNames="PageContainer__page"
+                        unmountOnExit
+                      >
+                        <div classNames="PageContainer__page">
+                          {title ? <Component title={title} /> : <Component />}
+                        </div>
+                      </CSSTransition>
+                    )}
+                  </Route>
+                ))}
+              </div>
+            </LayoutPublic>
+            <Route path="/backoffice" component={BackOffice} />
+            <Route path="/school-campaign" component={SchoolCampaign} />
+            <Route path="/toys-campaign" component={ToysCampaign} />
           </Suspense>
         </Switch>
       </BrowserRouter>
