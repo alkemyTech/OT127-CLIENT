@@ -3,10 +3,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/main.scss";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Progress from "./Components/Progress/Porgress";
+
 const About = lazy(() => import("./Components/About/About"));
 const Activities = lazy(() => import("./Components/Activities/Activities"));
 const ActivitiesForm = lazy(() =>
   import("./Components/Activities/ActivitiesForm")
+);
+const ActivitiesList = lazy(() =>
+  import("./Components/Activities/ActivitiesList")
 );
 const ActivityDetail = lazy(() =>
   import("./Components/Activities/ActivityDetail")
@@ -62,6 +66,10 @@ function App() {
             <Route
               path="/backoffice/create-activity"
               component={ActivitiesForm}
+            />
+            <Route
+              path="/actividades/activitieList"
+              component={ActivitiesList}
             />
             <Route
               path="/backoffice/activities/:id"
