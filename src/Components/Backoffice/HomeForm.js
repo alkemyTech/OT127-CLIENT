@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
-import '../../sass/pages/_homeform.scss'
 const HomeForm = () => {
     const [welcomeText, setWelcomeText] = useState('')
     const [initialValues, setInitialValues] = useState({
