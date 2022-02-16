@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Progress from "./Components/Progress/Porgress";
 import LayoutPublic from "./Components/Layout/LayoutPublic";
