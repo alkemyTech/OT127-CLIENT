@@ -6,7 +6,7 @@ import {
 } from 'react-social-plugins';
 import Separator from '../Card/Separator';
 import socialMediaImg from "../../images/social-media.jpg"
-import "../../sass/components/_socialmedia.scss"
+
 
 const SocialMedia = () => {
     const tweetId = "1492562845325791241"
