@@ -14,7 +14,7 @@ import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 
-const ActivitiesList  = () => {
+const ActivitiesList = () => {
   const activitiesMock = [
     {
       id: 1,
@@ -77,7 +77,7 @@ const ActivitiesList  = () => {
   // fin de stilos
   return (
     <Container maxWidth="md">
-      <Link to="/backoffice/activities/create">Create Activity</Link>
+      <Link to="/backoffice/activity/create">Create Activity</Link>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 600 }} stickyHeader>
           <TableHead>
@@ -111,4 +111,4 @@ const ActivitiesList  = () => {
   );
 };
 
-export default ActivitiesList ;
+export default ActivitiesList;

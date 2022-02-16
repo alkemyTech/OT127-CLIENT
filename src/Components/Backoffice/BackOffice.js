@@ -6,7 +6,7 @@ import Progress from "../Progress/Porgress";
 const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
 const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
 const ActivitiesForm = lazy(() => import("../Activities/ActivitiesForm"));
-const ActivitiesList = lazy(() => import("../Activities/ActivitiesList"));
+const ActivitiesList = lazy(() => import("./Activities"));
 const CategoriesForm = lazy(() => import("../Categories/CategoriesForm"));
 const CategoriesList = lazy(() => import("../Categories/CategoriesList"));
 const MembersForm = lazy(() => import("../Members/MembersForm"));
