@@ -1,6 +1,6 @@
-@import "../main.scss";
+@use "../base/typography";
 .separator {
-  @include outfit-title();
+  @include outfit-title;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
