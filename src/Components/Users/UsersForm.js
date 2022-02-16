@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
+import { postUser, getUserbyID, putUser } from "../../Services/userService"; 
+
 
 const UserForm = () => {
   const { id } = useParams();
@@ -20,7 +22,7 @@ const UserForm = () => {
 
   const getUser = async () => {
     try {
-      let userData = await axios.get(`${urlUsers}/${id}`).then((response) => {
+      let userData = await getUserbyID(id).then((response) => {
         let resData = response.data.data;
         return {
           name: resData.name,
@@ -50,16 +52,15 @@ const UserForm = () => {
     } catch (error) {
       //TODO
     }
+
   };
 
   const handleSubmit = (values) => {
     id
-      ? axios.put(`${urlUsers}/${id}`, values).catch((error) => {
+      ? putUser(id, values).catch((error) => {
         //TODO
       })
-      : axios.post(urlUsers, values).catch((error) => {
-        //TODO
-      });
+      : postUser(values);
   };
 
   const handleChange = (e, setFieldValue) => {
