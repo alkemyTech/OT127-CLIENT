@@ -1,8 +1,7 @@
 import React, { useState, lazy, Suspense } from "react";
-import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, Switch, Route } from "react-router-dom";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import Progress from "../Progress/Porgress";
-
 
 const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
 const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
@@ -31,14 +30,16 @@ const BackOffice = () => {
   const backofficeRoutes = [
     { name: "Home", router: "/backoffice/home" },
     { name: "Backoffice", router: "/backoffice" },
-    { name: "Users", router: "/backoffice/users" },
-    { name: "Slides", router: "/backoffice/slides" },
+    { name: "Activities", router: "/backoffice/activities" },
     { name: "Members", router: "/backoffice/members" },
     { name: "News", router: "/backoffice/news" },
+    { name: "Slides", router: "/backoffice/slides" },
+    { name: "Users", router: "/backoffice/users" },
     { name: "Organization", router: "/backoffice/organization" },
-    { name: "Create Project", router: "/backoffice/create-project" },
-    { name: "Create Slides", router: "/backoffice/create-slide" },
-    { name: "Create User", router: "/backoffice/create-user" },
+    { name: "Create Activity", router: "/backoffice/activity/create" },
+    { name: "Create Project", router: "/backoffice/projects/create" },
+    { name: "Create Slide", router: "/backoffice/slides/create" },
+    { name: "Create User", router: "/backoffice/users/create" },
   ];
 
   return (
@@ -66,12 +67,12 @@ const BackOffice = () => {
         <Suspense fallback={<Progress height={7} />}>
           <Route path="/backoffice/home" component={HomeForm} />
           <Route
-            path="/backoffice/create-activity"
+            path="/backoffice/activity/create"
             exact
             component={ActivitiesForm}
           />
           <Route
-            path="/backoffice/create-activity/:id"
+            path="/backoffice/activity/edit/:id"
             component={ActivitiesForm}
           />
           <Route path="/backoffice/activities" component={ActivitiesList} />
@@ -84,7 +85,6 @@ const BackOffice = () => {
             path="/backoffice/categories/create"
             component={CategoriesForm}
           />
-          {/* PROBLEMA members no carga los miembros */}
           <Route path="/backoffice/members" exact component={MembersList} />
           <Route
             path="/backoffice/members/create"
@@ -94,7 +94,6 @@ const BackOffice = () => {
           {/* PROBLEMA MembersForm no detecta si le pasamos un id en la url */}
           <Route path="/backoffice/members/edit/:id" component={MembersForm} />
           <Route path="/backoffice/slides" exact component={SlideList} />
-          {/* PROBLEMA Res.data is undefined en create y edit slides */}
           <Route
             path="/backoffice/slides/create"
             exact
