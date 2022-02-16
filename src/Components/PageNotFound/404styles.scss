@@ -1,14 +1,14 @@
 $background:#1a1a1a;
 $button:#0077d8f4;
 $font:'Gill Sans', sans-serif;
-body{
+
+
+.notFound{
     margin: 0;
     padding: 0;
     background-color: $background;
-}
-.notFound{
     position: fixed;
-    top: 4em;
+    height: 100%;
     width: 100%;
     text-align: center;
     &__imgContent{
@@ -17,7 +17,7 @@ body{
         justify-content: center;
         align-items: center;
         &__img{
-            width: 300px;
+            width: 400px;
             display: block;
             animation:  animates 2s linear infinite alternate;
         }
@@ -48,6 +48,7 @@ body{
         text-decoration: none;
     }
 }
+
 @keyframes animates{
     0%{
         transform: translateX(5%);
