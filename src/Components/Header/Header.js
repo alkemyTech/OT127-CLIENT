@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../Redux/actions/authActions";
 
 const Header = () => {
   const isLogged = useSelector((state) => state.authReducer.userIsLogged);
+  const dispatch = useDispatch();
 
   const menuItems = [
     { link: "/school-campaign", name: "Campaña escolar" },
@@ -12,6 +14,7 @@ const Header = () => {
   ];
 
   const logout = () => {
+    dispatch(logoutUser);
     //TODO Esperar a ver que dicen los chicos del LocalStorage, sino solo usar un dispatch y setear a !userIsLogged
   };
   return (
