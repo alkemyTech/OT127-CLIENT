@@ -38,6 +38,7 @@ const SlideList = () => {
         onChange={(e) => {
           handleSearchChange(e);
         }}
+        placeholder="Buscar Slide"
       />
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
