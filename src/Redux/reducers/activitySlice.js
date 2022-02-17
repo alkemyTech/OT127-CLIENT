@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";  
-import { Get } from "../../Services/publicActivityService";
+import { activitiesController } from "../../Services/publicActivityService";
 
 export const getActivities = createAsyncThunk("get/getActivities", async () => {
-  const response = await Get("http://ongapi.alkemy.org/api/activities", null);
+  const response = await activitiesController.getAll();
   return response.data.data;
 });
 
@@ -11,7 +11,7 @@ export const activitiesSlice = createSlice({
   initialState: { 
     activities: {
       status: "idle",
-      data: {}, 
+      data: [], 
       error: {}, 
     },
   },
