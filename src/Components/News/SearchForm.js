@@ -5,7 +5,7 @@ const SearchForm = () => {
 
   return (
     <>
-      <input type="text" onClick={(e) => searchNews(e)} />
+      <input type="text" onChange={(e) => searchNews(e)} />
     </>
   );
 };
