@@ -1,9 +1,10 @@
 import { Get } from "./publicApiService";
 import { sweetAlertError } from "./sweetAlertServices";
+import axios from "axios";
 
 const url = process.env.REACT_APP_ENDPOINTS_NEWS;
 
-const getNews = async (setMethod) => {
+export const getNews = async (setMethod) => {
   try {
     let newsFromAPI = await Get(url, null);
     let data = newsFromAPI.data.data;
@@ -17,4 +18,10 @@ const getNews = async (setMethod) => {
   }
 };
 
-export default getNews;
+export const getNewsSearch = (value, category) => {
+  axios
+    .get(
+      `http://ongapi.alkemy.org/api/news?search=${value}&category=${category}`
+    )
+    .then((res) => console.log(res));
+};
