@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Get } from "../../Services/publicApiService";
+import logo from "../../images/redes-sociales/somos-mas.png"
 
 const API_URL = process.env.REACT_APP_API_URL;
 const ORGANIZATION_ENDPOINT = process.env.REACT_APP_API_ORGANIZATION;
@@ -14,34 +15,34 @@ const PublicFooter = () => {
     );
   }, []);
 
-  const { logo, name, facebook_url, linkedin_url, instagram_url, twitter_url } =
+  const { name, facebook_url, linkedin_url, instagram_url, twitter_url } =
     organization;
 
   return (
     <>
       <div className="publicFooter">
-        <div>
+        <div className="publicFooter__logo-container">
           <img src={logo} alt="" className="publicFooter__logo" />
-          <h2>{name}</h2>
+          <p className="publicFooter__logo-text">{name}</p>
         </div>
-        <div>
+        <div className="publicFooter__links-container">
           {/*TODO: Controlar rutas*/}
-          <Link to={"/news"}>Novedades</Link>
-          <Link to={"/activities"}>Actividades</Link>
-          <Link to={"/contact"}>Contacto</Link>
-          <Link to={"/about"}>Nosotros</Link>
+          <Link className="publicFooter__link" to={"/news"}>Novedades</Link>
+          <Link className="publicFooter__link" to={"/activities"}>Actividades</Link>
+          <Link className="publicFooter__link" to={"/contact"}>Contacto</Link>
+          <Link className="publicFooter__link" to={"/about"}>Nosotros</Link>
         </div>
-        <div>
-          <a href={facebook_url} target="_blank" rel="noopener noreferrer">
+        <div className="publicFooter__links-container">
+          <a className="publicFooter__link" href={facebook_url} target="_blank" rel="noopener noreferrer">
             Facebook
           </a>
-          <a href={linkedin_url} target="_blank" rel="noopener noreferrer">
+          <a className="publicFooter__link" href={linkedin_url} target="_blank" rel="noopener noreferrer">
             Linkedin
           </a>
-          <a href={instagram_url} target="_blank" rel="noopener noreferrer">
+          <a className="publicFooter__link" href={instagram_url} target="_blank" rel="noopener noreferrer">
             Instagram
           </a>
-          <a href={twitter_url} target="_blank" rel="noopener noreferrer">
+          <a className="publicFooter__link" href={twitter_url} target="_blank" rel="noopener noreferrer">
             Twitter
           </a>
         </div>

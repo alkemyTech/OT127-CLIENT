@@ -10,12 +10,11 @@ import "../../sass/components/_form.scss"
 import "./styles.scss"
 
 const TestimonialForm = () => {
-    const [ name, setName ] = useState("")
-    const [ description, setDescription ] = useState("")
-    const [ image, setImage ] = useState("")
-    const [ create, setCreate ] = useState(true)
-    const url = "http://ongapi.alkemy.org/api/testimonials"
-
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [image, setImage] = useState("")
+    const [create, setCreate] = useState(true)
+    const url = process.env.REACT_APP_ENDPOINT_TESTIMONIALS
     const { id } = useParams()
 
     const Post = async (url, body) => {
@@ -115,12 +114,12 @@ const TestimonialForm = () => {
 
 
     const handleChange = (e, propsFormik) => {
-        if (e.currentTarget.files && e.currentTarget.files[ 0 ]) {
+        if (e.currentTarget.files && e.currentTarget.files[0]) {
             const reader = new FileReader()
             reader.onload = function (e) {
                 propsFormik.setFieldValue("image", e.target.result)
             }
-            reader.readAsDataURL(e.currentTarget.files[ 0 ])
+            reader.readAsDataURL(e.currentTarget.files[0])
         }
     }
 
