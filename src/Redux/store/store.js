@@ -9,12 +9,12 @@ import usReducer from "../reducers/usSlice";
 
 export default configureStore({
 	reducer: {
-		authReducer: authReducer,
-		newsReducer: newsReducer,
-		membersReducer: membersReducer,
+		authReducer,
+		newsReducer,
+		membersReducer,
 		slidesReducer,
-		usersReducer: usersReducer,
-		usReducer: usReducer,
+		usersReducer,
+		usReducer,
 		categoriesReducer
 	},
 });

@@ -1,12 +1,13 @@
-@import "../main.scss";
-
 .slider {
   max-width: 992px;
   overflow: hidden;
   margin: 50px auto;
   height: auto;
   position: relative;
-  width: 90%;
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 90%;
+  }
 
   &__item {
     min-width: 100%;
@@ -29,6 +30,11 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    display: none;
+
+    @media (min-width: 768px) {
+      display: inherit;
+    }
 
     &--title {
       font-weight: bold;

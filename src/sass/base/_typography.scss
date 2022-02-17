@@ -21,6 +21,9 @@ $size-regular: 1rem;
   font-family: $outfit;
   font-weight: bold;
 }
+@mixin outfit-regular {
+  font-family: $outfit;
+}
 
 @mixin roboto-title {
   font-family: $roboto;
@@ -34,4 +37,7 @@ $size-regular: 1rem;
 @mixin roboto-regular-bold {
   font-family: $roboto;
   font-weight: bold;
+}
+@mixin roboto-regular {
+  font-family: $roboto;
 }
