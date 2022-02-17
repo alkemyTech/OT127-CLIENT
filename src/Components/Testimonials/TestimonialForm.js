@@ -15,8 +15,7 @@ const TestimonialForm = () => {
     const [description, setDescription] = useState("")
     const [image, setImage] = useState("")
     const [create, setCreate] = useState(true)
-    const url = "http://ongapi.alkemy.org/api/testimonials"
-
+    const url = process.env.REACT_APP_ENDPOINT_TESTIMONIALS
     const { id } = useParams()
 
     const Post = async (url, body) => {
