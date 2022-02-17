@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Get } from "../../Services/publicApiService";
+import logo from "../../images/LOGO-SOMOS_MAS.png"
 
 const API_URL = process.env.REACT_APP_API_URL;
 const ORGANIZATION_ENDPOINT = process.env.REACT_APP_API_ORGANIZATION;
@@ -14,7 +15,7 @@ const PublicFooter = () => {
     );
   }, []);
 
-  const { logo, name, facebook_url, linkedin_url, instagram_url, twitter_url } =
+  const { name, facebook_url, linkedin_url, instagram_url, twitter_url } =
     organization;
 
   return (
