@@ -7,7 +7,7 @@ import Progress from "../Progress/Porgress";
 const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
 const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
 const ActivitiesForm = lazy(() => import("../Activities/ActivitiesForm"));
-const ActivitiesList = lazy(() => import("../Activities/ActivitiesList"));
+const Activities = lazy(() => import("../Activities/Activities"));
 const CategoriesForm = lazy(() => import("../Categories/CategoriesForm"));
 const CategoriesList = lazy(() => import("../Categories/CategoriesList"));
 const MembersForm = lazy(() => import("../Members/MembersForm"));
@@ -74,7 +74,7 @@ const BackOffice = () => {
             path="/backoffice/create-activity/:id"
             component={ActivitiesForm}
           />
-          <Route path="/backoffice/activities" component={ActivitiesList} />
+          <Route path="/backoffice/activities" component={Activities} />
           <Route
             path="/backoffice/categories"
             exact

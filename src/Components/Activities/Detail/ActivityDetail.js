@@ -1,17 +1,35 @@
-import Title from "../../Titulosynovedades/Title";
-import ActivitiesForm from "../ActivitiesForm";
-import ActivitiesList from "../ActivitiesList";
+import {useState, useEffect} from "react";
+import {useParams} from "react-router-dom";
+import Axios from "axios";
 
-const Detail = () => {
-	const titleFromAPI = "Desde la API Activities";
+const ActivityDetail = () => {
+
+	const [activity, setActivity] = useState({});
+
+	const {id} = useParams();
+
+	const getActivity = async () => {
+		try {
+			const url = `${process.env.REACT_APP_ACTIVITIES_ENDPOINT}/${id}`;
+			const {data} = await Axios.get(url);
+			const activityData = data.data;
+			setActivity(activityData);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		getActivity();
+	}, []);
 
 	return (
-		<div>
-			<Title title={titleFromAPI}></Title>
-			<ActivitiesList />
-			<ActivitiesForm />
-		</div>
+		<>
+			<div>{activity.name}</div>
+			<div>{activity.description}</div>
+      <img src={activity.image} alt="actividad"></img>
+		</>
 	);
 };
 
-export default Detail;
+export default ActivityDetail;

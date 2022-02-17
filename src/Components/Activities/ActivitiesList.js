@@ -4,6 +4,8 @@ import axios from "axios";
 import Spinner from "../Spinner/Spinner";
 import {sweetAlertError} from "../../Services/sweetAlertServices"
 
+// ! Va en el Front si queda tiempo generar el detalle de activida(donde se muestra una sola actividad)
+
 const ActivitiesList = () => {
 	const [activities, setActivities] = useState([]);
 	const [loading, setLoading] = useState(true);

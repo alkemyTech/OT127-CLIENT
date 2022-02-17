@@ -6,9 +6,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Progress from "./Components/Progress/Porgress";
 import LayoutPublic from "./Components/Layout/LayoutPublic";
 const About = lazy(() => import("./Components/About/About"));
-const Activities = lazy(() => import("./Components/Activities/Activities"));
-const ActivityDetail = lazy(() =>
-    import("./Components/Activities/ActivityDetail")
+const ActivityDetail = lazy(() => import("./Components/Activities/Detail/ActivityDetail"));
+const ActivitiesList = lazy(() =>
+    import("./Components/Activities/ActivitiesList")
 );
 const BackOffice = lazy(() => import("./Components/Backoffice/BackOffice"));
 const Contact = lazy(() => import("./Components/Contact/Contact"));
@@ -37,7 +37,7 @@ function App() {
                                 <Switch>
                                     <Route path="/" exact component={Home} />
                                     {/* PROBLEMA El componente activities no muestra ningun listado */}
-                                    <Route path="/activities" exact component={Activities} />
+                                    <Route path="/activities" exact component={ActivitiesList} />
                                     <Route path="/activities/:id" component={ActivityDetail} />
                                     <Route path="/login" component={LoginForm} />
                                     {/* PROBLEMA Problemas para obtener datos de la API, me tira error */}
