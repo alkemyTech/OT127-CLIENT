@@ -24,7 +24,7 @@ const SlideList = () => {
   const handleSearchChange = (e) => {
     let { value } = e.target;
     if (value.length > 2) {
-      dispatch(getSlidesSearch(e.target.value));
+      dispatch(getSlidesSearch(value));
     } else {
       dispatch(getSlides());
     }
