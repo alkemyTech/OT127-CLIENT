@@ -1,5 +1,7 @@
 import React from "react";
 import Countdown from "react-countdown";
+//import '../../sass/components/_landing.scss';
+import '../../sass/components/_landing'
 
 const Landing = () => {
   const renderer = ({ days, hours, minutes, seconds }) => {
@@ -10,10 +12,23 @@ const Landing = () => {
     );
   };
   return (
-    <div className="content__container">
-      <h2 className="content__title">
-        25/02/2022 15hs calle 123, barrio La Cava, Buenos Aires
-      </h2>
+    
+    <div className="landing__container">
+      <label>descripcion:</label>
+      <input type='text' name='descripcion' className="landing__input" />
+
+      <label>Fecha:</label>
+      <input type='date' name='fecha' className="landing__input" />
+
+      <label>Hora:</label>
+      <input type='time' name='hora' className="landing__input" />
+
+      <label>Lugar:</label>
+      <input type='text' name='lugar' className="landing__input" />
+
+     
+
+      
       <img
         src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-1.jpg"}
         alt=""
@@ -27,11 +42,7 @@ const Landing = () => {
         alt=""
         className="content__img"
       />
-      <p className="content__description">
-        Dona tus juguetes nuevo o usados en buenas condiciones. Los juguetes son
-        indispensables en el aprendizaje de los niños, fomentan su desarrollo
-        cognitivo, su imaginación, su diversión y, en definitiva, su felicidad.
-      </p>
+      
       <img
         src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-4.jpg"}
         alt=""

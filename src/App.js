@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Progress from "./Components/Progress/Porgress";
 import LayoutPublic from "./Components/Layout/LayoutPublic";
-//import Landing from "./Campaigns/School/Landing";
 const About = lazy(() => import("./Components/About/About"));
 const Activities = lazy(() => import("./Components/Activities/Activities"));
 const ActivityDetail = lazy(() =>
@@ -51,7 +50,7 @@ function App() {
                                         exact
                                         component={() => (
                                             <NewsDetails title="Titulo recibido por props" />
-                                        )}
+                                            )}
                                     />
                                     <Route
                                         path="/donate"
@@ -62,11 +61,12 @@ function App() {
                                         path="/about"
                                         component={() => <About text="Sobre Nosotros" />}
                                     />
-                                    <Route path='/Campaigns/School/Landing' component={Landing} />
                                 </Switch>
                             </LayoutPublic>
                         </Route>
                         {/* BACKOFFICE */}
+                        <Route path='/Campaigns/School/Landing' component={Landing} /> //cambiar a Public despues
+
                         <Route path="/backoffice" component={BackOffice} />
                         <Route path="/school-campaign" component={SchoolCampaign} />
                         <Route path="/toys-campaign" component={ToysCampaign} />
