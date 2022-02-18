@@ -37,7 +37,7 @@ export const postUser = (values) => {
   }
 };
 
-export const loginUser = (values) => {
+export const APIloginUser = (values) => {
   try {
     Axios.post(urlLogin, values);
   } catch (error) {
