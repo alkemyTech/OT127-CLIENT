@@ -8,8 +8,8 @@ const Header = () => {
   const menuItems = [
     { link: "/school-campaign", name: "Campaña escolar" },
     { link: "/toys-campaign", name: "Campaña de juguetes" },
-    { link: "/nosotros", name: "Nosotros" },
-    { link: "/contacto", name: "Contacto" },
+    { link: "/about", name: "Nosotros" },
+    { link: "/contact", name: "Contacto" },
   ];
 
   return (
@@ -19,21 +19,24 @@ const Header = () => {
           <img src={logo} alt="" className="header__logo" />
         </NavLink>
         <nav className="header__nav">
-          {
-            !isLogged
-              ? menuItems.map((item) => (
-                  <NavLink
-                    className="header__link"
-                    activeClassName="header__nav-links-active"
-                    to={item.link}
-                  >
-                    {item.name}
-                  </NavLink>
-                ))
-              : null //Login/Register ?
-          }
+          {menuItems.map((item) => (
+            <NavLink
+              className="header__link"
+              activeClassName="header__nav-links-active"
+              to={item.link}
+            >
+              {item.name}
+            </NavLink>
+          ))}
         </nav>
       </header>
+      <div className="header__logbar">
+        <NavLink to={isLogged ? "/" : "/login"}>
+          <button className="header__logbutton">
+            {isLogged ? "Cerrar sesión" : "Iniciar sesión"}
+          </button>
+        </NavLink>
+      </div>
     </>
   );
 };

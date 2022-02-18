@@ -6,20 +6,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
-  background-color: variables.$light-yellow;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  background-color: variables.$med-yellow;
   &__logo {
-    width: 70px;
-    height: 70px;
+    width: 150px;
   }
   &__nav {
     display: flex;
     gap: 30px;
   }
   &__link {
-    @include outfit-subtitle;
+    @include outfit-regular-bold;
     text-decoration: none;
     color: variables.$dark-blue;
+  }
+  &__logbar {
+    width: 100%;
+    background-color: variables.$light-yellow;
+    display: flex;
+    justify-content: end;
+    padding: 5px;
+  }
+  &__logbutton {
+    @include border-rounded;
+    @include outfit-regular;
+    font-size: 14px;
+    border: none;
+    background-color: variables.$dark-blue;
+    color: variables.$font-white;
+    width: 120px;
+    height: 30px;
+    transition: variables.$transition-time;
+    &:hover {
+      cursor: pointer;
+      background-color: variables.$med-blue;
+    }
   }
 }
