@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import PageNotFound from './Components/PageNotFound/NotFound';
 import Progress from "./Components/Progress/Porgress";
 import LayoutPublic from "./Components/Layout/LayoutPublic";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -47,6 +48,7 @@ const routes = [
   },
   { path: "/about", Component: About, title: "Sobre Nosotros" },
 ];
+
 
 function App() {
   return (
@@ -98,6 +100,7 @@ function App() {
             <Route path="/school-campaign" exact component={SchoolCampaign} />
             <Route path="/toys-campaign" exact component={ToysCampaign} />
             <Route path="/backoffice" component={BackOffice} />
+            <Route path="*" component={PageNotFound} />
           </Suspense>
         </Switch>
       </BrowserRouter>
