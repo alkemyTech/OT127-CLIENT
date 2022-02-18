@@ -1,8 +1,6 @@
 import React from "react";
 
-const SearchForm = () => {
-  const searchNews = () => {};
-
+const SearchForm = ({ searchNews }) => {
   return (
     <>
       <input type="text" onChange={(e) => searchNews(e)} />
