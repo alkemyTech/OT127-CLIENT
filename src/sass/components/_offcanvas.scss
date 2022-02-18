@@ -1,4 +1,6 @@
 .offcanvas {
+  background-color: $green-blue;
+  color: $font-white;
   &__controller {
     position: fixed;
     height: 100%;
@@ -11,5 +13,23 @@
   &__body {
     display: flex;
     flex-direction: column;
+  }
+  &__link {
+    @include roboto-regular-bold();
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+    gap: 5px;
+    color: $font-white;
+    text-decoration: none;
+    transition: $cubic-bezier;
+    &:hover,
+    &:active,
+    &:focus {
+      border-bottom: 2px solid $font-white;
+      background-color: #04414d;
+      color: $font-white;
+      transform: scale(1.1);
+    }
   }
 }
