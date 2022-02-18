@@ -48,6 +48,8 @@ const Header = () => {
             ) : null}
           </div>
           <button onClick={logout}>Cerrar sesión</button>
+          {/* Atento cuando venga el pull de los estilos que hice, hay que borrar todo lo local, pero pasar el 
+          metodo logout como prop del botton que viene */}
         </nav>
       </header>
     </>
