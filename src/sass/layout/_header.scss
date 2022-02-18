@@ -1,7 +1,6 @@
 .header {
   height: 80px;
   display: flex;
-  position: fixed;
   top: 0;
   width: 100%;
   align-items: center;
@@ -16,7 +15,6 @@
       list-style: none;
     }
     &-links {
-      color: #fff;
       text-decoration: none;
       margin-left: 20px;
       margin-right: 10px;
