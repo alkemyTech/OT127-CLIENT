@@ -17,9 +17,9 @@ const Sidebar = () => {
     { name: "Members", router: "/backoffice/members", icon: "face" },
     { name: "News", router: "/backoffice/news", icon: "feed" },
     { name: "Organization", router: "/backoffice/organization", icon: "info" },
-    { name: "Create Project", router: "/backoffice/create-project", icon: "post_add" },
-    { name: "Create Slides", router: "/backoffice/create-slide", icon: "add_to_photos" },
-    { name: "Create User", router: "/backoffice/create-user", icon: "person_add" },
+    { name: "Create Project", router: "/backoffice/projects/create", icon: "post_add" },
+    { name: "Create Slides", router: "/backoffice/slides/create", icon: "add_to_photos" },
+    { name: "Create User", router: "/backoffice/users/create", icon: "person_add" },
   ];
 
 
