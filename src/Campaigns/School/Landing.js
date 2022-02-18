@@ -1,7 +1,7 @@
 import React from "react";
 import Countdown from "react-countdown";
-//import '../../sass/components/_landing.scss';
-import '../../sass/components/_landing'
+import '../../sass/components/_landing.scss';
+//import '../../sass/components/_landing'
 
 const Landing = () => {
   const renderer = ({ days, hours, minutes, seconds }) => {

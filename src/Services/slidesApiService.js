@@ -20,6 +20,15 @@ export const getSlidesData = async () => {
   }
 };
 
+export const getSearch = async (search) => {
+  try {
+    const response = await axios.get(`${url}?search=${search}`);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getSlidesDataById = async (id) => {
   try {
     const response = await axios.get(`${url}/${id}`);
