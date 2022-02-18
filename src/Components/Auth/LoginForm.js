@@ -1,15 +1,29 @@
 import React, { useState } from "react";
+import Spinner from "../Spinner/Spinner";
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { loginUser } from "../../Redux/actions/authActions";
+import { APIloginUser } from "../../Services/userService";
 
 const LoginForm = () => {
-  const [userData, setUserData] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
+  const [authError, setauthError] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleSubmit = (values) => {
-    setUserData([
-      ...userData,
-      { email: values.email, password: values.password },
-    ]);
+  const handleSubmit = async (values) => {
+    setisLoading(true);
+    try {
+      let response = await APIloginUser(values); //!NO ESTA FUNCIONANDO
+      console.log(response);
+      dispatch(loginUser(values));
+    } catch (error) {
+      setauthError(true);
+      setTimeout(() => {
+        setauthError(false);
+      }, 4000);
+    }
+    setisLoading(false);
   };
 
   return (
@@ -30,7 +44,6 @@ const LoginForm = () => {
         })}
         onSubmit={(values) => {
           handleSubmit(values);
-          localStorage.setItem("TOKEN", values.email);
         }}
       >
         <Form className="form">
@@ -51,10 +64,10 @@ const LoginForm = () => {
             name="password"
             render={(msg) => <div className="form__error">{msg}</div>}
           />
-
           <button type="submit" className="form__button">
-            Entrar
+            {!isLoading ? "Entrar" : <Spinner size={30}></Spinner>}
           </button>
+          {authError ? <div>ERROR!!!</div> : null}
         </Form>
       </Formik>
     </div>

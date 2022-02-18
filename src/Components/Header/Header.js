@@ -15,7 +15,7 @@ const Header = () => {
 
   const logout = () => {
     dispatch(logoutUser);
-    //TODO Esperar a ver que dicen los chicos del LocalStorage, sino solo usar un dispatch y setear a !userIsLogged
+    localStorage.setItem("TOKEN", "");
   };
   return (
     <>
@@ -45,10 +45,9 @@ const Header = () => {
                   </li>
                 ))}
               </ul>
-            ) : (
-              <button onClick={logout}>Cerrar sesión</button>
-            )}
+            ) : null}
           </div>
+          <button onClick={logout}>Cerrar sesión</button>
         </nav>
       </header>
     </>
