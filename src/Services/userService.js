@@ -2,6 +2,7 @@ import Axios from "axios";
 
 const endPointUser = "http://ongapi.alkemy.org/api/users";
 const urlLogin = "http://ongapi.alkemy.org/api/login";
+const urlRegister = "http://ongapi.alkemy.org/api/register";
 
 export const getUserbyID = async (id) => {
   try {
@@ -40,6 +41,14 @@ export const postUser = (values) => {
 export const APIloginUser = (values) => {
   try {
     Axios.post(urlLogin, values);
+  } catch (error) {
+    return error;
+  }
+};
+
+export const APIRegisterUser = (values) => {
+  try {
+    Axios.post(urlRegister, values);
   } catch (error) {
     return error;
   }
