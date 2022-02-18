@@ -65,13 +65,13 @@ const News = () => {
           <h1>Novedades</h1>
           <section>
             <h1>Último evento</h1>
-            {/* <VideoPlayer /> */}
+            <VideoPlayer />
           </section>
           <SearchForm searchNews={searchNews}></SearchForm>
           <ul className="list-container">
             {filteredNews.length !== 0 ? filteredNewsList() : newsList()}
           </ul>
-          {/* {showComments && <Comments />} */}
+          {showComments && <Comments />}
         </div>
       )}
     </>
