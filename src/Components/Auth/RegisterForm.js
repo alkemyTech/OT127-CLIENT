@@ -12,6 +12,7 @@ const RegisterForm = () => {
           email: "",
           password: "",
           confirmPassword: "",
+          acceptTerms: false,
         }}
         validationSchema={Yup.object({
           name: Yup.string().required("Ingresá un nombre"),
@@ -32,8 +33,13 @@ const RegisterForm = () => {
               "Las contraseñas deben ser iguales."
             )
             .required("Confirmá tu contraseña"),
+          acceptTerms: Yup.bool().oneOf(
+            [true],
+            "Aceptar los términos y condiciones es obligatorio"
+          ),
         })}
-        onSubmit={(values) => {      // eslint-disable-next-line
+        onSubmit={(values) => {
+          // eslint-disable-next-line
           const user = {
             // Este es el objeto que va a ser enviado
             name: values.name,
@@ -97,6 +103,18 @@ const RegisterForm = () => {
             />
             <ErrorMessage
               name="confirmPassword"
+              render={(msg) => <div className="form__error">{msg}</div>}
+            />
+          </div>
+          <div className="form__subcontainer">
+            <div>
+              <Field type="checkbox" name="acceptTerms" id="acceptTerms" />
+              <label htmlFor="acceptTerms" className="form__label">
+                Accept Terms & Conditions
+              </label>
+            </div>
+            <ErrorMessage
+              name="acceptTerms"
               render={(msg) => <div className="form__error">{msg}</div>}
             />
           </div>
