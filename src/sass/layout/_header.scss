@@ -1,31 +1,25 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+@use "../base/typography";
+
 .header {
-  height: 80px;
   display: flex;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.11);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: variables.$light-yellow;
+  &__logo {
+    width: 70px;
+    height: 70px;
+  }
   &__nav {
     display: flex;
-    justify-content: space-between;
-    flex: 0 0 100%;
-    &-list {
-      display: flex;
-      list-style: none;
-    }
-    &-links {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 20px;
-      margin-right: 10px;
-    }
-    &-item :hover {
-      color: #1e3a8a;
-    }
-    &-links-active {
-      color: #1e3a8a;
-    }
+    gap: 30px;
+  }
+  &__link {
+    @include outfit-subtitle;
+    text-decoration: none;
+    color: variables.$dark-blue;
   }
 }
