@@ -7,9 +7,9 @@ import LayoutPublic from "./Components/Layout/LayoutPublic";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/main.scss";
 const About = lazy(() => import("./Components/About/About"));
-const Activities = lazy(() => import("./Components/Activities/Activities"));
+const ActivitiesList = lazy(() => import("./Components/Activities/ActivitiesList"));
 const ActivityDetail = lazy(() =>
-  import("./Components/Activities/ActivityDetail")
+  import("./Components/Activities/Detail/ActivityDetail")
 );
 const BackOffice = lazy(() => import("./Components/Backoffice/BackOffice"));
 const Contact = lazy(() => import("./Components/Contact/Contact"));
@@ -29,7 +29,7 @@ const ToysCampaign = lazy(() => import("./Campaigns/Toys/ToysCampaign"));
 const routes = [
   { path: "/", Component: Home },
   /* PROBLEMA El componente activities no muestra ningun listado */
-  { path: "/activities", Component: Activities },
+  { path: "/activities", Component: ActivitiesList },
   { path: "/activities/:id", Component: ActivityDetail },
   { path: "/login", Component: LoginForm },
   { path: "/contact", Component: Contact },
