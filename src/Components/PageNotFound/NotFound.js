@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import '../PageNotFound/404styles.scss';
 import img from './404.png'
 
@@ -13,11 +14,11 @@ const PageNotFound = () => {
                         404
                     </p>
                 </div>
-                <div className="notFound__description">
+                <div>
                     <p className="notFound__error">
                         UPSSSS!!!! Pagina no encontrada.
                     </p>
-                    <a href="#" className="notFound__button">SACAME DE AQUI!.</a>
+                    <Link to='/' className="notFound__button">SACAME DE AQUI!.</Link>
                 </div>
             </div>
         </>
