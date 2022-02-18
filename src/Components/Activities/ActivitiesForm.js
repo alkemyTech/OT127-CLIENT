@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useParams } from "react-router-dom";
-import "../../sass/components/_form.scss";
 import { activitiesController } from "../../Services/publicActivityService";
 
 const toDataURL = (blob) =>
@@ -58,32 +57,32 @@ const ActivitiesForm = () => {
 
   return (
     <div className="form__container">
-    <form className="form" onSubmit={handleSubmit}>
-      <input
-        className="form__input"
-        type="text"
-        name="name"
-        value={name}
-        onChange={handleChangeName}
-        placeholder="Activity Title"
-      />
-      <CKEditor
-        editor={ClassicEditor}
-        data={description}
-        onChange={(event, editor) => handleChangeDescription(event, editor)}
-      />
-      <input
-        className="form__input"
-        type="file"
-        name="file"
-        accept=".png, .jpg"
-        onChange={handleChangeImage}
-      />
-      <img src={image} alt="" />
-      <button className="form__button" type="submit">
-        Send
-      </button>
-    </form>
+      <form className="form" onSubmit={handleSubmit}>
+        <input
+          className="form__input"
+          type="text"
+          name="name"
+          value={name}
+          onChange={handleChangeName}
+          placeholder="Activity Title"
+        />
+        <CKEditor
+          editor={ClassicEditor}
+          data={description}
+          onChange={(event, editor) => handleChangeDescription(event, editor)}
+        />
+        <input
+          className="form__input"
+          type="file"
+          name="file"
+          accept=".png, .jpg"
+          onChange={handleChangeImage}
+        />
+        <img src={image} alt="" />
+        <button className="form__button" type="submit">
+          Send
+        </button>
+      </form>
     </div>
   );
 };
