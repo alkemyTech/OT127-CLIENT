@@ -1,27 +1,29 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { loginUser } from "../../Redux/actions/authActions";
+import { loginUser, setToken } from "../../Redux/actions/authActions";
 import { APIloginUser } from "../../Services/userService";
+import { sweetAlertError } from "../../Services/sweetAlertServices";
 
 const LoginForm = () => {
   const [isLoading, setisLoading] = useState(false);
-  const [authError, setauthError] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = async (values) => {
     setisLoading(true);
     try {
-      let response = await APIloginUser(values); //!NO ESTA FUNCIONANDO
-      console.log(response);
-      dispatch(loginUser(values));
+      let response = await APIloginUser(values);
+      let { token, user } = response.data.data;
+      dispatch(loginUser(user));
+      dispatch(setToken(token));
+      localStorage.setItem("TOKEN", token);
+      history.push("/");
     } catch (error) {
-      setauthError(true);
-      setTimeout(() => {
-        setauthError(false);
-      }, 4000);
+      sweetAlertError("Contraseña o usuario incorrectos");
     }
     setisLoading(false);
   };
@@ -67,7 +69,6 @@ const LoginForm = () => {
           <button type="submit" className="form__button">
             {!isLoading ? "Entrar" : <Spinner size={30}></Spinner>}
           </button>
-          {authError ? <div>ERROR!!!</div> : null}
         </Form>
       </Formik>
     </div>
