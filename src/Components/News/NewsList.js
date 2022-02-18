@@ -9,7 +9,9 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { getNews } from "../../Redux/reducers/newsSlice";
+import { getFilteredNews } from "../../Services/newsService";
 import { useSelector, useDispatch } from "react-redux";
+import SearchForm from "./SearchForm";
 
 const NewsList = () => {
   const dispatch = useDispatch();
@@ -30,66 +32,89 @@ const NewsList = () => {
   };
 
   const newsMap = () => {
-    return news.map((element) => (
-      <TableRow
-        key={element.id}
-        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-      >
-        <TableCell component="th" scope="row">
-          {element.name}
-        </TableCell>
-        <TableCell align="right">
-          <img src={element.image} alt="News_image" width="150em" />
-        </TableCell>
-        <TableCell align="right">{element.created_at}</TableCell>
-        <TableCell align="right">
-          <Button
-            variant="outlined"
-            style={{ marginRight: "1em" }}
-            onClick={handleClickEdit}
+    return news.length
+      ? news.map((element) => (
+          <TableRow
+            key={element.id}
+            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
-            Edit
-          </Button>
-          <Button variant="outlined" color="error" onClick={handleClickDelete}>
-            Delete
-          </Button>
-        </TableCell>
-      </TableRow>
-    ));
+            <TableCell component="th" scope="row">
+              {element.name}
+            </TableCell>
+            <TableCell align="right">
+              <img src={element.image} alt="News_image" width="150em" />
+            </TableCell>
+            <TableCell align="right">{element.created_at}</TableCell>
+            <TableCell align="right">
+              <Button
+                variant="outlined"
+                style={{ marginRight: "1em" }}
+                onClick={handleClickEdit}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleClickDelete}
+              >
+                Delete
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))
+      : null;
   };
 
   const filteredNewsMap = () => {
-    return filteredNews.map((element) => (
-      <TableRow
-        key={element.id}
-        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-      >
-        <TableCell component="th" scope="row">
-          {element.name}
-        </TableCell>
-        <TableCell align="right">
-          <img src={element.image} alt="News_image" width="150em" />
-        </TableCell>
-        <TableCell align="right">{element.created_at}</TableCell>
-        <TableCell align="right">
-          <Button
-            variant="outlined"
-            style={{ marginRight: "1em" }}
-            onClick={handleClickEdit}
+    return filteredNews.length
+      ? filteredNews.map((element) => (
+          <TableRow
+            key={element.id}
+            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
-            Edit
-          </Button>
-          <Button variant="outlined" color="error" onClick={handleClickDelete}>
-            Delete
-          </Button>
-        </TableCell>
-      </TableRow>
-    ));
+            <TableCell component="th" scope="row">
+              {element.name}
+            </TableCell>
+            <TableCell align="right">
+              <img src={element.image} alt="News_image" width="150em" />
+            </TableCell>
+            <TableCell align="right">{element.created_at}</TableCell>
+            <TableCell align="right">
+              <Button
+                variant="outlined"
+                style={{ marginRight: "1em" }}
+                onClick={handleClickEdit}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleClickDelete}
+              >
+                Delete
+              </Button>
+            </TableCell>
+          </TableRow>
+        ))
+      : null;
+  };
+
+  const searchNews = async (event) => {
+    //Ésta función hace la búsqueda de novedades y setea un estado con las noticias filtradas
+    if (event.target.value.length >= 3) {
+      let data = await getFilteredNews(event.target.value);
+      setFilteredNews(data);
+    } else {
+      setFilteredNews(news);
+    }
   };
 
   return (
     <div>
       <Link to="/backoffice/news/create">Create news</Link>
+      <SearchForm searchNews={searchNews}></SearchForm>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
