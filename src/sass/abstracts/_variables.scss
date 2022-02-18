@@ -24,7 +24,7 @@ $skeleton-input: #ccc;
 
 //TRANSICIONES
 $transition-time: 200ms;
-
+$cubic-bezier: transform 0.6s cubic-bezier(0.5, 1, 0.89, 1);
 //BREAKPOINTS
 $bp-tablet: 480px;
 $bp-desktop: 768px;
