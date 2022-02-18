@@ -38,9 +38,10 @@ export const postUser = (values) => {
   }
 };
 
-export const APIloginUser = (values) => {
+export const APIloginUser = async (values) => {
   try {
-    Axios.post(urlLogin, values);
+    let response = await Axios.post(urlLogin, values);
+    return response;
   } catch (error) {
     return error;
   }
