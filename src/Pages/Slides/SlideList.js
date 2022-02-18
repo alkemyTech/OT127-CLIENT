@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getSlides } from "../../Redux/reducers/slidesSlice";
+import { getSlides, getSlidesSearch } from "../../Redux/reducers/slidesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
@@ -9,7 +9,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
 
 const SlideList = () => {
   const dispatch = useDispatch();
@@ -22,9 +21,25 @@ const SlideList = () => {
 
   const rows = slides;
 
+  const handleSearchChange = (e) => {
+    let { value } = e.target;
+    if (value.length > 2) {
+      dispatch(getSlidesSearch(value));
+    } else {
+      dispatch(getSlides());
+    }
+  };
   return (
     <div className="list-container">
       <Link to="/backoffice/slides/create">Crear Slide</Link>
+      <input
+        type="search"
+        name="search"
+        onChange={(e) => {
+          handleSearchChange(e);
+        }}
+        placeholder="Buscar Slide"
+      />
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -40,12 +55,12 @@ const SlideList = () => {
               <TableRow key={id}>
                 <TableCell align="center">{name}</TableCell>
                 <TableCell align="center">
-                  <img src={image} alt="" className="imageTable" />
+                  <img src={image} alt="" className="imageTable" width="100" />
                 </TableCell>
                 <TableCell align="center">{order}</TableCell>
                 <TableCell>
                   <button>
-                    <Link to={`/backoffice/slides/edicion/${id}`}>Editar</Link>
+                    <Link to={`/backoffice/slides/edit/${id}`}>Editar</Link>
                   </button>
                 </TableCell>
                 <TableCell align="center">
