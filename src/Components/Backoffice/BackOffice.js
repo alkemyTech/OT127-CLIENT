@@ -3,7 +3,6 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link, Switch, Route } from "react-router-dom";
 import Progress from "../Progress/Porgress";
 
-
 const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
 const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
 const ActivitiesForm = lazy(() => import("../Activities/ActivitiesForm"));
