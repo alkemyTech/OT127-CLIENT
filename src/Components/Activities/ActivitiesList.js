@@ -1,12 +1,9 @@
 
-import React, {useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import '../../sass/components/_card.scss';
 import { getActivities } from '../../Redux/reducers/activitySlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
-import Axios from "axios";
-
-// ! Sacar Mock y hacer logica de Get y agregar logica de Edit, Delete y renderizar en Backoffice
 
 import {
   Container,
@@ -24,25 +21,9 @@ import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 const ActivitiesList  = () => {
 
     const dispatch = useDispatch();
-  //const [activities, setActivities] = useState([])
   const activities = useSelector(state => state.activityReducer.activities.data)
-  console.log(activities);
-
-
-//   const getActivities =  async() => {
-//     try {
-//       const url = `http://ongapi.alkemy.org/api/activities`
-//       const {data} = await Axios.get(url)
-//       console.log(data.data)
-//       //setActivities(data.data);
-//       return data.data
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
 
   useEffect(() => {
-    //getActivities()
     dispatch(getActivities())
   }, [])
   
@@ -56,7 +37,6 @@ const ActivitiesList  = () => {
     // Logica a desarrollar
   };
 
-  // estilos
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
