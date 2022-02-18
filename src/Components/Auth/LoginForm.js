@@ -30,18 +30,31 @@ const LoginForm = () => {
         })}
         onSubmit={(values) => {
           handleSubmit(values);
+          localStorage.setItem("TOKEN", values.email);
         }}
       >
         <Form className="form">
-          <label htmlFor="email" className="form__label">Email</label>
-          <Field name="email" type="email" className="form__input"/>
-          <ErrorMessage name="email" render={(msg) => <div className="form__error">{msg}</div>}/>
+          <label htmlFor="email" className="form__label">
+            Email
+          </label>
+          <Field name="email" type="email" className="form__input" />
+          <ErrorMessage
+            name="email"
+            render={(msg) => <div className="form__error">{msg}</div>}
+          />
 
-          <label htmlFor="password" className="form__label">Contraseña</label>
-          <Field name="password" type="password" className="form__input"/>
-          <ErrorMessage name="password" render={(msg) => <div className="form__error">{msg}</div>}/>
+          <label htmlFor="password" className="form__label">
+            Contraseña
+          </label>
+          <Field name="password" type="password" className="form__input" />
+          <ErrorMessage
+            name="password"
+            render={(msg) => <div className="form__error">{msg}</div>}
+          />
 
-          <button type="submit" className="form__button">Entrar</button>
+          <button type="submit" className="form__button">
+            Entrar
+          </button>
         </Form>
       </Formik>
     </div>
