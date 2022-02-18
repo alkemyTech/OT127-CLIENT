@@ -23,7 +23,7 @@ import {styled} from "@mui/material/styles";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableRow, {tableRowClasses} from "@mui/material/TableRow";
 
-const ActivitiesList = () => {
+const Activities = () => {
 	const [activities, setActivities] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -150,4 +150,4 @@ const ActivitiesList = () => {
 	);
 };
 
-export default ActivitiesList;
+export default Activities;
