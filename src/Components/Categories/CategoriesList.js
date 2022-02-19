@@ -10,6 +10,7 @@ import {
 	messageCategoriesSel,
 	errorCategoriesSel,
 } from "../../Redux/selector/selectorCategories";
+import Spinner from "../Spinner/Spinner";
 
 const CategoriesList = () => {
 	const dispatch = useDispatch();
@@ -50,40 +51,44 @@ const CategoriesList = () => {
 			<div className="table__container">
 				<div className="table__actions">
 					<input type="search" />
-					<Link className="table__link" to="/create-category">
+					<Link className="table__link" to="/backoffice/categories/create">
 						Crear categoría
 					</Link>
 				</div>
-				<table className="table__data">
-					<thead className="table__head">
-						<tr className="table__row">
-							<th className="table__title">Nombre</th>
-							<th className="table__title">Fecha de Creación</th>
-							<th className="table__title-edit">Editar</th>
-							<th className="table__title-delete">Eliminar</th>
-						</tr>
-					</thead>
-					<tbody className="table__body">
-						{categories?.data.map((categori) => (
-							<tr key={categori.id} className="table__row">
-								<td className="table__cell">{categori.name}</td>
-								<td className="table__cell">
-									{handleDate(categori.created_at)}
-								</td>
-								<td className="table__cell-edit">
-									<button className="table__edit" onClick={handleEdit}>
-										Editar
-									</button>
-								</td>
-								<td className="table__cell-delete">
-									<button className="table__delete" onClick={handleDelete}>
-										Eliminar
-									</button>
-								</td>
+				{isFetchingCategories ? (
+					<Spinner />
+				) : (
+					<table className="table__data">
+						<thead className="table__head">
+							<tr className="table__row">
+								<th className="table__title">Nombre</th>
+								<th className="table__title">Fecha de Creación</th>
+								<th className="table__title-edit">Editar</th>
+								<th className="table__title-delete">Eliminar</th>
 							</tr>
-						))}
-					</tbody>
-				</table>
+						</thead>
+						<tbody className="table__body">
+							{categories?.data.map((categori) => (
+								<tr key={categori.id} className="table__row">
+									<td className="table__cell">{categori.name}</td>
+									<td className="table__cell">
+										{handleDate(categori.created_at)}
+									</td>
+									<td className="table__cell-edit">
+										<button className="table__edit" onClick={handleEdit}>
+											Editar
+										</button>
+									</td>
+									<td className="table__cell-delete">
+										<button className="table__delete" onClick={handleDelete}>
+											Eliminar
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				)}
 			</div>
 		</div>
 	);
