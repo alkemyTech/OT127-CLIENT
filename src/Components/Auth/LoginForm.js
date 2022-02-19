@@ -10,7 +10,6 @@ const LoginForm = () => {
       ...userData,
       { email: values.email, password: values.password },
     ]);
-    console.log(userData)
   };
 
   return (
@@ -30,6 +29,7 @@ const LoginForm = () => {
             .required("Este campo es obligatorio"),
         })}
         onSubmit={(values) => {
+          console.log(values.email, values.password)
           handleSubmit(values);
         }}
       >
