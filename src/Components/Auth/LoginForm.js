@@ -10,6 +10,7 @@ const LoginForm = () => {
       ...userData,
       { email: values.email, password: values.password },
     ]);
+    console.log(userData)
   };
 
   return (
