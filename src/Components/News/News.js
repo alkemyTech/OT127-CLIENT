@@ -67,7 +67,7 @@ const News = () => {
             <h1>Último evento</h1>
             <VideoPlayer />
           </section>
-          <SearchForm searchNews={searchNews}></SearchForm>
+          <SearchForm searchNews={searchNews} />
           <ul className="list-container">
             {filteredNews.length ? filteredNewsList() : newsList()}
           </ul>
