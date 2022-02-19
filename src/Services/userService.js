@@ -1,11 +1,8 @@
 import Axios from "axios";
 
 const endPointUser = "http://ongapi.alkemy.org/api/users";
-<<<<<<< HEAD
 const urlLogin = "http://ongapi.alkemy.org/api/login";
 const urlRegister = "http://ongapi.alkemy.org/api/register";
-=======
->>>>>>> 50d8d7522309a5e19336ef2349473405e70d6365
 
 export const getUserbyID = async (id) => {
   try {
@@ -16,8 +13,6 @@ export const getUserbyID = async (id) => {
   }
 };
 
-<<<<<<< HEAD
-=======
 export const searchUser = async (search) => {
   try {
     const response = await Axios.get(`${endPointUser}?search=${search}`);
@@ -27,7 +22,6 @@ export const searchUser = async (search) => {
   }
 };
 
->>>>>>> 50d8d7522309a5e19336ef2349473405e70d6365
 export const allUsers = async () => {
   try {
     const response = await Axios.get(endPointUser);
@@ -51,7 +45,6 @@ export const postUser = (values) => {
   } catch (error) {
     return error;
   }
-<<<<<<< HEAD
 };
 
 export const APIloginUser = async (values) => {
@@ -69,6 +62,4 @@ export const APIRegisterUser = (values) => {
   } catch (error) {
     return error;
   }
-=======
->>>>>>> 50d8d7522309a5e19336ef2349473405e70d6365
 };
