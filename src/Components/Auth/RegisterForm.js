@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import { APIRegisterUser } from "../../Services/userService";
 import * as Yup from "yup";
 
 import Swal from "sweetalert2";
@@ -29,9 +30,9 @@ const RegisterForm = () => {
 
   let title = "Términos y condiciones?";
 
-  const onSubmit = (values, e) => {
+  const onSubmit = (values) => {
     acceptTerms
-      ? alert("okis")
+      ? APIRegisterUser(values)
       : sweetAlertConfirm(title).then((res) => {
           setAcceptTerms(res);
         });

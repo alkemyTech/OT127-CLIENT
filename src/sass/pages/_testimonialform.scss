@@ -1,0 +1,28 @@
+.testimonialForm {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  &__header-title {
+    text-align: center;
+  }
+  &__text-error {
+    color: red;
+  }
+  &__label {
+    font-size: 1.1rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  &__image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__image-preview {
+    width: 70%;
+    height: 70%;
+  }
+}
