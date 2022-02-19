@@ -23,6 +23,9 @@ const OrganizationDataForm = lazy(() =>
 const ProjectsForm = lazy(() => import("../Projects/ProjectsForm"));
 const BackOffice = () => {
   const isAuthenticated = JSON.parse(localStorage.getItem("authenticatedUser"));
+  const redirectToHome = () => {
+	  window.location.href='/'
+  }
   return (
     <>
       {isAuthenticated && isAuthenticated.role_id === 1 ? (
@@ -114,9 +117,9 @@ const BackOffice = () => {
             </Switch>
           </LayoutBackOffice>
         </div>
-      ) : (
-        <Link to="/login">Iniciá sesión</Link>
-      )}
+      ) : 
+	  redirectToHome()
+	  }
     </>
   );
 };
