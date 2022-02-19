@@ -9,7 +9,7 @@ const UsersList = () => {
 
   useEffect(() => {
     dispatch(getUsers());
-  }, []);
+  }, []); //eslint-disable-line
 
   const handleEdit = (values) => {
     // TO DO: Logica para editar un usuario
