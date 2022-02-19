@@ -1,0 +1,112 @@
+@use "../abstracts/variables";
+@use "../base/typography";
+
+.table {
+	&__container {
+		max-width: 90%;
+		margin: 0 auto;
+	}
+
+	&__actions {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__link {
+		color: $font-black;
+		font-size: 1.2rem;
+		text-transform: uppercase;
+		font-weight: 700;
+		transition-property: color;
+		transition-duration: 0.3s;
+	}
+
+	&__link:hover {
+		color: $green-blue;
+	}
+
+	&__data {
+		width: 100%;
+		margin: 1rem auto;
+		box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px -1px rgb(0 0 0 / 10%);
+	}
+
+	&__head {
+		border: none;
+	}
+
+	&__title {
+		background: $green-blue;
+		color: $font-white;
+		padding: 0.5rem;
+
+		&-edit {
+			text-align: center;
+			background: $green-blue;
+			color: $font-white;
+		}
+
+		&-delete {
+			text-align: center;
+			background: $green-blue;
+			color: $font-white;
+		}
+	}
+
+	&__body {
+		border: none;
+	}
+
+	&__row {
+		margin: 0;
+		padding: 0;
+	}
+
+	&__row:nth-last-child(odd) {
+		background: #eff0f3;
+	}
+
+	&__cell {
+		padding: 0.5rem;
+
+		&-edit {
+			text-align: center;
+		}
+
+		&-delete {
+			text-align: center;
+		}
+	}
+
+	&__edit {
+		width: 100%;
+		padding: 0.3rem;
+		border: none;
+		text-transform: uppercase;
+		font-weight: bold;
+		background: $dark-green;
+		color: $font-white;
+		transition-property: background;
+		transition-duration: 0.3s;
+	}
+
+	&__edit:hover {
+		background: $med-green;
+	}
+
+	&__delete {
+		width: 100%;
+		padding: 0.3rem;
+		border: none;
+		text-transform: uppercase;
+		font-weight: bold;
+		background: $med-red;
+		color: $font-white;
+		transition-property: background;
+		transition-duration: 0.3s;
+	}
+
+	&__delete:hover {
+		background: $light-red;
+	}
+}
