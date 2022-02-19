@@ -19,12 +19,14 @@
 		font-weight: 700;
 		transition-property: color;
 		transition-duration: 0.3s;
+
+		&:hover {
+			color: $green-blue;
+		}
+	
 	}
 
-	&__link:hover {
-		color: $green-blue;
-	}
-
+	
 	&__data {
 		width: 100%;
 		margin: 1rem auto;
@@ -88,11 +90,13 @@
 		color: $font-white;
 		transition-property: background;
 		transition-duration: 0.3s;
+
+		&:hover {
+			background: $med-green;
+		}
 	}
 
-	&__edit:hover {
-		background: $med-green;
-	}
+	
 
 	&__delete {
 		width: 100%;
@@ -104,9 +108,10 @@
 		color: $font-white;
 		transition-property: background;
 		transition-duration: 0.3s;
+
+		&:hover {
+			background: $light-red;
+		}
 	}
 
-	&__delete:hover {
-		background: $light-red;
-	}
 }
