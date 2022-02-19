@@ -1,10 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 
 const Header = () => {
   const isLogged = useSelector((state) => state.authReducer.userIsLogged);
   const dispatch = useDispatch();
+
+  const history = useHistory()
 
   const menuItems = [
     { link: "/school-campaign", name: "Campaña escolar" },
@@ -48,6 +50,7 @@ const Header = () => {
               </ul>
             ) : null}
           </div>
+          <button onClick={() => history.push("/donate")}>Donar</button>
           <button onClick={logout}>Cerrar sesión</button>
           {/* Atento cuando venga el pull de los estilos que hice, hay que borrar todo lo local, pero pasar el 
           metodo logout como prop del botton que viene */}
