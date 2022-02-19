@@ -69,7 +69,7 @@ const News = () => {
           </section>
           <SearchForm searchNews={searchNews}></SearchForm>
           <ul className="list-container">
-            {filteredNews.length !== 0 ? filteredNewsList() : newsList()}
+            {filteredNews.length ? filteredNewsList() : newsList()}
           </ul>
           {showComments && <Comments />}
         </div>
