@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { login } from "../../Services/loginService";
 
 const LoginForm = () => {
-  const [userData, setUserData] = useState([]);
 
   const handleSubmit = (values) => {
-    setUserData([
-      ...userData,
-      { email: values.email, password: values.password },
-    ]);
+    login(values)
   };
 
   return (
@@ -29,7 +26,6 @@ const LoginForm = () => {
             .required("Este campo es obligatorio"),
         })}
         onSubmit={(values) => {
-          console.log(values.email, values.password)
           handleSubmit(values);
         }}
       >
