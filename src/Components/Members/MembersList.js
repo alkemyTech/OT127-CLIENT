@@ -27,11 +27,11 @@ const MembersList = () => {
 			<div className="table__container">
 				<div className="table__actions">
 					<input type="search" />
-					<Link className="table__link" to="/backoffice/create-activity">
+					<Link className="table__link" to="/backoffice/members/create">
 						Crear Miembros
 					</Link>
 				</div>
-				{members ? (
+				{!members.length ? (
 					<Spinner />
 				) : (
 					<table className="table__data">
