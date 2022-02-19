@@ -52,6 +52,7 @@ const authReducer = createReducer(initialState, (builder) => {
           email: "",
           password: "",
         },
+        authToken: "",
       };
     })
     .addCase(setToken, (state, action) => {

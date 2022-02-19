@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../PageNotFound/404styles.scss';
-import img from './404.png'
+import img from '../../images/404.png'
 
 const PageNotFound = () => {
 
-    return(
+    return (
         <>
             <div className="notFound">
                 <div className="notFound__imgContent">
