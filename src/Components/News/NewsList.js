@@ -126,7 +126,7 @@ const NewsList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredNews.length !== 0 ? filteredNewsMap() : newsMap()}
+            {filteredNews.length ? filteredNewsMap() : newsMap()}
           </TableBody>
         </Table>
       </TableContainer>
