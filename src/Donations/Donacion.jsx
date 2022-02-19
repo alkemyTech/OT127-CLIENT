@@ -1,11 +1,11 @@
 import React from "react";
 
-const Donacion = ({ message }) => {
+const Donacion = ({ title }) => {
   const mercadoPagoCheckout = "https://mpago.la/1NKGewb";
 
   return (
     <div className="donation__container">
-      {message && <p>{message}</p>}
+      {title && <p>{title}</p>}
       <a className="donation__link" as="button" href={mercadoPagoCheckout}>
         <img
           className="donation__image"
