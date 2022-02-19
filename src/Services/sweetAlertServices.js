@@ -27,10 +27,11 @@ export const sweetAlertInfo = (text) => {
   });
 };
 
-export const sweetAlertConfirm = (title, text) => {
+export const sweetAlertConfirm = (title, text, imageUrl) => {
   return MySwal.fire({
     title,
     text,
+    imageUrl,
     icon: "warning",
     showCancelButton: true,
     confirmButtonText: "Acepto",

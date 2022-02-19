@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { APIRegisterUser } from "../../Services/userService";
-import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
+import {
+  sweetAlertConfirm,
+  sweetAlertSuccess,
+} from "../../Services/sweetAlertServices";
 import * as Yup from "yup";
 
 const RegisterForm = () => {
@@ -9,13 +12,20 @@ const RegisterForm = () => {
 
   let title = "Términos y condiciones";
   let text = "Acepta los términos y condiciones?";
+  const imgTermsAndCoditions =
+    "https://milformatos.com/wp-content/uploads/2019/08/Formato-de-T%C3%A9rminos-y-Condiciones.png";
 
-  const onSubmit = (values) => {
-    acceptTerms
-      ? APIRegisterUser(values)
-      : sweetAlertConfirm(title, text).then((res) => {
-          setAcceptTerms(res);
-        });
+  const onSubmit = (values, { resetForm }) => {
+    if (acceptTerms) {
+      APIRegisterUser(values);
+      sweetAlertSuccess("Te has registrado con éxito.");
+      resetForm();
+      setAcceptTerms(false);
+    } else {
+      sweetAlertConfirm(title, text, imgTermsAndCoditions).then((res) => {
+        setAcceptTerms(res);
+      });
+    }
   };
 
   const onChange = (e) => {
