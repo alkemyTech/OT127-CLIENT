@@ -6,7 +6,7 @@ export const login = (data) => {
   axios.post(ENDPOINT_LOGIN, data)
   .then(response => {
       localStorage.setItem('token', response.data.data.token)
-      window.location.href = '/backoffice'
+      window.location.href = '/backoffice/organization'
       return response.data
   })
   .catch(error => error);
