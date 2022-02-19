@@ -22,10 +22,10 @@ const OrganizationDataForm = lazy(() =>
 );
 const ProjectsForm = lazy(() => import("../Projects/ProjectsForm"));
 const BackOffice = () => {
-  const isAuthenticated = localStorage.getItem("TOKEN");
+  const isAuthenticated = JSON.parse(localStorage.getItem("authenticatedUser"));
   return (
     <>
-      {isAuthenticated? (
+      {isAuthenticated && isAuthenticated.role_id === 1 ? (
         <div>
           <LayoutBackOffice>
             <Switch>
