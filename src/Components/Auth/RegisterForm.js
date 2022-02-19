@@ -131,7 +131,7 @@ const RegisterForm = () => {
                 onChange={onChange}
               />
               <label htmlFor="acceptTerms" className="form__label">
-                Accept Terms & Conditions
+                Aceptar Términos y condiciones
               </label>
             </div>
             <ErrorMessage
