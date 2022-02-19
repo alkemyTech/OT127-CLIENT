@@ -1,24 +1,14 @@
 import { NavLink } from "react-router-dom";
-<<<<<<< HEAD
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 
 const Header = () => {
   const isLogged = useSelector((state) => state.authReducer.userIsLogged);
   const dispatch = useDispatch();
-=======
-import { useSelector } from "react-redux";
-
-import "../../sass/layout/_header.scss";
-
-const Header = () => {
-  const isLogged = useSelector((state) => state.authReducer.userIsLogged);
->>>>>>> 50d8d7522309a5e19336ef2349473405e70d6365
 
   const menuItems = [
     { link: "/school-campaign", name: "Campaña escolar" },
     { link: "/toys-campaign", name: "Campaña de juguetes" },
-<<<<<<< HEAD
     { link: "/nosotros", name: "Nosotros" },
     { link: "/contacto", name: "Contacto" },
   ];
@@ -27,12 +17,7 @@ const Header = () => {
     dispatch(logoutUser);
     localStorage.setItem("TOKEN", "");
   };
-=======
-    { link: "/about", name: "Nosotros" },
-    { link: "/contact", name: "Contacto" },
-  ];
 
->>>>>>> 50d8d7522309a5e19336ef2349473405e70d6365
   return (
     <>
       <header className="header">
