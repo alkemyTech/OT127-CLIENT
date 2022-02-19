@@ -27,6 +27,16 @@ const sweetAlertConfirm = (title) => {
 const RegisterForm = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
 
+  let title = "Términos y condiciones?";
+
+  const onSubmit = (values, e) => {
+    acceptTerms
+      ? alert("okis")
+      : sweetAlertConfirm(title).then((res) => {
+          setAcceptTerms(res);
+        });
+  };
+
   const onChange = (e) => {
     setAcceptTerms(e.target.checked);
   };
@@ -61,6 +71,7 @@ const RegisterForm = () => {
             )
             .required("Confirmá tu contraseña"),
         })}
+        onSubmit={onSubmit}
       >
         <Form className="form">
           {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
