@@ -4,7 +4,7 @@ import SearchIcon from "@material-ui/icons/Search";
 const SearchForm = ({ searchNews }) => {
   return (
     <>
-      <SearchIcon></SearchIcon>
+      <SearchIcon />
       <input type="text" onChange={(e) => searchNews(e)} className="input" />
     </>
   );
