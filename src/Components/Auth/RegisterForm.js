@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import { APIRegisterUser } from "../../Services/userService";
 import * as Yup from "yup";
 
 const RegisterForm = () => {
@@ -33,14 +34,14 @@ const RegisterForm = () => {
             )
             .required("Confirmá tu contraseña"),
         })}
-        onSubmit={(values) => {      // eslint-disable-next-line
+        onSubmit={(values) => {
+          // eslint-disable-next-line
           const user = {
-            // Este es el objeto que va a ser enviado
             name: values.name,
-            lastName: values.lastName,
             email: values.email,
             password: values.password,
           };
+          APIRegisterUser(user);
         }}
       >
         <Form className="form">
