@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 const RegisterForm = () => {
+  const [acceptTerms, setAcceptTerms] = useState(false);
+
+  const onChange = (e) => {
+    setAcceptTerms(e.target.checked);
+  };
+
   return (
     <div className="form__container">
       <Formik
@@ -12,7 +18,6 @@ const RegisterForm = () => {
           email: "",
           password: "",
           confirmPassword: "",
-          acceptTerms: false,
         }}
         validationSchema={Yup.object({
           name: Yup.string().required("Ingresá un nombre"),
@@ -33,21 +38,7 @@ const RegisterForm = () => {
               "Las contraseñas deben ser iguales."
             )
             .required("Confirmá tu contraseña"),
-          acceptTerms: Yup.bool().oneOf(
-            [true],
-            "Aceptar los términos y condiciones es obligatorio"
-          ),
         })}
-        onSubmit={(values) => {
-          // eslint-disable-next-line
-          const user = {
-            // Este es el objeto que va a ser enviado
-            name: values.name,
-            lastName: values.lastName,
-            email: values.email,
-            password: values.password,
-          };
-        }}
       >
         <Form className="form">
           {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
@@ -108,7 +99,13 @@ const RegisterForm = () => {
           </div>
           <div className="form__subcontainer">
             <div>
-              <Field type="checkbox" name="acceptTerms" id="acceptTerms" />
+              <Field
+                type="checkbox"
+                name="acceptTerms"
+                id="acceptTerms"
+                checked={acceptTerms}
+                onChange={onChange}
+              />
               <label htmlFor="acceptTerms" className="form__label">
                 Accept Terms & Conditions
               </label>
