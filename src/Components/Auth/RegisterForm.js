@@ -1,39 +1,19 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { APIRegisterUser } from "../../Services/userService";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
 import * as Yup from "yup";
-
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-const MySwal = withReactContent(Swal);
-
-const sweetAlertConfirm = (title) => {
-  return MySwal.fire({
-    title,
-    text: "Acepta los términos y condiciones?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Acepto",
-    cancelButtonText: "No acepto",
-  }).then((resultado) => {
-    if (resultado.value) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-};
 
 const RegisterForm = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
 
-  let title = "Términos y condiciones?";
+  let title = "Términos y condiciones";
+  let text = "Acepta los términos y condiciones?";
 
   const onSubmit = (values) => {
     acceptTerms
       ? APIRegisterUser(values)
-      : sweetAlertConfirm(title).then((res) => {
+      : sweetAlertConfirm(title, text).then((res) => {
           setAcceptTerms(res);
         });
   };
