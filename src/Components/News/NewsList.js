@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getNews, getNewSearch } from "../../Redux/reducers/newsSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllCategory } from "../../Services/categoriesService";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,13 +11,23 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import { getNews, getNewSearch } from "../../Redux/reducers/newsSlice";
-import { useSelector, useDispatch } from "react-redux";
+import SearchForm from "./SearchForm";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const NewsList = () => {
   const [value, setValue] = useState("");
+  const [categories, setCategories] = useState([]);
 
   const dispatch = useDispatch();
+
+  const news = useSelector((state) => state.newsReducer.news.data);
+
+  useEffect(() => {
+    getAllCategory().then((res) => setCategories(res.data));
+  }, []);
 
   useEffect(() => {
     dispatch(getNews());
@@ -24,10 +37,8 @@ const NewsList = () => {
     dispatch(getNewSearch(value));
   }, [value]);
 
-  const news = useSelector((state) => state.newsReducer.news.data);
-
   const handleClickEdit = () => {
-    //TODO, acciones editar novedades
+    //TODO, acciones editar novedadesss
   };
 
   const handleClickDelete = () => {
@@ -42,8 +53,18 @@ const NewsList = () => {
     <div>
       <Link to="/backoffice/news/create">Create news</Link>
       <div>
-        <input type="text" onChange={handleSearch} />
+        <SearchForm searchNews={handleSearch}></SearchForm>
+        <FormControl>
+          <InputLabel>Rol</InputLabel>
+          <Select label="Rol" autoWidth>
+            <MenuItem value={0}>Todos</MenuItem>
+            {categories.map((res) => (
+              <MenuItem value={res.id}>{res.name}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </div>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
