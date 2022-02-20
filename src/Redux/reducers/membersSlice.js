@@ -49,7 +49,6 @@ const membersSlice = createSlice({
       .addCase(getMembersSearch.fulfilled, (state, action) => {
         state.loading = false;
         state.status = "success";
-        // agrega todos los miembros obtenidos al array
         state.members = action.payload;
       })
       .addCase(getMembersSearch.rejected, (state, action) => {

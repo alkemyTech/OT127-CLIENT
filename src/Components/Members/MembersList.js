@@ -17,7 +17,7 @@ import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMembers } from "../../Redux/reducers/membersSlice";
+import { fetchMembers, getMembersSearch } from "../../Redux/reducers/membersSlice";
 
 const MembersList = () => {
   const dispatch = useDispatch();
@@ -64,9 +64,9 @@ const MembersList = () => {
   const handleUserSearch = (e) => {
     const { value } = e.target;
     if (value.length > 1) {
-      //dispatch(getUserSearch(value));
+      dispatch(getMembersSearch(value));
     } else {
-      //dispatch(getUsers());
+      dispatch(fetchMembers());
     }
   };
 
