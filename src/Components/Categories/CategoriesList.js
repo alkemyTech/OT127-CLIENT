@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { useSelector, shallowEqual } from "react-redux";
-import { getCategoriesAction } from "../../Redux/actions/categoriesActions";
+import { getCategoriesAction, searchCategoriesAction } from "../../Redux/actions/categoriesActions";
 import {
   isFetchingCategoriesSel,
   categoriesSel,
@@ -49,9 +49,9 @@ const CategoriesList = () => {
   const handleUserSearch = (e) => {
     const { value } = e.target;
     if (value.length > 2) {
-      //dispatch(getUserSearch(value));
+      dispatch(searchCategoriesAction(value));
     } else {
-      //dispatch(getUsers());
+      dispatch(getCategoriesAction());
     }
   };
 
