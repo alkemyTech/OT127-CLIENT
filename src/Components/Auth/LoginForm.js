@@ -37,7 +37,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (token) {
-      dispatch(setToken(token));
+      dispatch(setToken(token)); // para persistir token por si la ruta se ingresa manualmente
       history.push("/");
     }
   }, []); //eslint-disable-line
