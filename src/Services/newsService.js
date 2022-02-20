@@ -19,8 +19,12 @@ export const getNews = async (setMethod) => {
   }
 };
 
-export const getSearch = (value, category) => {
-  return axios.get(`http://ongapi.alkemy.org/api/news?search=${value}`);
+export const getSearchByCategory = ({ value, select }) => {
+  return value !== ""
+    ? axios.get(
+        `http://ongapi.alkemy.org/api/news?search=${value}&category=${select}`
+      )
+    : axios.get(`http://ongapi.alkemy.org/api/news?category=${select}`);
 };
 
 export const getFilteredNews = async (value) => {

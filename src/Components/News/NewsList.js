@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getNews, getNewSearch } from "../../Redux/reducers/newsSlice";
+import {
+  getNews,
+  getNewSearch,
+  getNewSearchCategory,
+} from "../../Redux/reducers/newsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategory } from "../../Services/categoriesService";
 import Table from "@mui/material/Table";
@@ -19,6 +23,7 @@ import Select from "@mui/material/Select";
 
 const NewsList = () => {
   const [value, setValue] = useState("");
+  const [select, setSelect] = useState(0);
   const [categories, setCategories] = useState([]);
 
   const dispatch = useDispatch();
@@ -30,12 +35,16 @@ const NewsList = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getNews());
-  }, []); //eslint-disable-line
-
-  useEffect(() => {
     dispatch(getNewSearch(value));
   }, [value]);
+
+  useEffect(() => {
+    if (select !== 0) {
+      dispatch(getNewSearchCategory({ select, value }));
+    } else {
+      dispatch(getNews());
+    }
+  }, [value, select]);
 
   const handleClickEdit = () => {
     //TODO, acciones editar novedadesss
@@ -43,6 +52,10 @@ const NewsList = () => {
 
   const handleClickDelete = () => {
     //TODO, acciones para borrar novedades
+  };
+
+  const handleChange = (e) => {
+    setSelect(e.target.value);
   };
 
   const handleSearch = (e) => {
@@ -55,11 +68,16 @@ const NewsList = () => {
       <div>
         <SearchForm searchNews={handleSearch}></SearchForm>
         <FormControl>
-          <InputLabel>Rol</InputLabel>
-          <Select label="Rol" autoWidth>
+          <InputLabel>Categorías</InputLabel>
+          <Select
+            label="Categorías"
+            autoWidth
+            onChange={handleChange}
+            value={select}
+          >
             <MenuItem value={0}>Todos</MenuItem>
-            {categories.map((res) => (
-              <MenuItem value={res.id}>{res.name}</MenuItem>
+            {categories.map(({ id, name }) => (
+              <MenuItem value={id}>{name}</MenuItem>
             ))}
           </Select>
         </FormControl>
