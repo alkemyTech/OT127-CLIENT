@@ -1,14 +1,15 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import PageNotFound from './Components/PageNotFound/NotFound';
 import Progress from "./Components/Progress/Porgress";
 import LayoutPublic from "./Components/Layout/LayoutPublic";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/main.scss";
 const About = lazy(() => import("./Components/About/About"));
-const Activities = lazy(() => import("./Components/Activities/Activities"));
+const ActivitiesList = lazy(() => import("./Components/Activities/ActivitiesList"));
 const ActivityDetail = lazy(() =>
-  import("./Components/Activities/ActivityDetail")
+  import("./Components/Activities/Detail/ActivityDetail")
 );
 const BackOffice = lazy(() => import("./Components/Backoffice/BackOffice"));
 const Contact = lazy(() => import("./Components/Contact/Contact"));
@@ -29,7 +30,7 @@ const ToysCampaign = lazy(() => import("./Campaigns/Toys/ToysCampaign"));
 const routes = [
   { path: "/", Component: Home },
   /* PROBLEMA El componente activities no muestra ningun listado */
-  { path: "/activities", Component: Activities },
+  { path: "/activities", Component: ActivitiesList },
   { path: "/activities/:id", Component: ActivityDetail },
   { path: "/login", Component: LoginForm },
   { path: "/contact", Component: Contact },
@@ -48,6 +49,7 @@ const routes = [
   },
   { path: "/about", Component: About, title: "Sobre Nosotros" },
 ];
+
 
 function App() {
   return (
@@ -79,10 +81,10 @@ function App() {
                         <CSSTransition
                           in={match != null}
                           timeout={500}
-                          classNames="PageContainer__page"
+                          className="PageContainer__page"
                           unmountOnExit
                         >
-                          <div classNames="PageContainer__page">
+                          <div className="PageContainer__page">
                             {title ? (
                               <Component title={title} />
                             ) : (
@@ -100,6 +102,7 @@ function App() {
             <Route path="/toys-campaign" exact component={ToysCampaign} />
             <Route path="/backoffice" component={BackOffice} />
             <Route path='/Landing' component={Landing} />
+            <Route path="*" component={PageNotFound} />
           </Suspense>
         </Switch>
       </BrowserRouter>
