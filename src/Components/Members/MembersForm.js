@@ -92,7 +92,7 @@ const MemberForm = () => {
                 <label className="form__label" htmlFor="name">
                   Nombre
                 </label>
-                <Field name="name" type="titulo" className="form__input" />
+                <Field name="name" type="text" className="form__input" />
                 <ErrorMessage
                   name="name"
                   render={(msg) => <div className="form__error">{msg}</div>}
@@ -144,7 +144,7 @@ const MemberForm = () => {
                 </label>
                 <Field
                   name="facebookUrl"
-                  type="facebookUrl"
+                  type="text"
                   className="form__input"
                 />
                 <ErrorMessage
@@ -157,7 +157,7 @@ const MemberForm = () => {
                 </label>
                 <Field
                   name="linkedinUrl"
-                  type="linkedinUrl"
+                  type="text"
                   className="form__input"
                 />
                 <ErrorMessage
