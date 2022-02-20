@@ -5,9 +5,6 @@ import { useEffect, useState, useRef } from "react"
 import { CKEditor } from "@ckeditor/ckeditor5-react"
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
 import axios from "axios"
-
-import "../../sass/components/_form.scss"
-import "./styles.scss"
 import { sweetAlertError } from "../../Services/sweetAlertServices"
 
 const TestimonialForm = () => {
@@ -156,20 +153,20 @@ const TestimonialForm = () => {
                 {(props) => {
                     return (
                         <Form className="form">
-                            <h3 className="form__header-title">Testimonial Form</h3>
-                            <label className="form__label">Nombre: </label>
+                            <h3 className="testimonialForm__header-title">Testimonial Form</h3>
+                            <label className="testimonialForm__label">Nombre: </label>
                             <Field
                                 name="name"
                                 type="text"
                                 className="input-field"
                             />
-                            <small className="form__text-error">
+                            <small className="testimonialForm__text-error">
                                 {props.initialTouched && props.errors.name}
                             </small>
-                            <label className="form__label">
+                            <label className="testimonialForm__label">
                                 Imagen:
                             </label>
-                            <div className="form__image-container">
+                            <div className="testimonialForm__image-container">
                                 <input
                                     type="file"
                                     ref={inputFileRef}
@@ -180,15 +177,15 @@ const TestimonialForm = () => {
                                     }}
                                 />
                                 <img
-                                    className="form__image-preview"
+                                    className="testimonialForm__image-preview"
                                     src={props.values.image}
                                     alt="imgPreview"
                                 />
                             </div>
-                            <small className="form__text-error">
+                            <small className="testimonialForm__text-error">
                                 {props.initialTouched.image && props.errors.image}
                             </small>
-                            <label className="form__label">Descripcion: </label>
+                            <label className="testimonialForm__label">Descripcion: </label>
                             <CKEditor
                                 name="description"
                                 editor={ClassicEditor}
@@ -201,7 +198,7 @@ const TestimonialForm = () => {
                                     )
                                 }}
                             />
-                            <small className="form__text-error">
+                            <small className="testimonialForm__text-error">
                                 {props.initialTouched.description && props.errors.description}
                             </small>
                             <button type="button"

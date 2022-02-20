@@ -1,16 +1,25 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import logo from "../../images/LOGO-SOMOS_MAS.png";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../Redux/actions/authActions";
 
 const Header = () => {
   const isLogged = useSelector((state) => state.authReducer.userIsLogged);
+  const dispatch = useDispatch();
 
   const menuItems = [
     { link: "/school-campaign", name: "Campaña escolar" },
     { link: "/toys-campaign", name: "Campaña de juguetes" },
-    { link: "/about", name: "Nosotros" },
-    { link: "/contact", name: "Contacto" },
+    { link: "/nosotros", name: "Nosotros" },
+    { link: "/contacto", name: "Contacto" },
   ];
+
+  const logout = () => {
+    console.log("logout init");
+    dispatch(logoutUser);
+    localStorage.setItem("TOKEN", "");
+    console.log("logout end");
+  };
 
   return (
     <>
@@ -32,7 +41,7 @@ const Header = () => {
       </header>
       <div className="header__logbar">
         <NavLink to={isLogged ? "/" : "/login"}>
-          <button className="header__logbutton">
+          <button className="header__logbutton" onClick={logout}>
             {isLogged ? "Cerrar sesión" : "Iniciar sesión"}
           </button>
         </NavLink>
