@@ -21,7 +21,13 @@ const LoginForm = () => {
       dispatch(loginUser(user));
       dispatch(setToken(token));
       localStorage.setItem("TOKEN", token);
-      history.push("/");
+      localStorage.setItem("authenticatedUser", JSON.stringify(user))
+      if(user.role_id === 1){
+        history.push("/backoffice/organization")
+      } else if (user.role_id === 2){
+        history.push("/");
+      }
+      
     } catch (error) {
       sweetAlertError("Contraseña o usuario incorrectos");
     }
