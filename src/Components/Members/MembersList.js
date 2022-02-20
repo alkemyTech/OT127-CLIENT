@@ -60,9 +60,24 @@ const MembersList = () => {
     },
   }));
   // fin de estilos
+
+  const handleUserSearch = (e) => {
+    const { value } = e.target;
+    if (value.length > 1) {
+      //dispatch(getUserSearch(value));
+    } else {
+      //dispatch(getUsers());
+    }
+  };
+
   return (
     <Container maxWidth="md">
       <Link to="/backoffice/members/create">Create Member</Link>
+      <input
+        type="search"
+        name="search"
+        onChange={(e) => handleUserSearch(e)}
+      />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 600 }} stickyHeader>
           <TableHead>
