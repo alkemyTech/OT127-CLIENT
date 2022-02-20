@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAll } from "../../Services/publicActivityService";
 import axios from 'axios'
 
 export const getActivities = createAsyncThunk("get/getActivities", async () => {
-  const response = await getAll();
+  const response = await axios.get(`${process.env.REACT_APP_ACTIVITIES_ENDPOINT}`)
   return response.data.data;
 });
 
@@ -32,7 +31,7 @@ const activitiesSlice = createSlice({
     },
     [getActivities.fulfilled.type]: (state, action) => {
       state.status = "succeeded";
-      state.users = action.payload;
+      state.activities = action.payload;
     },
     [getActivities.rejected.type]: (state, action) => {
       state.status = "failed";
@@ -44,7 +43,7 @@ const activitiesSlice = createSlice({
     },
     [getActivitiesSearch.fulfilled.type]: (state, action) => {
       state.status = "succeeded";
-      state.users = action.payload;
+      state.activities = action.payload;
     },
     [getActivitiesSearch.rejected.type]: (state, action) => {
       state.status = "failed";

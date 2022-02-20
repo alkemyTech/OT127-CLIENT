@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import Axios from "axios";
-import {
+/* import {
   sweetAlertInfo,
   sweetAlertError,
-} from "../../Services/sweetAlertServices";
+} from "../../Services/sweetAlertServices"; */
 import Spinner from "../Spinner/Spinner";
-
-// ! Sacar Mock y hacer logica de Get y agregar logica de Edit, Delete y renderizar en Backoffice
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getActivities,
+  getActivitiesSearch,
+} from "../../Redux/reducers/activitiesSlice";
 import {
   Container,
   Table,
@@ -24,43 +25,14 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow, { tableRowClasses } from "@mui/material/TableRow";
 
 const Activities = () => {
-  const [activities, setActivities] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const activities = useSelector((state) => state.activitiesReducer.activities);
 
   const history = useHistory();
 
-  // logica para traerme los datos y agregue el spinner
-  const getActivities = async () => {
-    try {
-      setLoading(true);
-      const url = process.env.REACT_APP_ACTIVITIES_ENDPOINT;
-      const { data } = await Axios.get(url);
-      const activitiesData = data.data;
-      setActivities(activitiesData);
-      setLoading(false);
-    } catch (error) {
-      sweetAlertError();
-      return error;
-    }
-  };
-
-  const searchActivities = async (value) => {
-    try {
-      setLoading(true);
-      const url = process.env.REACT_APP_ACTIVITIES_ENDPOINT;
-      const { data } = await Axios.get(`${url}/${value}`);
-      const activitiesData = data.data;
-      setActivities(activitiesData);
-      setLoading(false);
-    } catch (error) {
-      sweetAlertError();
-      return error;
-    }
-  };
-
   useEffect(() => {
-    getActivities();
-  }, []);
+    dispatch(getActivities());
+  }, [dispatch]);
 
   // Editar redireccion al formulario segun el ID que seleciona de la tabla
   const handleEdit = (id) => {
@@ -68,7 +40,7 @@ const Activities = () => {
   };
 
   // Eliminar y actualizar el estado para mostar sin el que esta eliminado
-  const handleDelete = async (id, name, image) => {
+  /* const handleDelete = async (id, name, image) => {
     try {
       const url = `${process.env.REACT_APP_ACTIVITIES_ENDPOINT}/${id}`;
       await Axios.delete(url, {
@@ -84,7 +56,7 @@ const Activities = () => {
     } catch (error) {
       return error;
     }
-  };
+  }; */
 
   // estilos
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -115,15 +87,15 @@ const Activities = () => {
   const handleActivitiesSearch = (e) => {
     const { value } = e.target;
     if (value.length > 2) {
-		searchActivities(value)
+      dispatch(getActivitiesSearch(value));
     } else {
-      getActivities();
+      dispatch(getActivities());
     }
   };
   return (
     <Container maxWidth="md">
       <Link to="/backoffice/create-activity">Create Activity</Link>
-      {loading ? (
+      {!activities.length ? (
         <Spinner />
       ) : (
         <TableContainer component={Paper}>
@@ -158,14 +130,7 @@ const Activities = () => {
                     >
                       Editar
                     </Button>{" "}
-                    <Button
-                      color="error"
-                      onClick={() =>
-                        handleDelete(activity.id, activity.name, activity.image)
-                      }
-                    >
-                      Eliminar
-                    </Button>
+                    <Button color="error">Eliminar</Button>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
