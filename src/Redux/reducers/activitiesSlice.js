@@ -10,7 +10,7 @@ export const getActivities = createAsyncThunk("get/getActivities", async () => {
 export const getActivitiesSearch = createAsyncThunk(
   "get/getActivitiesSearch",
   async (search) => {
-    const response = await axios.get(`${process.env.REACT_APP_ACTIVITIES_ENDPOINT}/${search}`);
+    const response = await axios.get(`${process.env.REACT_APP_ACTIVITIES_ENDPOINT}?search=${search}`);
     return response.data.data;
   }
 );
