@@ -1,4 +1,4 @@
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 import { Link } from "react-router-dom";
@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const isLogged = useSelector((state) => state.authReducer.userIsLogged);
   const dispatch = useDispatch();
-
-  const history = useHistory()
 
   const menuItems = [
     { link: "/school-campaign", name: "Campaña escolar" },
