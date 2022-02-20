@@ -105,6 +105,55 @@
 // }}
 
 
+// .content__img {
+//     display: none;
+//     @media only screen and (min-width: 900px) {
+//     display: block;
+//     width: 125px;
+//     height: 100px;
+//     object-fit: cover;
+//     border-radius: 15px;
+//     filter: brightness(90%);
+//     &:nth-child(2) {
+//         transform: rotate(-10deg);
+//     }
+//     &:nth-child(4),
+//     &:nth-child(6) {
+//         transform: rotate(10deg);
+//     }
+//     &:nth-child(7) {
+//         justify-self: center;
+//         align-self: self-end;
+//     }
+//     &:last-child {
+//         justify-self: end;
+//         transform: rotate(-10deg);
+//     }
+//     &:hover {
+//         transform: scale(1.2);
+//     }
+//     }
+//     &__countdown {
+//         display: none;
+//         @media only screen and (min-width: 667px) {
+//             display: block;
+//             margin: 50px 0;
+//             &-timer {
+//                 //@include outfit-title;
+//                 //background-color: $med-yellow;
+//                 padding: 20px;
+//                 //color: $font-white;
+//                 font-size: 2rem;
+//             border-radius: 15px;
+//         }
+//     }
+//     @media only screen and (min-width: 900px) {
+//         align-self: start;
+//     }
+//     }
+// }
+
+
 
 
 
@@ -113,26 +162,25 @@
 
 
 .login-container {
-    height: 100vh;
+    //height: 100vh;
+    position: absolute;
     font-family: 'Poppins', sans-serif;
-    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
-    height: 43.75em;
-    width: 60em;
-    margin: 6em auto;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
+    background: rgb(118,110,255);
+    background: linear-gradient(90deg, rgba(118,110,255,1) 0%, rgba(214,212,255,1) 92%);
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
     overflow: hidden;
+    align-items: center;
 }
 
 .login-info-container {
-    width: 50%;
-    display: flex;
+    //width: 50%;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding-top: 0.5rem;
-    background-color: var(--login-bg);
+    padding-top:1rem;
 }
 
 .title {
@@ -144,8 +192,8 @@
   }
   
   .inputs-container {
-    height: 55%;
-    width: 85%;
+    height: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -158,7 +206,7 @@
   }
   
   .input {
-      padding-left: 20px;
+      margin: 10px;
       border: none;
       border-radius: 5px;
       font-weight: 600;
@@ -180,10 +228,31 @@
       cursor: pointer;
   }
   
-  .inputs-container p {
-      margin: 0;
-  }
+
   
+  .conteinerGrid {
+    display: grid;
+    grid-template-columns: 300px auto 200px;
+    align-items: center;
+    justify-content: center;
+    background: rgb(118,110,255);
+    background: linear-gradient(90deg, rgba(118,110,255,1) 0%, rgba(214,212,255,1) 92%);
+  }
+
+  @media only screen and (max-width: 768px) {
+    .conteinerGrid {
+        display: none;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    .content__img {
+        display: none;
+    }
+  }
+
+  
+
+
   
   
   // //estilos form anterior
