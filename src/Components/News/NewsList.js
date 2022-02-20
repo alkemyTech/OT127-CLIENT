@@ -35,14 +35,10 @@ const NewsList = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getNewSearch(value));
-  }, [value]);
-
-  useEffect(() => {
     if (select !== 0) {
       dispatch(getNewSearchCategory({ select, value }));
     } else {
-      dispatch(getNews());
+      dispatch(getNewSearch(value));
     }
   }, [value, select]);
 
@@ -66,7 +62,7 @@ const NewsList = () => {
     <div>
       <Link to="/backoffice/news/create">Create news</Link>
       <div>
-        <SearchForm searchNews={handleSearch}></SearchForm>
+        <SearchForm searchNews={handleSearch} />
         <FormControl>
           <InputLabel>Categorías</InputLabel>
           <Select
@@ -94,37 +90,36 @@ const NewsList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {news.length &&
-              news.map((element) => (
-                <TableRow
-                  key={element.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {element.name}
-                  </TableCell>
-                  <TableCell align="right">
-                    <img src={element.image} alt="News_image" width="150em" />
-                  </TableCell>
-                  <TableCell align="right">{element.created_at}</TableCell>
-                  <TableCell align="right">
-                    <Button
-                      variant="outlined"
-                      style={{ marginRight: "1em" }}
-                      onClick={handleClickEdit}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      color="error"
-                      onClick={handleClickDelete}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+            {news.map((element) => (
+              <TableRow
+                key={element.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {element.name}
+                </TableCell>
+                <TableCell align="right">
+                  <img src={element.image} alt="News_image" width="150em" />
+                </TableCell>
+                <TableCell align="right">{element.created_at}</TableCell>
+                <TableCell align="right">
+                  <Button
+                    variant="outlined"
+                    style={{ marginRight: "1em" }}
+                    onClick={handleClickEdit}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={handleClickDelete}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

@@ -30,7 +30,7 @@ export const newsSlice = createSlice({
   initialState: {
     news: {
       status: "idle",
-      data: {},
+      data: [],
       error: {},
     },
   },
@@ -46,7 +46,7 @@ export const newsSlice = createSlice({
     [getNews.rejected.type]: (state, action) => {
       state.news = {
         status: "idle",
-        data: {},
+        data: [],
         error: action.payload,
       };
     },
@@ -60,7 +60,7 @@ export const newsSlice = createSlice({
     [getNewSearch.rejected.type]: (state, action) => {
       state.news = {
         status: "idle",
-        data: {},
+        data: [],
         error: action.payload,
       };
     },
@@ -74,7 +74,7 @@ export const newsSlice = createSlice({
     [getNewSearchCategory.rejected.type]: (state, action) => {
       state.news = {
         status: "idle",
-        data: {},
+        data: [],
         error: action.payload,
       };
     },
