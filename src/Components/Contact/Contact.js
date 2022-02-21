@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Title from "../Titulosynovedades/Title";
-import {sweetAlertError} from "../../Services/sweetAlertServices";
+import { sweetAlertError } from "../../Services/sweetAlertServices";
 import Leaflet from "../../features/leaflet/Leaflet";
+
 
 const Contact = () => {
   // Estados para guardar los datos y las banderas
@@ -71,6 +72,7 @@ const Contact = () => {
           </div>
         </div>
       ))}
+      <Leaflet/>
     </>
   );
 };
