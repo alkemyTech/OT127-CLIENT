@@ -1,4 +1,4 @@
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ const Header = () => {
   const isLogged = useSelector((state) => state.authReducer.authToken);
   const dispatch = useDispatch();
   const isAuthenticated = JSON.parse(localStorage.getItem("authenticatedUser"));
-  const history = useHistory();
+  const token = localStorage.getItem("TOKEN")
 
   const menuItems = [
     { link: "/school-campaign", name: "Campaña escolar" },
@@ -19,7 +19,8 @@ const Header = () => {
   const logout = () => {
     dispatch(logoutUser());
     localStorage.removeItem("TOKEN")
-    history.push("/");
+    localStorage.removeItem("authenticatedUser")
+    window.location.href = "/"
   };
 
   return (
@@ -36,7 +37,7 @@ const Header = () => {
             </NavLink>
           </div>
           <div className="header__nav-right">
-            {isLogged ? (
+            {token ? (
               <ul className="header__nav-list">
                 {menuItems.map((item) => (
                   <li key={item.name} className="header__nav-item">
@@ -74,7 +75,6 @@ const Header = () => {
           {isAuthenticated && !isAuthenticated.role_id === 1 && (
             <Link to="/donate">Donar</Link>
           )}
-          {isAuthenticated && <button onClick={logout}>Cerrar sesión</button>}
 
           {/* Atento cuando venga el pull de los estilos que hice, hay que borrar todo lo local, pero pasar el 
           metodo logout como prop del botton que viene */}
