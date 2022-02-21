@@ -1,13 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const isLogged = useSelector((state) => state.authReducer.authToken);
   const dispatch = useDispatch();
   const isAuthenticated = JSON.parse(localStorage.getItem("authenticatedUser"));
-  const token = localStorage.getItem("TOKEN")
+  const token = localStorage.getItem("TOKEN");
 
   const menuItems = [
     { link: "/school-campaign", name: "Campaña escolar" },
@@ -18,9 +17,9 @@ const Header = () => {
 
   const logout = () => {
     dispatch(logoutUser());
-    localStorage.removeItem("TOKEN")
-    localStorage.removeItem("authenticatedUser")
-    window.location.href = "/"
+    localStorage.removeItem("TOKEN");
+    localStorage.removeItem("authenticatedUser");
+    window.location.href = "/";
   };
 
   return (
