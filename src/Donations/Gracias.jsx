@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Gracias = () => {
+  const history = useHistory();
+  const isLogged = useSelector((state) => state.authReducer.userIsLogged);
+
+  useEffect(() => {
+    if (!isLogged) {
+      history.push("/");
+    }
+  }, []); //eslint-disable-line
   return (
     <div className="thanks__container">
       <div className="thanks__content">
