@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { APIRegisterUser } from "../../Services/userService";
+import {
+  sweetAlertConfirm,
+  sweetAlertSuccess,
+} from "../../Services/sweetAlertServices";
 import * as Yup from "yup";
 
 const RegisterForm = () => {
+  const [acceptTerms, setAcceptTerms] = useState(false);
+
+  let title = "Términos y condiciones";
+  let text = "Acepta los términos y condiciones?";
+  const imgTermsAndCoditions =
+    "https://milformatos.com/wp-content/uploads/2019/08/Formato-de-T%C3%A9rminos-y-Condiciones.png";
+
+  const handleSubmit = (values, { resetForm }) => {
+    if (acceptTerms) {
+      APIRegisterUser(values);
+      sweetAlertSuccess("Te has registrado con éxito.");
+      resetForm();
+      setAcceptTerms(false);
+    } else {
+      sweetAlertConfirm(title, text, imgTermsAndCoditions).then((res) => {
+        setAcceptTerms(res);
+      });
+    }
+  };
+
+  const handleChange = (e) => {
+    setAcceptTerms(e.target.checked);
+  };
+
   return (
     <div className="form__container">
       <Formik
@@ -34,15 +62,7 @@ const RegisterForm = () => {
             )
             .required("Confirmá tu contraseña"),
         })}
-        onSubmit={(values) => {
-          // eslint-disable-next-line
-          const user = {
-            name: values.name,
-            email: values.email,
-            password: values.password,
-          };
-          APIRegisterUser(user);
-        }}
+        onSubmit={handleSubmit}
       >
         <Form className="form">
           {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
@@ -98,6 +118,24 @@ const RegisterForm = () => {
             />
             <ErrorMessage
               name="confirmPassword"
+              render={(msg) => <div className="form__error">{msg}</div>}
+            />
+          </div>
+          <div className="form__subcontainer">
+            <div>
+              <Field
+                type="checkbox"
+                name="acceptTerms"
+                id="acceptTerms"
+                checked={acceptTerms}
+                onChange={handleChange}
+              />
+              <label htmlFor="acceptTerms" className="form__label">
+                Aceptar Términos y condiciones
+              </label>
+            </div>
+            <ErrorMessage
+              name="acceptTerms"
               render={(msg) => <div className="form__error">{msg}</div>}
             />
           </div>
