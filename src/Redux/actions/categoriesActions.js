@@ -23,3 +23,16 @@ export const getCategoriesAction = () => async (dispatch) => {
 	}
 };
 
+export const searchCategoriesAction = (category) => async (dispatch) => {
+	const CATEGORIES_ENDPOINT = process.env.REACT_APP_ENDPOINT_CATEGORIES
+	try {
+		dispatch(startFetchingCategories());
+		const {data} = await Axios.get(
+			`${CATEGORIES_ENDPOINT}?search=${category}`
+		);
+		dispatch(successFetchingCategories({data}));
+	} catch (error) {
+		dispatch(errorFetchingCategories({error}));
+	}
+};
+
