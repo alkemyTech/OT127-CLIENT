@@ -3,7 +3,10 @@ import {Link} from "react-router-dom";
 
 import {useDispatch} from "react-redux";
 import {useSelector, shallowEqual} from "react-redux";
-import {getCategoriesAction} from "../../Redux/actions/categoriesActions";
+import {
+	getCategoriesAction,
+	searchCategoriesAction,
+} from "../../Redux/actions/categoriesActions";
 import {
 	isFetchingCategoriesSel,
 	categoriesSel,
@@ -14,17 +17,18 @@ import Spinner from "../Spinner/Spinner";
 
 const CategoriesList = () => {
 	const dispatch = useDispatch();
+	//eslint-disable-next-line
 	const isFetchingCategories = useSelector(
 		isFetchingCategoriesSel,
 		shallowEqual
 	);
 	const categories = useSelector(categoriesSel, shallowEqual);
-	const messageCategories = useSelector(messageCategoriesSel, shallowEqual);
-	const errorCategories = useSelector(errorCategoriesSel, shallowEqual);
+	const messageCategories = useSelector(messageCategoriesSel, shallowEqual); //eslint-disable-line
+	const errorCategories = useSelector(errorCategoriesSel, shallowEqual); //eslint-disable-line
 
 	useEffect(() => {
 		dispatch(getCategoriesAction());
-	}, []);
+	}, []); //eslint-disable-line
 
 	const handleDate = (fecha) => {
 		const newDate = new Date(fecha);
@@ -46,11 +50,24 @@ const CategoriesList = () => {
 		// Logica para eliminar
 	};
 
+	const handleUserSearch = (e) => {
+		const {value} = e.target;
+		if (value.length > 2) {
+			dispatch(searchCategoriesAction(value));
+		} else {
+			dispatch(getCategoriesAction());
+		}
+	};
+
 	return (
 		<div className="table">
 			<div className="table__container">
 				<div className="table__actions">
-					<input type="search" />
+					<input
+						type="search"
+						name="search"
+						onChange={(e) => handleUserSearch(e)}
+					/>
 					<Link className="table__link" to="/backoffice/categories/create">
 						Crear categoría
 					</Link>
