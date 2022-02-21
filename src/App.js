@@ -21,7 +21,7 @@ const News = lazy(() => import("./Components/News/News"));
 const NewsDetails = lazy(() => import("./Components/News/Detail/NewsDetails"));
 const RegisterForm = lazy(() => import("./Components/Auth/RegisterForm"));
 const SchoolCampaign = lazy(() => import("./Campaigns/School/SchoolCampaign"));
-const Landing = lazy(() => import("./Campaigns/School/Landing"));
+const SchoolContent = lazy(() => import('./Campaigns/School/Content'))
 const TestimonialForm = lazy(() =>
   import("./Components/Testimonials/TestimonialForm")
 );
@@ -99,9 +99,9 @@ function App() {
               </LayoutPublic>
             </Route>
             <Route path="/school-campaign" exact component={SchoolCampaign} />
+            <Route path='/school-content' exact component={SchoolContent} />
             <Route path="/toys-campaign" exact component={ToysCampaign} />
             <Route path="/backoffice" component={BackOffice} />
-            <Route path='/Landing' component={Landing} />
             <Route path="*" component={PageNotFound} />
           </Suspense>
         </Switch>
