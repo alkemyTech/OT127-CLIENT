@@ -16,7 +16,7 @@ const Header = () => {
 
   const logout = () => {
     console.log("logout init");
-    dispatch(logoutUser);
+    dispatch(logoutUser());
     localStorage.setItem("TOKEN", "");
     console.log("logout end");
   };
