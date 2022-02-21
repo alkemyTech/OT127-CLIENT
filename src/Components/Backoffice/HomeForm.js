@@ -1,86 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios'
-import { Put } from '../../Services/privateApiService'
-import {Get}  from '../../Services/publicApiService'
+import { Put, Get, updateSlides } from '../../Services/homeApiService'
 
 import '../../sass/pages/_homeform.scss'
 const HomeForm = () => {
-    const [welcomeText, setWelcomeText] = useState('')
-    const [initialValues, setInitialValues] = useState({
+    const [ welcomeText, setWelcomeText ] = useState('')
+    const [ initialValues, setInitialValues ] = useState({
         welcome: '',
-        slides: [{
+        slides: [ {
             name: '',
             description: '',
             image: '',
-        }],
+        } ],
     })
-
-    const toDataURL = (blob) =>
-        new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(blob);
-        });
-
-    const updateSlides = (slide) => {
-        // Primero tenemos que pasar la URL de la imagen a un string base64
-        axios
-            .get(slide.image, { responseType: "blob" })
-            .then((response) => toDataURL(response.data))
-            .then((encoded) => {
-                slide.image = encoded
-                axios.put(`http://ongapi.alkemy.org/api/slides/${slide.id}`, slide)
-            });
+    const updateWelcomeText = async (values) => {
+        Put('http://ongapi.alkemy.org/api/organization', 1, { name: welcomeText.name, welcome_text: values.welcome })
+            .catch(error => error)
     }
-
-	const updateWelcomeText = async (values) => {
-		try {
-			Put('http://ongapi.alkemy.org/api/organization', 1, { name: welcomeText.name, welcome_text: values.welcome })
-		} catch (error) {
-			// TO DO
-		}
-	}
-
     const compareValues = (values) => {
         values.slides.filter((slide, i) => {
-            if (slide !== initialValues.slides[i]) {
+            if (slide !== initialValues.slides[ i ]) {
                 // solo se van a hacer una peticion de update los slides modificados 
                 updateSlides(slide)
             }
         })
-
         // Comparo el mensaje que viene del formulario con el original
         if (values.welcome !== welcomeText.welcome_text) {
             // si son diferentes realizamos la peticion "PUT" con todos los datos originales excepto el mensaje modificado
             updateWelcomeText(values)
         }
     }
-
     const getDataToEdit = async () => {
-        try {
-            // Traemos la toda la informacion que podria ser editada
-			//   const slidesResponse = await axios.get('http://ongapi.alkemy.org/api/slides')
-			  const slidesResponse = await Get('http://ongapi.alkemy.org/api/slides')
-            const welcomeResponse = await Get('http://ongapi.alkemy.org/api/organization')
-            const slides = slidesResponse.data.data
-            const welcomeText = welcomeResponse.data.data
-            // Guardamos la informacion original aparte, para luego hacer una comparacion
-            // con la informacion que venga del formulario y ver que se modifico
-            setWelcomeText(welcomeText)
-
-            // guardamos los valores iniciales que va a usar formik
-            setInitialValues({
-                welcome: welcomeText.welcome_text,
-                slides: slides
-            })
-
-        } catch (error) {
-            // TO DO
-        }
+        const responseSlides = await Get('http://ongapi.alkemy.org/api/slides')
+        const responseOrganization = await Get('http://ongapi.alkemy.org/api/organization')
+        const slides = responseSlides.data.data
+        const welcomeText = responseOrganization.data.data
+        setWelcomeText(welcomeText)
+        setInitialValues({
+            welcome: welcomeText.welcome_text,
+            slides: slides
+        })
     }
+
+
 
     useEffect(() => {
         getDataToEdit()

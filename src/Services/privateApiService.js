@@ -66,43 +66,6 @@ export const privateDelete = (route, id) => {
     }
 };
 
-export const Put = async (route, id, data) => {
-    //README:
-    //Ingresar la url completa  del tipo
-    //'http://ongapi.alkemy.org/api/activities'
-    //Pasar objeto como argum para enviarlo en el body
-    let url = id ? route + "/" + id : route;
-    await axios
-        .put(`${url}`, data, {
-            headers: getSecureHeader(),
-        })
-        .then((res) => res)
-        .catch((err) => alert(err));
-};
-export const Delete = async (route, id) => {
-    //README:
-    //Ingresar la url completa  del tipo
-    //'http://ongapi.alkemy.org/api/activities' y el ID a eliminar
-    let url = id ? route + "/" + id : route;
-    await axios
-        .delete(`${url}`, {
-            headers: getSecureHeader(),
-        })
-        .then((res) => res)
-        .catch((err) => alert(err));
-};
-export const Post = async (url, body) => {
-    //README:
-    //Ingresar la url completa  del tipo
-    //'http://ongapi.alkemy.org/api/activities'
-    //Pasar objeto como argum para enviarlo en el body
-    await axios
-        .post(url, body, {
-            headers: getSecureHeader(),
-        })
-        .then((res) => res)
-        .catch((err) => alert(err));
-};
 export const privatePost = (route, data) => {
     let url = route;
     let token = getSecureHeader();
