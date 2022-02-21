@@ -15,7 +15,7 @@ const RegisterForm = () => {
   const imgTermsAndCoditions =
     "https://milformatos.com/wp-content/uploads/2019/08/Formato-de-T%C3%A9rminos-y-Condiciones.png";
 
-  const onSubmit = (values, { resetForm }) => {
+  const handleSubmit = (values, { resetForm }) => {
     if (acceptTerms) {
       APIRegisterUser(values);
       sweetAlertSuccess("Te has registrado con éxito.");
@@ -28,7 +28,7 @@ const RegisterForm = () => {
     }
   };
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     setAcceptTerms(e.target.checked);
   };
 
@@ -62,7 +62,7 @@ const RegisterForm = () => {
             )
             .required("Confirmá tu contraseña"),
         })}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
       >
         <Form className="form">
           {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
@@ -128,7 +128,7 @@ const RegisterForm = () => {
                 name="acceptTerms"
                 id="acceptTerms"
                 checked={acceptTerms}
-                onChange={onChange}
+                onChange={handleChange}
               />
               <label htmlFor="acceptTerms" className="form__label">
                 Aceptar Términos y condiciones
