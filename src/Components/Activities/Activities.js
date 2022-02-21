@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-/* import {
-  sweetAlertInfo,
-  sweetAlertError,
-} from "../../Services/sweetAlertServices"; */
+import {
+  sweetAlertInfo, //eslint-disable-line
+  sweetAlertError, //eslint-disable-line
+} from "../../Services/sweetAlertServices"; 
 import Spinner from "../Spinner/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import {
