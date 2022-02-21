@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  getNews,
   getNewSearch,
   getNewSearchCategory,
 } from "../../Redux/reducers/newsSlice";
@@ -46,8 +45,8 @@ const NewsList = () => {
     //TODO, acciones editar novedadesss
   };
 
-  const handleClickDelete = () => {
-    //TODO, acciones para borrar novedades
+  const handleClickDelete = (id) => {
+    //TODO, acciones editar novedadesss
   };
 
   const handleChange = (e) => {

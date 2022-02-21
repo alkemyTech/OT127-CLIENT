@@ -3,7 +3,7 @@ import { Get } from "./publicApiService";
 import { sweetAlertError } from "./sweetAlertServices";
 
 const url = process.env.REACT_APP_ENDPOINTS_NEWS;
-const urlSearch = "http://ongapi.alkemy.org/api/news?search="; //!REVISAR ESTO EN VARIABLES DE ENTORNO
+const urlSearch = "http://ongapi.alkemy.org/api/news?search=";
 
 export const getNews = async (setMethod) => {
   try {
