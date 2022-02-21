@@ -3,19 +3,19 @@
     .content__container {
         height: 550px;
     }
-    .content__title{
-        .content__fecha {
+    .contenInfo{
+        &__fecha {
             display: block;
             text-align: center;
             margin: 1rem;
         }
-        .content__hora {
+        &__hora {
             display: block;
             text-align: center;
             margin: 1rem;
 
         }
-        .content__lugar {
+        &__lugar {
             text-align: center;
         }
     }

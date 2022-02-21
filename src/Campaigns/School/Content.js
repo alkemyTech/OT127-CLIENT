@@ -14,10 +14,10 @@ const Content = () => {
 
   return (
     <div className="content__container">
-      <h2 className="content__title">
-        <span className='content__fecha' >25/02/2022</span>
-        <span className='content__hora' >13hs</span>
-        <span className='content__lugar'>calle 127, barrio Quilmes, Buenos Aires</span>
+      <h2 className="contenInfo">
+        <span className='contenInfo__fecha' >25/02/2022</span>
+        <span className='contenInfo__hora' >13hs</span>
+        <span className='contenInfo__lugar'>calle 127, barrio Quilmes, Buenos Aires</span>
       </h2>
       <img
         src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-1.jpg"}
