@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { sweetAlertError, sweetAlertSuccess } from "./sweetAlertServices";
 
 const endPointUser = "http://ongapi.alkemy.org/api/users";
 const urlLogin = "http://ongapi.alkemy.org/api/login";
@@ -58,8 +59,10 @@ export const APIloginUser = async (values) => {
 
 export const APIRegisterUser = (values) => {
   try {
-    Axios.post(urlRegister, values);
+    Axios.post(urlRegister, values).then(
+      sweetAlertSuccess(`${values.name} te haz registrado correctamente`)
+    );
   } catch (error) {
-    return error;
+    sweetAlertError("Hubo un error al intentar el registro");
   }
 };
