@@ -26,7 +26,11 @@ const Comments = () => {
       <h1>Comentarios</h1>
       {comments.length ? (
         comments.map((comment) => {
-          return <p key={comment.id}>{comment.text}</p>;
+          return (
+            <p key={comment.id}>
+              <q>{comment.text}</q>
+            </p>
+          );
         })
       ) : (
         <Skeleton mode="list" />
