@@ -1,15 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, getUserSearch } from "../../Redux/reducers/usersSlice";
+import { getUsers, getUserSearch, getUserSearchAndRole } from "../../Redux/reducers/usersSlice";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 
 const UsersList = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.usersReducer.users);
+  const [role, setRole] = useState(0)
+  const [search, setSearch] = useState({})
+
+
 
   useEffect(() => {
     dispatch(getUsers());
   }, []); //eslint-disable-line
+
+
 
   const handleEdit = (values) => {
     // TO DO: Logica para editar un usuario
@@ -19,9 +30,20 @@ const UsersList = () => {
     // TO DO: Logica para eliminar un usuario
   };
 
+  const handleRoleChange = (e) => {
+    const selectedRole = e.target.value
+    setRole(selectedRole)
+    if (selectedRole !== 0) {
+      dispatch(getUserSearchAndRole({ search: search, role: selectedRole }))
+    } else {
+      dispatch(getUserSearch(search));
+    }
+  }
+
   const handleUserSearch = (e) => {
     const { value } = e.target;
-    if (value.length > 1) {
+    setSearch(value)
+    if (value.length > 0) {
       dispatch(getUserSearch(value));
     } else {
       dispatch(getUsers());
@@ -41,6 +63,21 @@ const UsersList = () => {
         name="search"
         onChange={(e) => handleUserSearch(e)}
       />
+
+      <FormControl>
+        <InputLabel>Rol</InputLabel>
+        <Select
+          value={role}
+          label="Rol"
+          onChange={handleRoleChange}
+          autoWidth
+        >
+          <MenuItem value={0}>Todos</MenuItem>
+          <MenuItem value={1}>Usuario Regular</MenuItem>
+          <MenuItem value={2}>Usuario Administrador</MenuItem>
+        </Select>
+      </FormControl>
+
       <table className="usersList__table">
         <thead>
           <tr className="usersList__tr">
