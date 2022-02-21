@@ -20,12 +20,16 @@
     align-items: center;
   }
   &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
   &__listitem {
-    list-style: none;
-    h3 {
-    }
-    p {
-    }
+    margin: 10px;
+    @include border-rounded;
+    min-width: 150px !important;
+    height: 250px;
   }
 }

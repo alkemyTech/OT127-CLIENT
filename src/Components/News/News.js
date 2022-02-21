@@ -26,10 +26,12 @@ const News = () => {
     //Ésta es la lista de novedades completa
     return news.length
       ? news.map((element) => (
-          <li className="news__listitem" key={element.id}>
-            <h3>{element.name}</h3>
-            <p>{element.content}</p>
-          </li>
+          <div className="card-custom__wrapper news__listitem">
+            <img src={element.image} alt="" className="card-custom__image" />
+            <div className="card-custom__content">
+              <h3 className="card-custom__title">{element.name}</h3>
+            </div>
+          </div>
         ))
       : null;
   };
@@ -38,10 +40,12 @@ const News = () => {
     // Ésta es la lista de novedades filtradas
     return filteredNews.length
       ? filteredNews.map((element) => (
-          <li className="news__listitem" key={element.id}>
-            <h3>{element.name}</h3>
-            <p>{element.content}</p>
-          </li>
+          <div className="card-custom__wrapper news__listitem">
+            <img src={element.image} alt="" className="card-custom__image" />
+            <div className="card-custom__content">
+              <h3 className="card-custom__title">{element.name}</h3>
+            </div>
+          </div>
         ))
       : null;
   };
@@ -68,9 +72,9 @@ const News = () => {
             <VideoPlayer />
           </section>
           <SearchForm searchNews={searchNews} />
-          <ul className="news__list">
+          <div className="card-custom news__list">
             {filteredNews.length ? filteredNewsList() : newsList()}
-          </ul>
+          </div>
           {showComments && <Comments />}
         </div>
       )}
