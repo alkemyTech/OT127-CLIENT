@@ -503,6 +503,10 @@ textarea:focus {
     }
 }
 
+.app{
+  min-height: 100vh;
+}
+
 .preloader {
     position: absolute;
     top: 50%;

@@ -102,7 +102,7 @@ function App() {
             <Route path='/school-content' exact component={SchoolContent} />
             <Route path="/toys-campaign" exact component={ToysCampaign} />
             <Route path="/backoffice" component={BackOffice} />
-            <Route path="*" component={PageNotFound} />
+            <Route component={PageNotFound} />
           </Suspense>
         </Switch>
       </BrowserRouter>
