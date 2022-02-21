@@ -18,7 +18,7 @@ const Header = () => {
 
   const logout = () => {
     dispatch(logoutUser());
-    localStorage.setItem("TOKEN", "");
+    localStorage.removeItem("TOKEN")
     history.push("/");
   };
 
@@ -74,8 +74,8 @@ const Header = () => {
           {isAuthenticated && !isAuthenticated.role_id === 1 && (
             <Link to="/donate">Donar</Link>
           )}
+          {isAuthenticated && <button onClick={logout}>Cerrar sesión</button>}
 
-          <button onClick={logout}>Cerrar sesión</button>
           {/* Atento cuando venga el pull de los estilos que hice, hay que borrar todo lo local, pero pasar el 
           metodo logout como prop del botton que viene */}
         </nav>
