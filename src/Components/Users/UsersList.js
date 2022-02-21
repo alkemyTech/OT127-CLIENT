@@ -13,14 +13,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 const UsersList = () => {
-	const dispatch = useDispatch();
-	const users = useSelector((state) => state.usersReducer.users);
-	const [role, setRole] = useState(0);
-	const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.usersReducer.users);
+  const [role, setRole] = useState(0)
+  const [search, setSearch] = useState({})
 
 	useEffect(() => {
 		dispatch(getUsers());
-	}, []);
+	}, []); // eslint-disable-line
 
 	const handleEdit = (values) => {
 		// TO DO: Logica para editar un usuario

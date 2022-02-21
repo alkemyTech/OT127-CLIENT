@@ -1,39 +1,28 @@
-import {useState, useEffect} from "react";
+import {useEffect} from "react"
+import {useDispatch, useSelector} from "react-redux";
+import {
+	getActivities,
+	getActivitiesSearch,
+} from "../../Redux/reducers/activitiesSlice";
 import {useHistory} from "react-router-dom";
 import {Link} from "react-router-dom";
-import Axios from "axios";
 import {
-	sweetAlertInfo,
-	sweetAlertError,
+	sweetAlertInfo, //eslint-disable-line
+	sweetAlertError, //eslint-disable-line
 } from "../../Services/sweetAlertServices";
 import Spinner from "../Spinner/Spinner";
 
 // ! Sacar Mock y hacer logica de Get y agregar logica de Edit, Delete y renderizar en Backoffice
 
 const Activities = () => {
-	const [activities, setActivities] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const dispatch = useDispatch();
+	const activities = useSelector((state) => state.activitiesReducer.activities);
 
 	const history = useHistory();
 
-	// logica para traerme los datos y agregue el spinner
-	const getActivities = async () => {
-		try {
-			setLoading(true);
-			const url = process.env.REACT_APP_ACTIVITIES_ENDPOINT;
-			const {data} = await Axios.get(url);
-			const activitiesData = data.data;
-			setActivities(activitiesData);
-			setLoading(false);
-		} catch (error) {
-			sweetAlertError();
-			return error;
-		}
-	};
-
 	useEffect(() => {
-		getActivities();
-	}, []);
+		dispatch(getActivities());
+	}, [dispatch]);
 
 	// Editar redireccion al formulario segun el ID que seleciona de la tabla
 	const handleEdit = (id) => {
@@ -41,22 +30,35 @@ const Activities = () => {
 	};
 
 	// Eliminar y actualizar el estado para mostar sin el que esta eliminado
+	/* const handleDelete = async (id, name, image) => {
+    try {
+      const url = `${process.env.REACT_APP_ACTIVITIES_ENDPOINT}/${id}`;
+      await Axios.delete(url, {
+        id,
+        name,
+        image,
+      });
+      const activitiesUpDate = activities.filter(
+        (activity) => activity.id !== id
+      );
+      setActivities(activitiesUpDate);
+      sweetAlertInfo("Registro Eliminado con Exito");
+    } catch (error) {
+      return error;
+    }
+  }; */
+
+	// Eliminar y actualizar el estado para mostar sin el que esta eliminado
 	const handleDelete = async (id, name, image) => {
-		try {
-			const url = `${process.env.REACT_APP_ACTIVITIES_ENDPOINT}/${id}`;
-			const respuesta = await Axios.delete(url, {
-				id,
-				name,
-				image,
-			});
-			const activitiesUpDate = activities.filter(
-				(activity) => activity.id !== id
-			);
-			setActivities(activitiesUpDate);
-			sweetAlertInfo("Registro Eliminado con Exito");
-			return respuesta;
-		} catch (error) {
-			return error;
+		// logica desarrolada por david
+	};
+
+	const handleActivitiesSearch = (e) => {
+		const {value} = e.target;
+		if (value.length > 2) {
+			dispatch(getActivitiesSearch(value));
+		} else {
+			dispatch(getActivities());
 		}
 	};
 
@@ -64,12 +66,16 @@ const Activities = () => {
 		<div className="table">
 			<div className="table__container">
 				<div className="table__actions">
-					<input type="search" />
+					<input
+						type="search"
+						name="search"
+						onChange={(e) => handleActivitiesSearch(e)}
+					/>
 					<Link className="table__link" to="/backoffice/create-activity">
 						Crear Actividad
 					</Link>
 				</div>
-				{loading ? (
+				{!activities.length ? (
 					<Spinner />
 				) : (
 					<table className="table__data">
