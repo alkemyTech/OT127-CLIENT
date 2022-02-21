@@ -7,6 +7,11 @@ export const getUsers = createAsyncThunk("get/getUsers", async () => {
   return response.data.data;
 });
 
+export const getUserSearchAndRole = createAsyncThunk("get/getUserSearchAndRole", async (values) => {
+  const response = await Get(`http://ongapi.alkemy.org/api/users?search=${values.search}&role=${values.role}`);
+  return response.data.data;
+});
+
 export const getUserSearch = createAsyncThunk(
   "get/getUserSearch",
   async (search) => {
@@ -47,6 +52,17 @@ const usersSlice = createSlice({
       state.users = action.payload;
     },
     [getUserSearch.rejected.type]: (state, action) => {
+      state.status = "failed";
+      state.error = action.payload;
+    },
+    [getUserSearchAndRole.pending.type]: (state, action) => {
+      state.status = "loading";
+    },
+    [getUserSearchAndRole.fulfilled.type]: (state, action) => {
+      state.status = "succeeded";
+      state.users = action.payload;
+    },
+    [getUserSearchAndRole.rejected.type]: (state, action) => {
       state.status = "failed";
       state.error = action.payload;
     },
