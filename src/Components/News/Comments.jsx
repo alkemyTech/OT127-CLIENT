@@ -24,17 +24,19 @@ const Comments = () => {
   return (
     <div>
       <h1>Comentarios</h1>
-      {comments.length ? (
-        comments.map((comment) => {
-          return (
-            <p key={comment.id}>
-              <q>{comment.text}</q>
-            </p>
-          );
-        })
-      ) : (
-        <Skeleton mode="list" />
-      )}
+      <div>
+        {comments.length ? (
+          comments.map((comment) => {
+            return (
+              <p key={comment.id}>
+                <q>{comment.text}</q>
+              </p>
+            );
+          })
+        ) : (
+          <Skeleton mode="list" />
+        )}
+      </div>
     </div>
   );
 };
