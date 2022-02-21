@@ -100,7 +100,7 @@ function App() {
             <Route path="/school-campaign" exact component={SchoolCampaign} />
             <Route path="/toys-campaign" exact component={ToysCampaign} />
             <Route path="/backoffice" component={BackOffice} />
-            <Route path="*" component={PageNotFound} />
+            <Route component={PageNotFound} />
           </Suspense>
         </Switch>
       </BrowserRouter>
