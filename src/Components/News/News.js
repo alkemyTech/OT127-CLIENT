@@ -57,24 +57,24 @@ const News = () => {
   };
 
   return (
-    <>
+    <div className="news">
       {isLoading ? (
         <Spinner />
       ) : (
         <div>
-          <h1>Novedades</h1>
-          <section>
-            <h1>Último evento</h1>
+          <h1 className="news__title">Novedades</h1>
+          <section className="news__videoplayercontainer">
+            <h1 className="news__subtitle">Último evento</h1>
             <VideoPlayer />
           </section>
           <SearchForm searchNews={searchNews} />
-          <ul className="list-container">
+          <ul className="news__list">
             {filteredNews.length ? filteredNewsList() : newsList()}
           </ul>
           {showComments && <Comments />}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

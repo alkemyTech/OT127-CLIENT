@@ -1,4 +1,7 @@
+@use "../base/typography";
 .title {
+  @include outfit-title;
+  font-size: 36px;
   &__header {
     text-align: center;
     color: #fff;

@@ -6,11 +6,11 @@ const Home = () => {
   const [welcomeText, setWelcomeText] = useState("Bienvenido"); //eslint-disable-line
 
   return (
-    <>
-      <h2>{welcomeText}</h2>
+    <div className="home">
+      <h1 className="home__title">{welcomeText}</h1>
       <SliderHome />
       <News />
-    </>
+    </div>
   );
 };
 
