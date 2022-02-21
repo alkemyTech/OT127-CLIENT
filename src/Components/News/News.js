@@ -26,7 +26,7 @@ const News = () => {
     //Ésta es la lista de novedades completa
     return news.length
       ? news.map((element) => (
-          <li className="card-info" key={element.id}>
+          <li className="news__listitem" key={element.id}>
             <h3>{element.name}</h3>
             <p>{element.content}</p>
           </li>
@@ -38,7 +38,7 @@ const News = () => {
     // Ésta es la lista de novedades filtradas
     return filteredNews.length
       ? filteredNews.map((element) => (
-          <li className="card-info" key={element.id}>
+          <li className="news__listitem" key={element.id}>
             <h3>{element.name}</h3>
             <p>{element.content}</p>
           </li>
@@ -57,11 +57,11 @@ const News = () => {
   };
 
   return (
-    <div className="news">
+    <>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
+        <div className="news">
           <h1 className="news__title">Novedades</h1>
           <section className="news__videoplayercontainer">
             <h1 className="news__subtitle">Último evento</h1>
@@ -74,7 +74,7 @@ const News = () => {
           {showComments && <Comments />}
         </div>
       )}
-    </div>
+    </>
   );
 };
 

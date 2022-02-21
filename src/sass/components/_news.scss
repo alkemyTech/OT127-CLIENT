@@ -1,0 +1,31 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+@use "../base/typography";
+
+.news {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    @include roboto-regular-bold;
+  }
+  &__subtitle {
+    @include roboto-regular;
+  }
+  &__videoplayercontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &__list {
+  }
+  &__listitem {
+    list-style: none;
+    h3 {
+    }
+    p {
+    }
+  }
+}
