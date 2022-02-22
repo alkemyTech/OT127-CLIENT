@@ -113,7 +113,7 @@ const HomeForm = () => {
                         <label htmlFor="welcome" className="form__label">
                             Mensaje de Bienvenida
                         </label>
-                        <Field name="welcome" className='form__input' />
+                        <Field title="welcome" name="welcome" className='form__input' placeholder="Bienvenido!" />
                         <ErrorMessage name="welcome" className='form__error' component="p" />
                         <p className='form__label'>Slides</p>
                         <FieldArray name="slides">
@@ -126,18 +126,21 @@ const HomeForm = () => {
                                         <Field
                                             name={`slides.${i}.name`}
                                             className='form__input'
+                                            placeholder="Dia de campo"
                                         />
                                         <ErrorMessage className='form__error' name={`slides.${i}.name`} component="p" />
                                         <label className="form__label">Descripción</label >
                                         <Field
                                             name={`slides.${i}.description`}
                                             className='form__input'
+                                            placeholder="Una vez al año nos vamos de dia de campo a la plaza"
                                         />
                                         <ErrorMessage className='form__error' name={`slides.${i}.description`} component="p" />
                                         <label className="form__label">URL de la imagen</label>
                                         <Field
                                             name={`slides.${i}.image`}
                                             className='form__input'
+                                            placeholder="link de una imagen"
                                         />
                                         <ErrorMessage className='form__error' name={`slides.${i}.image`} component="p" />
                                     </div>

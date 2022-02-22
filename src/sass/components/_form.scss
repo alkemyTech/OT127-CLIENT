@@ -25,6 +25,11 @@
     border-radius: 10px;
     margin: 0 0 1em 0;
     border-style: none;
+    padding-left: 10px;
+    outline: none;
+    &:focus {
+      border: 2px solid $green-blue;
+    }
   }
   &__label {
     margin: 0.5em 0 0.5em 0;
