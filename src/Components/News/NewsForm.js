@@ -1,79 +1,71 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import * as Yup from "yup";
 import { useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import {
+  sweetAlertError,
+  sweetAlertSuccess,
+} from "../../Services/sweetAlertServices";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
-import axios from "axios";
-import { sweetAlertError } from "../../Services/sweetAlertServices";
 
 const NewsForm = () => {
+  const URL_NEWS = process.env.REACT_APP_ENDPOINTS_NEWS;
+  const URL_CATEGORIES = process.env.REACT_APP_ENDPOINT_CATEGORIES;
+
   const [initialValues, setInitialValues] = useState({
     name: "",
-    contenido: "",
-    categorie: "",
+    content: "",
+    category_id: "",
     image: "",
   });
-  const [ordersList, setOrdersList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dataCategorie, setDataCategorie] = useState([]);
 
   const { id } = useParams();
-  const url = "http://ongapi.alkemy.org/api/news";
-  const urlCategories = "http://ongapi.alkemy.org/api/categories";
 
   const getCategorieData = () => {
-    if (id) {
-      axios
-        .get(urlCategories)
-        .then((response) => {
-          const dataCategorie = response.data.data;
-          setDataCategorie(dataCategorie);
-        })
-        .catch((error) => {
-          return error;
-        });
-    }
-  };
-
-  const getOrdersList = async () => {
-    await axios
-      .get(url)
-      .then((res) => {
-        let data = res.data.data;
-        const orderBlackList = data
-          .map((data) => data.order)
-          .filter((order) => order !== initialValues.order);
-        setOrdersList(orderBlackList);
+    axios
+      .get(URL_CATEGORIES)
+      .then((response) => {
+        const dataCategorie = response.data.data;
+        setDataCategorie(dataCategorie);
       })
-      .catch((err) => {
-        alert(err.message);
+      .catch((error) => {
+        return error;
       });
   };
+
+  const toDataURL = (blob) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
 
   const getDataID = async (id) => {
     setLoading(true);
 
-    await axios
-      .get(`${url}/${id}`)
-      .then((res) => {
-        if (res.data.success) {
-          const { name, contenido, image } = res.data.data;
-          setInitialValues({
-            name: name,
-            contenido: contenido,
-            image: image,
-            id: true,
+    await axios.get(`${URL_NEWS}/${id}`).then((res) => {
+      if (res.data.success) {
+        const { name, content, image, category_id } = res.data.data;
+        //Es necesario encodear la URL que viene de la API para que se pueda editar con exito.
+        axios
+          .get(image, { responseType: "blob" })
+          .then((response) => toDataURL(response.data))
+          .then((encoded) => {
+            setInitialValues({
+              name: name,
+              content: content,
+              image: encoded,
+              category_id: category_id,
+            });
           });
-        } else {
-          const { status } = res.data;
-          alert(status.message);
-        }
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+      }
+    });
     setLoading(false);
   };
 
@@ -81,14 +73,13 @@ const NewsForm = () => {
     if (id) {
       getDataID(id);
     }
-    getOrdersList();
     getCategorieData();
   }, []); //eslint-disable-line
 
   const toBase64 = (file) => {
     return new Promise((resolve) => {
       const reader = new FileReader();
-      reader.readAsDataURL(file);
+      reader.readURL_CATEGORIESataURL_NEWS(file);
       reader.onloadend = () => {
         resolve(reader.result);
       };
@@ -106,11 +97,16 @@ const NewsForm = () => {
     }
 
     if (id) {
-      await axios.put(`${url}/${id}`, formValues).catch((err) => {
-        sweetAlertError("No se pudo actualizar esta novedad.");
-      });
+      await axios
+        .put(`${URL_NEWS}/${id}`, formValues)
+        .then((res) => {
+          sweetAlertSuccess("Se actualizo con exito");
+        })
+        .catch((err) => {
+          sweetAlertError("No se pudo actualizar esta novedad.");
+        });
     } else {
-      await axios.post(url, formValues).catch((err) => {
+      await axios.post(URL_NEWS, formValues).catch((err) => {
         sweetAlertError("No se pudo crear esta novedad.");
       });
     }
@@ -122,13 +118,7 @@ const NewsForm = () => {
     name: Yup.string()
       .min(4, "Debe tener al menos 4 caracteres")
       .required("Este campo es obligatorio"),
-    contenido: Yup.string().required("Este campo es obligatorio"),
-    id: Yup.boolean(),
-    order: Yup.number()
-      .moreThan(0, "Debe ser un numero mayor o igual a cero")
-      .required("Este campo es obligatorio")
-      .integer()
-      .notOneOf(ordersList, "Numero de orden ya esta en uso"),
+    content: Yup.string().required("Este campo es obligatorio"),
     image: Yup.string().required("Este campo es obligatorio"),
   });
 
@@ -141,19 +131,7 @@ const NewsForm = () => {
           enableReinitialize={true}
           initialValues={initialValues}
           validationSchema={validations}
-          onSubmit={async (values, { resetForm }) => {
-            let formValues = {
-              name: values.name,
-              contenido: values.contenido,
-              categorie: values.categorie,
-              image: values.image,
-            };
-            await handleSubmit(formValues);
-            // limpio el input file
-            inputFileRef.current.value = "";
-
-            resetForm();
-          }}
+          onSubmit={handleSubmit}
         >
           {({ setFieldValue }) => (
             <Form className="form">
@@ -172,10 +150,10 @@ const NewsForm = () => {
                 render={(msg) => <div className="form__error">{msg}</div>}
               />
 
-              <label className="form__label" htmlFor="contenido">
+              <label className="form__label" htmlFor="content">
                 Contenido
               </label>
-              <Field name="contenido">
+              <Field name="content">
                 {({ field }) => (
                   <>
                     <CKEditor
@@ -192,19 +170,19 @@ const NewsForm = () => {
                 )}
               </Field>
               <ErrorMessage
-                name="contenido"
+                name="content"
                 render={(msg) => <div className="form__error">{msg}</div>}
               />
 
-              <label className="form__label" htmlFor="categorie">
+              <label className="form__label" htmlFor="category_id">
                 Categorias
               </label>
               <Field
                 className="form__input"
                 component="select"
                 as="select"
-                name="categorie"
-                type="categorie"
+                name="category_id"
+                type="category_id"
               >
                 {dataCategorie.map((element) => {
                   return (
@@ -219,11 +197,11 @@ const NewsForm = () => {
                 })}
               </Field>
               <ErrorMessage
-                name="categorie"
+                name="category_id"
                 render={(msg) => <div className="form__error">{msg}</div>}
               />
 
-              <label className="form__label" htmlFor="categorie">
+              <label className="form__label" htmlFor="category_id">
                 Cargar Imagen
               </label>
               <input
@@ -234,8 +212,10 @@ const NewsForm = () => {
                 }}
                 accept=".jpg, .png"
               />
-              <ErrorMessage name="image" render={(msg) => <div className="form__error">{msg}</div>} />
-
+              <ErrorMessage
+                name="image"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
               <button type="submit" className="form__button">
                 Enviar
               </button>
