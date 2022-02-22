@@ -23,11 +23,20 @@ const MemberForm = () => {
   const handleSubmit = async (formValues) => {
     setLoading(true);
     if (id) {
-      await axios.put(`${baseUrl}/${id}`, formValues).catch((err) => {
+      await axios
+      .put(`${baseUrl}/${id}`, formValues)
+      .catch((err) => {
         alert(err.message);
       });
     } else {
-      await axios.post(baseUrl, formValues).catch((err) => {
+      await axios
+      .post(baseUrl, formValues)
+      .then((res) => {
+        console.log(formValues);
+        console.log(res);
+        setFormValues(res.data.data);
+      })
+      .catch((err) => {
         alert(err.message);
       });
     }
@@ -81,8 +90,9 @@ const MemberForm = () => {
               .required("Campo obligatorio")
               .email("Formato invalido"),
           })}
-          onSubmit={({ resetForm }) => {
-            handleSubmit();
+          onSubmit={({formValues, resetForm }) => {
+            console.log(formValues)
+            handleSubmit(formValues);
             resetForm();
           }}
         >
