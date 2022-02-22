@@ -72,7 +72,9 @@ const NewsList = () => {
               >
                 <MenuItem value={0}>Todos</MenuItem>
                 {categories.map(({ id, name }) => (
-                  <MenuItem value={id}>{name}</MenuItem>
+                  <MenuItem key={id} value={id}>
+                    {name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -91,28 +93,27 @@ const NewsList = () => {
               </tr>
             </thead>
             <tbody className="table__body">
-              {news.length &&
-                news.map((element) => (
-                  <tr key={element.id} className="table__row">
-                    <td className="table__cell">{element.name}</td>
-                    <td className="table__cell">
-                      <img src={element.image} alt="News_image" width="100" />
-                    </td>
-                    <td className="table__cell-edit">
-                      <button className="table__edit" onClick={handleClickEdit}>
-                        Editar
-                      </button>
-                    </td>
-                    <td className="table__cell-delete">
-                      <button
-                        className="table__delete"
-                        onClick={handleClickDelete}
-                      >
-                        Eliminar
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+              {news.map((element) => (
+                <tr key={element.id} className="table__row">
+                  <td className="table__cell">{element.name}</td>
+                  <td className="table__cell">
+                    <img src={element.image} alt="News_image" width="100" />
+                  </td>
+                  <td className="table__cell-edit">
+                    <button className="table__edit" onClick={handleClickEdit}>
+                      Editar
+                    </button>
+                  </td>
+                  <td className="table__cell-delete">
+                    <button
+                      className="table__delete"
+                      onClick={handleClickDelete}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         )}
