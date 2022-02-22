@@ -1,3 +1,5 @@
+@use "../abstracts/mixins";
+
 .thanks {
   &__container {
     display: flex;
@@ -15,9 +17,7 @@
     margin: 15px;
   }
   &__title {
-    @include outfit-title;
-    color: $dark-blue;
-    margin-bottom: 15px;
+    @include title;
   }
   &__text {
     @include outfit-regular-bold;
