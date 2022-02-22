@@ -9,8 +9,12 @@ import { APIloginUser } from "../../Services/userService";
 import { sweetAlertError } from "../../Services/sweetAlertServices";
 import { useEffect } from "react";
 
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+
 const LoginForm = () => {
   const [isLoading, setisLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const token = localStorage.getItem("TOKEN");
@@ -75,7 +79,17 @@ const LoginForm = () => {
           <label htmlFor="password" className="form__label">
             Contraseña
           </label>
-          <Field name="password" type="password" className="form__input" />
+          <Field
+            name="password"
+            type={showPassword ? "text" : "password"}
+            className="form__input"
+          />
+          {!showPassword ? (
+            <VisibilityIcon onClick={() => setShowPassword(!showPassword)} />
+          ) : (
+            <VisibilityOff onClick={() => setShowPassword(!showPassword)} />
+          )}
+
           <ErrorMessage
             name="password"
             render={(msg) => <div className="form__error">{msg}</div>}
