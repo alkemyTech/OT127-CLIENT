@@ -9,7 +9,7 @@ const Donacion = ({ title }) => {
 
   useEffect(() => {
     if (!isLogged) {
-      history.push("/");
+      history.push("/login");
     }
   }, []); //eslint-disable-line
 

@@ -15,7 +15,7 @@ const About = ({
 
   useEffect(() => {
     if (!isLogged) {
-      history.push("/");
+      history.push("/login");
     }
     dispatch(getUs());
   }, []);

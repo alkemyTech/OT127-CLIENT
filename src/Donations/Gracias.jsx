@@ -8,7 +8,7 @@ const Gracias = () => {
 
   useEffect(() => {
     if (!isLogged) {
-      history.push("/");
+      history.push("/login");
     }
   }, []); //eslint-disable-line
   return (

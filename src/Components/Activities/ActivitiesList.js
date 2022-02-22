@@ -31,7 +31,7 @@ const ActivitiesList = () => {
 
   useEffect(() => {
     if (!isLogged) {
-      history.push("/");
+      history.push("/login");
     }
     getActivities();
   }, []);
