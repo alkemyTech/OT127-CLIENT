@@ -35,7 +35,7 @@ const NewsletterForm = () => {
             }, 2000);
           } else {
             if (userSubscribed) {
-              setUserFeedback("Ya te habías subscripto");
+              setUserFeedback("Ya te habías suscripto");
               setShowFeedback(true);
               setTimeout(() => {
                 setShowFeedback(false);
