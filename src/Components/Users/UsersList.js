@@ -6,7 +6,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
+import { deleteUser } from "../../Services/userService"
 
 const UsersList = () => {
   const dispatch = useDispatch();
@@ -20,12 +21,16 @@ const UsersList = () => {
     dispatch(getUsers());
   }, []); //eslint-disable-line
 
-  const handleEdit = (values) => {
-    // TO DO: Logica para editar un usuario
-  };
-
-  const handleDelete = (values) => {
-    // TO DO: Logica para eliminar un usuario
+  const handleDelete = (id) => {
+    sweetAlertConfirm(
+      "Eliminar usuario",
+      "Seguro quieres eliminar al usuario?"
+    ).then((res) => {
+      res && deleteUser(id);
+      setTimeout(() => {
+        dispatch(getUsers());
+      }, 2000);
+    });
   };
 
   const handleRoleChange = (e) => {
@@ -90,8 +95,8 @@ const UsersList = () => {
               <td className="usersList__th">{user.name}</td>
               <td className="usersList__th">{user.email}</td>
               <td className="usersList__th usersList__action">
-                <button onClick={() => handleEdit(user)}>EDITAR</button>
-                <button onClick={() => handleDelete(user)}>ELIMINAR</button>
+                <Link to={`/backoffice/users/edit/${user.id}`}>Editar</Link>
+                <button onClick={() => handleDelete(user.id)}>ELIMINAR</button>
               </td>
             </tr>
           ))}
