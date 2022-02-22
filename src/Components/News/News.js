@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getNews } from "../../Redux/reducers/newsSlice";
 import { getFilteredNews } from "../../Services/newsService";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
@@ -13,9 +14,14 @@ const News = () => {
   const [showComments, setShowComments] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [filteredNews, setFilteredNews] = useState([]);
+  const history = useHistory();
+  const isLogged = useSelector((state) => state.authReducer.userIsLogged);
   useBottomScrollListener(() => setShowComments(true));
 
   useEffect(() => {
+    if (!isLogged) {
+      history.push("/");
+    }
     dispatch(getNews());
     setIsLoading(false);
   }, []); //eslint-disable-line
