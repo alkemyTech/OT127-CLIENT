@@ -8,7 +8,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategory } from "../../Services/categoriesService";
 import Spinner from "../Spinner/Spinner";
-
 import SearchForm from "./SearchForm";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -78,7 +77,7 @@ const NewsList = () => {
               >
                 <MenuItem value={0}>Todos</MenuItem>
                 {categories.map(({ id, name }) => (
-                  <MenuItem value={id}>{name}</MenuItem>
+                  <MenuItem key={id} value={id}>{name}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -97,8 +96,7 @@ const NewsList = () => {
               </tr>
             </thead>
             <tbody className="table__body">
-              {news.length &&
-                news.map((element) => (
+              {news.map((element) => (
                   <tr key={element.id} className="table__row">
                     <td className="table__cell">{element.name}</td>
                     <td className="table__cell">
