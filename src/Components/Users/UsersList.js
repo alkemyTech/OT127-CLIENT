@@ -20,8 +20,6 @@ const UsersList = () => {
     dispatch(getUsers());
   }, []); //eslint-disable-line
 
-
-
   const handleEdit = (values) => {
     // TO DO: Logica para editar un usuario
   };
