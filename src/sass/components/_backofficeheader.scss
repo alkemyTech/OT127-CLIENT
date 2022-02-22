@@ -1,0 +1,33 @@
+.backofficeheader {
+  width: 100%;
+  background-color: $green-blue;
+  color: $font-white;
+  display: flex;
+  align-items: center;
+  padding: 0 8vw;
+  height: 70px;
+  &__title {
+    @include outfit-title;
+    margin: 0 0 0 5vw;
+  }
+  &__button {
+    display: flex;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    height: 35px;
+    width: 35px;
+    background-color: transparent;
+    transition: $transition-time;
+    &:hover {
+      background-color: #0b91ac;
+    }
+  }
+  &__menu {
+    color: $font-white;
+    font-size: 27px;
+  }
+}
