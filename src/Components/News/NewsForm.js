@@ -79,14 +79,14 @@ const NewsForm = () => {
   const toBase64 = (file) => {
     return new Promise((resolve) => {
       const reader = new FileReader();
-      reader.readURL_CATEGORIESataURL_NEWS(file);
+      reader.readAsDataURL(file);
       reader.onloadend = () => {
         resolve(reader.result);
       };
     });
   };
 
-  const handleSubmit = async (formValues) => {
+  const handleSubmit = async (formValues, { resetForm }) => {
     let { image, ...rest } = formValues;
     if (typeof image === "object") {
       image = await toBase64(image);
@@ -106,9 +106,15 @@ const NewsForm = () => {
           sweetAlertError("No se pudo actualizar esta novedad.");
         });
     } else {
-      await axios.post(URL_NEWS, formValues).catch((err) => {
-        sweetAlertError("No se pudo crear esta novedad.");
-      });
+      await axios
+        .post(URL_NEWS, formValues)
+        .then((res) => {
+          sweetAlertSuccess("Se creo con exito");
+          resetForm();
+        })
+        .catch((err) => {
+          sweetAlertError("No se pudo crear esta novedad.");
+        });
     }
   };
 
