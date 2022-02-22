@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../Titulosynovedades/Title";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUs } from "../../Redux/reducers/usSlice";
+import Spinner from "../Spinner/Spinner";
 
 
 const About = ({
@@ -9,18 +10,28 @@ const About = ({
 }) => {
 	const dispatch = useDispatch()
 	const info = useSelector(state => state.usReducer.info)
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
+		setLoading(true);
 		dispatch(getUs())
+		setLoading(false);
 	}, []);
 	// El texto en un futuro se obtendra desde una API
 	return (
 		<>
-			<Title title="Nosotros" />
-			<main>
-				<p>{info.name}</p>
-				<p>{info.short_description}</p>
-			</main>
+			{loading ? (
+				<Spinner/>
+			) : (
+				<>
+				<Title title="Nosotros" />
+				<main>
+					<p>{info.name}</p>
+					<p>{info.short_description}</p>
+				</main>
+				</>
+				)
+			}
 		</>
 	);
 };
