@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Donacion = ({ title }) => {
   const mercadoPagoCheckout = "https://mpago.la/1NKGewb";
+  const history = useHistory();
+  const isLogged = useSelector((state) => state.authReducer.userIsLogged);
+
+  useEffect(() => {
+    if (!isLogged) {
+      history.push("/login");
+    }
+  }, []); //eslint-disable-line
 
   return (
     <div className="donation__container">
