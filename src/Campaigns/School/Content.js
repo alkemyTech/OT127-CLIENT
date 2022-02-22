@@ -1,6 +1,6 @@
 import React from 'react';
 import Countdown from "react-countdown";
-import '../../sass/pages/_schoolContent.scss'
+
 
 const Content = () => {
 
@@ -13,44 +13,42 @@ const Content = () => {
   };
 
   return (
-    <div className="content__container">
-      <h2 className="contenInfo">
-        <span className='contenInfo__fecha' >25/02/2022</span>
-        <span className='contenInfo__hora' >13hs</span>
-        <span className='contenInfo__lugar'>calle 127, barrio Quilmes, Buenos Aires</span>
+    <div className="school-content__container">
+      <h2 className="school-content__title">
+        26/02/2022 13hs calle 123, Quilmes, Buenos Aires
       </h2>
       <img
-        src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-1.jpg"}
+        src={process.env.PUBLIC_URL + "/images/school-campaing/school1.jpg"}
         alt=""
-        className="content__img"
+        className="school-content__img"
       />
-      <h3 className="content__countdown">
+      <h3 className="school-content__countdown">
         <Countdown date={new Date(2022, 1, 25, 0, 0, 0)} renderer={renderer} />
       </h3>
       <img
-        src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-2.jpg"}
+        src={process.env.PUBLIC_URL + "/images/school-campaing/school2.jpg"}
         alt=""
-        className="content__img"
+        className="school-content__img"
       />
-      <p className="content__description">
-        Dona tus juguetes nuevo o usados en buenas condiciones. Los juguetes son
+      <p className="school-content__description">
+        Dona tus utiles escolares, nuevo o usados en buenas condiciones. Los utiles escolares son
         indispensables en el aprendizaje de los niños, fomentan su desarrollo
         cognitivo, su imaginación, su diversión y, en definitiva, su felicidad.
       </p>
       <img
-        src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-4.jpg"}
+        src={process.env.PUBLIC_URL + "/images/school-campaing/school3.jpg"}
         alt=""
-        className="content__img"
+        className="school-content__img"
       />
       <img
-        src={process.env.PUBLIC_URL + "/images/toys-campaign/niños-3.jpg"}
+        src={process.env.PUBLIC_URL + "/images/school-campaing/school4.jpg"}
         alt=""
-        className="content__img"
+        className="school-content__img"
       />
       <img
-        src={process.env.PUBLIC_URL + "/images/toys-campaign/juguete-5.jpg"}
+        src={process.env.PUBLIC_URL + "/images/school-campaing/school5.jpg"}
         alt=""
-        className="content__img"
+        className="school-content__img"
       />
     </div>
   );
