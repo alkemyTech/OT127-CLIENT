@@ -11,10 +11,6 @@
   justify-content: center;
   align-items: center;
 
-  @media (min-width: variables.$bp-tv) {
-    background-color: rgba(110, 231, 183, 0.8);
-    opacity: 0.5;
-  }
   &__campaignlogo {
     width: 150px;
     height: 100px;

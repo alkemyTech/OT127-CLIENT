@@ -6,6 +6,7 @@ import {
   sweetAlertSuccess,
 } from "../../Services/sweetAlertServices";
 import * as Yup from "yup";
+import Leaflet from "../../features/leaflet/Leaflet"
 
 const RegisterForm = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -37,7 +38,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <>
+    <div>
       {isLogged ? redirectToHome() : (
         <div className="form__container">
           <Formik
@@ -155,7 +156,8 @@ const RegisterForm = () => {
           </Formik >
         </div >
       )}
-    </>
+      <Leaflet />
+    </div>
   );
 };
 
