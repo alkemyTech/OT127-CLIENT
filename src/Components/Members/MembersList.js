@@ -14,10 +14,12 @@ import {
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow, { tableRowClasses } from "@mui/material/TableRow";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMembers, getMembersSearch } from "../../Redux/reducers/membersSlice";
+import { deleteMember } from "../../Services/membersService"
 
 const MembersList = () => {
   const dispatch = useDispatch();
@@ -27,14 +29,17 @@ const MembersList = () => {
 
   const { members } = useSelector((state) => state.membersReducer);
 
-  const handleEdit = (id) => {
-    // Logica a desarrollar
-  };
-
   const handleDelete = (id) => {
-    // Logica a desarrollar
+    sweetAlertConfirm(
+      "Eliminar miembro.",
+      "Seguro quieres eliminar este miebro?"
+    ).then((res) => {
+      res && deleteMember(id);
+      setTimeout(() => {
+        dispatch(fetchMembers());
+      }, 2000);
+    });
   };
-
   // estilos
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -95,9 +100,7 @@ const MembersList = () => {
                   <img src={member.image} alt={member.name} width="50px" />
                 </StyledTableCell>
                 <StyledTableCell style={{ width: "25%" }}>
-                  <Button color="success" onClick={() => handleEdit(member.id)}>
-                    Editar
-                  </Button>{" "}
+                  <Link to={`/backoffice/members/edit/${member.id}`}>Editar</Link>
                   <Button color="error" onClick={() => handleDelete(member.id)}>
                     Eliminar
                   </Button>
