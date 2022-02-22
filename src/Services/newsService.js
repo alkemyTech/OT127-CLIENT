@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Get } from "./publicApiService";
 import { sweetAlertError } from "./sweetAlertServices";
 
@@ -16,6 +17,14 @@ export const getNews = async (setMethod) => {
       sweetAlertError("Ha ocurrido un problema!");
     }
   }
+};
+
+export const getSearchByCategory = ({ value, select }) => {
+  return value !== ""
+    ? axios.get(
+        `http://ongapi.alkemy.org/api/news?search=${value}&category=${select}`
+      )
+    : axios.get(`http://ongapi.alkemy.org/api/news?category=${select}`);
 };
 
 export const getFilteredNews = async (value) => {
