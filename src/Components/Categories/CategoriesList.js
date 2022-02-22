@@ -10,6 +10,8 @@ import {
   messageCategoriesSel,
   errorCategoriesSel,
 } from "../../Redux/selector/selectorCategories";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
+import { deleteCategory } from "../../Services/categoriesService"
 
 const CategoriesList = () => {
   const dispatch = useDispatch();
@@ -38,12 +40,16 @@ const CategoriesList = () => {
     return newDate.toLocaleDateString("es-ES", opciones);
   };
 
-  const handleEdit = () => {
-    // Logica para editar
-  };
-
-  const handleDelete = () => {
-    // Logica para eliminar
+  const handleDelete = (id) => {
+    sweetAlertConfirm(
+      "Eliminar categoría",
+      "Seguro quieres eliminar la categoría?"
+    ).then((res) => {
+      res && deleteCategory(id);
+      setTimeout(() => {
+        dispatch(getCategoriesAction());
+      }, 2000);
+    });
   };
 
   const handleUserSearch = (e) => {
@@ -69,20 +75,19 @@ const CategoriesList = () => {
           <tr>
             <th>Nombre</th>
             <th>Fecha de Creación</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {categories?.data.map((categori) => (
-            <tr key={categori.id}>
-              <td>{categori.name}</td>
-              <td>{handleDate(categori.created_at)}</td>
+          {categories?.data.map((category) => (
+            <tr key={category.id}>
+              <td>{category.name}</td>
+              <td>{handleDate(category.created_at)}</td>
+              {/* <td>
+                <Link to={`/backoffice/categories/create/${category.id}`}>Editar</Link>
+              </td> */}
               <td>
-                <button onClick={handleEdit}>Editar</button>
-              </td>
-              <td>
-                <button onClick={handleDelete}>Editar</button>
+                <button onClick={() => handleDelete(category.id)}>Eliminar</button>
               </td>
             </tr>
           ))}
