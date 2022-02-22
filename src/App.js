@@ -81,10 +81,10 @@ function App() {
                         <CSSTransition
                           in={match != null}
                           timeout={500}
-                          classNames="PageContainer__page"
+                          className="PageContainer__page"
                           unmountOnExit
                         >
-                          <div classNames="PageContainer__page">
+                          <div className="PageContainer__page">
                             {title ? (
                               <Component title={title} />
                             ) : (
@@ -101,7 +101,7 @@ function App() {
             <Route path="/school-campaign" exact component={SchoolCampaign} />
             <Route path="/toys-campaign" exact component={ToysCampaign} />
             <Route path="/backoffice" component={BackOffice} />
-            <Route path="*" component={PageNotFound} />
+            <Route component={PageNotFound} />
           </Suspense>
         </Switch>
       </BrowserRouter>
