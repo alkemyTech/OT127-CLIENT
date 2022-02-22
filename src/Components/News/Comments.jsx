@@ -34,7 +34,7 @@ const Comments = () => {
                   src={comment.image}
                   alt={comment.text}
                 />
-                <p className="comments__text">{comment.text}</p>
+                <q className="comments__text">{comment.text}</q>
               </div>
             );
           })
