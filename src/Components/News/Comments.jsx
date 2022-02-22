@@ -22,15 +22,20 @@ const Comments = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Comentarios</h1>
-      <div>
+    <div className="comments">
+      <h1 className="comments__title">Comentarios</h1>
+      <div className="comment__container">
         {comments.length ? (
           comments.map((comment) => {
             return (
-              <p key={comment.id}>
-                <q>{comment.text}</q>
-              </p>
+              <div className="comments__cardcontainer" key={comment.id}>
+                <img
+                  className="comments__img"
+                  src={comment.image}
+                  alt={comment.text}
+                />
+                <p className="comments__text">{comment.text}</p>
+              </div>
             );
           })
         ) : (
