@@ -41,8 +41,8 @@ const NewsList = () => {
 
   const handleClickDelete = (id) => {
     sweetAlertConfirm(
-      "Eliminar actividad",
-      "Seguro quieres eliminar la actividad?"
+      "Eliminar novedad",
+      "Seguro quieres eliminar la novedad?"
     ).then((res) => {
       res && deleteNews(id);
       setTimeout(() => {
