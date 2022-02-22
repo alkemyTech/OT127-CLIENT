@@ -105,47 +105,50 @@ const HomeForm = () => {
         >
             {({
                 values,
-            }) => (<Form className='homeForm'>
-                <p className='homeForm__title'>Formulario de Edición Home</p>
-                <p className='homeForm__subtitle'>Modifique los campos que desee editar</p>
-                <label htmlFor="welcome" className="homeForm__label">
-                    Texto de Bienvenida
-                </label>
-                <Field name="welcome" className='input' />
-                <ErrorMessage name="welcome" />
-                <p className='homeForm__sliders-title'>Slides</p>
-                <div className='homeForm__sliders'>
-                    <FieldArray name="slides">
-                        {() => (values.slides.map((slide, i) => {
-                            return (
-                                <div key={i} className='homeForm__slide'>
-                                    <hr className='homeForm__divider' />
-                                    <p className="homeForm__label">ID: {slide.id}</p>
-                                    <label className="homeForm__label">Titulo</label>
-                                    <Field
-                                        name={`slides.${i}.name`}
-                                        className='input'
-                                    />
-                                    <ErrorMessage className='homeForm__error' name={`slides.${i}.name`} component="div" />
-                                    <label className="homeForm__label">Descripción</label >
-                                    <Field
-                                        name={`slides.${i}.description`}
-                                        className='input'
-                                    />
-                                    <ErrorMessage className='homeForm__error' name={`slides.${i}.description`} component="div" />
-                                    <label className="homeForm__label">URL de la imagen</label>
-                                    <Field
-                                        name={`slides.${i}.image`}
-                                        className='input'
-                                    />
-                                    <ErrorMessage className='homeForm__error' name={`slides.${i}.image`} component="div" />
-                                </div>
-                            )
-                        }))}
-                    </FieldArray>
+            }) => (
+                <div className="form__container">
+                    <Form className='form'>
+                        <p className='form__title'>Editar elementos del inicio</p>
+                        <p className='form__subtitle'>Modifique los campos que desee editar</p>
+                        <label htmlFor="welcome" className="form__label">
+                            Mensaje de Bienvenida
+                        </label>
+                        <Field name="welcome" className='form__input' />
+                        <ErrorMessage name="welcome" className='form__error' component="p" />
+                        <p className='form__label'>Slides</p>
+                        <FieldArray name="slides">
+                            {() => (values.slides.map((slide, i) => {
+                                return (
+                                    <div key={i} className='form__subcontainer'>
+                                        <hr className='form__divider' />
+                                        <p className="form__label">ID: {slide.id}</p>
+                                        <label className="form__label">Titulo</label>
+                                        <Field
+                                            name={`slides.${i}.name`}
+                                            className='form__input'
+                                        />
+                                        <ErrorMessage className='form__error' name={`slides.${i}.name`} component="p" />
+                                        <label className="form__label">Descripción</label >
+                                        <Field
+                                            name={`slides.${i}.description`}
+                                            className='form__input'
+                                        />
+                                        <ErrorMessage className='form__error' name={`slides.${i}.description`} component="p" />
+                                        <label className="form__label">URL de la imagen</label>
+                                        <Field
+                                            name={`slides.${i}.image`}
+                                            className='form__input'
+                                        />
+                                        <ErrorMessage className='form__error' name={`slides.${i}.image`} component="p" />
+                                    </div>
+                                )
+                            }))}
+                        </FieldArray>
+
+                        <button type='submit' className="form__button">GUARDAR CAMBIOS</button>
+                    </Form>
                 </div>
-                <button type='submit' className='homeForm__button button'>GUARDAR CAMBIOS</button>
-            </Form>)}
+            )}
         </Formik >
 
     )
