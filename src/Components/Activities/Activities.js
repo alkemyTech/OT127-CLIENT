@@ -1,57 +1,35 @@
-import {useEffect} from "react"
-import {useDispatch, useSelector} from "react-redux";
-import {
-	getActivities,
-	getActivitiesSearch,
-} from "../../Redux/reducers/activitiesSlice";
-import {useHistory} from "react-router-dom";
-import {Link} from "react-router-dom";
-import {
-	sweetAlertInfo, //eslint-disable-line
-	sweetAlertError, //eslint-disable-line
-} from "../../Services/sweetAlertServices";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
-
-// ! Sacar Mock y hacer logica de Get y agregar logica de Edit, Delete y renderizar en Backoffice
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getActivities,
+  getActivitiesSearch,
+} from "../../Redux/reducers/activitiesSlice";
+import { activitiesController } from "../../Services/publicActivityService";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
 
 const Activities = () => {
 	const dispatch = useDispatch();
 	const activities = useSelector((state) => state.activitiesReducer.activities);
 
-	const history = useHistory();
+  useEffect(() => {
+    dispatch(getActivities());
+  }, []); //eslint-disable-line
 
-	useEffect(() => {
-		dispatch(getActivities());
-	}, [dispatch]);
+  // Eliminar y actualizar el estado para mostar sin el que esta eliminado
+  const handleDelete = (id) => {
+    sweetAlertConfirm(
+      "Eliminar actividad",
+      "Seguro quieres eliminar la actividad?"
+    ).then((res) => {
+      res && activitiesController.delete(id);
+      setTimeout(() => {
+        dispatch(getActivities());
+      }, 2000);
+    });
+  };
 
-	// Editar redireccion al formulario segun el ID que seleciona de la tabla
-	const handleEdit = (id) => {
-		history.push(`/backoffice/create-activity/${id}`);
-	};
-
-	// Eliminar y actualizar el estado para mostar sin el que esta eliminado
-	/* const handleDelete = async (id, name, image) => {
-    try {
-      const url = `${process.env.REACT_APP_ACTIVITIES_ENDPOINT}/${id}`;
-      await Axios.delete(url, {
-        id,
-        name,
-        image,
-      });
-      const activitiesUpDate = activities.filter(
-        (activity) => activity.id !== id
-      );
-      setActivities(activitiesUpDate);
-      sweetAlertInfo("Registro Eliminado con Exito");
-    } catch (error) {
-      return error;
-    }
-  }; */
-
-	// Eliminar y actualizar el estado para mostar sin el que esta eliminado
-	const handleDelete = async (id, name, image) => {
-		// logica desarrolada por david
-	};
 
 	const handleActivitiesSearch = (e) => {
 		const {value} = e.target;
@@ -99,12 +77,9 @@ const Activities = () => {
 										/>
 									</td>
 									<td className="table__cell-edit">
-										<button
-											className="table__edit"
-											onClick={() => handleEdit(activity?.id)}
-										>
-											Editar
-										</button>
+									<Link className="table__edit" to={`/backoffice/create-activity/${activity.id}`}>
+                      Editar
+                    </Link>
 									</td>
 									<td className="table__cell-delete">
 										<button
