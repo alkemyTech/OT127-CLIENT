@@ -1,10 +1,5 @@
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import {
-  sweetAlertInfo, //eslint-disable-line
-  sweetAlertError, //eslint-disable-line
-} from "../../Services/sweetAlertServices"; 
 import Spinner from "../Spinner/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,40 +18,29 @@ import {
 import { styled } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow, { tableRowClasses } from "@mui/material/TableRow";
+import { activitiesController } from "../../Services/publicActivityService";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
 
 const Activities = () => {
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activitiesReducer.activities);
 
-  const history = useHistory();
-
   useEffect(() => {
     dispatch(getActivities());
-  }, [dispatch]);
-
-  // Editar redireccion al formulario segun el ID que seleciona de la tabla
-  const handleEdit = (id) => {
-    history.push(`/backoffice/create-activity/${id}`);
-  };
+  }, []); //eslint-disable-line
 
   // Eliminar y actualizar el estado para mostar sin el que esta eliminado
-  /* const handleDelete = async (id, name, image) => {
-    try {
-      const url = `${process.env.REACT_APP_ACTIVITIES_ENDPOINT}/${id}`;
-      await Axios.delete(url, {
-        id,
-        name,
-        image,
-      });
-      const activitiesUpDate = activities.filter(
-        (activity) => activity.id !== id
-      );
-      setActivities(activitiesUpDate);
-      sweetAlertInfo("Registro Eliminado con Exito");
-    } catch (error) {
-      return error;
-    }
-  }; */
+  const handleDelete = (id) => {
+    sweetAlertConfirm(
+      "Eliminar actividad",
+      "Seguro quieres eliminar la actividad?"
+    ).then((res) => {
+      res && activitiesController.delete(id);
+      setTimeout(() => {
+        dispatch(getActivities());
+      }, 2000);
+    });
+  };
 
   // estilos
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -124,13 +108,15 @@ const Activities = () => {
                     />
                   </StyledTableCell>
                   <StyledTableCell style={{ width: "25%" }}>
-                    <Button
-                      color="success"
-                      onClick={() => handleEdit(activity.id)}
-                    >
+                    <Link to={`/backoffice/create-activity/${activity.id}`}>
                       Editar
-                    </Button>{" "}
-                    <Button color="error">Eliminar</Button>
+                    </Link>
+                    <Button
+                      color="error"
+                      onClick={() => handleDelete(activity.id)}
+                    >
+                      Eliminar
+                    </Button>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

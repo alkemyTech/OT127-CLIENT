@@ -1,135 +1,122 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import { getNews } from "../../Redux/reducers/newsSlice";
-import { getFilteredNews } from "../../Services/newsService";
+import {
+  getNews,
+  getNewSearch,
+  getNewSearchCategory,
+} from "../../Redux/reducers/newsSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { getAllCategory } from "../../Services/categoriesService";
+import Spinner from "../Spinner/Spinner";
+
 import SearchForm from "./SearchForm";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const NewsList = () => {
+  const [value, setValue] = useState("");
+  const [select, setSelect] = useState(0);
+  const [categories, setCategories] = useState([]);
+
   const dispatch = useDispatch();
-  const [filteredNews, setFilteredNews] = useState([]);
-
-  useEffect(() => {
-    dispatch(getNews());
-  }, []); //eslint-disable-line
-
   const news = useSelector((state) => state.newsReducer.news.data);
 
-  const handleClickEdit = () => {
-    //TODO, acciones editar novedades
-  };
+  useEffect(() => {
+    getAllCategory().then((res) => setCategories(res.data));
+  }, []);
 
-  const handleClickDelete = () => {
-    //TODO, acciones para borrar novedades
-  };
-
-  const newsMap = () => {
-    return news.length
-      ? news.map((element) => (
-          <TableRow
-            key={element.id}
-            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-          >
-            <TableCell component="th" scope="row">
-              {element.name}
-            </TableCell>
-            <TableCell align="right">
-              <img src={element.image} alt="News_image" width="150em" />
-            </TableCell>
-            <TableCell align="right">{element.created_at}</TableCell>
-            <TableCell align="right">
-              <Button
-                variant="outlined"
-                style={{ marginRight: "1em" }}
-                onClick={handleClickEdit}
-              >
-                Edit
-              </Button>
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={handleClickDelete}
-              >
-                Delete
-              </Button>
-            </TableCell>
-          </TableRow>
-        ))
-      : null;
-  };
-
-  const filteredNewsMap = () => {
-    return filteredNews.length
-      ? filteredNews.map((element) => (
-          <TableRow
-            key={element.id}
-            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-          >
-            <TableCell component="th" scope="row">
-              {element.name}
-            </TableCell>
-            <TableCell align="right">
-              <img src={element.image} alt="News_image" width="150em" />
-            </TableCell>
-            <TableCell align="right">{element.created_at}</TableCell>
-            <TableCell align="right">
-              <Button
-                variant="outlined"
-                style={{ marginRight: "1em" }}
-                onClick={handleClickEdit}
-              >
-                Edit
-              </Button>
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={handleClickDelete}
-              >
-                Delete
-              </Button>
-            </TableCell>
-          </TableRow>
-        ))
-      : null;
-  };
-
-  const searchNews = async (event) => {
-    //Ésta función hace la búsqueda de novedades y setea un estado con las noticias filtradas
-    if (event.target.value.length >= 3) {
-      let data = await getFilteredNews(event.target.value);
-      setFilteredNews(data);
+  useEffect(() => {
+    if (select !== 0) {
+      dispatch(getNewSearchCategory({ select, value }));
+    } else if (value.length >= 3) {
+      dispatch(getNewSearch(value));
     } else {
-      setFilteredNews(news);
+      dispatch(getNews());
     }
+  }, [value, select]);
+
+  const handleClickEdit = () => {
+    //TODO, acciones editar novedadesss
+  };
+
+  const handleClickDelete = (id) => {
+    //TODO, acciones editar novedadesss
+  };
+
+  const handleChange = (e) => {
+    setSelect(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    setValue(e.target.value);
   };
 
   return (
-    <div>
-      <Link to="/backoffice/news/create">Create news</Link>
-      <SearchForm searchNews={searchNews}></SearchForm>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Image</TableCell>
-              <TableCell align="right">Created At</TableCell>
-              <TableCell align="right"></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredNews.length ? filteredNewsMap() : newsMap()}
-          </TableBody>
-        </Table>
-      </TableContainer>
+    <div className="table">
+      <div className="table__container">
+        <div className="table__actions">
+          <Link className="table__link" to="/backoffice/news/create">
+            Crear Novedad
+          </Link>
+          <div>
+            <SearchForm searchNews={handleSearch} />
+            <FormControl>
+              <InputLabel>Categorías</InputLabel>
+              <Select
+                label="Categorías"
+                autoWidth
+                onChange={handleChange}
+                value={select}
+              >
+                <MenuItem value={0}>Todos</MenuItem>
+                {categories.map(({ id, name }) => (
+                  <MenuItem value={id}>{name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+        {!news ? (
+          <Spinner />
+        ) : (
+          <table className="table__data">
+            <thead className="table__head">
+              <tr className="table__row">
+                <th className="table__title">Nombre</th>
+                <th className="table__title">Imagen</th>
+                <th className="table__title-edit">Editar</th>
+                <th className="table__title-delete">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody className="table__body">
+              {news.length &&
+                news.map((element) => (
+                  <tr key={element.id} className="table__row">
+                    <td className="table__cell">{element.name}</td>
+                    <td className="table__cell">
+                      <img src={element.image} alt="News_image" width="100" />
+                    </td>
+                    <td className="table__cell-edit">
+                      <button className="table__edit" onClick={handleClickEdit}>
+                        Editar
+                      </button>
+                    </td>
+                    <td className="table__cell-delete">
+                      <button
+                        className="table__delete"
+                        onClick={handleClickDelete}
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 };
