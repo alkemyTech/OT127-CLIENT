@@ -25,6 +25,7 @@ const NewsForm = () => {
   const [dataCategorie, setDataCategorie] = useState([]);
 
   const { id } = useParams();
+  const inputFileRef = useRef();
 
   const getCategorieData = () => {
     axios
@@ -111,6 +112,7 @@ const NewsForm = () => {
         .then((res) => {
           sweetAlertSuccess("Se creó con éxito.");
           resetForm();
+          inputFileRef.current.value = "";
         })
         .catch((err) => {
           sweetAlertError("No se pudo crear esta novedad.");
@@ -118,14 +120,13 @@ const NewsForm = () => {
     }
   };
 
-  const inputFileRef = useRef();
-
   const validations = Yup.object({
     name: Yup.string()
       .min(4, "Debe tener al menos 4 caracteres")
       .required("Este campo es obligatorio"),
     content: Yup.string().required("Este campo es obligatorio"),
     image: Yup.string().required("Este campo es obligatorio"),
+    category_id: Yup.string().required("Este campo es obligatorio"),
   });
 
   return (
@@ -190,6 +191,7 @@ const NewsForm = () => {
                 name="category_id"
                 type="category_id"
               >
+                <option value="">--- Seleccionar ---</option>
                 {dataCategorie.map((element) => {
                   return (
                     <option
