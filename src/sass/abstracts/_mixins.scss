@@ -1,3 +1,5 @@
+@use "../base/typography";
+
 @mixin border-rounded() {
   border-radius: 10px;
 }
@@ -34,16 +36,8 @@
   }
 }
 
-//SE PUEDEN HACER KEYFRAMES
-
-// @mixin fade-in() {
-//   @keyframes fadeIn {
-//     0% {
-//       opacity: 0;
-//     }
-//     100% {
-//       opacity: 1;
-//     }
-//   }
-//   animation: fadeIn 1s linear infinite alternate;
-// }
+@mixin title() {
+  @include outfit-title;
+  font-size: 3rem;
+  margin: 20px;
+}

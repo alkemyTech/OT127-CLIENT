@@ -1,3 +1,4 @@
+@use "../abstracts/mixins";
 .content {
   &__container {
     display: flex;
@@ -22,14 +23,7 @@
   }
 
   &__title {
-    @include roboto-title;
-    color: $dark-blue;
-    text-transform: uppercase;
-    @media only screen and (min-width: 900px) {
-      grid-column-start: span 3;
-      max-width: 400px;
-      place-self: center;
-    }
+    @include title;
   }
   &__description {
     @include roboto-regular-bold;

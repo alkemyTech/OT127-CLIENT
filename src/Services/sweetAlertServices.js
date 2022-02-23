@@ -26,3 +26,21 @@ export const sweetAlertInfo = (text) => {
     text,
   });
 };
+
+export const sweetAlertConfirm = (title, text, imageUrl) => {
+  return MySwal.fire({
+    title,
+    text,
+    imageUrl,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Acepto",
+    cancelButtonText: "No acepto",
+  }).then((resultado) => {
+    if (resultado.value) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+};
