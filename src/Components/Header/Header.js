@@ -17,9 +17,7 @@ const Header = () => {
 
   //     <>
   //       <header className="header">
-  //         <NavLink activeClassName="header__nav-links-active" to="/">
-  //           <img src={logo} alt="" className="header__logo" />
-  //         </NavLink>
+  //
   //         <nav className="header__nav">
   //           {menuItems.map((item) => (
   //             <NavLink
@@ -52,71 +50,66 @@ const Header = () => {
   return (
     <>
       <header className="header">
+        <NavLink
+          activeClassName="header__nav-links-active"
+          to="/"
+          className="header__link"
+        >
+          <img src={logo} alt="" className="header__logo" />
+        </NavLink>
         <nav className="header__nav">
-          <div className="header__nav-left">
-            <NavLink
-              className="header__nav-links"
-              activeClassName="header__nav-links-active"
-              to="/"
-            >
-              Inicio
-            </NavLink>
-          </div>
-          <div className="header__nav-right">
-            {token ? (
-              <ul className="header__nav-list">
-                {menuItems.map((item) => (
-                  <li key={item.name} className="header__nav-item">
-                    <NavLink
-                      className="header__nav-links"
-                      activeClassName="header__nav-links-active"
-                      to={item.link}
-                    >
-                      {item.name}
-                    </NavLink>
-                  </li>
-                ))}
-                {isAuthenticated && isAuthenticated.role_id !== 1 && (
-                  <li className="header__nav-item">
-                    <NavLink
-                      className="header__nav-links"
-                      activeClassName="header__nav-links-active"
-                      to="/contacto"
-                    >
-                      Contacto
-                    </NavLink>
-                  </li>
-                )}
-                <button onClick={logout}>Cerrar sesión</button>
-              </ul>
-            ) : (
-              <div>
-                <NavLink
-                  className="header__nav-links"
-                  activeClassName="header__nav-links-active"
-                  to="/login"
-                >
-                  Iniciar sesión
-                </NavLink>
-                <NavLink
-                  className="header__nav-links"
-                  activeClassName="header__nav-links-active"
-                  to="/register"
-                >
-                  Registrarse
-                </NavLink>
-              </div>
-            )}
-          </div>
-
-          {isAuthenticated && !isAuthenticated.role_id === 1 && (
-            <Link to="/donate">Donar</Link>
+          {token ? (
+            menuItems.map((item) => (
+              <NavLink
+                className="header__link"
+                activeClassName="header__nav-links-active"
+                to={item.link}
+              >
+                {item.name}
+              </NavLink>
+            ))
+          ) : (
+            <>
+              <NavLink
+                className="header__link"
+                activeClassName="header__nav-links-active"
+                to="/login"
+              >
+                Iniciar sesión
+              </NavLink>
+              <NavLink
+                className="header__link"
+                activeClassName="header__nav-links-active"
+                to="/register"
+              >
+                Registrarse
+              </NavLink>
+            </>
           )}
-
-          {/* Atento cuando venga el pull de los estilos que hice, hay que borrar todo lo local, pero pasar el 
-          metodo logout como prop del botton que viene */}
+          {isAuthenticated && isAuthenticated.role_id !== 1 && (
+            <>
+              <NavLink
+                className="header__link"
+                activeClassName="header__nav-links-active"
+                to="/contacto"
+              >
+                Contacto
+              </NavLink>
+            </>
+          )}
         </nav>
+
+        {isAuthenticated && isAuthenticated.role_id === 2 && (
+          <Link to="/donate">Donar</Link>
+        )}
       </header>
+      <div className="header__logbar">
+        {isAuthenticated && (
+          <button onClick={logout} className="header__logbutton">
+            Cerrar sesión
+          </button>
+        )}
+      </div>
     </>
   );
 };
