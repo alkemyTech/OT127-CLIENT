@@ -1,0 +1,38 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+@use "../base/typography";
+
+.toysCampaignHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  padding: 1em 2em;
+  background-color: rgba(110, 231, 183, 1);
+
+  &__campaignLogo {
+    img {
+      width: 200px;
+    }
+  }
+
+  &__title {
+    @include title;
+    display: none;
+    @include breakpoint(desktop) {
+      display: initial;
+    }
+  }
+
+  &__ongLogo {
+    display: none;
+
+    @include breakpoint(tablet-portrait) {
+      display: initial;
+    }
+  }
+
+  @include breakpoint(big-desktop) {
+    background-color: rgba(110, 231, 183, 0.7);
+  }
+}

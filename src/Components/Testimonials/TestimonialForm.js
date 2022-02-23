@@ -5,17 +5,14 @@ import { useEffect, useState, useRef } from "react"
 import { CKEditor } from "@ckeditor/ckeditor5-react"
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
 import axios from "axios"
-
-import "../../sass/components/_form.scss"
-import "./styles.scss"
+import { sweetAlertError } from "../../Services/sweetAlertServices"
 
 const TestimonialForm = () => {
-    const [ name, setName ] = useState("")
-    const [ description, setDescription ] = useState("")
-    const [ image, setImage ] = useState("")
-    const [ create, setCreate ] = useState(true)
-    const url = "http://ongapi.alkemy.org/api/testimonials"
-
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [image, setImage] = useState("")
+    const [create, setCreate] = useState(true)
+    const url = process.env.REACT_APP_ENDPOINT_TESTIMONIALS
     const { id } = useParams()
 
     const Post = async (url, body) => {
@@ -23,7 +20,7 @@ const TestimonialForm = () => {
             const res = await axios.post(url, body)
             return res.data
         } catch (error) {
-            return { success: false, error }
+            sweetAlertError("No se pudo crear el testimonio")
         }
     }
 
@@ -32,7 +29,7 @@ const TestimonialForm = () => {
             const res = await axios.put(`${url}/${id}`, body)
             return res.data
         } catch (error) {
-            return { success: false, error }
+            sweetAlertError("No se pudo actualizar el testimonio")
         }
     }
 
@@ -41,7 +38,7 @@ const TestimonialForm = () => {
             const res = await axios.get(`${url}/${id}`)
             return res.data
         } catch (error) {
-            return { success: false, error }
+            sweetAlertError("No se pudo traer la informacion de los testimonios")
         }
     }
 
@@ -66,9 +63,8 @@ const TestimonialForm = () => {
                     values
                 )
                 formik.setSubmitting(false)
-                alert("Testimonio creado correctamente")
             } catch (error) {
-                alert(error)
+                sweetAlertError("No se pudo crear el testimonio")
             }
         } else {
             try {
@@ -78,9 +74,8 @@ const TestimonialForm = () => {
                     values
                 )
                 formik.setSubmitting(false)
-                alert("Testimonio actualizado correctamente")
             } catch (error) {
-                alert(error)
+                sweetAlertError("No se pudo actualizar el testimonio")
             }
         }
     }
@@ -102,7 +97,7 @@ const TestimonialForm = () => {
                     }
                 )
             } catch (error) {
-                alert(error)
+                sweetAlertError("No se pudo traer la informacion de los testimonios")
             }
         }
     }
@@ -115,12 +110,12 @@ const TestimonialForm = () => {
 
 
     const handleChange = (e, propsFormik) => {
-        if (e.currentTarget.files && e.currentTarget.files[ 0 ]) {
+        if (e.currentTarget.files && e.currentTarget.files[0]) {
             const reader = new FileReader()
             reader.onload = function (e) {
                 propsFormik.setFieldValue("image", e.target.result)
             }
-            reader.readAsDataURL(e.currentTarget.files[ 0 ])
+            reader.readAsDataURL(e.currentTarget.files[0])
         }
     }
 
@@ -158,20 +153,20 @@ const TestimonialForm = () => {
                 {(props) => {
                     return (
                         <Form className="form">
-                            <h3 className="form__header-title">Testimonial Form</h3>
-                            <label className="form__label">Nombre: </label>
+                            <h3 className="testimonialForm__header-title">Testimonial Form</h3>
+                            <label className="testimonialForm__label">Nombre: </label>
                             <Field
                                 name="name"
                                 type="text"
                                 className="input-field"
                             />
-                            <small className="form__text-error">
+                            <small className="testimonialForm__text-error">
                                 {props.initialTouched && props.errors.name}
                             </small>
-                            <label className="form__label">
+                            <label className="testimonialForm__label">
                                 Imagen:
                             </label>
-                            <div className="form__image-container">
+                            <div className="testimonialForm__image-container">
                                 <input
                                     type="file"
                                     ref={inputFileRef}
@@ -182,15 +177,15 @@ const TestimonialForm = () => {
                                     }}
                                 />
                                 <img
-                                    className="form__image-preview"
+                                    className="testimonialForm__image-preview"
                                     src={props.values.image}
                                     alt="imgPreview"
                                 />
                             </div>
-                            <small className="form__text-error">
+                            <small className="testimonialForm__text-error">
                                 {props.initialTouched.image && props.errors.image}
                             </small>
-                            <label className="form__label">Descripcion: </label>
+                            <label className="testimonialForm__label">Descripcion: </label>
                             <CKEditor
                                 name="description"
                                 editor={ClassicEditor}
@@ -203,7 +198,7 @@ const TestimonialForm = () => {
                                     )
                                 }}
                             />
-                            <small className="form__text-error">
+                            <small className="testimonialForm__text-error">
                                 {props.initialTouched.description && props.errors.description}
                             </small>
                             <button type="button"

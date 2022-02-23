@@ -52,12 +52,13 @@ const authReducer = createReducer(initialState, (builder) => {
           email: "",
           password: "",
         },
+        authToken: "",
       };
     })
     .addCase(setToken, (state, action) => {
       return {
         ...state,
-        authToken: action.payload.token,
+        authToken: action.payload,
       };
     })
     .addDefaultCase((state) => {

@@ -6,6 +6,7 @@ import categoriesReducer from "../reducers/categoriesReducer";
 import slidesReducer from "../reducers/slidesSlice";
 import usersReducer from "../reducers/usersSlice";
 import usReducer from "../reducers/usSlice";
+import activitiesReducer from "../reducers/activitiesSlice";
 
 export default configureStore({
 	reducer: {
@@ -15,6 +16,7 @@ export default configureStore({
 		slidesReducer,
 		usersReducer,
 		usReducer,
-		categoriesReducer
+		categoriesReducer,
+		activitiesReducer
 	},
 });

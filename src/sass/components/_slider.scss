@@ -1,3 +1,4 @@
+@use "../abstracts/mixins";
 .slider {
   max-width: 992px;
   overflow: hidden;
@@ -36,8 +37,8 @@
       display: inherit;
     }
 
-    &--title {
-      font-weight: bold;
+    &__title {
+      @include title;
     }
   }
 
