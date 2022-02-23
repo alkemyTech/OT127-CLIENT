@@ -100,7 +100,7 @@ const NewsForm = () => {
       await axios
         .put(`${URL_NEWS}/${id}`, formValues)
         .then((res) => {
-          sweetAlertSuccess("Se actualizo con exito");
+          sweetAlertSuccess("Se actualizó con éxito");
         })
         .catch((err) => {
           sweetAlertError("No se pudo actualizar esta novedad.");
@@ -109,7 +109,7 @@ const NewsForm = () => {
       await axios
         .post(URL_NEWS, formValues)
         .then((res) => {
-          sweetAlertSuccess("Se creo con exito");
+          sweetAlertSuccess("Se creó con éxito.");
           resetForm();
         })
         .catch((err) => {
