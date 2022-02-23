@@ -1,5 +1,7 @@
 @use "../abstracts/mixins";
+
 .slider {
+  @include section-margin;
   max-width: 992px;
   overflow: hidden;
   margin: 50px auto;
