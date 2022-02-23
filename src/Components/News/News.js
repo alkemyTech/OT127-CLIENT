@@ -28,11 +28,12 @@ const News = () => {
       ? news.map((element) => (
           <li className="card-info" key={element.id}>
             <h3>{element.name}</h3>
-            <p>{element.content}</p>
+            {element.content && <p>{element.content.slice(3, element.content.length-4)}</p>}
           </li>
         ))
       : null;
   };
+
 
   const filteredNewsList = () => {
     // Ésta es la lista de novedades filtradas
