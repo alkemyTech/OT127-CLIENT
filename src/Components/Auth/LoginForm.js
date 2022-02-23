@@ -43,7 +43,7 @@ const LoginForm = () => {
   }, []); //eslint-disable-line
 
   return (
-    <div className="form__container">
+    <div className="form__container form__container--public">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({
@@ -66,7 +66,7 @@ const LoginForm = () => {
           <label htmlFor="email" className="form__label">
             Email
           </label>
-          <Field name="email" type="email" className="form__input" />
+          <Field name="email" type="email" className="form__input" placeholder="juanperez@gmail.com" />
           <ErrorMessage
             name="email"
             render={(msg) => <div className="form__error">{msg}</div>}
@@ -75,7 +75,7 @@ const LoginForm = () => {
           <label htmlFor="password" className="form__label">
             Contraseña
           </label>
-          <Field name="password" type="password" className="form__input" />
+          <Field name="password" type="password" className="form__input" placeholder="*******" />
           <ErrorMessage
             name="password"
             render={(msg) => <div className="form__error">{msg}</div>}

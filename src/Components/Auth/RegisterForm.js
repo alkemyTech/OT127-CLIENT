@@ -80,7 +80,7 @@ const RegisterForm = () => {
                 <label htmlFor="name" className="form__label">
                   Nombre
                 </label>
-                <Field name="name" type="text" className="form__input" />
+                <Field name="name" type="text" className="form__input" placeholder="Juan" />
                 <ErrorMessage
                   name="name"
                   render={(msg) => <div className="form__error">{msg}</div>}
@@ -90,7 +90,7 @@ const RegisterForm = () => {
                 <label htmlFor="lastName" className="form__label">
                   Apellido
                 </label>
-                <Field name="lastName" type="text" className="form__input" />
+                <Field name="lastName" type="text" className="form__input" placeholder="Perez" />
                 <ErrorMessage
                   name="lastName"
                   render={(msg) => <div className="form__error">{msg}</div>}
@@ -100,7 +100,7 @@ const RegisterForm = () => {
                 <label htmlFor="email" className="form__label">
                   Email
                 </label>
-                <Field name="email" type="email" className="form__input" />
+                <Field name="email" type="email" className="form__input" placeholder="juanperez@gmail.com" />
                 <ErrorMessage
                   name="email"
                   render={(msg) => <div className="form__error">{msg}</div>}
@@ -110,7 +110,7 @@ const RegisterForm = () => {
                 <label htmlFor="password" className="form__label">
                   Contraseña
                 </label>
-                <Field name="password" type="password" className="form__input" />
+                <Field name="password" type="password" className="form__input" placeholder="********" />
                 <ErrorMessage
                   name="password"
                   render={(msg) => <div className="form__error">{msg}</div>}
@@ -124,6 +124,7 @@ const RegisterForm = () => {
                   name="confirmPassword"
                   type="password"
                   className="form__input"
+                  placeholder="********"
                 />
                 <ErrorMessage
                   name="confirmPassword"
