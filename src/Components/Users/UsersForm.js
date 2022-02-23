@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
-import { postUser, getUserbyID, putUser } from "../../Services/userService"; 
+import { postUser, getUserbyID, putUser } from "../../Services/userService";
 
 
 const UserForm = () => {
@@ -110,7 +110,7 @@ const UserForm = () => {
               <label htmlFor="name" className="form__label">
                 Nombre
               </label>
-              <Field className="form__input" name="name" type="text" />
+              <Field className="form__input" name="name" type="text" placeholder="Juan Perez" />
               <ErrorMessage
                 name="name"
                 render={(msg) => <div className="form__error">{msg}</div>}
@@ -120,7 +120,7 @@ const UserForm = () => {
               <label htmlFor="email" className="form__label">
                 Email
               </label>
-              <Field className="form__input" name="email" type="email" />
+              <Field className="form__input" name="email" type="email" placeholder="juanperez@gmail.com" />
               <ErrorMessage
                 name="email"
                 render={(msg) => <div className="form__error">{msg}</div>}
@@ -156,6 +156,7 @@ const UserForm = () => {
                 className="form__input"
                 name="password"
                 type="password"
+                placeholder="*********"
               ></Field>
               <ErrorMessage
                 name="password"

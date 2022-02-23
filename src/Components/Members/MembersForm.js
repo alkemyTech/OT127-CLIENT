@@ -23,11 +23,18 @@ const MemberForm = () => {
   const handleSubmit = async (formValues) => {
     setLoading(true);
     if (id) {
-      await axios.put(`${baseUrl}/${id}`, formValues).catch((err) => {
+      await axios
+      .put(`${baseUrl}/${id}`, formValues)
+      .catch((err) => {
         alert(err.message);
       });
     } else {
-      await axios.post(baseUrl, formValues).catch((err) => {
+      await axios
+      .post(baseUrl, formValues)
+      .then((res) => {
+        setFormValues(res.data.data);
+      })
+      .catch((err) => {
         alert(err.message);
       });
     }
@@ -83,7 +90,6 @@ const MemberForm = () => {
           })}
           onSubmit={({ resetForm }) => {
             handleSubmit();
-            resetForm();
           }}
         >
           {({ setFieldValue }) => (

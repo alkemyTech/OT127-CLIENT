@@ -152,7 +152,7 @@ const SlidesForm = () => {
                 className="form__input"
                 type="text"
                 name="name"
-                placeholder="Slide Title"
+                placeholder="Titulo"
               />
 
               <ErrorMessage
