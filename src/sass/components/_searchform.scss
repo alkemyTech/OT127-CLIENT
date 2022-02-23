@@ -1,0 +1,10 @@
+@use "../abstracts/mixins";
+@use "../abstracts/variables";
+
+.searchform {
+  @include section-margin;
+  &__input {
+    @include border-rounded;
+    border: 2px variables.$med-yellow solid;
+  }
+}
