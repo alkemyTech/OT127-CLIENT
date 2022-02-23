@@ -1,5 +1,5 @@
 import axios from "axios";
-import { sweetAlertError } from "./sweetAlertServices";
+const { sweetAlertError, sweetAlertSuccess } = require("./sweetAlertServices");
 
 const url = process.env.REACT_APP_ENDPOINT_SLIDES;
 
@@ -66,10 +66,10 @@ export const updateSlide = async (data, id) => {
 };
 
 export const deleteSlide = async (id) => {
-  try {
-    const response = await axios.delete(`${url}/${id}`);
-    return response;
-  } catch (error) {
-    return error;
+  if (id) {
+    await axios
+      .delete(`${url}/${id}`)
+      .then(() => sweetAlertSuccess("Se elimino el slide."))
+      .catch(() => sweetAlertError("No se pudo eliminar el slide."));
   }
 };
