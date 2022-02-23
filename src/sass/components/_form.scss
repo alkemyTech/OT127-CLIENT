@@ -5,8 +5,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 300px;
-  max-width: 500px;
+  width: 100%;
+  @media (min-width: 480px) {
+    min-width: 300px;
+    max-width: 500px;
+  }
   padding: 2em;
   background-color: rgba(255, 255, 255, 0.459);
   margin: 0 auto;
