@@ -27,7 +27,6 @@ const Sidebar = () => {
   return (
     <div>
       <div className="offcanvas__controller"></div>
-      <h1>Bienvenido!</h1>
       <BackofficeHeader handleShow={handleShow}></BackofficeHeader>
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header>
