@@ -17,7 +17,6 @@ const UserForm = () => {
   });
   const [roles, setRoles] = useState([]);
 
-  const urlUsers = "http://ongapi.alkemy.org/api/users";
   const urlRoles = "http://ongapi.alkemy.org/api/roles";
 
   const getUser = async () => {
