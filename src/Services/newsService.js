@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Get } from "./publicApiService";
-import { sweetAlertError } from "./sweetAlertServices";
+import { sweetAlertError, sweetAlertSuccess } from "./sweetAlertServices";
 
 const url = process.env.REACT_APP_ENDPOINTS_NEWS;
 const urlSearch = "http://ongapi.alkemy.org/api/news?search=";
@@ -39,3 +39,13 @@ export const getFilteredNews = async (value) => {
     }
   }
 };
+
+export const deleteNews = async (id) => {
+  if (id) {
+    await axios
+      .delete(`${url}/${id}`)
+      .then(() => sweetAlertSuccess("Se elimino la novedad."))
+      .catch(() => sweetAlertError("No se pudo eliminar la novedad."));
+  }
+};
+

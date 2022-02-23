@@ -1,9 +1,12 @@
 import axios from "axios";
+const { sweetAlertError, sweetAlertSuccess } = require("./sweetAlertServices");
 
-const endPointMembers = process.env.REACT_APP_ENDPOINT_MENBERS
+const endPointMembers = process.env.REACT_APP_ENDPOINT_MENBERS;
 
 const getMembers = async () => {
-  const response = await axios.get(endPointMembers).catch((error) => error.message);
+  const response = await axios
+    .get(endPointMembers)
+    .catch((error) => error.message);
   return response;
 };
 
@@ -26,4 +29,11 @@ const putMember = async (id, data) => {
   await axios.put(`${endPointMembers}/${id}`, data).catch((err) => err.message);
 };
 
-export { getMembers, postMember, putMember };
+const deleteMember = async (id) => {
+  await axios
+    .delete(`${endPointMembers}/${id}`)
+    .then(() => sweetAlertSuccess("Se elimino al miembro."))
+    .catch(() => sweetAlertError("No se pudo eliminar al miembro."));
+};
+
+export { getMembers, postMember, putMember, deleteMember };

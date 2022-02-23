@@ -1,4 +1,5 @@
 import Axios from "axios";
+const { sweetAlertError, sweetAlertSuccess } = require("./sweetAlertServices");
 
 const endPointCategories = process.env.REACT_APP_ENDPOINT_CATEGORIES;
 
@@ -34,4 +35,10 @@ export const postCategory = (name, description, image) => {
   } catch (error) {
     return error;
   }
+};
+
+export const deleteCategory = (id) => {
+    Axios.delete(`${endPointCategories}/${id}`)
+    .then(() => sweetAlertSuccess("Se elimino la categoría."))
+    .catch(() => sweetAlertError("No se pudo eliminar la categoría."));
 };

@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { sweetAlertError, sweetAlertSuccess } from "./sweetAlertServices";
 
-const endPointUser = "http://ongapi.alkemy.org/api/users";
+const endPointUser = process.env.REACT_APP_ENDPOINT_USERS
 const urlLogin = "http://ongapi.alkemy.org/api/login";
 const urlRegister = "http://ongapi.alkemy.org/api/register";
 
@@ -73,3 +73,12 @@ export const APIRegisterUser = (values) => {
     sweetAlertError("Hubo un error al intentar el registro");
   }
 };
+
+export const deleteUser = async (id) => {
+  if (id) {
+    await Axios
+      .delete(`${endPointUser}/${id}`)
+      .then(() => sweetAlertSuccess("Se eliminó al usuario."))
+      .catch(() => sweetAlertError("No se pudo eliminar al usuario."));
+  }
+} 

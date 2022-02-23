@@ -23,7 +23,7 @@ const About = ({
 		  history.push("/login");
 		}
 		dispatch(getUs());
-	  }, []);
+	  }, []);//eslint-disable-line
 	// El texto en un futuro se obtendra desde una API
 	return (
 		<>
