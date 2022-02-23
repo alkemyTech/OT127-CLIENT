@@ -5,7 +5,6 @@ import axios from "axios";
 import * as Yup from "yup";
 import { postUser, getUserbyID, putUser } from "../../Services/userService";
 
-
 const UserForm = () => {
   const { id } = useParams();
   const [initialValues, setinitialValues] = useState({
@@ -17,7 +16,6 @@ const UserForm = () => {
   });
   const [roles, setRoles] = useState([]);
 
-  const urlUsers = "http://ongapi.alkemy.org/api/users";
   const urlRoles = "http://ongapi.alkemy.org/api/roles";
 
   const getUser = async () => {
@@ -34,7 +32,7 @@ const UserForm = () => {
       });
       setinitialValues(userData);
     } catch (error) {
-      //TODO
+      alert(error);
     }
   };
 
@@ -50,16 +48,13 @@ const UserForm = () => {
       });
       setRoles(rolesData);
     } catch (error) {
-      //TODO
+      alert(error);
     }
-
   };
 
   const handleSubmit = (values) => {
     id
-      ? putUser(id, values).catch((error) => {
-        //TODO
-      })
+      ? putUser(id, values)
       : postUser(values);
   };
 
@@ -110,7 +105,12 @@ const UserForm = () => {
               <label htmlFor="name" className="form__label">
                 Nombre
               </label>
-              <Field className="form__input" name="name" type="text" placeholder="Juan Perez" />
+              <Field
+                className="form__input"
+                name="name"
+                type="text"
+                placeholder="Juan Perez"
+              />
               <ErrorMessage
                 name="name"
                 render={(msg) => <div className="form__error">{msg}</div>}
@@ -120,7 +120,12 @@ const UserForm = () => {
               <label htmlFor="email" className="form__label">
                 Email
               </label>
-              <Field className="form__input" name="email" type="email" placeholder="juanperez@gmail.com" />
+              <Field
+                className="form__input"
+                name="email"
+                type="email"
+                placeholder="juanperez@gmail.com"
+              />
               <ErrorMessage
                 name="email"
                 render={(msg) => <div className="form__error">{msg}</div>}

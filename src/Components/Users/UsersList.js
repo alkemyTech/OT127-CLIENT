@@ -11,6 +11,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
 import { deleteUser } from "../../Services/userService";
 
@@ -100,7 +102,13 @@ const UsersList = () => {
                 <tr key={user.id} className="table__row">
                   <td className="table__cell">{user.name}</td>
                   <td className="table__cell">{user.email}</td>
-                  <td className="table__cell">{user.role_id}</td>
+                  <td className="table__cell">
+                    {user.role_id === 1 ? (
+                      <AdminPanelSettingsIcon />
+                    ) : (
+                      <AccountCircleIcon />
+                    )}
+                  </td>
                   <td className="table__cell-edit">
                     <Link to={`/backoffice/users/edit/${user.id}`}>Editar</Link>
                   </td>

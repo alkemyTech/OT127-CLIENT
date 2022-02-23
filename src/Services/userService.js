@@ -33,10 +33,17 @@ export const allUsers = async () => {
 };
 
 export const putUser = (id, values) => {
+  const {name, email, role, profilePhoto, password } = values
   try {
-    Axios.put(`${endPointUser}/${id}`, values);
+    Axios.put(`${endPointUser}/${id}`, {
+      name,
+      email,
+      password,
+      role_id:role,
+      profile_image: profilePhoto
+    });
   } catch (error) {
-    return error;
+    alert(error.message);
   }
 };
 
