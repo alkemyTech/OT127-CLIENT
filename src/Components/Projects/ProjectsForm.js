@@ -59,7 +59,7 @@ const ProjectsForm = () => {
           name="title"
           value={title}
           onChange={(e) => handleChange(e, "title")}
-          placeholder="Title"
+          placeholder="Titulo"
           required
         ></input>
         <input
@@ -68,7 +68,7 @@ const ProjectsForm = () => {
           name="description"
           value={description}
           onChange={(e) => handleChange(e, "description")}
-          placeholder="Write some description"
+          placeholder="Escribe una descripción"
           required
         ></input>
         <input
