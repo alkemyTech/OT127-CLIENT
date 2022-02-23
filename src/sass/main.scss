@@ -5,6 +5,7 @@
 @import "base/base";
 @import "base/typography";
 // COMPONENTS
+@import "components/backofficeHeader";
 @import "components/backofficeSidebar";
 @import "components/button";
 @import "components/campaignsSchoolFooter";
@@ -25,6 +26,7 @@
 @import "components/thanks";
 @import "components/videocontrols";
 @import "components/videoplayer";
+@import "components/schoollContent";
 @import "components/categoriesList";
 @import "components/spiner";
 // LAYOUT
@@ -37,7 +39,6 @@
 @import "pages/contact";
 @import "pages/home";
 @import "pages/app";
-@import "pages/homeform";
 @import "pages/memberlist";
 @import "pages/testimonialform";
 @import "pages/userslist";
