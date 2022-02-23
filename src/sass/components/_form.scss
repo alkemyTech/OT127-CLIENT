@@ -15,6 +15,9 @@
     align-items: center;
     background-color: #065666b4;
     min-height: calc(100vh - 70px);
+    &--public {
+      background-color: $light-yellow; // los formularios de web publica tiene otro color
+    }
   }
   &__subcontainer {
     display: flex;

@@ -33,7 +33,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="form__container">
+    <div className="form__container form__container--public">
       <Formik
         initialValues={{
           name: "",
