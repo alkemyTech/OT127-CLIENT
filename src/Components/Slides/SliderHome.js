@@ -80,43 +80,43 @@ const SliderHome = () => {
       }, 5000);
     });
   }, []);
-  
-  
+
+
 
   return (
     <>
-    { loading ? (
-        <Spinner/>
+      {loading ? (
+        <Spinner />
       ) : (
-      <div className="slider">
-        <div className="slider__container" ref={carousel}>
-          {sliderData.map((slide) => (
-            <div className="slider__item" key={slide.id}>
-              <img className="slider__img" src={slide.image} alt={slide.name} />
-              <div className="slider__text">
-                <p className="slider__text--title">{slide.name}</p>
-                <p className="slider__text--description">{slide.description}</p>
+        <div className="slider">
+          <div className="slider__container" ref={carousel}>
+            {sliderData.map((slide) => (
+              <div className="slider__item" key={slide.id}>
+                <img className="slider__img" src={slide.image} alt={slide.name} />
+                <div className="slider__text">
+                  <p className="slider__text--title">{slide.name}</p>
+                  <p className="slider__text--description">{slide.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="slider__controllers">
+            <span
+              className="slider__arrow-button slider__arrow-button--left"
+              onClick={prevSlide}
+            >
+              <i class="fa fa-chevron-left"></i>
+            </span>
+            <span
+              className="slider__arrow-button slider__arrow-button--right"
+              onClick={nextSlide}
+            >
+              <i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
         </div>
-        <div className="slider__controllers">
-          <span
-            className="material-icons slider__arrow-button slider__arrow-button--left"
-            onClick={prevSlide}
-          >
-            chevron_left
-          </span>
-          <span
-            className="material-icons slider__arrow-button slider__arrow-button--right"
-            onClick={nextSlide}
-          >
-            chevron_right
-          </span>
-        </div> 
-      </div>
       )
-    }
+      }
     </>
   );
 };
