@@ -66,11 +66,11 @@ const News = () => {
         <Spinner />
       ) : (
         <div className="news">
-          <h1 className="news__title">Novedades</h1>
           <section className="news__videoplayercontainer">
             <h1 className="news__subtitle">Último evento</h1>
             <VideoPlayer />
           </section>
+          <h1 className="news__title">Novedades</h1>
           <SearchForm searchNews={searchNews} />
           <div className="card-custom news__list">
             {filteredNews.length ? filteredNewsList() : newsList()}
