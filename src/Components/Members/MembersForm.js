@@ -32,8 +32,6 @@ const MemberForm = () => {
       await axios
       .post(baseUrl, formValues)
       .then((res) => {
-        console.log(formValues);
-        console.log(res);
         setFormValues(res.data.data);
       })
       .catch((err) => {
@@ -90,10 +88,8 @@ const MemberForm = () => {
               .required("Campo obligatorio")
               .email("Formato invalido"),
           })}
-          onSubmit={({formValues, resetForm }) => {
-            console.log(formValues)
-            handleSubmit(formValues);
-            resetForm();
+          onSubmit={({ resetForm }) => {
+            handleSubmit();
           }}
         >
           {({ setFieldValue }) => (
