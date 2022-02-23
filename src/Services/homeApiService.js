@@ -14,8 +14,7 @@ export const getSecureHeader = () => {
 };
 export const Put = async (route, data, id) => {
     //README:
-    //Ingresar la url completa  del tipo
-    //'http://ongapi.alkemy.org/api/activities'
+    //Ingresar la url completa
     //Pasar objeto como argum para enviarlo en el body
     let url = id ? `${route}/${id}` : route;
     await axios
@@ -27,8 +26,7 @@ export const Put = async (route, data, id) => {
 };
 export const Delete = async (route, id) => {
     //README:
-    //Ingresar la url completa  del tipo
-    //'http://ongapi.alkemy.org/api/activities' y el ID a eliminar
+    //Ingresar la url completa  
     let url = id ? `${route}/${id}` : route;
     await axios
         .delete(url, {
@@ -39,8 +37,7 @@ export const Delete = async (route, id) => {
 };
 export const Post = async (url, body) => {
     //README:
-    //Ingresar la url completa  del tipo
-    //'http://ongapi.alkemy.org/api/activities'
+    //Ingresar la url completa  
     //Pasar objeto como argum para enviarlo en el body
     await axios
         .post(url, body, {
@@ -51,8 +48,7 @@ export const Post = async (url, body) => {
 };
 export const Get = async (route, id) => {
     //README:
-    //Ingresar la url completa  del tipo
-    //'http://ongapi.alkemy.org/api/activities'
+    //Ingresar la url completa
     let url = id ? `${route}/${id}` : route;
     return await axios
         .get(url)
@@ -72,6 +68,6 @@ export const updateSlides = (slide) => {
         .then((response) => toDataURL(response.data))
         .then((encoded) => {
             slide.image = encoded
-            axios.put(`http://ongapi.alkemy.org/api/slides/${slide.id}`, slide)
+            axios.put(`${process.env.REACT_APP_ENDPOINT_SLIDES}/${slide.id}`, slide)
         });
 }

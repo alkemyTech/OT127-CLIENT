@@ -15,7 +15,7 @@ const HomeForm = () => {
         } ],
     })
     const updateWelcomeText = async (values) => {
-        Put('http://ongapi.alkemy.org/api/organization', 1, { name: welcomeText.name, welcome_text: values.welcome })
+        Put(`${process.env.REACT_APP_API_ORGANIZATION2}`, 1, { name: welcomeText.name, welcome_text: values.welcome })
             .catch(error => error)
     }
     const compareValues = (values) => {
@@ -32,8 +32,12 @@ const HomeForm = () => {
         }
     }
     const getDataToEdit = async () => {
-        const responseSlides = await Get('http://ongapi.alkemy.org/api/slides')
-        const responseOrganization = await Get('http://ongapi.alkemy.org/api/organization')
+        const responseSlides = await Get(
+			process.env.REACT_APP_ENDPOINT_SLIDES
+		)
+        const responseOrganization = await Get(
+			process.env.REACT_APP_API_ORGANIZATION2
+		)
         const slides = responseSlides.data.data
         const welcomeText = responseOrganization.data.data
         setWelcomeText(welcomeText)
