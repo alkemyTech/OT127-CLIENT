@@ -1,0 +1,44 @@
+.publicFooter {
+  display: flex;
+  background-color: rgba(183, 190, 201, 0.26);
+  justify-content: space-around;
+  align-items: center;
+  &__logo-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+  }
+  &__logo {
+    max-width: 150px;
+    object-fit: cover;
+    margin: 0 auto;
+    &-text {
+      @include outfit-regular();
+      display: none;
+      font-weight: bold;
+      @media (min-width: $bp-tablet) {
+        display: inherit;
+      }
+    }
+  }
+  &__links-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+  }
+  &__link {
+    @include outfit-regular-bold();
+    color: $font-gray;
+    margin: 0px 5px;
+    text-decoration: none;
+    transition: transform 0.6s cubic-bezier(0.5, 1, 0.89, 1);
+    &:hover {
+      border-bottom: 2px solid $dark-blue;
+      color: $dark-blue;
+      transform: scale(1.1);
+    }
+  }
+}

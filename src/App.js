@@ -1,101 +1,108 @@
-import React from "react";
-import "./sass/main.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import About from "./Components/About/About";
-import Activities from "./Components/Activities/Activities";
-import ActivitiesForm from "./Components/Activities/ActivitiesForm";
-import ActivityDetail from "./Components/Activities/ActivityDetail";
-import BackOffice from "./Components/Backoffice/BackOffice";
-import CategoriesForm from "./Components/Categories/CategoriesForm";
-import CategoriesList from "./Components/Categories/CategoriesList";
-import Contact from "./Components/Contact/Contact";
-import Donacion from "./Donations/Donacion";
-import Gracias from "./Donations/Gracias";
-import Home from "./Pages/Home/Home";
-import HomeForm from "./Components/Backoffice/HomeForm";
-import LoginForm from "./Components/Auth/LoginForm";
-import MembersForm from "./Components/Members/MembersForm";
-import MembersList from "./Components/Members/MembersList";
-import News from "./Components/News/News";
-import NewsDetails from "./Components/News/Detail/NewsDetails";
-import NewsForm from "./Components/News/NewsForm";
-import NewsList from "./Components/News/NewsList";
-import OrganizationData from "./Components/Organization/OrganizationData";
-import OrganizationForm from "./Components/Organization/EditOrganizationDataForm";
-import ProjectsForm from "./Components/Projects/ProjectsForm";
-import RegisterForm from "./Components/Auth/RegisterForm";
-import SchoolCampaign from "./Campaigns/School/SchoolCampaign";
-import SlidesForm from "./Components/Slides/SlidesForm";
-import SlideList from "./Pages/Slides/SlideList";
-import TestimonialForm from "./Components/Testimonials/TestimonialsForm";
-import ToysCampaign from "./Campaigns/Toys/ToysCampaign";
-import UserForm from "./Components/Users/UsersForm";
-import UsersList from "./Components/Users/UsersList";
+import { CSSTransition } from "react-transition-group";
+import PageNotFound from "./Components/PageNotFound/NotFound";
+import Progress from "./Components/Progress/Porgress";
+import LayoutPublic from "./Components/Layout/LayoutPublic";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./sass/main.scss";
+const About = lazy(() => import("./Components/About/About"));
+const ActivitiesList = lazy(() =>
+  import("./Components/Activities/ActivitiesList")
+);
+const ActivityDetail = lazy(() =>
+  import("./Components/Activities/Detail/ActivityDetail")
+);
+const BackOffice = lazy(() => import("./Components/Backoffice/BackOffice"));
+const Contact = lazy(() => import("./Components/Contact/Contact"));
+const Donacion = lazy(() => import("./Donations/Donacion"));
+const Gracias = lazy(() => import("./Donations/Gracias"));
+const Home = lazy(() => import("./Pages/Home/Home"));
+const LoginForm = lazy(() => import("./Components/Auth/LoginForm"));
+const News = lazy(() => import("./Components/News/News"));
+const NewsDetails = lazy(() => import("./Components/News/Detail/NewsDetails"));
+const RegisterForm = lazy(() => import("./Components/Auth/RegisterForm"));
+const SchoolCampaign = lazy(() => import("./Campaigns/School/SchoolCampaign"));
+const TestimonialForm = lazy(() =>
+  import("./Components/Testimonials/TestimonialForm")
+);
+const ToysCampaign = lazy(() => import("./Campaigns/Toys/ToysCampaign"));
+
+const routes = [
+  { path: "/", Component: Home },
+  /* PROBLEMA El componente activities no muestra ningun listado */
+  { path: "/activities", Component: ActivitiesList },
+  { path: "/activities/:id", Component: ActivityDetail },
+  { path: "/login", Component: LoginForm },
+  { path: "/contact", Component: Contact },
+  { path: "/register", Component: RegisterForm },
+  { path: "/news", Component: News },
+  {
+    path: "/news/:id",
+    Component: NewsDetails,
+    title: "Titulo recibido por props",
+  },
+  { path: "/thanks", Component: Gracias },
+  {
+    path: "/donate",
+    Component: Donacion,
+    title: "Quieres donar?",
+  },
+  { path: "/about", Component: About, title: "Sobre Nosotros" },
+];
 
 function App() {
   return (
-    // Agregar newsletter en footer
     <>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/actividades/:id" component={ActivityDetail} />
-          <Route path="/actividades" component={Activities} />
-          <Route path="/backoffice" component={BackOffice} />
-          <Route
-            path="/backoffice/create-activity"
-            component={ActivitiesForm}
-          />
-          <Route path="/backoffice/activities/:id" component={ActivitiesForm} />
-          <Route
-            path="/backoffice/create-category"
-            component={CategoriesForm}
-          />
-          <Route path="/backoffice/create-member" component={MembersForm} />
-          <Route path="/backoffice/create-news" component={NewsForm} />
-          <Route path="/backoffice/create-project" component={ProjectsForm} />
-          <Route path="/backoffice/create-slide" component={SlidesForm} />
-          <Route
-            path="/backoffice/create-testimonials"
-            component={TestimonialForm}
-          />
-          <Route path="/backoffice/create-user/:id" component={UserForm} />
-          <Route path="/backoffice/create-user" exact component={UserForm} />
-          <Route path="/backoffice/home" component={HomeForm} />
-          <Route path="/backoffice/members" component={MembersList} />
-          <Route path="/backoffice/news" component={NewsList} />
-          <Route path="/backoffice/organization" component={OrganizationData} />
-          <Route
-            path="/backoffice/organization/edit"
-            component={OrganizationForm}
-          />
-          <Route path="/backoffice/projects/:id" component={ProjectsForm} />
-          <Route path="/backoffice/slides" component={SlideList} />
-          <Route path="/backoffice/slides/creacion" component={SlidesForm} />
-          <Route path="/backoffice/slides/edicion/:id" component={SlidesForm} />
-          <Route path="/backoffice/users" component={UsersList} />
-          <Route path="/categories" component={CategoriesList} />
-          <Route path="/contacto" component={Contact} />
-          <Route
-            path="/donar"
-            component={() => <Donacion message="Quieres donar?" />}
-          />
-          <Route path="/gracias" component={Gracias} />
-          <Route path="/login" component={LoginForm} />
-          <Route path="/news/:id" component={NewsForm} />
-          <Route
-            path="/novedades/:id"
-            component={() => <NewsDetails title="Titulo recibido por props" />}
-          />
-          <Route path="/novedades" exact component={News} />
-          <Route
-            path="/nosotros"
-            component={() => <About text="Sobre Nosotros" />}
-          />
-          <Route path="/register" component={RegisterForm} />
-          <Route path="/school-campaign" component={SchoolCampaign} />
-          <Route path="/toys-campaign" component={ToysCampaign} />
+          <Suspense fallback={<Progress height={7} />}>
+            <Route
+              exact
+              path={[
+                "/",
+                "/activities",
+                "/activities/:id",
+                "/login",
+                "/contact",
+                "/register",
+                "/news",
+                "/news/:id",
+                "/donate",
+                "/thanks",
+                "/about",
+              ]}
+            >
+              <LayoutPublic>
+                <div className="PageContainer">
+                  {routes.map(({ path, Component, title }) => (
+                    <Route key={path} exact path={path}>
+                      {({ match }) => (
+                        <CSSTransition
+                          in={match != null}
+                          timeout={500}
+                          className="PageContainer__page"
+                          unmountOnExit
+                        >
+                          <div className="PageContainer__page">
+                            {title ? (
+                              <Component title={title} />
+                            ) : (
+                              <Component />
+                            )}
+                          </div>
+                        </CSSTransition>
+                      )}
+                    </Route>
+                  ))}
+                </div>
+              </LayoutPublic>
+            </Route>
+            <Route path="/school-campaign" exact component={SchoolCampaign} />
+            <Route path="/toys-campaign" exact component={ToysCampaign} />
+            <Route path="/backoffice" component={BackOffice} />
+            <Route component={PageNotFound} />
+          </Suspense>
         </Switch>
       </BrowserRouter>
     </>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "../../sass/components/_form.scss";
 
 const API_URL = "http://ongapi.alkemy.org/api/projects";
 
@@ -12,7 +11,7 @@ const ProjectsForm = () => {
 
   useEffect(() => {
     getProjectByID(id);
-  }, []);
+  }, []); //eslint-disable-line
 
   function getProjectByID(id) {
     if (id) {
@@ -52,42 +51,45 @@ const ProjectsForm = () => {
   };
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <input
-        className="input-field"
-        type="text"
-        name="title"
-        value={title}
-        onChange={(e) => handleChange(e, "title")}
-        placeholder="Title"
-        required
-      ></input>
-      <input
-        className="input-field"
-        type="text"
-        name="description"
-        value={description}
-        onChange={(e) => handleChange(e, "description")}
-        placeholder="Write some description"
-        required
-      ></input>
-      <input
-        type="date"
-        name="due_date"
-        value={due_date && due_date.split("T")[0]}
-        onChange={(e) => handleChange(e, "due_date")}
-      ></input>
-      <input
-        type="file"
-        name="image"
-        accept=".png, .jpg"
-        onChange={(e) => handleChange(e, "image")}
-      ></input>
-      <img src={image} alt="" />
-      <button className="submit-btn" type="submit">
-        Send
-      </button>
-    </form>
+    <div className="form__container">
+      <form className="form" onSubmit={handleSubmit}>
+        <input
+          className="form__input"
+          type="text"
+          name="title"
+          value={title}
+          onChange={(e) => handleChange(e, "title")}
+          placeholder="Title"
+          required
+        ></input>
+        <input
+          className="form__input"
+          type="text"
+          name="description"
+          value={description}
+          onChange={(e) => handleChange(e, "description")}
+          placeholder="Write some description"
+          required
+        ></input>
+        <input
+          className="form__input"
+          type="date"
+          name="due_date"
+          value={due_date && due_date.split("T")[0]}
+          onChange={(e) => handleChange(e, "due_date")}
+        ></input>
+        <input
+          type="file"
+          name="image"
+          accept=".png, .jpg"
+          onChange={(e) => handleChange(e, "image")}
+        ></input>
+        <img src={image} alt="" />
+        <button className="form__button" type="submit">
+          Send
+        </button>
+      </form>
+    </div>
   );
 };
 

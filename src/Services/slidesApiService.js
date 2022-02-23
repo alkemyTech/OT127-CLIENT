@@ -1,4 +1,5 @@
 import axios from "axios";
+import { sweetAlertError } from "./sweetAlertServices";
 
 const url = process.env.REACT_APP_ENDPOINT_SLIDES;
 
@@ -12,8 +13,15 @@ const toDataURL = (blob) =>
   });
 
 export const getSlidesData = async () => {
+  const response = await axios.get(url).catch((error) => {
+    sweetAlertError("No se pudo cargar todo el contenido");
+  });
+  return response;
+};
+
+export const getSearch = async (search) => {
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(`${url}?search=${search}`);
     return response;
   } catch (error) {
     return error;

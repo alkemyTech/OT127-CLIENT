@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { getSlides } from "../../Redux/reducers/slidesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import "../../sass/components/_slider.scss";
 import Spinner from "../Spinner/Spinner";
 
 

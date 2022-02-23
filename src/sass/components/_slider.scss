@@ -1,12 +1,14 @@
-@import "../main.scss";
-
+@use "../abstracts/mixins";
 .slider {
   max-width: 992px;
   overflow: hidden;
   margin: 50px auto;
   height: auto;
   position: relative;
-  width: 90%;
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 90%;
+  }
 
   &__item {
     min-width: 100%;
@@ -29,9 +31,14 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    display: none;
 
-    &--title {
-      font-weight: bold;
+    @media (min-width: 768px) {
+      display: inherit;
+    }
+
+    &__title {
+      @include title;
     }
   }
 
