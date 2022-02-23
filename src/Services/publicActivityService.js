@@ -1,6 +1,5 @@
 const axios = require("axios");
-const { sweetAlertError } = require("./sweetAlertServices");
-
+const { sweetAlertError, sweetAlertSuccess } = require("./sweetAlertServices");
 class ActivitiesService {
   constructor() {
     this.API_URL = process.env.REACT_APP_ACTIVITIES_ENDPOINT;
@@ -54,8 +53,8 @@ class ActivitiesService {
     if (id) {
       await axios
         .delete(`${this.API_URL}/${id}`)
-        .then((response) => response.data)
-        .catch(sweetAlertError("No se pudo eliminar la actividad"));
+        .then(() => sweetAlertSuccess("Se elimino la actividad."))
+        .catch(() => sweetAlertError("No se pudo eliminar la actividad."));
     }
   };
 

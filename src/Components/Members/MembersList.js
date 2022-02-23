@@ -1,99 +1,79 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-
-// Material UI
-import {
-  Container,
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  Paper,
-  Button,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableRow, { tableRowClasses } from "@mui/material/TableRow";
+import React, {useEffect} from "react";
+import {Link} from "react-router-dom";
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMembers } from "../../Redux/reducers/membersSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchMembers} from "../../Redux/reducers/membersSlice";
+import Spinner from "../Spinner/Spinner";
 
 const MembersList = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchMembers());
-  }, []); //eslint-disable-line
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchMembers());
+	}, []); //eslint-disable-line
 
-  const { members } = useSelector((state) => state.membersReducer);
+	const {members} = useSelector((state) => state.membersReducer);
 
-  const handleEdit = (id) => {
-    // Logica a desarrollar
-  };
+	const handleEdit = (id) => {
+		// Logica a desarrollar
+	};
 
-  const handleDelete = (id) => {
-    // Logica a desarrollar
-  };
+	const handleDelete = (id) => {
+		// Logica a desarrollar
+	};
 
-  // estilos
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    [`&.${tableRowClasses.root}`]: {
-      height: "50px",
-      width: "70px",
-    },
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
-  // fin de estilos
-  return (
-    <Container maxWidth="md">
-      <Link to="/backoffice/members/create">Create Member</Link>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 600 }} stickyHeader>
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell>Photo</StyledTableCell>
-              <StyledTableCell></StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {members.map((member) => (
-              <StyledTableRow key={member.id}>
-                <StyledTableCell scope="row">{member.name}</StyledTableCell>
-                <StyledTableCell>
-                  <img src={member.image} alt={member.name} width="50px" />
-                </StyledTableCell>
-                <StyledTableCell style={{ width: "25%" }}>
-                  <Button color="success" onClick={() => handleEdit(member.id)}>
-                    Editar
-                  </Button>{" "}
-                  <Button color="error" onClick={() => handleDelete(member.id)}>
-                    Eliminar
-                  </Button>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
-  );
+	return (
+		<div className="table">
+			<div className="table__container">
+				<div className="table__actions">
+					<input type="search" />
+					<Link className="table__link" to="/backoffice/members/create">
+						Crear Miembros
+					</Link>
+				</div>
+				{!members.length ? (
+					<Spinner />
+				) : (
+					<table className="table__data">
+						<thead className="table__head">
+							<tr className="table__row">
+								<th className="table__title">Nombre</th>
+								<th className="table__title">Foto</th>
+								<th className="table__title-edit">Editar</th>
+								<th className="table__title-delete">Eliminar</th>
+							</tr>
+						</thead>
+						<tbody className="table__body">
+							{members.map((member) => (
+								<tr key={member.id} className="table__row">
+									<td className="table__cell">{member.name}</td>
+									<td className="table__cell">
+										<img src={member.image} alt={member.name} width="50px" />
+									</td>
+									<td className="table__cell-edit">
+										<button
+											className="table__edit"
+											onClick={() => handleEdit(member.id)}
+										>
+											Editar
+										</button>
+									</td>
+									<td className="table__cell-delete">
+										<button
+											className="table__delete"
+											onClick={() => handleDelete(member.id)}
+										>
+											Eliminar
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default MembersList;

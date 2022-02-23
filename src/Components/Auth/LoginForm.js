@@ -7,11 +7,13 @@ import * as Yup from "yup";
 import { loginUser, setToken } from "../../Redux/actions/authActions";
 import { APIloginUser } from "../../Services/userService";
 import { sweetAlertError } from "../../Services/sweetAlertServices";
+import { useEffect } from "react";
 
 const LoginForm = () => {
   const [isLoading, setisLoading] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
+  const token = localStorage.getItem("TOKEN");
 
   const handleSubmit = async (values) => {
     setisLoading(true);
@@ -21,21 +23,27 @@ const LoginForm = () => {
       dispatch(loginUser(user));
       dispatch(setToken(token));
       localStorage.setItem("TOKEN", token);
-      localStorage.setItem("authenticatedUser", JSON.stringify(user))
-      if(user.role_id === 1){
-        history.push("/backoffice/organization")
-      } else if (user.role_id === 2){
+      localStorage.setItem("authenticatedUser", JSON.stringify(user));
+      if (user.role_id === 1) {
+        history.push("/backoffice/organization");
+      } else if (user.role_id === 2) {
         history.push("/");
       }
-      
     } catch (error) {
       sweetAlertError("Contraseña o usuario incorrectos");
     }
     setisLoading(false);
   };
 
+  useEffect(() => {
+    if (token) {
+      dispatch(setToken(token)); // para persistir token por si la ruta se ingresa manualmente
+      history.push("/");
+    }
+  }, []); //eslint-disable-line
+
   return (
-    <div className="form__container">
+    <div className="form__container form__container--public">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({
@@ -58,7 +66,7 @@ const LoginForm = () => {
           <label htmlFor="email" className="form__label">
             Email
           </label>
-          <Field name="email" type="email" className="form__input" />
+          <Field name="email" type="email" className="form__input" placeholder="juanperez@gmail.com" />
           <ErrorMessage
             name="email"
             render={(msg) => <div className="form__error">{msg}</div>}
@@ -67,7 +75,7 @@ const LoginForm = () => {
           <label htmlFor="password" className="form__label">
             Contraseña
           </label>
-          <Field name="password" type="password" className="form__input" />
+          <Field name="password" type="password" className="form__input" placeholder="*******" />
           <ErrorMessage
             name="password"
             render={(msg) => <div className="form__error">{msg}</div>}
