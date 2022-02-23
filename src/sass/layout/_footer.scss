@@ -3,6 +3,10 @@
   background-color: rgba(183, 190, 201, 0.26);
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
+  @media (min-width: $bp-tablet) {
+    flex-wrap: nowrap;
+  }
   &__logo-container {
     display: flex;
     flex-direction: column;
@@ -13,10 +17,14 @@
     max-width: 150px;
     object-fit: cover;
     margin: 0 auto;
+    display: none;
+    @media (min-width: $bp-tablet) {
+      display: inherit;
+    }
     &-text {
       @include outfit-regular();
-      display: none;
       font-weight: bold;
+      display: none;
       @media (min-width: $bp-tablet) {
         display: inherit;
       }
