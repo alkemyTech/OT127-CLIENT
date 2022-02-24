@@ -93,7 +93,7 @@ export const privatePost = (route, data) => {
 
   if (Authorization) {
     axios
-      .post(url, data)
+      .post(url, data, config)
       .then((res) => res)
       .catch((err) => err);
   }
