@@ -3,7 +3,8 @@ import { sweetAlertError } from "./sweetAlertServices";
 
 const config = {
   headers: {
-    group_id: 127, //Aqui va el ID del equipo!!
+    Accept: "application/json, text/plain, */*",
+    Group: 127, //Aqui va el ID del equipo!!
   },
 };
 

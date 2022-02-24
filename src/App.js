@@ -23,7 +23,7 @@ const News = lazy(() => import("./Components/News/News"));
 const NewsDetails = lazy(() => import("./Components/News/Detail/NewsDetails"));
 const RegisterForm = lazy(() => import("./Components/Auth/RegisterForm"));
 const SchoolCampaign = lazy(() => import("./Campaigns/School/SchoolCampaign"));
-const TestimonialForm = lazy(() =>
+const TestimonialForm = lazy(() => 
   import("./Components/Testimonials/TestimonialForm")
 );
 const ToysCampaign = lazy(() => import("./Campaigns/Toys/ToysCampaign"));

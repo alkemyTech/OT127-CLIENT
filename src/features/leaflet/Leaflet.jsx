@@ -17,7 +17,11 @@ const Leaflet = () => {
   const getOrganizationData = () => {
     let organizationApi = `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_ORGANIZATION}`;
     axios
-      .get(`${organizationApi}`)
+      .get(`${organizationApi}`, {
+        headers: {
+          Group: 127,
+        },
+      })
       .then((response) => setOrgData(response.data.data))
       .catch((error) => error);
   };

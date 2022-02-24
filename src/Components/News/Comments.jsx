@@ -7,7 +7,11 @@ const Comments = () => {
   const [comments, setComments] = useState([]);
   const getComments = () => {
     axios
-      .get("http://ongapi.alkemy.org/api/comments")
+      .get("http://ongapi.alkemy.org/api/comments", {
+        headers: {
+          Group: 127,
+        },
+      })
       .then((res) => {
         setTimeout(function () {
           setComments(res.data.data);
