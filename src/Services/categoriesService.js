@@ -29,7 +29,7 @@ export const getCategory = async (id) => {
 
 export const putCategory = (id, name, description, image) => {
   try {
-    Axios.put(`${endPointCategories}${id}`, { name, description, image });
+    Axios.put(`${endPointCategories}${id}`, { name, description, image }, config);
   } catch (error) {
     return error;
   }
@@ -37,14 +37,14 @@ export const putCategory = (id, name, description, image) => {
 
 export const postCategory = (name, description, image) => {
   try {
-    Axios.post(`${endPointCategories}`, { name, description, image });
+    Axios.post(`${endPointCategories}`, { name, description, image }, config);
   } catch (error) {
     return error;
   }
 };
 
 export const deleteCategory = (id) => {
-    Axios.delete(`${endPointCategories}/${id}`)
+    Axios.delete(`${endPointCategories}/${id}`, config)
     .then(() => sweetAlertSuccess("Se elimino la categoría."))
     .catch(() => sweetAlertError("No se pudo eliminar la categoría."));
 };
