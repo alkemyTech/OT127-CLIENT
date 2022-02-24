@@ -81,7 +81,7 @@ const NewsList = () => {
               ),
             }}
           />
-          <FormControl>
+          <FormControl className="table__filter">
             <InputLabel>Categorías</InputLabel>
             <Select
               label="Categorías"

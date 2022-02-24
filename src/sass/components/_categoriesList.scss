@@ -55,7 +55,9 @@
       width: 150px;
     }
   }
-
+  &__filter {
+    margin-right: auto !important;
+  }
   &__body {
     border: none;
   }

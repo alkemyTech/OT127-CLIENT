@@ -80,7 +80,7 @@ const UsersList = () => {
 							),
 						}}
 					/>
-					<FormControl>
+					<FormControl className="table__filter">
 						<InputLabel>Rol</InputLabel>
 						<Select
 							value={role}
@@ -98,19 +98,6 @@ const UsersList = () => {
 						Crear Usuario
 					</Link>
 				</div>
-				<FormControl>
-					<InputLabel>Rol</InputLabel>
-					<Select
-						value={role}
-						label="Rol"
-						onChange={handleRoleChange}
-						autoWidth
-					>
-						<MenuItem value={0}>Todos</MenuItem>
-						<MenuItem value={1}>Usuario Administrador</MenuItem>
-						<MenuItem value={2}>Usuario Regular</MenuItem>
-					</Select>
-				</FormControl>
 				{!users.length ? (
 					<Spinner />
 				) : (
