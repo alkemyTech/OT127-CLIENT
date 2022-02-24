@@ -2,14 +2,24 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 
 export const getActivities = createAsyncThunk("get/getActivities", async () => {
-  const response = await axios.get(`${process.env.REACT_APP_ACTIVITIES_ENDPOINT}`)
+  const response = await axios.get(`${process.env.REACT_APP_ACTIVITIES_ENDPOINT}`,{
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      Group: 127,
+    },
+  })
   return response.data.data;
 });
 
 export const getActivitiesSearch = createAsyncThunk(
   "get/getActivitiesSearch",
   async (search) => {
-    const response = await axios.get(`${process.env.REACT_APP_ACTIVITIES_ENDPOINT}?search=${search}`);
+    const response = await axios.get(`${process.env.REACT_APP_ACTIVITIES_ENDPOINT}?search=${search}`,{
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        Group: 127,
+      },
+    });
     return response.data.data;
   }
 );
