@@ -24,13 +24,21 @@ const MemberForm = () => {
     setLoading(true);
     if (id) {
       await axios
-      .put(`${baseUrl}/${id}`, formValues)
+      .put(`${baseUrl}/${id}`, formValues, {
+        headers: {
+          Group: 127,
+        },
+      })
       .catch((err) => {
         alert(err.message);
       });
     } else {
       await axios
-      .post(baseUrl, formValues)
+      .post(baseUrl, formValues, {
+        headers: {
+          Group: 127,
+        },
+      })
       .then((res) => {
         setFormValues(res.data.data);
       })
@@ -52,7 +60,11 @@ const MemberForm = () => {
   const getDataById = async (formValues) => {
     setLoading(true);
     await axios
-      .get(`${baseUrl}/${id}`)
+      .get(`${baseUrl}/${id}`, {
+        headers: {
+          Group: 127,
+        },
+      })
       .then((res) => {
         setFormValues(res.data.data);
       })
