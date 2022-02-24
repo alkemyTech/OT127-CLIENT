@@ -7,7 +7,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import axios from "axios";
 import { sweetAlertError } from "../../Services/sweetAlertServices";
-import "../../sass/components/_form.scss";
 
 const NewsForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -23,11 +22,16 @@ const NewsForm = () => {
   const { id } = useParams();
   const url = "http://ongapi.alkemy.org/api/news";
   const urlCategories = "http://ongapi.alkemy.org/api/categories";
+  const config ={
+    headers: {
+      Group: 127,
+    },
+  }
 
   const getCategorieData = () => {
     if (id) {
       axios
-        .get(urlCategories)
+        .get(urlCategories, config)
         .then((response) => {
           const dataCategorie = response.data.data;
           setDataCategorie(dataCategorie);
@@ -40,7 +44,7 @@ const NewsForm = () => {
 
   const getOrdersList = async () => {
     await axios
-      .get(url)
+      .get(url, config)
       .then((res) => {
         let data = res.data.data;
         const orderBlackList = data
@@ -57,7 +61,7 @@ const NewsForm = () => {
     setLoading(true);
 
     await axios
-      .get(`${url}/${id}`)
+      .get(`${url}/${id}`, config)
       .then((res) => {
         if (res.data.success) {
           const { name, contenido, image } = res.data.data;
@@ -84,7 +88,7 @@ const NewsForm = () => {
     }
     getOrdersList();
     getCategorieData();
-  }, []);
+  }, []); //eslint-disable-line
 
   const toBase64 = (file) => {
     return new Promise((resolve) => {
@@ -107,11 +111,11 @@ const NewsForm = () => {
     }
 
     if (id) {
-      await axios.put(`${url}/${id}`, formValues).catch((err) => {
+      await axios.put(`${url}/${id}`, formValues, config).catch((err) => {
         sweetAlertError("No se pudo actualizar esta novedad.");
       });
     } else {
-      await axios.post(url, formValues).catch((err) => {
+      await axios.post(url, formValues, config).catch((err) => {
         sweetAlertError("No se pudo crear esta novedad.");
       });
     }
@@ -134,7 +138,7 @@ const NewsForm = () => {
   });
 
   return (
-    <>
+    <div className="form__container">
       {loading ? (
         <p>LOADING...</p>
       ) : (
@@ -157,18 +161,25 @@ const NewsForm = () => {
           }}
         >
           {({ setFieldValue }) => (
-            <Form className="form-container">
-              <label htmlFor="name">Titulo</label>
+            <Form className="form">
+              <label className="form__label" htmlFor="name">
+                Titulo
+              </label>
               <Field
                 id="name"
-                className="input-field"
+                className="form__input"
                 type="text"
                 name="name"
                 placeholder="titulo"
               />
-              <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
+              <ErrorMessage
+                name="name"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
 
-              <label htmlFor="contenido">Contenido</label>
+              <label className="form__label" htmlFor="contenido">
+                Contenido
+              </label>
               <Field name="contenido">
                 {({ field }) => (
                   <>
@@ -187,11 +198,14 @@ const NewsForm = () => {
               </Field>
               <ErrorMessage
                 name="contenido"
-                render={(msg) => <div>{msg}</div>}
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
 
-              <label htmlFor="categorie">Categorias</label>
+              <label className="form__label" htmlFor="categorie">
+                Categorias
+              </label>
               <Field
+                className="form__input"
                 component="select"
                 as="select"
                 name="categorie"
@@ -199,34 +213,42 @@ const NewsForm = () => {
               >
                 {dataCategorie.map((element) => {
                   return (
-                    <option key={element.id} value={element.id}>
+                    <option
+                      className="form__option"
+                      key={element.id}
+                      value={element.id}
+                    >
                       {element.name}
                     </option>
                   );
                 })}
               </Field>
-              <ErrorMessage name="categorie" />
+              <ErrorMessage
+                name="categorie"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
 
-              <label htmlFor="categorie">Cargar Imagen</label>
+              <label className="form__label" htmlFor="categorie">
+                Cargar Imagen
+              </label>
               <input
                 ref={inputFileRef}
-                className="input-field"
                 type="file"
                 onChange={(e) => {
                   setFieldValue("image", e.currentTarget.files[0]);
                 }}
                 accept=".jpg, .png"
               />
-              <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
+              <ErrorMessage name="image" render={(msg) => <div className="form__error">{msg}</div>} />
 
-              <button type="submit" className="submit-btn">
+              <button type="submit" className="form__button">
                 Enviar
               </button>
             </Form>
           )}
         </Formik>
       )}
-    </>
+    </div>
   );
 };
 

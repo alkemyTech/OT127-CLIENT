@@ -8,8 +8,6 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
-
-import "../../sass/components/_form.scss";
 import { getSlidesData, getSlidesDataById, updateSlide, createNewSlide } from "../../Services/slidesApiService";
 
 const SlidesForm = () => {
@@ -122,7 +120,7 @@ const SlidesForm = () => {
   });
 
   return (
-    <>
+    <div className="form__container">
       {loading ? (
         <p>LOADING...</p>
       ) : (
@@ -145,18 +143,25 @@ const SlidesForm = () => {
           }}
         >
           {({ setFieldValue }) => (
-            <Form className="form-container">
-              <label htmlFor="name">Titulo</label>
+            <Form className="form">
+              <label className="form__label" htmlFor="name">
+                Titulo
+              </label>
               <Field
                 id="name"
-                className="input-field"
+                className="form__input"
                 type="text"
                 name="name"
-                placeholder="Slide Title"
+                placeholder="Titulo"
               />
 
-              <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
-              <label htmlFor="description">Descripcion</label>
+              <ErrorMessage
+                name="name"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <label className="form__label" htmlFor="description">
+                Descripcion
+              </label>
               <Field name="description">
                 {({ field }) => (
                   <>
@@ -176,12 +181,14 @@ const SlidesForm = () => {
 
               <ErrorMessage
                 name="description"
-                render={(msg) => <div>{msg}</div>}
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
-              <label htmlFor="order">Numero de orden</label>
+              <label className="form__label" htmlFor="order">
+                Numero de orden
+              </label>
               <Field
                 id="order"
-                className="input-field"
+                className="form__input"
                 type="number"
                 name="order"
                 onChange={(e) => {
@@ -189,26 +196,33 @@ const SlidesForm = () => {
                 }}
                 placeholder="ingrese un numero"
               />
-              <ErrorMessage name="order" render={(msg) => <div>{msg}</div>} />
-              <label htmlFor="order">Cargar Imagen</label>
+              <ErrorMessage
+                name="order"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <label className="form__label" htmlFor="order">
+                Cargar Imagen
+              </label>
               <input
                 ref={inputFileRef}
-                className="input-field"
                 type="file"
                 onChange={(e) => {
                   setFieldValue("image", e.currentTarget.files[0]);
                 }}
                 accept=".jpg, .png"
               />
-              <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
-              <button type="submit" className="submit-btn">
+              <ErrorMessage
+                name="image"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <button type="submit" className="form__button">
                 Enviar
               </button>
             </Form>
           )}
         </Formik>
       )}
-    </>
+    </div>
   );
 };
 

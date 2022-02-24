@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "../../sass/pages/MemberListUs.js";
 
 const MemberListUs = () => {
   const endPointMenbers = process.env.REACT_APP_ENDPOINT_MENBERS;
@@ -9,7 +8,11 @@ const MemberListUs = () => {
 
   const getMembers = async () => {
     await axios
-      .get(endPointMenbers)
+      .get(endPointMenbers, {
+        headers: {
+          Group: 127,
+        },
+      })
       .then((res) => {
         setMembers(res.data.data);
         setLoading(false);
@@ -20,7 +23,7 @@ const MemberListUs = () => {
   };
   useEffect(() => {
     getMembers();
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <>
