@@ -15,7 +15,7 @@ const SliderHome = () => {
     setLoading(true);
     dispatch(getSlides());
     setLoading(false);
-  }, []);
+  }, []); //eslint-disable-line
 
   const sliderData = useSelector((state) => state.slidesReducer.slides.data);
 
