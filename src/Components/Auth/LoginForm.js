@@ -8,9 +8,12 @@ import { loginUser, setToken } from "../../Redux/actions/authActions";
 import { APIloginUser } from "../../Services/userService";
 import { sweetAlertError } from "../../Services/sweetAlertServices";
 import { useEffect } from "react";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const LoginForm = () => {
   const [isLoading, setisLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState("password");
   const dispatch = useDispatch();
   const history = useHistory();
   const token = localStorage.getItem("TOKEN");
@@ -43,7 +46,7 @@ const LoginForm = () => {
   }, []); //eslint-disable-line
 
   return (
-    <div className="form__container">
+    <div className="form__container form__container--public">
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={Yup.object({
@@ -66,7 +69,12 @@ const LoginForm = () => {
           <label htmlFor="email" className="form__label">
             Email
           </label>
-          <Field name="email" type="email" className="form__input" />
+          <Field
+            name="email"
+            type="email"
+            className="form__input"
+            placeholder="juanperez@gmail.com"
+          />
           <ErrorMessage
             name="email"
             render={(msg) => <div className="form__error">{msg}</div>}
@@ -75,7 +83,19 @@ const LoginForm = () => {
           <label htmlFor="password" className="form__label">
             Contraseña
           </label>
-          <Field name="password" type="password" className="form__input" />
+          <div className="form__password">
+          <Field
+            name="password"
+            type={showPassword}
+            className="form__input--password"
+            placeholder="*******"
+          />
+          {showPassword === "password" ? (
+            <VisibilityIcon className="form__visibility" onClick={() => setShowPassword('text')}/>
+          ) : (
+            <VisibilityOffIcon className="form__visibility"  onClick={() => setShowPassword('password')}/>
+          )}
+          </div>
           <ErrorMessage
             name="password"
             render={(msg) => <div className="form__error">{msg}</div>}

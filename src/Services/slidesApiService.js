@@ -1,6 +1,12 @@
 import axios from "axios";
+const { sweetAlertError, sweetAlertSuccess } = require("./sweetAlertServices");
 
 const url = process.env.REACT_APP_ENDPOINT_SLIDES;
+const config = {
+  headers: {
+    Group: 127,
+  },
+}
 
 const toDataURL = (blob) =>
   // Para convertir los links de imagenes a base64
@@ -12,17 +18,15 @@ const toDataURL = (blob) =>
   });
 
 export const getSlidesData = async () => {
-  try {
-    const response = await axios.get(url);
-    return response;
-  } catch (error) {
-    return error;
-  }
+  const response = await axios.get(url, config).catch((error) => {
+    sweetAlertError("No se pudo cargar todo el contenido");
+  });
+  return response;
 };
 
 export const getSearch = async (search) => {
   try {
-    const response = await axios.get(`${url}?search=${search}`);
+    const response = await axios.get(`${url}?search=${search}`, config);
     return response;
   } catch (error) {
     return error;
@@ -31,7 +35,7 @@ export const getSearch = async (search) => {
 
 export const getSlidesDataById = async (id) => {
   try {
-    const response = await axios.get(`${url}/${id}`);
+    const response = await axios.get(`${url}/${id}`, config);
     return response;
   } catch (error) {
     return error;
@@ -45,7 +49,7 @@ export const createNewSlide = async (data) => {
     let encoded = await toDataURL(imgBlob.data);
     // Guardamos el link ya transformado a base 64 y hacemos la peticion
     data.image = encoded;
-    const response = await axios.post(url, data);
+    const response = await axios.post(url, data, config);
     return response;
   } catch (error) {
     return error;
@@ -59,7 +63,7 @@ export const updateSlide = async (data, id) => {
     let encoded = await toDataURL(imgBlob.data);
     // Guardamos el link ya transformado a base 64 y hacemos la peticion
     data.image = encoded;
-    const response = await axios.put(`${url}/${id}`, data);
+    const response = await axios.put(`${url}/${id}`, data, config);
     return response;
   } catch (error) {
     return error;
@@ -67,10 +71,10 @@ export const updateSlide = async (data, id) => {
 };
 
 export const deleteSlide = async (id) => {
-  try {
-    const response = await axios.delete(`${url}/${id}`);
-    return response;
-  } catch (error) {
-    return error;
+  if (id) {
+    await axios
+      .delete(`${url}/${id}`, config)
+      .then(() => sweetAlertSuccess("Se elimino el slide."))
+      .catch(() => sweetAlertError("No se pudo eliminar el slide."));
   }
 };

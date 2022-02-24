@@ -1,13 +1,12 @@
 import React from "react";
-import MenuIcon from "@material-ui/icons/Menu";
 
 const BackofficeHeader = ({ handleShow }) => {
   return (
-    <header className="backofficeheader">
-      <h1 className="backofficeheader__title">Somos más</h1>
-      <button onClick={handleShow} className="backofficeheader__button">
-        <MenuIcon />
+    <header className="backofficeHeader">
+      <button onClick={handleShow} className="backofficeHeader__button">
+        <i className="fa fa-bars backofficeHeader__menu" />
       </button>
+      <p className="backofficeHeader__title">Somos más</p>
     </header>
   );
 };

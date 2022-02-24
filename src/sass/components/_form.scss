@@ -2,20 +2,25 @@
 @use "../abstracts/mixins";
 
 .form {
-  position: absolute;
   display: flex;
   flex-direction: column;
-  width: 30%;
+  justify-content: center;
+  width: 100%;
+  @media (min-width: 480px) {
+    min-width: 300px;
+    max-width: 500px;
+  }
   padding: 2em;
   background-color: rgba(255, 255, 255, 0.459);
-  margin-top: 3%;
-  margin-left: 34%;
-  margin-right: 35%;
-  margin-bottom: 2em;
+  margin: 0 auto;
   &__container {
-    min-height: 100vh;
-    height: max-content;
-    background-color: cornsilk;
+    display: flex;
+    align-items: center;
+    background-color: #065666b4;
+    min-height: calc(100vh - 70px);
+    &--public {
+      background-color: $light-yellow; // los formularios de web publica tiene otro color
+    }
   }
   &__subcontainer {
     display: flex;
@@ -26,6 +31,20 @@
     border-radius: 10px;
     margin: 0 0 1em 0;
     border-style: none;
+    padding-left: 10px;
+    outline: none;
+    &:focus {
+      border: 2px solid $green-blue;
+    }
+    &--password {
+      width: 100%;
+      height: 2.5em;
+      border-radius: 10px;
+      margin: 0 0 1em 0;
+      border-style: none;
+      padding-left: 10px;
+      outline: none;
+    }
   }
   &__label {
     margin: 0.5em 0 0.5em 0;
@@ -34,10 +53,11 @@
   }
   &__error {
     color: variables.$med-red;
+    font-weight: bold;
   }
   &__option {
     font-size: 1rem;
-  }  
+  }
   &__button {
     height: 2.5em;
     border-radius: 10px;
@@ -49,6 +69,32 @@
     &:hover {
       cursor: pointer;
       background-color: variables.$light-green;
+    }
+  }
+  &__divider {
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    border: none;
+  }
+  &__title {
+    @include outfit-title();
+    margin: 0;
+    margin-top: 10px;
+  }
+  &__subtitle {
+    @include outfit-subtitle();
+    margin: 0;
+    margin-bottom: 30px;
+  }
+  &__password {
+    display: flex;
+  }
+  &__visibility{
+    margin-top: .3em;
+    margin-left: .3em;
+    &:hover{
+      cursor: pointer;
     }
   }
 }
