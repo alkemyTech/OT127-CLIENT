@@ -18,7 +18,11 @@ const ActivitiesList = () => {
   const getActivities = () => {
     setLoading(true);
     axios
-      .get(url)
+      .get(url,{
+        headers: {
+          Group: 127,
+        },
+      })
       .then(({ data }) => {
         setActivities(data);
         setLoading(false);
@@ -34,7 +38,7 @@ const ActivitiesList = () => {
       history.push("/login");
     }
     getActivities();
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <div className="activitites">
