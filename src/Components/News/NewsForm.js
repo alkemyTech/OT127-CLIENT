@@ -14,6 +14,11 @@ import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 const NewsForm = () => {
   const URL_NEWS = process.env.REACT_APP_ENDPOINTS_NEWS;
   const URL_CATEGORIES = process.env.REACT_APP_ENDPOINT_CATEGORIES;
+  const config = {
+    headers: {
+      Group: 127,
+    },
+  };
 
   const [initialValues, setInitialValues] = useState({
     name: "",
@@ -29,7 +34,7 @@ const NewsForm = () => {
 
   const getCategorieData = () => {
     axios
-      .get(URL_CATEGORIES)
+      .get(URL_CATEGORIES, config)
       .then((response) => {
         const dataCategorie = response.data.data;
         setDataCategorie(dataCategorie);
@@ -99,7 +104,7 @@ const NewsForm = () => {
 
     if (id) {
       await axios
-        .put(`${URL_NEWS}/${id}`, formValues)
+        .put(`${URL_NEWS}/${id}`, formValues, config)
         .then((res) => {
           sweetAlertSuccess("Se actualizó con éxito");
         })
@@ -108,7 +113,7 @@ const NewsForm = () => {
         });
     } else {
       await axios
-        .post(URL_NEWS, formValues)
+        .post(URL_NEWS, formValues, config)
         .then((res) => {
           sweetAlertSuccess("Se creó con éxito.");
           resetForm();

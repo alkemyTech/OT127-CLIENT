@@ -1,29 +1,52 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+@use "../base/typography";
+
 .header {
-  height: 80px;
+  position: fixed;
   display: flex;
-  top: 0;
-  width: 100%;
+  justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.11);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+
+  width: 100vw;
+  z-index: 999;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  background-color: variables.$med-yellow;
+  &__logo {
+    width: 150px;
+  }
   &__nav {
     display: flex;
-    justify-content: space-between;
-    flex: 0 0 100%;
-    &-list {
-      display: flex;
-      list-style: none;
-    }
-    &-links {
-      text-decoration: none;
-      margin-left: 20px;
-      margin-right: 10px;
-    }
-    &-item :hover {
-      color: #1e3a8a;
-    }
-    &-links-active {
-      color: #1e3a8a;
+    gap: 30px;
+  }
+  &__link {
+    @include outfit-regular-bold;
+    text-decoration: none;
+    color: variables.$dark-blue;
+  }
+  &__logbar {
+    width: 100%;
+    background-color: variables.$light-yellow;
+    display: flex;
+    justify-content: end;
+    padding: 5px;
+  }
+  &__logbutton {
+    @include border-rounded;
+    @include outfit-regular;
+    font-size: 14px;
+    border: none;
+    background-color: variables.$dark-blue;
+    color: variables.$font-white;
+    width: 120px;
+    height: 30px;
+    transition: variables.$transition-time;
+    &:hover {
+      cursor: pointer;
+      background-color: variables.$med-blue;
     }
   }
 }
