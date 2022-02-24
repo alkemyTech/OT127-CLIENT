@@ -15,7 +15,11 @@ const Contact = () => {
   // Peticion a la API
   const getContact = async () => {
     try {
-      const { data } = await axios.get(endPointContacts);
+      const { data } = await axios.get(endPointContacts,{
+        headers: {
+          Group: 127,
+        },
+      });
       const contactsAPI = data.data;
       // Utilice un filter para no guardar tantos datos en el estado local ya que hay como 700 contactos
       const filterData = contactsAPI.filter((contact) => contact.id < 25);
