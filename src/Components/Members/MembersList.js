@@ -1,9 +1,10 @@
-import React, {useEffect} from "react";
-import {Link} from "react-router-dom";
-
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 //redux
-import {useDispatch, useSelector} from "react-redux";
-import {fetchMembers} from "../../Redux/reducers/membersSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMembers } from "../../Redux/reducers/membersSlice";
 import Spinner from "../Spinner/Spinner";
 
 const MembersList = () => {
@@ -12,7 +13,7 @@ const MembersList = () => {
 		dispatch(fetchMembers());
 	}, []); //eslint-disable-line
 
-	const {members} = useSelector((state) => state.membersReducer);
+	const { members } = useSelector((state) => state.membersReducer);
 
 	const handleEdit = (id) => {
 		// Logica a desarrollar
@@ -26,7 +27,22 @@ const MembersList = () => {
 		<div className="table">
 			<div className="table__container">
 				<div className="table__actions">
-					<input type="search" />
+					<TextField
+						type="search"
+						name="Buscar Miembro"
+						size="small"
+						label="Buscar Miembro"
+						placeholder="Maria"
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<span className="material-icons">
+										search
+									</span>
+								</InputAdornment>
+							),
+						}}
+					/>
 					<Link className="table__link" to="/backoffice/members/create">
 						Crear Miembros
 					</Link>

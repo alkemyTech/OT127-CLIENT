@@ -1,8 +1,10 @@
-import {useEffect} from "react";
-import {getSlides, getSlidesSearch} from "../../Redux/reducers/slidesSlice";
-import {useSelector, useDispatch} from "react-redux";
-import {Link} from "react-router-dom";
+import { useEffect } from "react";
+import { getSlides, getSlidesSearch } from "../../Redux/reducers/slidesSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import Spinner from "../../Components/Spinner/Spinner";
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 
 const SlideList = () => {
 	const dispatch = useDispatch();
@@ -15,7 +17,7 @@ const SlideList = () => {
 
 	const rows = slides;
 
-  const handleClickEdit = () => {
+	const handleClickEdit = () => {
 		//TODO, acciones editar novedades
 	};
 
@@ -25,8 +27,8 @@ const SlideList = () => {
 
 
 	const handleSearchChange = (e) => {
-		let {value} = e.target;
-		if (value.length > 2) {
+		let { value } = e.target;
+		if (value.length > 0) {
 			dispatch(getSlidesSearch(value));
 		} else {
 			dispatch(getSlides());
@@ -36,13 +38,24 @@ const SlideList = () => {
 		<div className="table">
 			<div className="table__container">
 				<div className="table__actions">
-					<input
+					<TextField
 						type="search"
-						name="search"
+						name="Buscar Usuario"
+						size="small"
+						label="Buscar Usuario"
+						placeholder="Buscar Slide"
 						onChange={(e) => {
 							handleSearchChange(e);
 						}}
-						placeholder="Buscar Slide"
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<span className="material-icons">
+										search
+									</span>
+								</InputAdornment>
+							),
+						}}
 					/>
 					<Link className="table__link" to="/backoffice/slides/create">
 						Crear Slide
@@ -62,7 +75,7 @@ const SlideList = () => {
 							</tr>
 						</thead>
 						<tbody className="table__body">
-							{rows.map(({id, name, image, order}) => (
+							{rows.map(({ id, name, image, order }) => (
 								<tr key={id} className="table__row">
 									<td className="table__cell">{name}</td>
 									<td className="table__cell">
@@ -73,7 +86,7 @@ const SlideList = () => {
 											width="100"
 										/>
 									</td>
-                  <td className="table__cell">{order}</td>
+									<td className="table__cell">{order}</td>
 									<td className="table__cell-edit">
 										<button
 											className="table__edit"
@@ -87,7 +100,7 @@ const SlideList = () => {
 											className="table__delete"
 											onClick={handleClickDelete}
 										>
-										Eliminar
+											Eliminar
 										</button>
 									</td>
 								</tr>

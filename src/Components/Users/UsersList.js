@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	getUsers,
 	getUserSearch,
@@ -11,12 +11,14 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 
 const UsersList = () => {
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.usersReducer.users);
-  const [role, setRole] = useState(0)
-  const [search, setSearch] = useState({})
+	const dispatch = useDispatch();
+	const users = useSelector((state) => state.usersReducer.users);
+	const [role, setRole] = useState(0)
+	const [search, setSearch] = useState({})
 
 	useEffect(() => {
 		dispatch(getUsers());
@@ -34,14 +36,14 @@ const UsersList = () => {
 		const selectedRole = e.target.value;
 		setRole(selectedRole);
 		if (selectedRole !== 0) {
-			dispatch(getUserSearchAndRole({search: search, role: selectedRole}));
+			dispatch(getUserSearchAndRole({ search: search, role: selectedRole }));
 		} else {
 			dispatch(getUserSearch(search));
 		}
 	};
 
 	const handleUserSearch = (e) => {
-		const {value} = e.target;
+		const { value } = e.target;
 		setSearch(value);
 		if (value.length > 0) {
 			dispatch(getUserSearch(value));
@@ -54,28 +56,41 @@ const UsersList = () => {
 		<div className="table">
 			<div className="table__container">
 				<div className="table__actions">
-					<input
+					<TextField
 						type="search"
-						name="search"
+						name="Buscar Usuario"
+						size="small"
+						label="Buscar Usuario"
+						placeholder="Juan"
 						onChange={(e) => handleUserSearch(e)}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<span className="material-icons">
+										search
+									</span>
+								</InputAdornment>
+							),
+						}}
 					/>
+					<FormControl>
+						<InputLabel>Rol</InputLabel>
+						<Select
+							value={role}
+							label="Rol"
+							onChange={handleRoleChange}
+							autoWidth
+							size="small"
+						>
+							<MenuItem value={0}>Todos</MenuItem>
+							<MenuItem value={1}>Usuario Administrador</MenuItem>
+							<MenuItem value={2}>Usuario Regular</MenuItem>
+						</Select>
+					</FormControl>
 					<Link className="table__link" to="/backoffice/users/create">
 						Crear Usuario
 					</Link>
 				</div>
-				<FormControl>
-					<InputLabel>Rol</InputLabel>
-					<Select
-						value={role}
-						label="Rol"
-						onChange={handleRoleChange}
-						autoWidth
-					>
-						<MenuItem value={0}>Todos</MenuItem>
-						<MenuItem value={1}>Usuario Administrador</MenuItem>
-						<MenuItem value={2}>Usuario Regular</MenuItem>
-					</Select>
-				</FormControl>
 				{!users.length ? (
 					<Spinner />
 				) : (
