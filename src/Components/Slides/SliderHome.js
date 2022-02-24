@@ -3,7 +3,6 @@ import { getSlides } from "../../Redux/reducers/slidesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../Spinner/Spinner";
 
-
 const SliderHome = () => {
   const carousel = useRef(null);
   const intervalCarousel = useRef(null);
@@ -80,43 +79,48 @@ const SliderHome = () => {
       }, 5000);
     });
   }, []);
-  
-  
 
   return (
     <>
-    { loading ? (
-        <Spinner/>
+      {loading ? (
+        <Spinner />
       ) : (
-      <div className="slider">
-        <div className="slider__container" ref={carousel}>
-          {sliderData.map((slide) => (
-            <div className="slider__item" key={slide.id}>
-              <img className="slider__img" src={slide.image} alt={slide.name} />
-              <div className="slider__text">
-                <p className="slider__text--title">{slide.name}</p>
-                <p className="slider__text--description">{slide.description}</p>
+        <div className="slider">
+          <div className="slider__container" ref={carousel}>
+            {sliderData.map((slide) => (
+              <div className="slider__item" key={slide.id}>
+                <img
+                  className="slider__img"
+                  src={slide.image}
+                  alt={slide.name}
+                />
+                <div className="slider__text">
+                  <p className="slider__text--title">{slide.name}</p>
+                  {slide.description && (
+                    <p className="slider__text--description">
+                      {slide.description.slice(3, slide.description.length - 4)}
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="slider__controllers">
+            <span
+              className="material-icons slider__arrow-button slider__arrow-button--left"
+              onClick={prevSlide}
+            >
+              chevron_left
+            </span>
+            <span
+              className="material-icons slider__arrow-button slider__arrow-button--right"
+              onClick={nextSlide}
+            >
+              chevron_right
+            </span>
+          </div>
         </div>
-        <div className="slider__controllers">
-          <span
-            className="material-icons slider__arrow-button slider__arrow-button--left"
-            onClick={prevSlide}
-          >
-            chevron_left
-          </span>
-          <span
-            className="material-icons slider__arrow-button slider__arrow-button--right"
-            onClick={nextSlide}
-          >
-            chevron_right
-          </span>
-        </div> 
-      </div>
-      )
-    }
+      )}
     </>
   );
 };

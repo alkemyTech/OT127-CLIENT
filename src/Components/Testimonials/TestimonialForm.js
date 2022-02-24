@@ -14,10 +14,15 @@ const TestimonialForm = () => {
     const [create, setCreate] = useState(true)
     const url = process.env.REACT_APP_ENDPOINT_TESTIMONIALS
     const { id } = useParams()
+    const config = {
+        headers: {
+          Group: 127,
+        },
+      }
 
     const Post = async (url, body) => {
         try {
-            const res = await axios.post(url, body)
+            const res = await axios.post(url, body, config)
             return res.data
         } catch (error) {
             sweetAlertError("No se pudo crear el testimonio")
@@ -26,7 +31,7 @@ const TestimonialForm = () => {
 
     const Put = async (url, id, body) => {
         try {
-            const res = await axios.put(`${url}/${id}`, body)
+            const res = await axios.put(`${url}/${id}`, body, config)
             return res.data
         } catch (error) {
             sweetAlertError("No se pudo actualizar el testimonio")
@@ -35,7 +40,7 @@ const TestimonialForm = () => {
 
     const Get = async (url, id) => {
         try {
-            const res = await axios.get(`${url}/${id}`)
+            const res = await axios.get(`${url}/${id}`, config)
             return res.data
         } catch (error) {
             sweetAlertError("No se pudo traer la informacion de los testimonios")
@@ -58,7 +63,7 @@ const TestimonialForm = () => {
     const submitForm = async (values, formik) => {
         if (create) {
             try {
-                const res = await Post(
+                await Post(
                     url,
                     values
                 )
@@ -68,7 +73,7 @@ const TestimonialForm = () => {
             }
         } else {
             try {
-                const res = await Put(
+                await Put(
                     url,
                     id,
                     values
