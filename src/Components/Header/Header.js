@@ -1,8 +1,7 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../images/LOGO-SOMOS_MAS.png";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logoutUser } from "../../Redux/actions/authActions";
-import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -14,31 +13,6 @@ const Header = () => {
     { link: "/toys-campaign", name: "Campaña de juguetes" },
     { link: "/nosotros", name: "Nosotros" },
   ];
-
-  //     <>
-  //       <header className="header">
-  //
-  //         <nav className="header__nav">
-  //           {menuItems.map((item) => (
-  //             <NavLink
-  //               className="header__link"
-  //               activeClassName="header__nav-links-active"
-  //               to={item.link}
-  //             >
-  //               {item.name}
-  //             </NavLink>
-  //           ))}
-  //         </nav>
-  //       </header>
-  //       <div className="header__logbar">
-  //         <NavLink to={isLogged ? "/" : "/login"}>
-  //           <button className="header__logbutton" onClick={logout}>
-  //             {isLogged ? "Cerrar sesión" : "Iniciar sesión"}
-  //           </button>
-  //         </NavLink>
-  //       </div>
-  //     </>
-  //   );
 
   const logout = () => {
     dispatch(logoutUser());
@@ -97,19 +71,19 @@ const Header = () => {
               </NavLink>
             </>
           )}
-        </nav>
+          {isAuthenticated && isAuthenticated.role_id === 2 && (
+            <NavLink className="header__link" to="/donate">
+              Donar
+            </NavLink>
+          )}
 
-        {isAuthenticated && isAuthenticated.role_id === 2 && (
-          <Link to="/donate">Donar</Link>
-        )}
+          {isAuthenticated && (
+            <button onClick={logout} className="header__logbutton">
+              Cerrar sesión
+            </button>
+          )}
+        </nav>
       </header>
-      <div className="header__logbar">
-        {isAuthenticated && (
-          <button onClick={logout} className="header__logbutton">
-            Cerrar sesión
-          </button>
-        )}
-      </div>
     </>
   );
 };
