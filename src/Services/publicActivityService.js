@@ -8,7 +8,12 @@ class ActivitiesService {
   getAll = async () => {
     let data;
     await axios
-      .get(this.API_URL)
+      .get(this.API_URL, {
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          Group: 127,
+        },
+      })
       .then((response) => (data = response.data.data))
       .catch(() => sweetAlertError("No se pudo cargar las actividades"));
     return data;
@@ -18,7 +23,12 @@ class ActivitiesService {
     let data;
     if (id) {
       await axios
-        .get(`${this.API_URL}/${id}`)
+        .get(`${this.API_URL}/${id}`, {
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            Group: 127,
+          },
+        })
         .then((response) => (data = response.data.data))
         .catch(() => sweetAlertError("No se pudo cargar la actividad"));
       return data;
@@ -27,24 +37,39 @@ class ActivitiesService {
 
   post = async (name, description, image) => {
     await axios
-      .post(this.API_URL, {
-        name,
-        description,
-        image,
-      })
-      .then((response) => response.data)
+      .post(
+        this.API_URL,{
+              name,
+              description,
+              image,
+          },
+          {
+            headers: {
+              Group: 127,
+            },
+          },
+      )
+      .then(() => sweetAlertSuccess("Actividad creada"))
       .catch(() => sweetAlertError("No se pudo crear la actividad"));
   };
 
   put = async (id, name, description, image) => {
     if (id) {
       await axios
-        .put(`${this.API_URL}/${id}`, {
-          name,
-          description,
-          image,
-        })
-        .then((response) => response.data)
+        .put(
+          `${this.API_URL}/${id}`,
+          {
+            name,
+            description,
+            image,
+          },
+          {
+            headers: {
+              Group: 127,
+            },
+          },
+        )
+        .then(() => sweetAlertSuccess("Actividad editada."))
         .catch(() => sweetAlertError("No se pudo editar la actividad"));
     }
   };
@@ -52,7 +77,12 @@ class ActivitiesService {
   delete = async (id) => {
     if (id) {
       await axios
-        .delete(`${this.API_URL}/${id}`)
+        .delete(`${this.API_URL}/${id}`, {
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            Group: 127,
+          },
+        })
         .then(() => sweetAlertSuccess("Se elimino la actividad."))
         .catch(() => sweetAlertError("No se pudo eliminar la actividad."));
     }

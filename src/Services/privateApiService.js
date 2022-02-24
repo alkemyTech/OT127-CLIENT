@@ -1,8 +1,9 @@
-import axios from "axios"
+import axios from "axios";
 
-const config = {
+export let config = {
   headers: {
-    Group: "127",
+    Accept: "application/json, text/plain, */*",
+    Group: 127,
   },
 };
 
@@ -23,7 +24,7 @@ export const getSecureHeader = () => {
 export const privateServicePatch = (route, id, data) => {
   let url = id ? `${route}/${id}` : route;
   let token = getSecureHeader();
-  const { Authorization, error } = token;
+  const { Authorization } = token;
 
   if (Authorization) {
     axios.patch(url, data, {
@@ -69,32 +70,31 @@ export const getPrivate = async (route, id = null) => {
 };
 
 export const privateDelete = (route, id) => {
-  const url = `${route}/${id}`
-  let token = getSecureHeader()
-  const { Authorization, error } = token
+  const url = `${route}/${id}`;
+  let token = getSecureHeader();
+  const { Authorization, error } = token;
 
   if (Authorization) {
     axios.delete(url, {
       header: {
         ...config.headers,
         Authorization,
-      }
-    })
-
+      },
+    });
   } else {
-    return error
+    return error;
   }
-}
+};
 
 export const privatePost = (route, data) => {
   let url = route;
   let token = getSecureHeader();
-  const { Authorization, error } = token;
+  const { Authorization } = token;
 
   if (Authorization) {
     axios
-    .post(url, data)
-    .then((res) => res)
-    .catch((err) => err); 
+      .post(url, data)
+      .then((res) => res)
+      .catch((err) => err);
   }
 };
