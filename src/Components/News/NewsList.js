@@ -13,6 +13,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
+import { deleteNews } from "../../Services/newsService"
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -36,14 +38,18 @@ const NewsList = () => {
     } else {
       dispatch(getNews());
     }
-  }, [value, select]);
-
-  const handleClickEdit = () => {
-    //TODO, acciones editar novedadesss
-  };
+  }, [value, select]); //eslint-disable-line
 
   const handleClickDelete = (id) => {
-    //TODO, acciones editar novedadesss
+    sweetAlertConfirm(
+      "Eliminar novedad",
+      "Seguro quieres eliminar la novedad?"
+    ).then((res) => {
+      res && deleteNews(id);
+      setTimeout(() => {
+        dispatch(getNews());
+      }, 2000);
+    });
   };
 
   const handleChange = (e) => {
@@ -114,14 +120,12 @@ const NewsList = () => {
                     <img src={element.image} alt="News_image" width="100" />
                   </td>
                   <td className="table__cell-edit">
-                    <button className="table__edit" onClick={handleClickEdit}>
-                      Editar
-                    </button>
+                    <Link to={`/backoffice/news/edit/${element.id}`}>Editar</Link>
                   </td>
                   <td className="table__cell-delete">
                     <button
                       className="table__delete"
-                      onClick={handleClickDelete}
+                      onClick={() => handleClickDelete(element.id)}
                     >
                       Eliminar
                     </button>

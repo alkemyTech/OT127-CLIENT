@@ -36,6 +36,15 @@
     &:focus {
       border: 2px solid $green-blue;
     }
+    &--password {
+      width: 100%;
+      height: 2.5em;
+      border-radius: 10px;
+      margin: 0 0 1em 0;
+      border-style: none;
+      padding-left: 10px;
+      outline: none;
+    }
   }
   &__label {
     margin: 0.5em 0 0.5em 0;
@@ -77,5 +86,15 @@
     @include outfit-subtitle();
     margin: 0;
     margin-bottom: 30px;
+  }
+  &__password {
+    display: flex;
+  }
+  &__visibility{
+    margin-top: .3em;
+    margin-left: .3em;
+    &:hover{
+      cursor: pointer;
+    }
   }
 }

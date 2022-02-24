@@ -3,6 +3,8 @@ import { getSlides, getSlidesSearch } from "../../Redux/reducers/slidesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Spinner from "../../Components/Spinner/Spinner";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
+import { deleteSlide } from "../../Services/slidesApiService";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -11,20 +13,23 @@ const SlideList = () => {
 
 	useEffect(() => {
 		dispatch(getSlides());
-	}, []);
+	}, []); //eslint-disable-line
 
 	const slides = useSelector((state) => state.slidesReducer.slides.data);
 
 	const rows = slides;
 
-	const handleClickEdit = () => {
-		//TODO, acciones editar novedades
+	const handleClickDelete = (id) => {
+		sweetAlertConfirm(
+			"Eliminar slide",
+			"Seguro quieres eliminar el slide?"
+		).then((res) => {
+			res && deleteSlide(id);
+			setTimeout(() => {
+				dispatch(getSlides());
+			}, 2000);
+		});
 	};
-
-	const handleClickDelete = () => {
-		//TODO, acciones para borrar novedades
-	};
-
 
 	const handleSearchChange = (e) => {
 		let { value } = e.target;
@@ -88,17 +93,12 @@ const SlideList = () => {
 									</td>
 									<td className="table__cell">{order}</td>
 									<td className="table__cell-edit">
-										<button
-											className="table__edit"
-											onClick={handleClickEdit}
-										>
-											Editar
-										</button>
+										<Link to={`/backoffice/slides/edit/${id}`}>Editar</Link>
 									</td>
 									<td className="table__cell-delete">
 										<button
 											className="table__delete"
-											onClick={handleClickDelete}
+											onClick={() => handleClickDelete(id)}
 										>
 											Eliminar
 										</button>

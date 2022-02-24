@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
+import Spinner from "../Spinner/Spinner";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMembers } from "../../Redux/reducers/membersSlice";
-import Spinner from "../Spinner/Spinner";
+import {
+	fetchMembers,
+	getMembersSearch,
+} from "../../Redux/reducers/membersSlice";
+import { deleteMember } from "../../Services/membersService";
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 
 const MembersList = () => {
 	const dispatch = useDispatch();
@@ -15,12 +20,25 @@ const MembersList = () => {
 
 	const { members } = useSelector((state) => state.membersReducer);
 
-	const handleEdit = (id) => {
-		// Logica a desarrollar
+	const handleDelete = (id) => {
+		sweetAlertConfirm(
+			"Eliminar miembro.",
+			"Seguro quieres eliminar este miebro?"
+		).then((res) => {
+			res && deleteMember(id);
+			setTimeout(() => {
+				dispatch(fetchMembers());
+			}, 2000);
+		});
 	};
 
-	const handleDelete = (id) => {
-		// Logica a desarrollar
+	const handleMemberSearch = (e) => {
+		const { value } = e.target;
+		if (value.length > 0) {
+			dispatch(getMembersSearch(value));
+		} else {
+			dispatch(fetchMembers());
+		}
 	};
 
 	return (
@@ -67,12 +85,9 @@ const MembersList = () => {
 										<img src={member.image} alt={member.name} width="50px" />
 									</td>
 									<td className="table__cell-edit">
-										<button
-											className="table__edit"
-											onClick={() => handleEdit(member.id)}
-										>
+										<Link to={`/backoffice/members/edit/${member.id}`}>
 											Editar
-										</button>
+										</Link>
 									</td>
 									<td className="table__cell-delete">
 										<button

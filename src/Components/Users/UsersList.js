@@ -11,25 +11,32 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
+import { deleteUser } from "../../Services/userService";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-
 const UsersList = () => {
 	const dispatch = useDispatch();
 	const users = useSelector((state) => state.usersReducer.users);
-	const [role, setRole] = useState(0)
-	const [search, setSearch] = useState({})
+	const [role, setRole] = useState(0);
+	const [search, setSearch] = useState("");
 
 	useEffect(() => {
 		dispatch(getUsers());
 	}, []); // eslint-disable-line
 
-	const handleEdit = (values) => {
-		// TO DO: Logica para editar un usuario
-	};
-
-	const handleDelete = (values) => {
-		// TO DO: Logica para eliminar un usuario
+	const handleDelete = (id) => {
+		sweetAlertConfirm(
+			"Eliminar usuario",
+			"Seguro quieres eliminar al usuario?"
+		).then((res) => {
+			res && deleteUser(id);
+			setTimeout(() => {
+				dispatch(getUsers());
+			}, 2000);
+		});
 	};
 
 	const handleRoleChange = (e) => {
@@ -91,6 +98,19 @@ const UsersList = () => {
 						Crear Usuario
 					</Link>
 				</div>
+				<FormControl>
+					<InputLabel>Rol</InputLabel>
+					<Select
+						value={role}
+						label="Rol"
+						onChange={handleRoleChange}
+						autoWidth
+					>
+						<MenuItem value={0}>Todos</MenuItem>
+						<MenuItem value={1}>Usuario Administrador</MenuItem>
+						<MenuItem value={2}>Usuario Regular</MenuItem>
+					</Select>
+				</FormControl>
 				{!users.length ? (
 					<Spinner />
 				) : (
@@ -109,21 +129,19 @@ const UsersList = () => {
 								<tr key={user.id} className="table__row">
 									<td className="table__cell">{user.name}</td>
 									<td className="table__cell">{user.email}</td>
-									<td className="table__cell">{user.role_id}</td>
+									<td className="table__cell">
+										{user.role_id === 1 ? (
+											<AdminPanelSettingsIcon />
+										) : (
+											<AccountCircleIcon />
+										)}
+									</td>
 									<td className="table__cell-edit">
-										<button
-											className="table__edit"
-											onClick={() => handleEdit(user)}
-										>
-											Editar
-										</button>
+										<Link to={`/backoffice/users/edit/${user.id}`}>Editar</Link>
 									</td>
 									<td className="table__cell-delete">
-										<button
-											className="table__delete"
-											onClick={() => handleDelete(user)}
-										>
-											Eliminar
+										<button onClick={() => handleDelete(user.id)}>
+											ELIMINAR
 										</button>
 									</td>
 								</tr>
