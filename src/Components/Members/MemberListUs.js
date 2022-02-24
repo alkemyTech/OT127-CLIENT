@@ -8,7 +8,11 @@ const MemberListUs = () => {
 
   const getMembers = async () => {
     await axios
-      .get(endPointMenbers)
+      .get(endPointMenbers, {
+        headers: {
+          Group: 127,
+        },
+      })
       .then((res) => {
         setMembers(res.data.data);
         setLoading(false);
@@ -19,7 +23,7 @@ const MemberListUs = () => {
   };
   useEffect(() => {
     getMembers();
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <>

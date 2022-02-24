@@ -45,13 +45,9 @@ const ActivitiesForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      activitiesController.put(id, name, description, image).then(() => {
-        alert("Actualizado");
-      });
+      activitiesController.put(id, name, description, image);
     } else {
-      activitiesController.post(name, description, image).then(() => {
-        alert("Actividad creada");
-      });
+      activitiesController.post(name, description, image);
     }
   };
 

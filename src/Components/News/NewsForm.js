@@ -22,11 +22,16 @@ const NewsForm = () => {
   const { id } = useParams();
   const url = "http://ongapi.alkemy.org/api/news";
   const urlCategories = "http://ongapi.alkemy.org/api/categories";
+  const config ={
+    headers: {
+      Group: 127,
+    },
+  }
 
   const getCategorieData = () => {
     if (id) {
       axios
-        .get(urlCategories)
+        .get(urlCategories, config)
         .then((response) => {
           const dataCategorie = response.data.data;
           setDataCategorie(dataCategorie);
@@ -39,7 +44,7 @@ const NewsForm = () => {
 
   const getOrdersList = async () => {
     await axios
-      .get(url)
+      .get(url, config)
       .then((res) => {
         let data = res.data.data;
         const orderBlackList = data
@@ -56,7 +61,7 @@ const NewsForm = () => {
     setLoading(true);
 
     await axios
-      .get(`${url}/${id}`)
+      .get(`${url}/${id}`, config)
       .then((res) => {
         if (res.data.success) {
           const { name, contenido, image } = res.data.data;
@@ -106,11 +111,11 @@ const NewsForm = () => {
     }
 
     if (id) {
-      await axios.put(`${url}/${id}`, formValues).catch((err) => {
+      await axios.put(`${url}/${id}`, formValues, config).catch((err) => {
         sweetAlertError("No se pudo actualizar esta novedad.");
       });
     } else {
-      await axios.post(url, formValues).catch((err) => {
+      await axios.post(url, formValues, config).catch((err) => {
         sweetAlertError("No se pudo crear esta novedad.");
       });
     }

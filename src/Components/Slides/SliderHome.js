@@ -3,7 +3,6 @@ import { getSlides } from "../../Redux/reducers/slidesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../Spinner/Spinner";
 
-
 const SliderHome = () => {
   const carousel = useRef(null);
   const intervalCarousel = useRef(null);
@@ -81,8 +80,6 @@ const SliderHome = () => {
     });
   }, []);
 
-
-
   return (
     <>
       {loading ? (
@@ -92,10 +89,18 @@ const SliderHome = () => {
           <div className="slider__container" ref={carousel}>
             {sliderData.map((slide) => (
               <div className="slider__item" key={slide.id}>
-                <img className="slider__img" src={slide.image} alt={slide.name} />
+                <img
+                  className="slider__img"
+                  src={slide.image}
+                  alt={slide.name}
+                />
                 <div className="slider__text">
                   <p className="slider__text--title">{slide.name}</p>
-                  <p className="slider__text--description">{slide.description}</p>
+                  {slide.description && (
+                    <p className="slider__text--description">
+                      {slide.description.slice(3, slide.description.length - 4)}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}

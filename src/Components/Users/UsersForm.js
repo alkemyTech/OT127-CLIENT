@@ -38,14 +38,20 @@ const UserForm = () => {
 
   const getRoles = async () => {
     try {
-      let rolesData = await axios.get(urlRoles).then((response) => {
-        let resData = response.data.data;
-        let arrData = [];
-        resData.forEach((element) => {
-          arrData.push({ id: element.id, name: element.name });
+      let rolesData = await axios
+        .get(urlRoles, {
+          headers: {
+            Group: 127,
+          },
+        })
+        .then((response) => {
+          let resData = response.data.data;
+          let arrData = [];
+          resData.forEach((element) => {
+            arrData.push({ id: element.id, name: element.name });
+          });
+          return arrData;
         });
-        return arrData;
-      });
       setRoles(rolesData);
     } catch (error) {
       alert(error);
@@ -53,9 +59,7 @@ const UserForm = () => {
   };
 
   const handleSubmit = (values) => {
-    id
-      ? putUser(id, values)
-      : postUser(values);
+    id ? putUser(id, values) : postUser(values);
   };
 
   const handleChange = (e, setFieldValue) => {

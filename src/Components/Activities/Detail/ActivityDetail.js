@@ -11,7 +11,11 @@ const ActivityDetail = () => {
 	const getActivity = async () => {
 		try {
 			const url = `${process.env.REACT_APP_ACTIVITIES_ENDPOINT}/${id}`;
-			const {data} = await Axios.get(url);
+			const {data} = await Axios.get(url, {
+				headers: {
+				  Group: 127,
+				},
+			  });
 			const activityData = data.data;
 			setActivity(activityData);
 		} catch (error) {
@@ -21,7 +25,7 @@ const ActivityDetail = () => {
 
 	useEffect(() => {
 		getActivity();
-	}, []);
+	}, []);//eslint-disable-line
 
 	return (
 		<>
