@@ -1,25 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import * as Yup from "yup";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import {
-  sweetAlertError,
-  sweetAlertSuccess,
-} from "../../Services/sweetAlertServices";
+import { putNews, postNews, getNewsByID } from "../../Services/newsService";
+import { getAllCategory } from "../../Services/categoriesService";
+import Spinner from "../Spinner/Spinner";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
 const NewsForm = () => {
-  const URL_NEWS = process.env.REACT_APP_ENDPOINTS_NEWS;
-  const URL_CATEGORIES = process.env.REACT_APP_ENDPOINT_CATEGORIES;
-  const config = {
-    headers: {
-      Group: 127,
-    },
-  };
-
   const [initialValues, setInitialValues] = useState({
     name: "",
     content: "",
@@ -33,10 +24,9 @@ const NewsForm = () => {
   const inputFileRef = useRef();
 
   const getCategorieData = () => {
-    axios
-      .get(URL_CATEGORIES, config)
+    getAllCategory()
       .then((response) => {
-        const dataCategorie = response.data.data;
+        const dataCategorie = response.data;
         setDataCategorie(dataCategorie);
       })
       .catch((error) => {
@@ -52,10 +42,9 @@ const NewsForm = () => {
       reader.readAsDataURL(blob);
     });
 
-  const getDataID = async (id) => {
+  const getNewsID = async (id) => {
     setLoading(true);
-
-    await axios.get(`${URL_NEWS}/${id}`).then((res) => {
+    getNewsByID(id).then((res) => {
       if (res.data.success) {
         const { name, content, image, category_id } = res.data.data;
         //Es necesario encodear la URL que viene de la API para que se pueda editar con exito.
@@ -77,7 +66,7 @@ const NewsForm = () => {
 
   useEffect(() => {
     if (id) {
-      getDataID(id);
+      getNewsID(id);
     }
     getCategorieData();
   }, []); //eslint-disable-line
@@ -103,25 +92,11 @@ const NewsForm = () => {
     }
 
     if (id) {
-      await axios
-        .put(`${URL_NEWS}/${id}`, formValues, config)
-        .then((res) => {
-          sweetAlertSuccess("Se actualizó con éxito");
-        })
-        .catch((err) => {
-          sweetAlertError("No se pudo actualizar esta novedad.");
-        });
+      putNews(id, formValues);
     } else {
-      await axios
-        .post(URL_NEWS, formValues, config)
-        .then((res) => {
-          sweetAlertSuccess("Se creó con éxito.");
-          resetForm();
-          inputFileRef.current.value = "";
-        })
-        .catch((err) => {
-          sweetAlertError("No se pudo crear esta novedad.");
-        });
+      postNews(formValues);
+      resetForm();
+      inputFileRef.current.value = "";
     }
   };
 
@@ -137,7 +112,7 @@ const NewsForm = () => {
   return (
     <div className="form__container">
       {loading ? (
-        <p>LOADING...</p>
+        <Spinner />
       ) : (
         <Formik
           enableReinitialize={true}
@@ -230,7 +205,7 @@ const NewsForm = () => {
                 render={(msg) => <div className="form__error">{msg}</div>}
               />
               <button type="submit" className="form__button">
-                Enviar
+                {id ? "Editar" : "Crear"}
               </button>
             </Form>
           )}

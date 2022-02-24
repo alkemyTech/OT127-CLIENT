@@ -24,8 +24,8 @@ const ProjectsForm = lazy(() => import("../Projects/ProjectsForm"));
 const BackOffice = () => {
   const isAuthenticated = JSON.parse(localStorage.getItem("authenticatedUser"));
   const redirectToHome = () => {
-	  window.location.href='/'
-  }
+    window.location.href = "/";
+  };
   return (
     <>
       {isAuthenticated && isAuthenticated.role_id === 1 ? (
@@ -54,7 +54,7 @@ const BackOffice = () => {
                   component={CategoriesForm}
                 />
                 <Route
-                  path="/backoffice/categories/create/:id"
+                  path="/backoffice/categories/edit/:id"
                   component={CategoriesForm}
                 />
                 <Route
@@ -120,9 +120,9 @@ const BackOffice = () => {
             </Switch>
           </LayoutBackOffice>
         </div>
-      ) : 
-	  redirectToHome()
-	  }
+      ) : (
+        redirectToHome()
+      )}
     </>
   );
 };
