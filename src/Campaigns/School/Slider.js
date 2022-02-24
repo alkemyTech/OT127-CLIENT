@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import image1 from "../../images/juguetes1.jpg"
-import image2 from "../../images/juguetes2.png"
-import image3 from "../../images/juguetes3.jpg"
+import image1 from "../../images/escolar1.jpg"
+import image2 from "../../images/escolar2.jpg"
+import image3 from "../../images/escolar3.jpg"
 
 
 
@@ -10,9 +10,9 @@ const Slider = () => {
   const intervalCarousel = useRef(null);
 
   const sliderData = [
-    { id: 1, image: image1, name: "Dona tus viejos juguetes", description: "Con tan solo donar juguetes viejos que ya no se utilicen, vas a hacer feliz a muchos niños y niñas que se encuentran en situaciones de vulnerabilidad" },
-    { id: 2, image: image2, name: "¿Por qué donar juguetes?", description: "Los juguetes no son solo entretenimiento para los niños y niñas, juega un rol fundamental para desarrollar sus mentes" },
-    { id: 3, image: image3, name: "¿Donde puedo dejar mis juguetes?", description: "Tenemos centros de recolección por toda la ciudad, contáctenos para averiguar más" }
+    { id: 1, image: image1, name: "Seamos útiles", description: "Tercera campaña masiva de recolecciones de útiles escolares, nuevos o en buenas condiciones, tu granito de arena suma!" },
+    { id: 2, image: image2, name: "Nuestro futuro", description: "Con un simple gesto ayudas a nuestra futura generación a formarse de la mejor manera" },
+    { id: 3, image: image3, name: "Todo un exito!", description: "Gracias a personas como vos ya vamos hemos alcanzado a más de 2000 alumnos! que esto no se quede acá, conoce nuestros puntos de recolección" }
   ]
 
   const nextSlide = () => {
