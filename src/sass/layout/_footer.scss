@@ -24,6 +24,7 @@
     &-text {
       @include outfit-regular();
       font-weight: bold;
+      align-self: center;
       display: none;
       @media (min-width: $bp-tablet) {
         display: inherit;
