@@ -42,11 +42,11 @@ export const getSlidesDataById = async (id) => {
   }
 };
 
-export const postSlides = async (data) => {
+export const postSlide = async (data) => {
   await axios
     .post(url, data, config)
     .then((res) => {
-      sweetAlertSuccess(`Slides ${data.name} creado correctamente`);
+      sweetAlertSuccess(`Slide ${data.name} creado correctamente`);
     })
     .catch((err) => {
       sweetAlertError("No se pudo crear el slides");
@@ -54,7 +54,7 @@ export const postSlides = async (data) => {
 };
 
 // Metodo a utilizar cuando este componente MembersForm
-export const putSlides = async (id, data) => {
+export const putSlide = async (id, data) => {
   await axios
     .put(`${url}/${id}`, data, config)
     .then((res) => {
