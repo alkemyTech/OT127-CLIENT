@@ -24,27 +24,27 @@ const MemberForm = () => {
     setLoading(true);
     if (id) {
       await axios
-      .put(`${baseUrl}/${id}`, formValues, {
-        headers: {
-          Group: 127,
-        },
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+        .put(`${baseUrl}/${id}`, formValues, {
+          headers: {
+            Group: 127,
+          },
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
     } else {
       await axios
-      .post(baseUrl, formValues, {
-        headers: {
-          Group: 127,
-        },
-      })
-      .then((res) => {
-        setFormValues(res.data.data);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+        .post(baseUrl, formValues, {
+          headers: {
+            Group: 127,
+          },
+        })
+        .then((res) => {
+          setFormValues(res.data.data);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
     }
     setLoading(false);
   };
@@ -107,6 +107,8 @@ const MemberForm = () => {
           {({ setFieldValue }) => (
             <Form className="form__container">
               <div className="form">
+                {id ? <p className="form__title">Editar miembro</p> : <p className="form__title">Crear miembro nuevo</p>}
+                <p className="form__subtitle">complete todos los campos</p>
                 <label className="form__label" htmlFor="name">
                   Nombre
                 </label>

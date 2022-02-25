@@ -105,6 +105,8 @@ const UserForm = () => {
       >
         {({ setFieldValue }) => (
           <Form className="form">
+            {id ? <p className="form__title">Editar usuario</p> : <p className="form__title">Crear usuario nuevo</p>}
+            <p className="form__subtitle">complete todos los campos</p>
             <div className="form__subcontainer">
               <label htmlFor="name" className="form__label">
                 Nombre
