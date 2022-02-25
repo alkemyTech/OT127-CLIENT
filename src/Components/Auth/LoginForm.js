@@ -66,6 +66,8 @@ const LoginForm = () => {
         }}
       >
         <Form className="form">
+          <p className="form__title">Bienvenido!</p>
+          <p className="form__subtitle">Iniciar sesión</p>
           <label htmlFor="email" className="form__label">
             Email
           </label>

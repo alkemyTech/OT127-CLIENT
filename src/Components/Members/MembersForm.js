@@ -5,7 +5,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import { useParams } from "react-router-dom";
-import Spinner from "../Spinner/Spinner";
+
 import {
   getMemberById,
   postMember,
