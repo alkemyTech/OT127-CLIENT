@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 import Countdown from "react-countdown";
 
-
 const Content = () => {
-
   const renderer = ({ days, hours, minutes, seconds }) => {
     return (
       <span className="content__countdown-timer">
@@ -31,9 +29,10 @@ const Content = () => {
         className="school-content__img"
       />
       <p className="school-content__description">
-        Dona tus utiles escolares, nuevo o usados en buenas condiciones. Los utiles escolares son
-        indispensables en el aprendizaje de los niños, fomentan su desarrollo
-        cognitivo, su imaginación, su diversión y, en definitiva, su felicidad.
+        Dona tus utiles escolares, nuevo o usados en buenas condiciones. Los
+        utiles escolares son indispensables en el aprendizaje de los niños,
+        fomentan su desarrollo cognitivo, su imaginación, su diversión y, en
+        definitiva, su felicidad.
       </p>
       <img
         src={process.env.PUBLIC_URL + "/images/school-campaing/school3.jpg"}
@@ -52,6 +51,6 @@ const Content = () => {
       />
     </div>
   );
-}
- 
+};
+
 export default Content;
