@@ -14,7 +14,7 @@ import {
   postSlide,
   putSlide,
 } from "../../Services/slidesApiService";
-import Spinner from "../Spinner/Spinner";
+
 import Progress from "../Progress/Progress";
 
 const SlidesForm = () => {
