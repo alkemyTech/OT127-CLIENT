@@ -69,7 +69,7 @@ export const postUser = (values) => {
 
 export const APIloginUser = async (values) => {
   try {
-    let response = await Axios.post(urlLogin, values);
+    let response = await Axios.post(urlLogin, values, config);
     return response;
   } catch (error) {
     return error;
