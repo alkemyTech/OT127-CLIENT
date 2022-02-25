@@ -3,17 +3,13 @@ import { Switch, Route } from "react-router-dom";
 import Progress from "../Progress/Porgress";
 import LayoutBackOffice from "./LayoutBackOffice";
 
-const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
-const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
 const ActivitiesForm = lazy(() => import("../Activities/ActivitiesForm"));
 const ActivitiesList = lazy(() => import("./Activities"));
 const CategoriesForm = lazy(() => import("../Categories/CategoriesForm"));
 const CategoriesList = lazy(() => import("../Categories/CategoriesList"));
+const HomeForm = lazy(() => import("./HomeForm"));
 const MembersForm = lazy(() => import("../Members/MembersForm"));
 const MembersList = lazy(() => import("../Members/MembersList"));
-const HomeForm = lazy(() => import("./HomeForm"));
-const UserForm = lazy(() => import("../Users/UsersForm"));
-const UsersList = lazy(() => import("../Users/UsersList"));
 const NewsForm = lazy(() => import("../News/NewsForm"));
 const NewsList = lazy(() => import("../News/NewsList"));
 const OrganizationData = lazy(() => import("../Organization/OrganizationData"));
@@ -21,11 +17,16 @@ const OrganizationDataForm = lazy(() =>
   import("../Organization/OrganizationDataForm")
 );
 const ProjectsForm = lazy(() => import("../Projects/ProjectsForm"));
+const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
+const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
+const UserForm = lazy(() => import("../Users/UsersForm"));
+const UsersList = lazy(() => import("../Users/UsersList"));
+
 const BackOffice = () => {
   const isAuthenticated = JSON.parse(localStorage.getItem("authenticatedUser"));
   const redirectToHome = () => {
-	  window.location.href='/'
-  }
+    window.location.href = "/";
+  };
   return (
     <>
       {isAuthenticated && isAuthenticated.role_id === 1 ? (
