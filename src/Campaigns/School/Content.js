@@ -29,8 +29,8 @@ const Content = () => {
         className="school-content__img"
       />
       <p className="school-content__description">
-        Dona tus utiles escolares, nuevo o usados en buenas condiciones. Los
-        utiles escolares son indispensables en el aprendizaje de los niños,
+        Dona tus útiles escolares, nuevo o usados en buenas condiciones. Los
+        útiles escolares son indispensables en el aprendizaje de los niños,
         fomentan su desarrollo cognitivo, su imaginación, su diversión y, en
         definitiva, su felicidad.
       </p>
