@@ -14,6 +14,8 @@ import {
   postSlide,
   putSlide,
 } from "../../Services/slidesApiService";
+import Spinner from "../Spinner/Spinner";
+import Progress from "../Progress/Progress";
 
 const SlidesForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -23,7 +25,7 @@ const SlidesForm = () => {
     image: "",
   });
   const [ordersList, setOrdersList] = useState([]); // para validar order
-
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
   const getOrdersList = async () => {
@@ -67,7 +69,8 @@ const SlidesForm = () => {
     });
   };
 
-  const handleSubmit = async (formValues) => {
+  const handleSubmit = async (formValues, resetForm) => {
+    setLoading(true);
     let { image, ...rest } = formValues;
     if (typeof image === "object") {
       image = await toBase64(image);
@@ -87,6 +90,10 @@ const SlidesForm = () => {
     } else {
       await postSlide(formValues);
     }
+    //limpio el input file
+    inputFileRef.current.value = "";
+    resetForm();
+    setLoading(false);
   };
 
   const inputFileRef = useRef();
@@ -114,10 +121,7 @@ const SlidesForm = () => {
         initialValues={initialValues}
         validationSchema={validations}
         onSubmit={(values, { resetForm }) => {
-          handleSubmit(values);
-          //limpio el input file
-          inputFileRef.current.value = "";
-          resetForm();
+          handleSubmit(values, resetForm);
         }}
       >
         {({ setFieldValue }) => (
@@ -197,6 +201,9 @@ const SlidesForm = () => {
               <button type="submit" className="form__button">
                 {id ? "Editar" : "Crear"}
               </button>
+              {loading && (
+                <Progress primaryColor="#1c4937" backgroundColor="#6ee7b7" />
+              )}
             </div>
           </Form>
         )}
