@@ -66,6 +66,8 @@ const LoginForm = () => {
         }}
       >
         <Form className="form">
+          <p className="form__title">Bienvenido!</p>
+          <p className="form__subtitle">Iniciar sesión</p>
           <label htmlFor="email" className="form__label">
             Email
           </label>
@@ -84,17 +86,17 @@ const LoginForm = () => {
             Contraseña
           </label>
           <div className="form__password">
-          <Field
-            name="password"
-            type={showPassword}
-            className="form__input--password"
-            placeholder="*******"
-          />
-          {showPassword === "password" ? (
-            <VisibilityIcon className="form__visibility" onClick={() => setShowPassword('text')}/>
-          ) : (
-            <VisibilityOffIcon className="form__visibility"  onClick={() => setShowPassword('password')}/>
-          )}
+            <Field
+              name="password"
+              type={showPassword}
+              className="form__input--password"
+              placeholder="*******"
+            />
+            {showPassword === "password" ? (
+              <VisibilityIcon className="form__visibility" onClick={() => setShowPassword('text')} />
+            ) : (
+              <VisibilityOffIcon className="form__visibility" onClick={() => setShowPassword('password')} />
+            )}
           </div>
           <ErrorMessage
             name="password"

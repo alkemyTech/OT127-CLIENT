@@ -40,7 +40,7 @@ const RegisterForm = () => {
   return (
     <div>
       {isLogged ? redirectToHome() : (
-        <div className="form__container">
+        <div className="form__container form__container--public">
           <Formik
             initialValues={{
               name: "",
@@ -74,6 +74,8 @@ const RegisterForm = () => {
             onSubmit={handleSubmit}
           >
             <Form className="form">
+              <p className="form__title">Bienvenido!</p>
+              <p className="form__subtitle">registrate</p>
               {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
               {/*Los componentes ErrorMessage tienen un atributo render, eso va a servir para cuando agreguemos los estilos, solo hay que agregar la clase*/}
               <div className="form__subcontainer">
