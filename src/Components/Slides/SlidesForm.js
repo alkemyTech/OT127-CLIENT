@@ -32,10 +32,8 @@ const SlidesForm = () => {
       .then((res) => {
         let data = res.data.data;
         // arreglo de order utilizados
-        const orderBlackList = data
-          .map((data) => data.order)
-          .filter((order) => order !== initialValues.order);
-        setOrdersList(orderBlackList);
+        const ordersArr = data.map((data) => data.order);
+        setOrdersList(ordersArr);
       })
       .catch((err) => {
         alert(err.message);
@@ -112,7 +110,9 @@ const SlidesForm = () => {
   };
 
   const inputFileRef = useRef();
-
+  const ordersBlackList = ordersList.filter(
+    (order) => order !== initialValues.order
+  );
   const validations = Yup.object({
     name: Yup.string()
       .min(4, "Debe tener al menos 4 caracteres")
@@ -123,7 +123,7 @@ const SlidesForm = () => {
       .moreThan(0, "Debe ser un numero mayor o igual a cero")
       .required("Este campo es obligatorio")
       .integer()
-      .notOneOf(ordersList, "Numero de orden ya esta en uso"),
+      .notOneOf(ordersBlackList, "Numero de orden ya esta en uso"),
     image: Yup.string().required("Este campo es obligatorio"),
   });
 
@@ -200,7 +200,7 @@ const SlidesForm = () => {
                 type="number"
                 name="order"
                 onChange={(e) => {
-                  setFieldValue("order", parseInt(e.currentTarget.value));
+                  setFieldValue("order", e.currentTarget.value);
                 }}
                 placeholder="ingrese un numero"
               />
