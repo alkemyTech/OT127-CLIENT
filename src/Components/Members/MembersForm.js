@@ -11,6 +11,7 @@ import {
   postMember,
   putMember,
 } from "../../Services/membersService";
+import Progress from "../Progress/Progress";
 
 const MemberForm = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const MemberForm = () => {
     linkedinUrl: "",
     image: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const inputFileRef = useRef();
 
@@ -53,7 +55,8 @@ const MemberForm = () => {
     }
   }, []); //eslint-disable-line
 
-  const handleSubmit = async (formValues) => {
+  const handleSubmit = async (formValues, resetForm) => {
+    setLoading(true);
     let { image, ...rest } = formValues;
     if (typeof image === "object") {
       image = await send_image(image);
@@ -73,6 +76,10 @@ const MemberForm = () => {
     } else {
       await postMember(formValues);
     }
+
+    inputFileRef.current.value = "";
+    resetForm();
+    setLoading(false);
   };
   return (
     <div>
@@ -93,8 +100,7 @@ const MemberForm = () => {
             .url("Formato invalido"),
         })}
         onSubmit={(values, { resetForm }) => {
-          handleSubmit(values);
-          resetForm();
+          handleSubmit(values, resetForm);
         }}
       >
         {({ setFieldValue }) => (
@@ -171,6 +177,9 @@ const MemberForm = () => {
               <button className="form__button" type="submit">
                 {id ? "Editar" : "Crear"}
               </button>
+              {loading && (
+                <Progress primaryColor="#1c4937" backgroundColor="#6ee7b7" />
+              )}
             </div>
           </Form>
         )}
