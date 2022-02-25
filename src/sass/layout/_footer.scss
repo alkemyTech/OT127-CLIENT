@@ -42,3 +42,51 @@
     }
   }
 }
+.footer {
+  display: flex;
+  &__container {
+    display: inherit;
+    background-color: #fff;
+    &__left-name {
+      display: none;
+      text-align: center;
+      @media screen and (min-width: 768px) {
+        display: block;
+      }
+    }
+    &__left {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      &__links {
+        display: none;
+        margin: 10px;
+        @media screen and (min-width: 1200px) {
+          display: flex;
+          justify-content: space-around;
+          margin: 10px;
+        }
+      }
+    }
+    &__right {
+      display: inherit;
+      @media screen and (min-width: 992px) {
+        display: flex;
+        margin: 5px;
+      }
+      & p {
+        display: none;
+        @media screen and (min-width: 992px) {
+          display: block;
+          margin: 5px;
+        }
+      }
+      &__logo {
+        width: 50px;
+      }
+      &__footerlink {
+        text-decoration: none;
+      }
+    }
+  }
+}
