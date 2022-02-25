@@ -3,6 +3,11 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const API_URL = "http://ongapi.alkemy.org/api/projects";
+const config = {
+  headers: {
+    Group: 127,
+  },
+};
 
 const ProjectsForm = () => {
   const { id } = useParams();
@@ -15,7 +20,7 @@ const ProjectsForm = () => {
 
   function getProjectByID(id) {
     if (id) {
-      axios.get(`${API_URL}/${id}`).then((res) => {
+      axios.get(`${API_URL}/${id}`, config).then((res) => {
         setProject(res.data.data);
       });
     }
@@ -34,19 +39,27 @@ const ProjectsForm = () => {
     e.preventDefault();
     let newDate = new Date(due_date).toISOString();
     if (id) {
-      axios.put(`${API_URL}/${id}`, {
-        title,
-        description,
-        image,
-        due_date: newDate,
-      }); //TODO: Controlar errores (Catch)
+      axios.put(
+        `${API_URL}/${id}`,
+        {
+          title,
+          description,
+          image,
+          due_date: newDate,
+        },
+        config
+      ); //TODO: Controlar errores (Catch)
     } else {
-      axios.post(API_URL, {
-        title,
-        description,
-        image,
-        due_date: newDate,
-      }); //TODO: Controlar errores (Catch)
+      axios.post(
+        API_URL,
+        {
+          title,
+          description,
+          image,
+          due_date: newDate,
+        },
+        config
+      ); //TODO: Controlar errores (Catch)
     }
   };
 
@@ -59,7 +72,7 @@ const ProjectsForm = () => {
           name="title"
           value={title}
           onChange={(e) => handleChange(e, "title")}
-          placeholder="Title"
+          placeholder="Titulo"
           required
         ></input>
         <input
@@ -68,7 +81,7 @@ const ProjectsForm = () => {
           name="description"
           value={description}
           onChange={(e) => handleChange(e, "description")}
-          placeholder="Write some description"
+          placeholder="Escribe una descripción"
           required
         ></input>
         <input

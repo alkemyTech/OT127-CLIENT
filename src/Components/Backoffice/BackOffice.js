@@ -24,8 +24,8 @@ const ProjectsForm = lazy(() => import("../Projects/ProjectsForm"));
 const BackOffice = () => {
   const isAuthenticated = JSON.parse(localStorage.getItem("authenticatedUser"));
   const redirectToHome = () => {
-	  window.location.href='/'
-  }
+    window.location.href = "/";
+  };
   return (
     <>
       {isAuthenticated && isAuthenticated.role_id === 1 ? (
@@ -53,7 +53,10 @@ const BackOffice = () => {
                   path="/backoffice/categories/create"
                   component={CategoriesForm}
                 />
-                {/* PROBLEMA members no carga los miembros */}
+                <Route
+                  path="/backoffice/categories/create/:id"
+                  component={CategoriesForm}
+                />
                 <Route
                   path="/backoffice/members"
                   exact
@@ -117,9 +120,9 @@ const BackOffice = () => {
             </Switch>
           </LayoutBackOffice>
         </div>
-      ) : 
-	  redirectToHome()
-	  }
+      ) : (
+        redirectToHome()
+      )}
     </>
   );
 };

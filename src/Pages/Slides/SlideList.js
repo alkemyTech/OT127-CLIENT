@@ -2,24 +2,32 @@ import { useEffect } from "react";
 import { getSlides, getSlidesSearch } from "../../Redux/reducers/slidesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import Spinner from "../../Components/Spinner/Spinner";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
+import { deleteSlide } from "../../Services/slidesApiService";
 
 const SlideList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getSlides());
-  }, []);
+  }, []); //eslint-disable-line
 
   const slides = useSelector((state) => state.slidesReducer.slides.data);
 
   const rows = slides;
+
+  const handleClickDelete = (id) => {
+    sweetAlertConfirm(
+		"Eliminar slide",
+		"Seguro quieres eliminar el slide?"
+	  ).then((res) => {
+		res && deleteSlide(id);
+		setTimeout(() => {
+		  dispatch(getSlides());
+		}, 2000);
+	  });
+  };
 
   const handleSearchChange = (e) => {
     let { value } = e.target;
@@ -30,50 +38,64 @@ const SlideList = () => {
     }
   };
   return (
-    <div className="list-container">
-      <Link to="/backoffice/slides/create">Crear Slide</Link>
-      <input
-        type="search"
-        name="search"
-        onChange={(e) => {
-          handleSearchChange(e);
-        }}
-        placeholder="Buscar Slide"
-      />
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">Título</TableCell>
-              <TableCell align="center">Imagen</TableCell>
-              <TableCell align="center">Orden</TableCell>
-              <TableCell align="center">Acciones</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map(({ id, name, image, order }) => (
-              <TableRow key={id}>
-                <TableCell align="center">{name}</TableCell>
-                <TableCell align="center">
-                  <img src={image} alt="" className="imageTable" width="100" />
-                </TableCell>
-                <TableCell align="center">{order}</TableCell>
-                <TableCell>
-                  <button>
+    <div className="table">
+      <div className="table__container">
+        <div className="table__actions">
+          <input
+            type="search"
+            name="search"
+            onChange={(e) => {
+              handleSearchChange(e);
+            }}
+            placeholder="Buscar Slide"
+          />
+          <Link className="table__link" to="/backoffice/slides/create">
+            Crear Slide
+          </Link>
+        </div>
+        {!rows.length ? (
+          <Spinner />
+        ) : (
+          <table className="table__data">
+            <thead className="table__head">
+              <tr className="table__row">
+                <th className="table__title">Título</th>
+                <th className="table__title">Imagen</th>
+                <th className="table__title">Orden</th>
+                <th className="table__title-edit">Editar</th>
+                <th className="table__title-delete">Eliminar</th>
+              </tr>
+            </thead>
+            <tbody className="table__body">
+              {rows.map(({ id, name, image, order }) => (
+                <tr key={id} className="table__row">
+                  <td className="table__cell">{name}</td>
+                  <td className="table__cell">
+                    <img
+                      src={image}
+                      alt=""
+                      className="imageTable"
+                      width="100"
+                    />
+                  </td>
+                  <td className="table__cell">{order}</td>
+                  <td className="table__cell-edit">
                     <Link to={`/backoffice/slides/edit/${id}`}>Editar</Link>
-                  </button>
-                </TableCell>
-                <TableCell align="center">
-                  <button>
-                    {/*TODO: Crear ruta*/}
-                    <Link to={`/backoffice/slides/delete/${id}`}>Eliminar</Link>
-                  </button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                  </td>
+                  <td className="table__cell-delete">
+                    <button
+                      className="table__delete"
+                      onClick={() => handleClickDelete(id)}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 };
