@@ -11,9 +11,10 @@ import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import {
   getSlidesData,
   getSlidesDataById,
-  updateSlide,
-  createNewSlide,
+  postSlide,
+  putSlide,
 } from "../../Services/slidesApiService";
+import Spinner from "../Spinner/Spinner";
 
 const SlidesForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -28,41 +29,28 @@ const SlidesForm = () => {
   const { id } = useParams();
 
   const getOrdersList = async () => {
-    await getSlidesData()
-      .then((res) => {
-        let data = res.data.data;
-        // arreglo de order utilizados
-        const ordersArr = data.map((data) => data.order);
-        setOrdersList(ordersArr);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    await getSlidesData().then((res) => {
+      let data = res.data.data;
+      // arreglo de order utilizados
+      const ordersArr = data.map((data) => data.order);
+      setOrdersList(ordersArr);
+    });
   };
 
   const getSlideById = async (id) => {
     setLoading(true);
 
-    await getSlidesDataById(id)
-      .then((res) => {
-        if (res.data.success) {
-          const { name, description, order, image } = res.data.data;
-          setInitialValues({
-            name: name,
-            description: description,
-            order: order ? order : 0,
-            image: image,
-            id: true,
-          });
-        } else {
-          const { status } = res.data;
-          alert(status.message);
-        }
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-
+    await getSlidesDataById(id).then((res) => {
+      if (res.data.success) {
+        const { name, description, order, image } = res.data.data;
+        setInitialValues({
+          name: name,
+          description: description,
+          order: order ? order : 0,
+          image: image,
+        });
+      }
+    });
     setLoading(false);
   };
 
@@ -99,13 +87,10 @@ const SlidesForm = () => {
     }
 
     if (id) {
-      await updateSlide(formValues, id).catch((err) => {
-        alert(err.message);
-      });
+      await putSlide(id, formValues);
+      getSlideById(id);
     } else {
-      await createNewSlide(formValues).catch((err) => {
-        alert(err.message);
-      });
+      await postSlide(formValues);
     }
   };
 
@@ -128,104 +113,101 @@ const SlidesForm = () => {
   });
 
   return (
-    <div className="form__container">
+    <div>
       {loading ? (
-        <p>LOADING...</p>
+        <p>
+          <Spinner />
+        </p>
       ) : (
         <Formik
           enableReinitialize={true}
           initialValues={initialValues}
           validationSchema={validations}
-          onSubmit={async (values, { resetForm }) => {
-            let formValues = {
-              name: values.name,
-              description: values.description,
-              order: values.order,
-              image: values.image,
-            };
-            await handleSubmit(formValues);
-            // limpio el input file
+          onSubmit={(values, { resetForm }) => {
+            handleSubmit(values);
+            //limpio el input file
             inputFileRef.current.value = "";
-
             resetForm();
           }}
         >
           {({ setFieldValue }) => (
-            <Form className="form">
-              <label className="form__label" htmlFor="name">
-                Titulo
-              </label>
-              <Field
-                id="name"
-                className="form__input"
-                type="text"
-                name="name"
-                placeholder="Titulo"
-              />
+            <Form className="form__container">
+              <div className="form">
+                <label className="form__label" htmlFor="name">
+                  Titulo
+                </label>
+                <Field
+                  id="name"
+                  className="form__input"
+                  type="text"
+                  name="name"
+                  placeholder="Titulo"
+                />
 
-              <ErrorMessage
-                name="name"
-                render={(msg) => <div className="form__error">{msg}</div>}
-              />
-              <label className="form__label" htmlFor="description">
-                Descripcion
-              </label>
-              <Field name="description">
-                {({ field }) => (
-                  <>
-                    <CKEditor
-                      config={{
-                        language: "es",
-                      }}
-                      editor={ClassicEditor}
-                      data={field.value}
-                      onChange={(event, editor) => {
-                        setFieldValue(field.name, editor.getData());
-                      }}
-                    />
-                  </>
-                )}
-              </Field>
+                <ErrorMessage
+                  name="name"
+                  render={(msg) => <div className="form__error">{msg}</div>}
+                />
+                <label className="form__label" htmlFor="description">
+                  Descripcion
+                </label>
+                <Field name="description">
+                  {({ field }) => (
+                    <>
+                      <CKEditor
+                        config={{
+                          language: "es",
+                        }}
+                        editor={ClassicEditor}
+                        data={field.value}
+                        onChange={(event, editor) => {
+                          setFieldValue(field.name, editor.getData());
+                        }}
+                      />
+                    </>
+                  )}
+                </Field>
 
-              <ErrorMessage
-                name="description"
-                render={(msg) => <div className="form__error">{msg}</div>}
-              />
-              <label className="form__label" htmlFor="order">
-                Numero de orden
-              </label>
-              <Field
-                id="order"
-                className="form__input"
-                type="number"
-                name="order"
-                onChange={(e) => {
-                  setFieldValue("order", e.currentTarget.value);
-                }}
-                placeholder="ingrese un numero"
-              />
-              <ErrorMessage
-                name="order"
-                render={(msg) => <div className="form__error">{msg}</div>}
-              />
-              <label className="form__label" htmlFor="order">
-                Cargar Imagen
-              </label>
-              <input
-                ref={inputFileRef}
-                type="file"
-                onChange={(e) => {
-                  setFieldValue("image", e.currentTarget.files[0]);
-                }}
-                accept=".jpg, .png"
-              />
-              <ErrorMessage
-                name="image"
-                render={(msg) => <div className="form__error">{msg}</div>}
-              />
-              <button type="submit" className="form__button">
-                {id ? "Editar" : "Crear"}
-              </button>
+                <ErrorMessage
+                  name="description"
+                  render={(msg) => <div className="form__error">{msg}</div>}
+                />
+                <label className="form__label" htmlFor="order">
+                  Numero de orden
+                </label>
+                <Field
+                  id="order"
+                  className="form__input"
+                  type="number"
+                  name="order"
+                  onChange={(e) => {
+                    setFieldValue("order", e.currentTarget.value);
+                  }}
+                  placeholder="ingrese un numero"
+                />
+                <ErrorMessage
+                  name="order"
+                  render={(msg) => <div className="form__error">{msg}</div>}
+                />
+                <label className="form__label" htmlFor="order">
+                  {id ? "Cambiar Imagen" : "Cargar Imagen"}
+                </label>
+                <input
+                  ref={inputFileRef}
+                  type="file"
+                  onChange={(e) => {
+                    setFieldValue("image", e.currentTarget.files[0]);
+                  }}
+                  accept=".jpg, .png"
+                />
+                <ErrorMessage
+                  name="image"
+                  render={(msg) => <div className="form__error">{msg}</div>}
+                />
+                <button type="submit" className="form__button">
+                  {id ? "Editar" : "Crear"}
+                </button>
+              </div>
             </Form>
           )}
         </Formik>
