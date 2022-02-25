@@ -6,6 +6,8 @@
   height: auto;
   position: relative;
   width: 100%;
+  border-radius: 10px;
+  box-shadow: 5px 5px 11px -2px rgba(0, 0, 0, 0.58);
   @media (min-width: 768px) {
     width: 90%;
   }
@@ -27,18 +29,20 @@
   &__text {
     text-align: center;
     color: white;
-    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.45);
     position: absolute;
     bottom: 0;
     width: 100%;
     display: none;
-
     @media (min-width: 768px) {
       display: inherit;
     }
-
-    &__title {
-      @include title;
+    &--title {
+      @include outfit-title;
+    }
+    &--description {
+      @include roboto-subtitle;
     }
   }
 
@@ -68,6 +72,12 @@
     font-size: 3rem;
     width: 60px;
 
+    @media (min-width: 768px) {
+      backdrop-filter: blur(4px) saturate(180%);
+      background-color: rgba(17, 25, 40, 0.45);
+
+      color: $font-white;
+    }
     &--right {
       right: 0;
     }

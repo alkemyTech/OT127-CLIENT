@@ -40,8 +40,6 @@ const PublicFooter = () => {
           <Link className="publicFooter__link" to={"/about"}>
             Nosotros
           </Link>
-        </div>
-        <div className="publicFooter__links-container">
           <a
             className="publicFooter__link"
             href={facebook_url}
@@ -74,8 +72,8 @@ const PublicFooter = () => {
           >
             Twitter
           </a>
-          <NewsletterForm />
         </div>
+        <NewsletterForm />
       </div>
     </>
   );
