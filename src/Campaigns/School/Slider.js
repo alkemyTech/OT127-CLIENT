@@ -10,9 +10,9 @@ const Slider = () => {
   const intervalCarousel = useRef(null);
 
   const sliderData = [
-    { id: 1, image: image1, name: "Seamos útiles", description: "Tercera campaña masiva de recolecciones de útiles escolares, nuevos o en buenas condiciones, tu granito de arena suma!" },
+    { id: 1, image: image1, name: "Seamos útiles", description: "Tercera campaña masiva de recolección de útiles escolares, nuevos o en buenas condiciones, tu granito de arena suma!" },
     { id: 2, image: image2, name: "Nuestro futuro", description: "Con un simple gesto ayudas a nuestra futura generación a formarse de la mejor manera" },
-    { id: 3, image: image3, name: "Todo un exito!", description: "Gracias a personas como vos ya vamos hemos alcanzado a más de 2000 alumnos! que esto no se quede acá, conoce nuestros puntos de recolección" }
+    { id: 3, image: image3, name: "Todo un éxito!", description: "Gracias a personas como vos ya hemos alcanzado a más de 2000 alumnos! que esto no se quede acá, conoce nuestros puntos de recolección" }
   ]
 
   const nextSlide = () => {
