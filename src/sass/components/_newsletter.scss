@@ -2,14 +2,16 @@
   &__wrapper {
     display: flex;
     flex-direction: column;
-    height: 100px;
     justify-content: center;
     align-items: center;
   }
-
   &__form {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    @media (min-width: 678px) {
+      flex-wrap: nowrap;
+    }
   }
   &__add-email {
     border: none;
@@ -17,6 +19,7 @@
     padding: 10px 0px;
     padding-left: 10px;
     margin-right: 5px;
+    width: 200px;
     @include shadow;
   }
   &__submit-button {
@@ -24,7 +27,9 @@
     @include border-rounded;
     outline: none;
     margin: 1px;
+    margin-top: 5px;
     padding: 0 20px;
+    min-height: 30px;
     cursor: pointer;
     background: #4abebb;
     color: #ffffff;
