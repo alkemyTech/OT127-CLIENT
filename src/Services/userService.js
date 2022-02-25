@@ -5,9 +5,9 @@ const endPointUser = process.env.REACT_APP_ENDPOINT_USERS;
 const urlLogin = process.env.REACT_APP_ENDPOINT_LOGIN;
 const urlRegister = process.env.REACT_APP_ENDPOINT_REGISTER;
 const config = {
-  headers: {
-    Group: 127,
-  },
+  // headers: {
+  //   Group: 127,
+  // },
 };
 
 export const getUserbyID = async (id) => {
