@@ -8,7 +8,12 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
-import { getSlidesData, getSlidesDataById, updateSlide, createNewSlide } from "../../Services/slidesApiService";
+import {
+  getSlidesData,
+  getSlidesDataById,
+  updateSlide,
+  createNewSlide,
+} from "../../Services/slidesApiService";
 
 const SlidesForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -39,7 +44,6 @@ const SlidesForm = () => {
 
   const getSlideById = async (id) => {
     setLoading(true);
-
 
     await getSlidesDataById(id)
       .then((res) => {
@@ -88,6 +92,10 @@ const SlidesForm = () => {
       image = await toBase64(image);
       formValues = {
         image,
+        ...rest,
+      };
+    } else {
+      formValues = {
         ...rest,
       };
     }
@@ -152,7 +160,7 @@ const SlidesForm = () => {
                 className="form__input"
                 type="text"
                 name="name"
-                placeholder="Slide Title"
+                placeholder="Titulo"
               />
 
               <ErrorMessage
@@ -216,7 +224,7 @@ const SlidesForm = () => {
                 render={(msg) => <div className="form__error">{msg}</div>}
               />
               <button type="submit" className="form__button">
-                Enviar
+                {id ? "Editar" : "Crear"}
               </button>
             </Form>
           )}
