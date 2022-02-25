@@ -14,7 +14,6 @@ import {
   postSlide,
   putSlide,
 } from "../../Services/slidesApiService";
-import Spinner from "../Spinner/Spinner";
 
 const SlidesForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -24,7 +23,6 @@ const SlidesForm = () => {
     image: "",
   });
   const [ordersList, setOrdersList] = useState([]); // para validar order
-  const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
 
@@ -38,8 +36,6 @@ const SlidesForm = () => {
   };
 
   const getSlideById = async (id) => {
-    setLoading(true);
-
     await getSlidesDataById(id).then((res) => {
       if (res.data.success) {
         const { name, description, order, image } = res.data.data;
@@ -51,7 +47,6 @@ const SlidesForm = () => {
         });
       }
     });
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -114,104 +109,98 @@ const SlidesForm = () => {
 
   return (
     <div>
-      {loading ? (
-        <p>
-          <Spinner />
-        </p>
-      ) : (
-        <Formik
-          enableReinitialize={true}
-          initialValues={initialValues}
-          validationSchema={validations}
-          onSubmit={(values, { resetForm }) => {
-            handleSubmit(values);
-            //limpio el input file
-            inputFileRef.current.value = "";
-            resetForm();
-          }}
-        >
-          {({ setFieldValue }) => (
-            <Form className="form__container">
-              <div className="form">
-                <label className="form__label" htmlFor="name">
-                  Titulo
-                </label>
-                <Field
-                  id="name"
-                  className="form__input"
-                  type="text"
-                  name="name"
-                  placeholder="Titulo"
-                />
+      <Formik
+        enableReinitialize={true}
+        initialValues={initialValues}
+        validationSchema={validations}
+        onSubmit={(values, { resetForm }) => {
+          handleSubmit(values);
+          //limpio el input file
+          inputFileRef.current.value = "";
+          resetForm();
+        }}
+      >
+        {({ setFieldValue }) => (
+          <Form className="form__container">
+            <div className="form">
+              <label className="form__label" htmlFor="name">
+                Titulo
+              </label>
+              <Field
+                id="name"
+                className="form__input"
+                type="text"
+                name="name"
+                placeholder="Titulo"
+              />
 
-                <ErrorMessage
-                  name="name"
-                  render={(msg) => <div className="form__error">{msg}</div>}
-                />
-                <label className="form__label" htmlFor="description">
-                  Descripcion
-                </label>
-                <Field name="description">
-                  {({ field }) => (
-                    <>
-                      <CKEditor
-                        config={{
-                          language: "es",
-                        }}
-                        editor={ClassicEditor}
-                        data={field.value}
-                        onChange={(event, editor) => {
-                          setFieldValue(field.name, editor.getData());
-                        }}
-                      />
-                    </>
-                  )}
-                </Field>
+              <ErrorMessage
+                name="name"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <label className="form__label" htmlFor="description">
+                Descripcion
+              </label>
+              <Field name="description">
+                {({ field }) => (
+                  <>
+                    <CKEditor
+                      config={{
+                        language: "es",
+                      }}
+                      editor={ClassicEditor}
+                      data={field.value}
+                      onChange={(event, editor) => {
+                        setFieldValue(field.name, editor.getData());
+                      }}
+                    />
+                  </>
+                )}
+              </Field>
 
-                <ErrorMessage
-                  name="description"
-                  render={(msg) => <div className="form__error">{msg}</div>}
-                />
-                <label className="form__label" htmlFor="order">
-                  Numero de orden
-                </label>
-                <Field
-                  id="order"
-                  className="form__input"
-                  type="number"
-                  name="order"
-                  onChange={(e) => {
-                    setFieldValue("order", e.currentTarget.value);
-                  }}
-                  placeholder="ingrese un numero"
-                />
-                <ErrorMessage
-                  name="order"
-                  render={(msg) => <div className="form__error">{msg}</div>}
-                />
-                <label className="form__label" htmlFor="order">
-                  {id ? "Cambiar Imagen" : "Cargar Imagen"}
-                </label>
-                <input
-                  ref={inputFileRef}
-                  type="file"
-                  onChange={(e) => {
-                    setFieldValue("image", e.currentTarget.files[0]);
-                  }}
-                  accept=".jpg, .png"
-                />
-                <ErrorMessage
-                  name="image"
-                  render={(msg) => <div className="form__error">{msg}</div>}
-                />
-                <button type="submit" className="form__button">
-                  {id ? "Editar" : "Crear"}
-                </button>
-              </div>
-            </Form>
-          )}
-        </Formik>
-      )}
+              <ErrorMessage
+                name="description"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <label className="form__label" htmlFor="order">
+                Numero de orden
+              </label>
+              <Field
+                id="order"
+                className="form__input"
+                type="number"
+                name="order"
+                onChange={(e) => {
+                  setFieldValue("order", e.currentTarget.value);
+                }}
+                placeholder="ingrese un numero"
+              />
+              <ErrorMessage
+                name="order"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <label className="form__label" htmlFor="order">
+                {id ? "Cambiar Imagen" : "Cargar Imagen"}
+              </label>
+              <input
+                ref={inputFileRef}
+                type="file"
+                onChange={(e) => {
+                  setFieldValue("image", e.currentTarget.files[0]);
+                }}
+                accept=".jpg, .png"
+              />
+              <ErrorMessage
+                name="image"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <button type="submit" className="form__button">
+                {id ? "Editar" : "Crear"}
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
