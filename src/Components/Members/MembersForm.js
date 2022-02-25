@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import { useParams } from "react-router-dom";
+import Spinner from "../Spinner/Spinner";
+import {
+  getMemberById,
+  postMember,
+  putMember,
+} from "../../Services/membersService";
 
 const MemberForm = () => {
   const { id } = useParams();
@@ -17,41 +22,30 @@ const MemberForm = () => {
     linkedinUrl: "",
     image: "",
   });
-  const baseUrl = "http://ongapi.alkemy.org/api/members";
+
   const inputFileRef = useRef();
 
-  const handleSubmit = async (formValues) => {
-    setLoading(true);
-    if (id) {
-      await axios.put(`${baseUrl}/${id}`, formValues).catch((err) => {
-        alert(err.message);
-      });
-    } else {
-      await axios.post(baseUrl, formValues).catch((err) => {
-        alert(err.message);
-      });
-    }
-    setLoading(false);
+  const send_image = (files) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(files);
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+    });
   };
 
-  const handleImage = (e, setFieldValue) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onloadend = () => {
-      setFieldValue("image", reader.result);
-    };
-  };
-
-  const getDataById = async (formValues) => {
+  const getDataById = async () => {
     setLoading(true);
-    await axios
-      .get(`${baseUrl}/${id}`)
-      .then((res) => {
-        setFormValues(res.data.data);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    const response = await getMemberById(id);
+    const data = response.data.data;
+    setFormValues({
+      name: data.name,
+      description: data.description,
+      facebookUrl: data.facebookUrl,
+      linkedinUrl: data.linkedinUrl,
+      image: data.image,
+    });
     setLoading(false);
   };
 
@@ -61,10 +55,31 @@ const MemberForm = () => {
     }
   }, []); //eslint-disable-line
 
+  const handleSubmit = async (formValues) => {
+    let { image, ...rest } = formValues;
+    if (typeof image === "object") {
+      image = await send_image(image);
+      formValues = {
+        image,
+        ...rest,
+      };
+    } else {
+      formValues = {
+        ...rest,
+      };
+    }
+
+    if (id) {
+      await putMember(id, formValues);
+      getDataById();
+    } else {
+      await postMember(formValues);
+    }
+  };
   return (
     <div>
       {loading ? (
-        <p>LOADING..</p>
+        <Spinner />
       ) : (
         <Formik
           enableReinitialize={true}
@@ -74,15 +89,16 @@ const MemberForm = () => {
               .min(4, "Debe tener por lo menos 4 caracteres.")
               .required("Campo obligatorio"),
             description: Yup.string().required("Campo obligatorio"),
+            image: Yup.string().required("Este campo es obligatorio"),
             facebookUrl: Yup.string()
               .required("Campo obligatorio")
-              .email("Formato invalido"),
+              .url("Formato invalido"),
             linkedinUrl: Yup.string()
               .required("Campo obligatorio")
-              .email("Formato invalido"),
+              .url("Formato invalido"),
           })}
-          onSubmit={({ resetForm }) => {
-            handleSubmit();
+          onSubmit={(values, { resetForm }) => {
+            handleSubmit(values);
             resetForm();
           }}
         >
@@ -123,7 +139,7 @@ const MemberForm = () => {
                 />
 
                 <label className="form__label" htmlFor="image">
-                  Cargar Imagen
+                  {id ? "Cambiar Imagen" : "Cargar Imagen"}
                 </label>
                 <input
                   name="image"
@@ -131,7 +147,7 @@ const MemberForm = () => {
                   type="file"
                   accept=".jpg, .png"
                   onChange={(e) => {
-                    handleImage(e, setFieldValue);
+                    setFieldValue("image", e.currentTarget.files[0]);
                   }}
                 />
                 <ErrorMessage
@@ -142,11 +158,7 @@ const MemberForm = () => {
                 <label className="form__label" htmlFor="facebookUrl">
                   Facebook
                 </label>
-                <Field
-                  name="facebookUrl"
-                  type="text"
-                  className="form__input"
-                />
+                <Field name="facebookUrl" type="text" className="form__input" />
                 <ErrorMessage
                   name="facebookUrl"
                   render={(msg) => <div className="form__error">{msg}</div>}
@@ -155,18 +167,14 @@ const MemberForm = () => {
                 <label className="form__label" htmlFor="linkedinUrl">
                   LinkedIn
                 </label>
-                <Field
-                  name="linkedinUrl"
-                  type="text"
-                  className="form__input"
-                />
+                <Field name="linkedinUrl" type="text" className="form__input" />
                 <ErrorMessage
                   name="linkedinUrl"
                   render={(msg) => <div className="form__error">{msg}</div>}
                 />
 
                 <button className="form__button" type="submit">
-                  Enviar
+                  {id ? "Editar" : "Crear"}
                 </button>
               </div>
             </Form>
