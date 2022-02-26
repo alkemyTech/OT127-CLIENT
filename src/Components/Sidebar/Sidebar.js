@@ -10,8 +10,8 @@ const Sidebar = () => {
   const handleShow = () => setShow(true);
 
   const backofficeRoutes = [
-    { name: "Home", router: "/backoffice/home", icon: "home" },
-    { name: "Panel de administrador", router: "/backoffice", icon: "settings" },
+    { name: "Home", router: "/backoffice", icon: "settings" },
+    { name: "Editar Inicio", router: "/backoffice/home", icon: "home" },
     {
       name: "Actividades",
       router: "/backoffice/activities",
@@ -76,7 +76,7 @@ const Sidebar = () => {
       <BackofficeHeader handleShow={handleShow}></BackofficeHeader>
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header>
-          <Offcanvas.Title>Backoffice Routes</Offcanvas.Title>
+          <Offcanvas.Title>Panel de administrador</Offcanvas.Title>
           <button
             type="button"
             onClick={handleClose}
