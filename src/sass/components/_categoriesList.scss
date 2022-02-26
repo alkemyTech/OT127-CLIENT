@@ -93,9 +93,12 @@
     color: $font-white;
     transition-property: background;
     transition-duration: 0.3s;
+    display: block;
+    text-decoration: none;
 
     &:hover {
       background: $med-green;
+      color: #fff;
     }
   }
 

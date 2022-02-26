@@ -89,11 +89,12 @@ const SlideList = () => {
 											alt=""
 											className="imageTable"
 											width="100"
+											height="100"
 										/>
 									</td>
 									<td className="table__cell">{order}</td>
 									<td className="table__cell-edit">
-										<Link to={`/backoffice/slides/edit/${id}`}>Editar</Link>
+										<Link  className="table__edit"  to={`/backoffice/slides/edit/${id}`}>Editar</Link>
 									</td>
 									<td className="table__cell-delete">
 										<button
