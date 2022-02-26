@@ -11,7 +11,6 @@ const Sidebar = () => {
 
   const backofficeRoutes = [
     { name: "Home", router: "/backoffice/home", icon: "home" },
-    { name: "Backoffice", router: "/backoffice", icon: "settings" },
     { name: "Users", router: "/backoffice/users", icon: "person" },
     { name: "Slides", router: "/backoffice/slides", icon: "auto_awesome_motion" },
     { name: "Members", router: "/backoffice/members", icon: "face" },
