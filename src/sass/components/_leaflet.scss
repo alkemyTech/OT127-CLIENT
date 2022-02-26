@@ -1,9 +1,10 @@
 .map {
-    width: 100%;
-    text-align: -webkit-center;
-    padding-bottom: 5em;
-    &__container{
-        height: 50vh;
-        width: 50%
-    };
+  margin: 0;
+  width: 100%;
+  text-align: -webkit-center;
+  padding-bottom: 5em;
+  &__container {
+    height: 50vh;
+    width: 50%;
+  }
 }

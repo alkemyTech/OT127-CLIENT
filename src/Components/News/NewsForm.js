@@ -22,7 +22,7 @@ const NewsForm = () => {
   const { id } = useParams();
   const url = "http://ongapi.alkemy.org/api/news";
   const urlCategories = "http://ongapi.alkemy.org/api/categories";
-  const config ={
+  const config = {
     headers: {
       Group: 127,
     },
@@ -162,6 +162,8 @@ const NewsForm = () => {
         >
           {({ setFieldValue }) => (
             <Form className="form">
+              {id ? <p className="form__title">Editar novedad</p> : <p className="form__title">Crear novedad</p>}
+              <p className="form__subtitle">complete todos los campos</p>
               <label className="form__label" htmlFor="name">
                 Titulo
               </label>
