@@ -3,12 +3,11 @@
 @use "../base/typography";
 
 .header {
-  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   width: 100vw;
+  height: 70px;
   z-index: 999;
   padding-top: 10px;
   padding-left: 40px;
@@ -25,7 +24,11 @@
   &__link {
     @include outfit-regular-bold;
     text-decoration: none;
-    color: variables.$dark-blue;
+    color: variables.$green-blue;
+    &:hover {
+      cursor: pointer;
+      color: variables.$med-green;
+    }
   }
   &__logbar {
     width: 100%;
@@ -39,14 +42,14 @@
     @include outfit-regular;
     font-size: 14px;
     border: none;
-    background-color: variables.$dark-blue;
+    background-color: variables.$dark-green;
     color: variables.$font-white;
     width: 120px;
     height: 30px;
     transition: variables.$transition-time;
     &:hover {
       cursor: pointer;
-      background-color: variables.$med-blue;
+      background-color: variables.$med-green;
     }
   }
 }

@@ -6,7 +6,7 @@ const config = {
   headers: {
     Group: 127,
   },
-}
+};
 
 const getMembers = async () => {
   const response = await axios
@@ -15,9 +15,21 @@ const getMembers = async () => {
   return response;
 };
 
+const getMemberById = async (id) => {
+  try {
+    const response = await axios.get(`${endPointMembers}/${id}`, config);
+    return response;
+  } catch (error) {
+    sweetAlertError("No se pudo cargar el contenido");
+  }
+};
+
 export const searchMembers = async (search) => {
   try {
-    const response = await axios.get(`${endPointMembers}?search=${search}`, config);
+    const response = await axios.get(
+      `${endPointMembers}?search=${search}`,
+      config
+    );
     return response;
   } catch (error) {
     return error;
@@ -26,12 +38,26 @@ export const searchMembers = async (search) => {
 
 // Metodo a utilizar cuando este componente MembersForm
 const postMember = async (data) => {
-  await axios.post(endPointMembers, data, config).catch((err) => err.message);
+  await axios
+    .post(endPointMembers, data, config)
+    .then((res) => {
+      sweetAlertSuccess(`Miembro ${data.name} creado correctamente`);
+    })
+    .catch((err) => {
+      sweetAlertError("No se pudo crear el miembro");
+    });
 };
 
 // Metodo a utilizar cuando este componente MembersForm
 const putMember = async (id, data) => {
-  await axios.put(`${endPointMembers}/${id}`, data, config).catch((err) => err.message);
+  await axios
+    .put(`${endPointMembers}/${id}`, data, config)
+    .then((res) => {
+      sweetAlertSuccess(`Miembro ${data.name} editado correctamente`);
+    })
+    .catch((err) => {
+      sweetAlertError("No se pudo editar el miembro");
+    });
 };
 
 const deleteMember = async (id) => {
@@ -41,4 +67,4 @@ const deleteMember = async (id) => {
     .catch(() => sweetAlertError("No se pudo eliminar al miembro."));
 };
 
-export { getMembers, postMember, putMember, deleteMember };
+export { getMembers, getMemberById, postMember, putMember, deleteMember };

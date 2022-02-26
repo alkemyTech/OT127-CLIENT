@@ -6,7 +6,7 @@ const config = {
   headers: {
     Group: 127,
   },
-}
+};
 
 const toDataURL = (blob) =>
   // Para convertir los links de imagenes a base64
@@ -38,8 +38,31 @@ export const getSlidesDataById = async (id) => {
     const response = await axios.get(`${url}/${id}`, config);
     return response;
   } catch (error) {
-    return error;
+    sweetAlertError("No se pudo cargar el contenido");
   }
+};
+
+export const postSlide = async (data) => {
+  await axios
+    .post(url, data, config)
+    .then((res) => {
+      sweetAlertSuccess(`Slide ${data.name} creado correctamente`);
+    })
+    .catch((err) => {
+      sweetAlertError("No se pudo crear el slides");
+    });
+};
+
+// Metodo a utilizar cuando este componente MembersForm
+export const putSlide = async (id, data) => {
+  await axios
+    .put(`${url}/${id}`, data, config)
+    .then((res) => {
+      sweetAlertSuccess(`Slide ${data.name} editado correctamente`);
+    })
+    .catch((err) => {
+      sweetAlertError("No se pudo editar el slide");
+    });
 };
 
 export const createNewSlide = async (data) => {

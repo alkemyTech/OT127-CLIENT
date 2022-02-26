@@ -92,16 +92,16 @@ const Slider = () => {
       </div>
       <div className="slider__controllers">
         <span
-          className="material-icons slider__arrow-button slider__arrow-button--left"
+          className="slider__arrow-button slider__arrow-button--left"
           onClick={prevSlide}
         >
-          chevron_left
+          <i class="fa fa-chevron-left"></i>
         </span>
         <span
-          className="material-icons slider__arrow-button slider__arrow-button--right"
+          className="slider__arrow-button slider__arrow-button--right"
           onClick={nextSlide}
         >
-          chevron_right
+          <i class="fa fa-chevron-right"></i>
         </span>
       </div>
     </div>

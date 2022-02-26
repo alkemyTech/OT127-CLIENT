@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
-import Progress from "../Progress/Porgress";
+import Progress from "../Progress/Progress";
 import LayoutBackOffice from "./LayoutBackOffice";
 
 const ActivitiesForm = lazy(() => import("../Activities/ActivitiesForm"));

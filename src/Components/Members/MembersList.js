@@ -16,7 +16,7 @@ const MembersList = () => {
     dispatch(fetchMembers());
   }, []); //eslint-disable-line
 
-  const { members } = useSelector((state) => state.membersReducer);
+  const { members, loading } = useSelector((state) => state.membersReducer);
 
   const handleDelete = (id) => {
     sweetAlertConfirm(
@@ -31,13 +31,13 @@ const MembersList = () => {
   };
 
   const handleMemberSearch = (e) => {
-		const {value} = e.target;
-		if (value.length > 2) {
-			dispatch(getMembersSearch(value));
-		} else {
-			dispatch(fetchMembers());
-		}
-	};
+    const { value } = e.target;
+    if (value.length > 2) {
+      dispatch(getMembersSearch(value));
+    } else {
+      dispatch(fetchMembers());
+    }
+  };
 
   return (
     <div className="table">
@@ -52,7 +52,7 @@ const MembersList = () => {
             Crear Miembros
           </Link>
         </div>
-        {!members.length ? (
+        {loading ? (
           <Spinner />
         ) : (
           <table className="table__data">
