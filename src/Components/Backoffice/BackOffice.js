@@ -35,12 +35,12 @@ const BackOffice = () => {
               <Suspense fallback={<Progress height={7} />}>
                 <Route path="/backoffice/home" component={HomeForm} />
                 <Route
-                  path="/backoffice/create-activity"
+                  path="/backoffice/activities/create"
                   exact
                   component={ActivitiesForm}
                 />
                 <Route
-                  path="/backoffice/create-activity/:id"
+                  path="/backoffice/activities/edit/:id"
                   component={ActivitiesForm}
                 />
                 <Route path="/backoffice/activities" component={Activities} />

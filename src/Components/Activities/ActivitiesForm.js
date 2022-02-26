@@ -14,27 +14,41 @@ const toDataURL = (blob) =>
 
 const ActivitiesForm = () => {
   const { id } = useParams();
-  const [activity, setActivity] = useState({});
-  const { name, description, image } = activity;
+  const [activity, setActivity] = useState({
+    name: "",
+    description: "",
+    image: "",
+  });
+
+  const send_image = (files) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      if (fileReader.readyState === 2) {
+        setActivity({ ...activity, image: fileReader.result });
+      }
+    };
+    fileReader.readAsDataURL(files);
+  };
+
+  const getActivityData = () => {
+    if (id) {
+      activitiesController.getById(id).then(({ data }) => {
+        const { name, description, image } = data;
+        setActivity({
+          name: name,
+          description: description,
+        });
+        send_image(image);
+      });
+    }
+  };
 
   useEffect(() => {
-    if (id) {
-      activitiesController.getById(id).then((res) => setActivity(res));
-    }
+    getActivityData();
   }, []); //eslint-disable-line
 
   const handleChangeName = (e) => {
     setActivity((prevActivity) => ({ ...prevActivity, name: e.target.value }));
-  };
-
-  const handleChangeImage = (e) => {
-    const img = URL.createObjectURL(e.target.files[0]);
-    activitiesController
-      .changeImage(img)
-      .then((response) => toDataURL(response))
-      .then((encoded) => {
-        setActivity((prevActivity) => ({ ...prevActivity, image: encoded }));
-      });
   };
 
   const handleChangeDescription = (e, editor) => {
@@ -45,9 +59,9 @@ const ActivitiesForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      activitiesController.put(id, name, description, image);
+      activitiesController.put(id, activity);
     } else {
-      activitiesController.post(name, description, image);
+      activitiesController.post(activity);
     }
   };
 
@@ -58,13 +72,13 @@ const ActivitiesForm = () => {
           className="form__input"
           type="text"
           name="name"
-          value={name}
+          value={activity.name}
           onChange={handleChangeName}
           placeholder="Activity Title"
         />
         <CKEditor
           editor={ClassicEditor}
-          data={description}
+          data={activity.description}
           onChange={(event, editor) => handleChangeDescription(event, editor)}
         />
         <input
@@ -72,12 +86,21 @@ const ActivitiesForm = () => {
           type="file"
           name="file"
           accept=".png, .jpg"
-          onChange={handleChangeImage}
+          onChange={(e) => {
+            send_image(e.target.files[0]);
+            setActivity({
+              ...activity,
+              image: (window.URL || window.webkitURL).createObjectURL(
+                e.target.files[0]
+              ),
+            });
+          }}
         />
-        <img src={image} alt="" />
-        <button className="form__button" type="submit">
-          Send
-        </button>
+        <input
+          className="form__button"
+          type="submit"
+          value={id ? "Editar" : "Crear"}
+        />
       </form>
     </div>
   );
