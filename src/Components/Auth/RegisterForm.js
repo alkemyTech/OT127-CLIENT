@@ -76,7 +76,7 @@ const RegisterForm = () => {
           >
             <Form className="form">
               <p className="form__title">Bienvenido!</p>
-              <p className="form__subtitle">registrate</p>
+              <p className="form__subtitle">Registrate</p>
               {/* Cada campo está anidado en un div para poder darle estilos más facilmente */}
               {/*Los componentes ErrorMessage tienen un atributo render, eso va a servir para cuando agreguemos los estilos, solo hay que agregar la clase*/}
               <div className="form__subcontainer">
@@ -164,7 +164,7 @@ const RegisterForm = () => {
                     onChange={handleChange}
                   />
                   <label htmlFor="acceptTerms" className="form__label">
-                    Aceptar Términos y condiciones
+                    Aceptar términos y condiciones
                   </label>
                 </div>
                 <ErrorMessage
