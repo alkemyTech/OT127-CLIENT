@@ -27,9 +27,9 @@ const LoginForm = () => {
       dispatch(setToken(token));
       localStorage.setItem("TOKEN", token);
       localStorage.setItem("authenticatedUser", JSON.stringify(user));
-      if (user.role_id === 1) {
+      if (user.name === 'Admin') {
         history.push("/backoffice/organization");
-      } else if (user.role_id === 2) {
+      } else if (user.name !== 'Admin') {
         history.push("/");
       }
     } catch (error) {

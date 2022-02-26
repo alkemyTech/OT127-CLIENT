@@ -12,7 +12,7 @@ const Header = () => {
   const menuItems = [
     { link: "/school-campaign", name: "Campaña escolar" },
     { link: "/toys-campaign", name: "Campaña de juguetes" },
-    { link: "/nosotros", name: "Nosotros" },
+    { link: "/about", name: "Nosotros" },
   ];
 
   const logout = () => {
@@ -68,7 +68,7 @@ const Header = () => {
               </NavLink>
             </>
           )}
-          {isAuthenticated && isAuthenticated.role_id !== 1 && (
+          {isAuthenticated && isAuthenticated.name !== "Admin" && (
             <>
               <NavLink
                 className="header__link"
@@ -79,7 +79,7 @@ const Header = () => {
               </NavLink>
             </>
           )}
-          {isAuthenticated && isAuthenticated.role_id === 2 && (
+          {isAuthenticated && isAuthenticated.name !== 'Admin' && (
             <NavLink className="header__link" to="/donate">
               Donar
             </NavLink>

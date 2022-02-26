@@ -117,7 +117,7 @@ const UsersList = () => {
 									<td className="table__cell">{user.name}</td>
 									<td className="table__cell">{user.email}</td>
 									<td className="table__cell">
-										{user.role_id === 1 ? (
+										{user.name === 'Admin' ? (
 											<AdminPanelSettingsIcon />
 										) : (
 											<AccountCircleIcon />

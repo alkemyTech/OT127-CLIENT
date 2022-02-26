@@ -13,16 +13,11 @@ const About = ({
 	const dispatch = useDispatch()
 	const info = useSelector(state => state.usReducer.info)
 	const [loading, setLoading] = useState(false);
-	const history = useHistory();
-	const isLogged = useSelector((state) => state.authReducer.userIsLogged);
-	
 
 	useEffect(() => {
 		setLoading(true);
-		if (!isLogged) {
-		  history.push("/login");
-		}
 		dispatch(getUs());
+		setLoading(false)
 	  }, []);//eslint-disable-line
 	// El texto en un futuro se obtendra desde una API
 	return (

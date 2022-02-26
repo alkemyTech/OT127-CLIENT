@@ -22,6 +22,7 @@ const RegisterForm = () => {
       sweetAlertSuccess("Te has registrado con éxito.");
       resetForm();
       setAcceptTerms(false);
+      window.location.href = '/login'
     } else {
       sweetAlertConfirm(title, text, imgTermsAndCoditions).then((res) => {
         setAcceptTerms(res);
