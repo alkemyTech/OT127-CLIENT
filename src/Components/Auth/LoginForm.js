@@ -30,7 +30,7 @@ const LoginForm = () => {
       if (user.name === 'Admin') {
         history.push("/backoffice/organization");
       } else if (user.name !== 'Admin') {
-        history.push("/");
+        window.location.href = '/' //Cambio a este metodo en lugar de history, para forzar el renderizado
       }
     } catch (error) {
       sweetAlertError("Contraseña o usuario incorrectos");
