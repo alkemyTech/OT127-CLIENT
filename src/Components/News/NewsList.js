@@ -8,13 +8,14 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategory } from "../../Services/categoriesService";
 import Spinner from "../Spinner/Spinner";
-import SearchForm from "./SearchForm";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
 import { deleteNews } from "../../Services/newsService";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const NewsList = () => {
   const [value, setValue] = useState("");
@@ -31,7 +32,7 @@ const NewsList = () => {
   useEffect(() => {
     if (select !== 0) {
       dispatch(getNewSearchCategory({ select, value }));
-    } else if (value.length >= 3) {
+    } else if (value.length > 0) {
       dispatch(getNewSearch(value));
     } else {
       dispatch(getNews());
@@ -62,28 +63,41 @@ const NewsList = () => {
     <div className="table">
       <div className="table__container">
         <div className="table__actions">
+          <TextField
+            type="search"
+            name="Buscar Novedad"
+            size="small"
+            label="Buscar Novedad"
+            placeholder="Escribe algo"
+            onChange={(e) => handleSearch(e)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <span className="material-icons">search</span>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <FormControl className="table__filter">
+            <InputLabel>Categorías</InputLabel>
+            <Select
+              label="Categorías"
+              autoWidth
+              size="small"
+              onChange={handleChange}
+              value={select}
+            >
+              <MenuItem value={0}>Todos</MenuItem>
+              {categories.map(({ id, name }) => (
+                <MenuItem key={id} value={id}>
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Link className="table__link" to="/backoffice/news/create">
             Crear Novedad
           </Link>
-          <div>
-            <SearchForm searchNews={handleSearch} />
-            <FormControl>
-              <InputLabel>Categorías</InputLabel>
-              <Select
-                label="Categorías"
-                autoWidth
-                onChange={handleChange}
-                value={select}
-              >
-                <MenuItem value={0}>Todos</MenuItem>
-                {categories.map(({ id, name }) => (
-                  <MenuItem key={id} value={id}>
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
         </div>
         {!news ? (
           <Spinner />

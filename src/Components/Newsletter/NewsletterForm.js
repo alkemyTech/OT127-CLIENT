@@ -52,31 +52,28 @@ const NewsletterForm = () => {
           resetForm();
         }}
       >
-        <div className="container">
-          <div className="newsletter__wrapper">
-            <div>
-              <ErrorMessage
-                name="email"
-                render={(msg) => <div className="newsletter__error">{msg}</div>}
-              />
-              {showFeedback && (
-                <p className="newsletter__error">{userFeedback}</p>
-              )}
-            </div>
-            <Form className="newsletter__form">
-              <Field
-                className="newsletter__add-email"
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Suscribete al newsletter"
-              />
-              <button className="newsletter__submit-button" type="submit">
-                Suscribirse
-              </button>
-            </Form>
-          </div>
+        <div className="newsletter__wrapper">
+          <ErrorMessage
+            name="email"
+            render={(msg) => <div className="newsletter__error">{msg}</div>}
+          />
+          {showFeedback && (
+            <p className="newsletter__error">{userFeedback}</p>
+          )}
+          <Form className="newsletter__form">
+            <Field
+              className="newsletter__add-email"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Suscribete al newsletter"
+            />
+            <button className="newsletter__submit-button" type="submit">
+              Suscribirse
+            </button>
+          </Form>
         </div>
+
       </Formik>
     </>
   );

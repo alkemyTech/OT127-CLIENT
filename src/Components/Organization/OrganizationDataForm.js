@@ -82,6 +82,8 @@ const OrganizationDataForm = () => {
   return (
     <div className="form__container">
       <form className="form">
+        <p className="form__title">Editar información general</p>
+        <p className="form__subtitle">complete todos los campos</p>
         <FormControl>
           <label className="form__label" htmlFor="name" required>
             Name

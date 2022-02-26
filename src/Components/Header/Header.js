@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 import logo from "../../images/LOGO-SOMOS_MAS.png";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../Redux/actions/authActions";
+import { logoutUser, setToken } from "../../Redux/actions/authActions";
+import { useEffect } from "react";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,12 @@ const Header = () => {
     window.location.href = "/";
   };
 
+  useEffect(() => {
+    if (token) {
+      dispatch(setToken(token));
+    }
+  }, []); //eslint-disable-line
+
   return (
     <>
       <header className="header">
@@ -38,6 +45,7 @@ const Header = () => {
                 className="header__link"
                 activeClassName="header__nav-links-active"
                 to={item.link}
+                key={item.name}
               >
                 {item.name}
               </NavLink>

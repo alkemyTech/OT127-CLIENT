@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import PageNotFound from "./Components/PageNotFound/NotFound";
-import Progress from "./Components/Progress/Porgress";
+import Progress from "./Components/Progress/Progress";
 import LayoutPublic from "./Components/Layout/LayoutPublic";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./sass/main.scss";
@@ -23,7 +23,7 @@ const News = lazy(() => import("./Components/News/News"));
 const NewsDetails = lazy(() => import("./Components/News/Detail/NewsDetails"));
 const RegisterForm = lazy(() => import("./Components/Auth/RegisterForm"));
 const SchoolCampaign = lazy(() => import("./Campaigns/School/SchoolCampaign"));
-const TestimonialForm = lazy(() => 
+const TestimonialForm = lazy(() =>
   import("./Components/Testimonials/TestimonialForm")
 );
 const ToysCampaign = lazy(() => import("./Campaigns/Toys/ToysCampaign"));
