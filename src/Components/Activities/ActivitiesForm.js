@@ -4,14 +4,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useParams } from "react-router-dom";
 import { activitiesController } from "../../Services/publicActivityService";
 
-const toDataURL = (blob) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-
 const ActivitiesForm = () => {
   const { id } = useParams();
   const [activity, setActivity] = useState({
@@ -30,7 +22,7 @@ const ActivitiesForm = () => {
     fileReader.readAsDataURL(files);
   };
 
-  const getActivityData = () => {
+  const getActivityData = (id) => {
     if (id) {
       activitiesController.getById(id).then(({ data }) => {
         const { name, description, image } = data;
@@ -44,7 +36,7 @@ const ActivitiesForm = () => {
   };
 
   useEffect(() => {
-    getActivityData();
+    getActivityData(id);
   }, []); //eslint-disable-line
 
   const handleChangeName = (e) => {
@@ -62,6 +54,10 @@ const ActivitiesForm = () => {
       activitiesController.put(id, activity);
     } else {
       activitiesController.post(activity);
+      setActivity({
+        name: "",
+        description: "",
+      });
     }
   };
 
@@ -75,13 +71,16 @@ const ActivitiesForm = () => {
           value={activity.name}
           onChange={handleChangeName}
           placeholder="Activity Title"
+          required
         />
         <CKEditor
           editor={ClassicEditor}
           data={activity.description}
           onChange={(event, editor) => handleChangeDescription(event, editor)}
+          required
         />
         <input
+          required
           className="form__input"
           type="file"
           name="file"
