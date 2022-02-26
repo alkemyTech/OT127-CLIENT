@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
-import Progress from "../Progress/Porgress";
+import Progress from "../Progress/Progress";
 import LayoutBackOffice from "./LayoutBackOffice";
 
 const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
@@ -24,8 +24,8 @@ const ProjectsForm = lazy(() => import("../Projects/ProjectsForm"));
 const BackOffice = () => {
   const isAuthenticated = JSON.parse(localStorage.getItem("authenticatedUser"));
   const redirectToHome = () => {
-	  window.location.href='/'
-  }
+    window.location.href = "/";
+  };
   return (
     <>
       {isAuthenticated && isAuthenticated.role_id === 1 ? (
@@ -120,9 +120,9 @@ const BackOffice = () => {
             </Switch>
           </LayoutBackOffice>
         </div>
-      ) : 
-	  redirectToHome()
-	  }
+      ) : (
+        redirectToHome()
+      )}
     </>
   );
 };

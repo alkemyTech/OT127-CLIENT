@@ -93,9 +93,15 @@ const LoginForm = () => {
               placeholder="*******"
             />
             {showPassword === "password" ? (
-              <VisibilityIcon className="form__visibility" onClick={() => setShowPassword('text')} />
+              <VisibilityIcon
+                className="form__visibility"
+                onClick={() => setShowPassword("text")}
+              />
             ) : (
-              <VisibilityOffIcon className="form__visibility" onClick={() => setShowPassword('password')} />
+              <VisibilityOffIcon
+                className="form__visibility"
+                onClick={() => setShowPassword("password")}
+              />
             )}
           </div>
           <ErrorMessage
