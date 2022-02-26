@@ -4,7 +4,7 @@ import Progress from "../Progress/Porgress";
 import LayoutBackOffice from "./LayoutBackOffice";
 
 const ActivitiesForm = lazy(() => import("../Activities/ActivitiesForm"));
-const ActivitiesList = lazy(() => import("./Activities"));
+const Activities = lazy(() => import("../Activities/Activities"));
 const CategoriesForm = lazy(() => import("../Categories/CategoriesForm"));
 const CategoriesList = lazy(() => import("../Categories/CategoriesList"));
 const HomeForm = lazy(() => import("./HomeForm"));
@@ -35,19 +35,17 @@ const BackOffice = () => {
             <Switch>
               <Suspense fallback={<Progress height={7} />}>
                 <Route path="/backoffice/home" component={HomeForm} />
+                <Route path="/backoffice/activities" component={Activities} />
                 <Route
-                  path="/backoffice/create-activity"
+                  path="/backoffice/activities/create"
                   exact
                   component={ActivitiesForm}
                 />
                 <Route
-                  path="/backoffice/create-activity/:id"
+                  path="/backoffice/activities/edit/:id"
                   component={ActivitiesForm}
                 />
-                <Route
-                  path="/backoffice/activities"
-                  component={ActivitiesList}
-                />
+
                 <Route
                   path="/backoffice/categories"
                   exact
