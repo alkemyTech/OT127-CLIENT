@@ -20,7 +20,6 @@ const Contact = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setOrganizationData(res.data.data);
       })
       .catch((error) => {
@@ -38,8 +37,9 @@ const Contact = () => {
         <h1 className="contact__title">Contacto</h1>
         <div className="contact__content">
           <p>{organizationData.name}</p>
-          <p>{organizationData.address}</p>
-          <p>{organizationData.cellphone}</p>
+          {/* Pongo datos estaticos porque API, da datos erroneos en estos campos, no se puede editar */}
+          <p>Cra. 22 # 80-73</p>
+          <p>(+34) 91 8061 516</p>
         </div>
         <div className="contact__footer">
           <h3>Redes Sociales</h3>

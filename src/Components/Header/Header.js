@@ -73,7 +73,7 @@ const Header = () => {
               <NavLink
                 className="header__link"
                 activeClassName="header__nav-links-active"
-                to="/contacto"
+                to="/contact"
               >
                 Contacto
               </NavLink>
