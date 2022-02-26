@@ -28,7 +28,7 @@ const BackOffice = () => {
   };
   return (
     <>
-      {isAuthenticated && isAuthenticated.role_id === 1 ? (
+      {isAuthenticated && isAuthenticated.name === "Admin" ? (
         <div>
           <LayoutBackOffice>
             <Switch>
