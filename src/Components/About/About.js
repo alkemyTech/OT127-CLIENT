@@ -8,37 +8,38 @@ import Spinner from "../Spinner/Spinner";
 import SocialMedia from "./SocialMedia";
 
 const About = ({
-  text = "Desde 1997 en Somos Más trabajamos con los chicos y chicas, mamás y papás, abuelos y vecinos del barrio La Cava ",
+	text = "Desde 1997 en Somos Más trabajamos con los chicos y chicas, mamás y papás, abuelos y vecinos del barrio La Cava ",
 }) => {
 	const dispatch = useDispatch()
 	const info = useSelector(state => state.usReducer.info)
 	const [loading, setLoading] = useState(false);
 	const history = useHistory();
 	const isLogged = useSelector((state) => state.authReducer.userIsLogged);
-	
+
 
 	useEffect(() => {
 		setLoading(true);
-		if (!isLogged) {
-		  history.push("/login");
+		if (isLogged) {
+			history.push("/login");
 		}
 		dispatch(getUs());
-	  }, []);//eslint-disable-line
+		setLoading(false);
+	}, []);//eslint-disable-line
 	// El texto en un futuro se obtendra desde una API
 	return (
 		<>
 			{loading ? (
-				<Spinner/>
+				<Spinner />
 			) : (
 				<>
-				<Title title="Nosotros" />
-				<main>
-					<p>{info.name}</p>
-					<p>{info.short_description}</p>
-				</main>
-				<SocialMedia />
+					<Title title="Nosotros" />
+					<main>
+						<p>{info.name}</p>
+						<p>{info.short_description}</p>
+					</main>
+					<SocialMedia />
 				</>
-				)
+			)
 			}
 		</>
 	);

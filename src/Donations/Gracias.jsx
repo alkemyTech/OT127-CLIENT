@@ -7,7 +7,7 @@ const Gracias = () => {
   const isLogged = useSelector((state) => state.authReducer.userIsLogged);
 
   useEffect(() => {
-    if (!isLogged) {
+    if (isLogged) {
       history.push("/login");
     }
   }, []); //eslint-disable-line
