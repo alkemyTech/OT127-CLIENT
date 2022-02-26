@@ -18,11 +18,8 @@ const SocialMedia = () => {
                 <p>Nuestras Redes</p>
             </Separator>
 
-            <p className='socialMedia__text'>Encontranos En</p>
 
             <div className='socialMedia__social-container'>
-
-
                 <TwitterButton
                     target="SomosmasO"
                     type="Mention"
