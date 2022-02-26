@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Title from "../Titulosynovedades/Title";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { getUs } from "../../Redux/reducers/usSlice";
 import Spinner from "../Spinner/Spinner";
 
