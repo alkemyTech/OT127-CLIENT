@@ -127,6 +127,7 @@ const SlidesForm = () => {
         {({ setFieldValue }) => (
           <Form className="form__container">
             <div className="form">
+              {id ? <p className="form__title">Editar slide</p> : <p className="form__title">Crear nuevo slide</p>}
               <label className="form__label" htmlFor="name">
                 Titulo
               </label>

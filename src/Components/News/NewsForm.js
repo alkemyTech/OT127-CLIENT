@@ -7,6 +7,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 import axios from "axios";
 import { sweetAlertError } from "../../Services/sweetAlertServices";
+import Progress from "../Progress/Progress";
+
 
 const NewsForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -140,7 +142,7 @@ const NewsForm = () => {
   return (
     <div className="form__container">
       {loading ? (
-        <p>LOADING...</p>
+        <Progress primaryColor="#1c4937" backgroundColor="#6ee7b7" />
       ) : (
         <Formik
           enableReinitialize={true}
