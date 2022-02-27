@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const BackofficeHeader = ({ handleShow }) => {
   return (
@@ -6,7 +7,9 @@ const BackofficeHeader = ({ handleShow }) => {
       <button onClick={handleShow} className="backofficeHeader__button">
         <i className="fa fa-bars backofficeHeader__menu" />
       </button>
-      <p className="backofficeHeader__title">Somos más</p>
+      <Link className="backofficeHeader__title" to={"/"}>
+        Somos más
+      </Link>
     </header>
   );
 };

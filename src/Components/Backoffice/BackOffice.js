@@ -3,17 +3,13 @@ import { Switch, Route } from "react-router-dom";
 import Progress from "../Progress/Progress";
 import LayoutBackOffice from "./LayoutBackOffice";
 
-const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
-const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
 const ActivitiesForm = lazy(() => import("../Activities/ActivitiesForm"));
 const Activities = lazy(() => import("../Activities/Activities"));
 const CategoriesForm = lazy(() => import("../Categories/CategoriesForm"));
 const CategoriesList = lazy(() => import("../Categories/CategoriesList"));
+const HomeForm = lazy(() => import("./HomeForm"));
 const MembersForm = lazy(() => import("../Members/MembersForm"));
 const MembersList = lazy(() => import("../Members/MembersList"));
-const HomeForm = lazy(() => import("./HomeForm"));
-const UserForm = lazy(() => import("../Users/UsersForm"));
-const UsersList = lazy(() => import("../Users/UsersList"));
 const NewsForm = lazy(() => import("../News/NewsForm"));
 const NewsList = lazy(() => import("../News/NewsList"));
 const OrganizationData = lazy(() => import("../Organization/OrganizationData"));
@@ -21,6 +17,11 @@ const OrganizationDataForm = lazy(() =>
   import("../Organization/OrganizationDataForm")
 );
 const ProjectsForm = lazy(() => import("../Projects/ProjectsForm"));
+const SlideList = lazy(() => import("../../Pages/Slides/SlideList"));
+const SlidesForm = lazy(() => import("../Slides/SlidesForm"));
+const UserForm = lazy(() => import("../Users/UsersForm"));
+const UsersList = lazy(() => import("../Users/UsersList"));
+
 const BackOffice = () => {
   const isAuthenticated = JSON.parse(localStorage.getItem("authenticatedUser"));
   const redirectToHome = () => {
@@ -28,22 +29,27 @@ const BackOffice = () => {
   };
   return (
     <>
-      {isAuthenticated && isAuthenticated.role_id === 1 ? (
+      {isAuthenticated && isAuthenticated.name === "Admin" ? (
         <div>
           <LayoutBackOffice>
             <Switch>
               <Suspense fallback={<Progress height={7} />}>
                 <Route path="/backoffice/home" component={HomeForm} />
                 <Route
-                  path="/backoffice/create-activity"
+                  path="/backoffice/activities"
+                  exact
+                  component={Activities}
+                />
+                <Route
+                  path="/backoffice/activities/create"
                   exact
                   component={ActivitiesForm}
                 />
                 <Route
-                  path="/backoffice/create-activity/:id"
+                  path="/backoffice/activities/edit/:id"
                   component={ActivitiesForm}
                 />
-                <Route path="/backoffice/activities" component={Activities} />
+
                 <Route
                   path="/backoffice/categories"
                   exact
@@ -54,7 +60,7 @@ const BackOffice = () => {
                   component={CategoriesForm}
                 />
                 <Route
-                  path="/backoffice/categories/create/:id"
+                  path="/backoffice/categories/edit/:id"
                   component={CategoriesForm}
                 />
                 <Route

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Skeleton from "../../features/skeleton/Skeleton";
+import quoteMark from "../../images/quote-mark.png";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
@@ -26,15 +27,35 @@ const Comments = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Comentarios</h1>
-      {comments.length ? (
-        comments.map((comment) => {
-          return <p key={comment.id}>{comment.text}</p>;
-        })
-      ) : (
-        <Skeleton mode="list" />
-      )}
+    <div className="comments">
+      <h1 className="comments__title">Comentarios</h1>
+      <div className="comments__container">
+        {comments.length ? (
+          comments.map((comment) => {
+            return (
+              <>
+                <div className="comments__cardcontainer" key={comment.id}>
+                  <div>
+                    <img
+                      className="comments__img"
+                      src={comment.image}
+                      alt={comment.text}
+                    />
+                    <p className="comments__text">{comment.text}</p>
+                  </div>
+                  <img
+                    src={quoteMark}
+                    alt="quotemark"
+                    className="comments__quotemark"
+                  />
+                </div>
+              </>
+            );
+          })
+        ) : (
+          <Skeleton mode="list" />
+        )}
+      </div>
     </div>
   );
 };

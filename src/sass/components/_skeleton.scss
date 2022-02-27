@@ -38,17 +38,18 @@
     }
   }
   &_list {
-    position: absolute;
-    margin: 2em 0 1em 0;
+    position: relative;
     &_container {
       width: 100%;
+      display: flex;
       justify-content: center;
+      align-items: center;
     }
     &:empty {
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
       height: 90vh;
-      width: 90%;
+      width: 90vw;
       margin-left: 5%;
       background-image: linear-gradient($skeleton-input, $skeleton-input),
         linear-gradient($skeleton-input, $skeleton-input),
