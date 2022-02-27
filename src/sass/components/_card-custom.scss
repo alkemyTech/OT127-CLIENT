@@ -1,10 +1,11 @@
+@use "../abstracts/mixins";
 .card-custom {
+  z-index: 999;
   &__wrapper {
     width: 279px;
     height: 374px;
     position: relative;
     overflow: hidden;
-
     @include breakpoint(phone) {
       box-shadow: 6px 6px 22px 6px rgba(0, 0, 0, 0.3);
     }
@@ -17,8 +18,10 @@
     z-index: -1;
     height: 100%;
     transform: scale(1.2);
+    object-fit: cover;
   }
   &__content {
+    @include border-rounded;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,14 +32,15 @@
     padding: 5px 0;
     position: absolute;
     bottom: 0;
-    left: calc(59px / 2);
-    height: 100px;
-    width: 220px;
+    left: 25px;
+    height: 50%;
+    width: 80%;
     margin-bottom: -50px;
     opacity: 0.9;
     &:hover {
       margin-bottom: -10px;
       transition: margin-bottom 0.4s ease-in;
+      cursor: default;
     }
     &:not(:hover) {
       transition: margin-bottom 0.4s ease-out;
