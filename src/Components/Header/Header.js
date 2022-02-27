@@ -85,7 +85,7 @@ const Header = () => {
             <NavLink
               className="header__link"
               activeClassName="header__nav-links-active"
-              to="/backoffice/home"
+              to="/backoffice/organization"
             >
               Ir al panel
             </NavLink>
