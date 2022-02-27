@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import FormHelperText from "@mui/material/FormHelperText";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const OrganizationDataForm = () => {
+  const location = useLocation();
   const [organizationData, setOrganizationData] = useState({
     name: "",
     logo: "",
-    shortDescription: "",
-    longDescription: "",
-    facebook: "",
-    linkedin: "",
-    instagram: "",
-    twitter: "",
+    short_description: "",
+    long_description: "",
+    facebook_url: "",
+    linkedin_url: "",
+    instagram_url: "",
+    twitter_url: "",
   });
   const [requiredSocials, setRequiredSocials] = useState({
     facebook: "",
@@ -22,6 +25,29 @@ const OrganizationDataForm = () => {
     instagram: "",
     twitter: "",
   });
+
+  useEffect(() => {
+    console.log("hoal");
+
+    if (location.pathname === "/backoffice/organization/edit") {
+      axios
+        .get(
+          `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_API_ORGANIZATION}`,
+          {
+            headers: {
+              Group: 127,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          setOrganizationData(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  }, []);
 
   const handleChange = (event, name) => {
     setOrganizationData({
@@ -99,38 +125,34 @@ const OrganizationDataForm = () => {
         <FormControl>
           <input
             className="form__input"
-            value={organizationData.logo}
             type="file"
             accept="image/x-png, image/jpeg"
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "logo")}
           />
         </FormControl>
+        <img src={organizationData.logo} alt="" />
         <CKEditor
           editor={ClassicEditor}
-          data={null}
-          value={organizationData.shortDescription}
+          data={organizationData.short_description}
+          value={organizationData.short_description}
           onChange={(event, editor) => {
             const data = editor.getData().slice(3, -4);
             setOrganizationData({
               ...organizationData,
-              shortDescription: data,
+              short_description: data,
             });
           }}
         />
         <FormControl>
-          <label
-            className="form__label"
-            htmlFor="longDescription"
-            required
-          >
+          <label className="form__label" htmlFor="long_description" required>
             Long description
           </label>
           <input
             className="form__input"
-            value={organizationData.longDescription}
+            value={organizationData.long_description}
             aria-describedby="my-helper-text"
-            onChange={(event) => handleChange(event, "longDescription")}
+            onChange={(event) => handleChange(event, "long_description")}
           />
         </FormControl>
         <label className="form__label">Redes sociales</label>
@@ -140,13 +162,13 @@ const OrganizationDataForm = () => {
           </label>
           <input
             className="form__input"
-            value={organizationData.facebook}
+            value={organizationData.facebook_url}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "facebook")}
             onBlur={handleBlurSocials}
           />
           <FormHelperText id="my-helper-text">
-            {requiredSocials.facebook}
+            {requiredSocials.facebook_url}
           </FormHelperText>
         </FormControl>
         <FormControl>
@@ -155,13 +177,13 @@ const OrganizationDataForm = () => {
           </label>
           <input
             className="form__input"
-            value={organizationData.linkedin}
+            value={organizationData.linkedin_url}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "linkedin")}
             onBlur={handleBlurSocials}
           />
           <FormHelperText id="my-helper-text">
-            {requiredSocials.linkedin}
+            {requiredSocials.linkedin_url}
           </FormHelperText>
         </FormControl>
         <FormControl>
@@ -170,13 +192,13 @@ const OrganizationDataForm = () => {
           </label>
           <input
             className="form__input"
-            value={organizationData.instagram}
+            value={organizationData.instagram_url}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "instagram")}
             onBlur={handleBlurSocials}
           />
           <FormHelperText id="my-helper-text">
-            {requiredSocials.instagram}
+            {requiredSocials.instagram_url}
           </FormHelperText>
         </FormControl>
         <FormControl>
@@ -185,13 +207,13 @@ const OrganizationDataForm = () => {
           </label>
           <input
             className="form__input"
-            value={organizationData.twitter}
+            value={organizationData.twitter_url}
             aria-describedby="my-helper-text"
             onChange={(event) => handleChange(event, "twitter")}
             onBlur={handleBlurSocials}
           />
           <FormHelperText id="my-helper-text">
-            {requiredSocials.twitter}
+            {requiredSocials.twitter_url}
           </FormHelperText>
         </FormControl>
         <FormControl>
