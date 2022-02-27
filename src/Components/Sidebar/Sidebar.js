@@ -68,6 +68,11 @@ const Sidebar = () => {
       icon: "add_to_photos",
     },
   ];
+  const logout = () => {
+    localStorage.removeItem("TOKEN");
+    localStorage.removeItem("authenticatedUser");
+    window.location.href = "/";
+  };
 
   return (
     <div>
@@ -96,6 +101,9 @@ const Sidebar = () => {
               </Link>
             );
           })}
+          <button onClick={logout} className="header__logbutton">
+            Cerrar sesión
+          </button>
         </Offcanvas.Body>
       </Offcanvas>
     </div>

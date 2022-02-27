@@ -13,7 +13,7 @@ const Content = () => {
   return (
     <div className="school-content__container">
       <h2 className="school-content__title">
-        26/02/2022 13hs calle 123, Quilmes, Buenos Aires
+        10/03/2022 13hs calle 123, Quilmes, Buenos Aires
       </h2>
       <img
         src={process.env.PUBLIC_URL + "/images/school-campaing/school1.jpg"}
@@ -21,7 +21,7 @@ const Content = () => {
         className="school-content__img"
       />
       <h3 className="school-content__countdown">
-        <Countdown date={new Date(2022, 1, 25, 0, 0, 0)} renderer={renderer} />
+        <Countdown date={new Date(2022, 2, 10, 0, 0, 0)} renderer={renderer} />
       </h3>
       <img
         src={process.env.PUBLIC_URL + "/images/school-campaing/school2.jpg"}

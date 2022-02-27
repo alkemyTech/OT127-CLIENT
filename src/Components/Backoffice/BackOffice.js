@@ -29,7 +29,7 @@ const BackOffice = () => {
   };
   return (
     <>
-      {isAuthenticated && isAuthenticated.role_id === 1 ? (
+      {isAuthenticated && isAuthenticated.name === "Admin" ? (
         <div>
           <LayoutBackOffice>
             <Switch>
@@ -60,7 +60,7 @@ const BackOffice = () => {
                   component={CategoriesForm}
                 />
                 <Route
-                  path="/backoffice/categories/create/:id"
+                  path="/backoffice/categories/edit/:id"
                   component={CategoriesForm}
                 />
                 <Route
