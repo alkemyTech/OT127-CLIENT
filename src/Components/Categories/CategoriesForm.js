@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Axios from "axios";
+import {
+  getCategoryByID,
+  postCategory,
+  putCategory,
+} from "../../Services/categoriesService";
 import Error from "../Error/Error";
 
 const CategoriesForm = () => {
-  const endPointCategories = process.env.REACT_APP_ENDPOINT_CATEGORIES;
-
   const [formValues, setFormValues] = useState({
     name: "",
     description: "",
-    message: "",
     image: "",
   });
 
@@ -25,24 +26,17 @@ const CategoriesForm = () => {
     fileReader.readAsDataURL(files);
   };
 
-  const getCategoryData = async () => {
+  const getCategoryData = () => {
     if (id) {
-      try {
-        const { data } = await Axios.get(`${endPointCategories}${id}`, {
-          headers: {
-            Group: 127,
-          },
-        });
-        const { name, description, image } = data.data;
+      getCategoryByID(id).then(({ data }) => {
+        const { name, description, image } = data;
+
         setFormValues({
-          ...formValues,
           name: name,
           description: description,
-          image: image,
         });
-      } catch (error) {
-        return error;
-      }
+        send_image(image);
+      });
     }
   };
 
@@ -66,52 +60,9 @@ const CategoriesForm = () => {
     }
 
     if (id) {
-      Axios.put(
-        `${endPointCategories}${id}`,
-        {
-          id,
-          name,
-          description,
-          image,
-        },
-        {
-          headers: {
-            Group: 127,
-          },
-        }
-      )
-        .then((response) => {
-          return response;
-        })
-        .catch((error) => {
-          return error;
-        });
+      putCategory(id, formValues);
     } else {
-      Axios.post(
-        endPointCategories,
-        {
-          name,
-          description,
-          image,
-        },
-        {
-          headers: {
-            Group: 127,
-          },
-        }
-      )
-        .then((response) => {
-          setFormValues({
-            name: "",
-            description: "",
-            message: "",
-            image: "",
-          });
-          return response;
-        })
-        .catch((error) => {
-          return error;
-        });
+      postCategory(formValues);
     }
   };
 
@@ -182,15 +133,9 @@ const CategoriesForm = () => {
         <input
           className="form__button"
           type="submit"
-          value={id ? "Editar" : "Guardar"}
+          value={id ? "Editar" : "Crear"}
         />
       </form>
-      {id ? (
-        <img
-          src={formValues.image ? formValues.image : ""}
-          alt="imagen_muestra"
-        />
-      ) : null}
     </div>
   );
 };

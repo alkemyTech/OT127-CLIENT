@@ -1,94 +1,73 @@
 import React, { useEffect, useRef, useState } from "react";
+import * as Yup from "yup";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import { putNews, postNews, getNewsByID } from "../../Services/newsService";
+import { getAllCategory } from "../../Services/categoriesService";
+import Spinner from "../Spinner/Spinner";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
-import axios from "axios";
-import { sweetAlertError } from "../../Services/sweetAlertServices";
-import Progress from "../Progress/Progress";
-
 
 const NewsForm = () => {
   const [initialValues, setInitialValues] = useState({
     name: "",
-    contenido: "",
-    categorie: "",
+    content: "",
+    category_id: "",
     image: "",
   });
-  const [ordersList, setOrdersList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dataCategorie, setDataCategorie] = useState([]);
 
   const { id } = useParams();
-  const url = "http://ongapi.alkemy.org/api/news";
-  const urlCategories = "http://ongapi.alkemy.org/api/categories";
-  const config = {
-    headers: {
-      Group: 127,
-    },
-  }
+  const inputFileRef = useRef();
 
   const getCategorieData = () => {
-    if (id) {
-      axios
-        .get(urlCategories, config)
-        .then((response) => {
-          const dataCategorie = response.data.data;
-          setDataCategorie(dataCategorie);
-        })
-        .catch((error) => {
-          return error;
-        });
-    }
-  };
-
-  const getOrdersList = async () => {
-    await axios
-      .get(url, config)
-      .then((res) => {
-        let data = res.data.data;
-        const orderBlackList = data
-          .map((data) => data.order)
-          .filter((order) => order !== initialValues.order);
-        setOrdersList(orderBlackList);
+    getAllCategory()
+      .then((response) => {
+        const dataCategorie = response.data;
+        setDataCategorie(dataCategorie);
       })
-      .catch((err) => {
-        alert(err.message);
+      .catch((error) => {
+        return error;
       });
   };
 
-  const getDataID = async (id) => {
+  const toDataURL = (blob) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+
+  const getNewsID = async (id) => {
     setLoading(true);
-
-    await axios
-      .get(`${url}/${id}`, config)
-      .then((res) => {
-        if (res.data.success) {
-          const { name, contenido, image } = res.data.data;
-          setInitialValues({
-            name: name,
-            contenido: contenido,
-            image: image,
-            id: true,
+    getNewsByID(id).then((res) => {
+      if (res.data.success) {
+        const { name, content, image, category_id } = res.data.data;
+        //Es necesario encodear la URL que viene de la API para que se pueda editar con exito.
+        axios
+          .get(image, { responseType: "blob" })
+          .then((response) => toDataURL(response.data))
+          .then((encoded) => {
+            setInitialValues({
+              name: name,
+              content: content,
+              image: encoded,
+              category_id: category_id,
+            });
           });
-        } else {
-          const { status } = res.data;
-          alert(status.message);
-        }
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+      }
+    });
     setLoading(false);
   };
 
   useEffect(() => {
     if (id) {
-      getDataID(id);
+      getNewsID(id);
     }
-    getOrdersList();
     getCategorieData();
   }, []); //eslint-disable-line
 
@@ -102,7 +81,7 @@ const NewsForm = () => {
     });
   };
 
-  const handleSubmit = async (formValues) => {
+  const handleSubmit = async (formValues, { resetForm }) => {
     let { image, ...rest } = formValues;
     if (typeof image === "object") {
       image = await toBase64(image);
@@ -113,54 +92,33 @@ const NewsForm = () => {
     }
 
     if (id) {
-      await axios.put(`${url}/${id}`, formValues, config).catch((err) => {
-        sweetAlertError("No se pudo actualizar esta novedad.");
-      });
+      putNews(id, formValues);
     } else {
-      await axios.post(url, formValues, config).catch((err) => {
-        sweetAlertError("No se pudo crear esta novedad.");
-      });
+      postNews(formValues);
+      resetForm();
+      inputFileRef.current.value = "";
     }
   };
-
-  const inputFileRef = useRef();
 
   const validations = Yup.object({
     name: Yup.string()
       .min(4, "Debe tener al menos 4 caracteres")
       .required("Este campo es obligatorio"),
-    contenido: Yup.string().required("Este campo es obligatorio"),
-    id: Yup.boolean(),
-    order: Yup.number()
-      .moreThan(0, "Debe ser un numero mayor o igual a cero")
-      .required("Este campo es obligatorio")
-      .integer()
-      .notOneOf(ordersList, "Numero de orden ya esta en uso"),
+    content: Yup.string().required("Este campo es obligatorio"),
     image: Yup.string().required("Este campo es obligatorio"),
+    category_id: Yup.string().required("Este campo es obligatorio"),
   });
 
   return (
     <div className="form__container">
       {loading ? (
-        <Progress primaryColor="#1c4937" backgroundColor="#6ee7b7" />
+        <Spinner />
       ) : (
         <Formik
           enableReinitialize={true}
           initialValues={initialValues}
           validationSchema={validations}
-          onSubmit={async (values, { resetForm }) => {
-            let formValues = {
-              name: values.name,
-              contenido: values.contenido,
-              categorie: values.categorie,
-              image: values.image,
-            };
-            await handleSubmit(formValues);
-            // limpio el input file
-            inputFileRef.current.value = "";
-
-            resetForm();
-          }}
+          onSubmit={handleSubmit}
         >
           {({ setFieldValue }) => (
             <Form className="form">
@@ -181,10 +139,10 @@ const NewsForm = () => {
                 render={(msg) => <div className="form__error">{msg}</div>}
               />
 
-              <label className="form__label" htmlFor="contenido">
+              <label className="form__label" htmlFor="content">
                 Contenido
               </label>
-              <Field name="contenido">
+              <Field name="content">
                 {({ field }) => (
                   <>
                     <CKEditor
@@ -201,20 +159,21 @@ const NewsForm = () => {
                 )}
               </Field>
               <ErrorMessage
-                name="contenido"
+                name="content"
                 render={(msg) => <div className="form__error">{msg}</div>}
               />
 
-              <label className="form__label" htmlFor="categorie">
+              <label className="form__label" htmlFor="category_id">
                 Categorias
               </label>
               <Field
                 className="form__input"
                 component="select"
                 as="select"
-                name="categorie"
-                type="categorie"
+                name="category_id"
+                type="category_id"
               >
+                <option value="">--- Seleccionar ---</option>
                 {dataCategorie.map((element) => {
                   return (
                     <option
@@ -228,11 +187,11 @@ const NewsForm = () => {
                 })}
               </Field>
               <ErrorMessage
-                name="categorie"
+                name="category_id"
                 render={(msg) => <div className="form__error">{msg}</div>}
               />
 
-              <label className="form__label" htmlFor="categorie">
+              <label className="form__label" htmlFor="category_id">
                 Cargar Imagen
               </label>
               <input
@@ -243,10 +202,12 @@ const NewsForm = () => {
                 }}
                 accept=".jpg, .png"
               />
-              <ErrorMessage name="image" render={(msg) => <div className="form__error">{msg}</div>} />
-
+              <ErrorMessage
+                name="image"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
               <button type="submit" className="form__button">
-                Enviar
+                {id ? "Editar" : "Crear"}
               </button>
             </Form>
           )}

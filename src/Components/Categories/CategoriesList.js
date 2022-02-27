@@ -98,7 +98,10 @@ const CategoriesList = () => {
                     {handleDate(category.created_at)}
                   </td>
                   <td className="table__cell-edit">
-                    <Link className="table__edit" to={`/backoffice/categories/create/${category.id}`}>
+                    <Link
+                      className="table__edit"
+                      to={`/backoffice/categories/edit/${category.id}`}
+                    >
                       Editar
                     </Link>
                   </td>

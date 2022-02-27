@@ -44,3 +44,7 @@
   font-size: 3rem;
   margin: 20px;
 }
+
+@mixin section-margin() {
+  margin: 20px;
+}

@@ -3,7 +3,8 @@
 
 .videocontrols {
   width: 100%;
-  background-color: variables.$font-gray;
+  height: 40px;
+  background-color: variables.$light-blue;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -12,15 +13,16 @@
     padding: 0;
     border: none;
     background: none;
+    color: variables.$font-white;
     &:hover {
       cursor: pointer;
-      color: variables.$font-white;
+      color: variables.$dark-blue;
     }
   }
   svg {
     &:hover {
       cursor: pointer;
-      color: variables.$font-white;
+      color: variables.$dark-blue;
     }
   }
 }
