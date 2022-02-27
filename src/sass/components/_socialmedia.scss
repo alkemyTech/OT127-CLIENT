@@ -4,14 +4,14 @@
     margin-left: 5%;
   }
   &__social-container {
-    @include shadow();
+    @include strongShadow();
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(186px, 1fr));
     align-items: center;
     justify-items: center;
     grid-gap: 10px;
     width: 90%;
-    margin: 0 auto;
+    margin: 30px auto;
   }
   &__button {
     display: block;
@@ -26,6 +26,7 @@
       background-color: #2374e1;
       &:hover {
         background-color: #22508c;
+        color: $font-white;
       }
     }
     &--instagram {
@@ -39,6 +40,7 @@
         #fd1d1d
       );
       &:hover {
+        color: $font-white;
         background: linear-gradient(
           -45deg,
           #405de6,
@@ -55,7 +57,7 @@
     margin-right: 15px;
   }
   &__tweets {
-    @include shadow();
+    @include strongShadow();
     @include border-rounded();
     margin-top: 20px;
     background-color: $light-blue;

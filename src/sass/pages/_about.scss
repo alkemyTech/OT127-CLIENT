@@ -1,5 +1,6 @@
 .about {
   &__main {
+    @include strongShadow;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +8,6 @@
     width: 100%;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 5px 5px 11px -2px rgba(0, 0, 0, 0.58);
     @media (min-width: 768px) {
       width: 90%;
     }
