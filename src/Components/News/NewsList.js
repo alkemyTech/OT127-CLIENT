@@ -8,15 +8,14 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategory } from "../../Services/categoriesService";
 import Spinner from "../Spinner/Spinner";
-import SearchForm from "./SearchForm";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
-import { deleteNews } from "../../Services/newsService"
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
+import { deleteNews } from "../../Services/newsService";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const NewsList = () => {
   const [value, setValue] = useState("");
@@ -74,9 +73,7 @@ const NewsList = () => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <span className="material-icons">
-                    search
-                  </span>
+                  <span className="material-icons">search</span>
                 </InputAdornment>
               ),
             }}
@@ -92,7 +89,9 @@ const NewsList = () => {
             >
               <MenuItem value={0}>Todos</MenuItem>
               {categories.map(({ id, name }) => (
-                <MenuItem key={id} value={id}>{name}</MenuItem>
+                <MenuItem key={id} value={id}>
+                  {name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -120,7 +119,9 @@ const NewsList = () => {
                     <img src={element.image} alt="News_image" width="100" />
                   </td>
                   <td className="table__cell-edit">
-                    <Link className="table__edit" to={`/backoffice/news/edit/${element.id}`}>Editar</Link>
+                    <Link to={`/backoffice/news/edit/${element.id}`}>
+                      Editar
+                    </Link>
                   </td>
                   <td className="table__cell-delete">
                     <button
