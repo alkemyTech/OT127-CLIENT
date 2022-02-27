@@ -27,10 +27,10 @@ const LoginForm = () => {
       dispatch(setToken(token));
       localStorage.setItem("TOKEN", token);
       localStorage.setItem("authenticatedUser", JSON.stringify(user));
-      if (user.role_id === 1) {
+      if (user.name === 'Admin') {
         history.push("/backoffice/organization");
-      } else if (user.role_id === 2) {
-        history.push("/");
+      } else if (user.name !== 'Admin') {
+        window.location.href = '/' //Cambio a este metodo en lugar de history, para forzar el renderizado
       }
     } catch (error) {
       sweetAlertError("Contraseña o usuario incorrectos");

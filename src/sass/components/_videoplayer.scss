@@ -1,6 +1,5 @@
 @use "../abstracts/mixins";
 
 .videoplayer {
-  @include shadow;
   width: 650px;
 }

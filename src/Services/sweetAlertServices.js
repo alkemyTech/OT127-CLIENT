@@ -8,6 +8,8 @@ export const sweetAlertSuccess = (text) => {
     icon: "success",
     title: "Éxito!",
     text,
+    showConfirmButton: false,
+    timer: 1500,
   });
 };
 
