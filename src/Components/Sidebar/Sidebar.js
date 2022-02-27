@@ -10,7 +10,8 @@ const Sidebar = () => {
   const handleShow = () => setShow(true);
 
   const backofficeRoutes = [
-    { name: "Editar Inicio", router: "/backoffice/home", icon: "home" },
+    { name: "Inicio", router: "/", icon: "home" },
+    { name: "Editar Inicio", router: "/backoffice/home", icon: "settings" },
     {
       name: "Actividades",
       router: "/backoffice/activities",
