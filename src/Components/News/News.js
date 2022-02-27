@@ -28,7 +28,7 @@ const News = () => {
     //Ésta es la lista de novedades completa
     return news.length
       ? news.map((element) => (
-        <div className="card-custom__wrapper news__listitem">
+        <div key={element.name} className="card-custom__wrapper news__listitem">
           <img src={element.image} alt="" className="card-custom__image" />
           <div className="card-custom__content">
             <h3 className="card-custom__title">{element.name}</h3>
@@ -42,7 +42,7 @@ const News = () => {
     // Ésta es la lista de novedades filtradas
     return filteredNews.length
       ? filteredNews.map((element) => (
-        <div className="card-custom__wrapper news__listitem">
+        <div key={element.name} className="card-custom__wrapper news__listitem">
           <img src={element.image} alt="" className="card-custom__image" />
           <div className="card-custom__content">
             <h3 className="card-custom__title">{element.name}</h3>
