@@ -119,7 +119,9 @@ const NewsList = () => {
                     <img src={element.image} alt="News_image" width="100" />
                   </td>
                   <td className="table__cell-edit">
-                    <Link className="table__edit" to={`/backoffice/news/edit/${element.id}`}>Editar</Link>
+                    <Link to={`/backoffice/news/edit/${element.id}`}>
+                      Editar
+                    </Link>
                   </td>
                   <td className="table__cell-delete">
                     <button
