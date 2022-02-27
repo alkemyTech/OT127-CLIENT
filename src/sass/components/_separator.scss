@@ -5,7 +5,7 @@
   justify-content: space-evenly;
   width: 100vw;
   height: 20vh;
-  background-size: cover;
-  background-position: center;
+  background-size: cover !important;
+  background-position: center !important;
   color: $font-white;
 }
