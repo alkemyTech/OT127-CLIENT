@@ -11,4 +11,55 @@
     @include section-margin;
     @include title;
   }
+  &__welcometext {
+    @include outfit-title;
+    font-size: 3rem;
+  }
+  &__hero {
+    display: flex;
+    align-items: center;
+    color: $font-white;
+    height: 80vh;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("../../images/hero.jpg");
+    background-size: cover !important;
+    background-position: center !important;
+    padding-left: 10vw;
+    &-container {
+      max-width: 500px;
+    }
+  }
+  &__info {
+    @include roboto-regular;
+  }
+
+  &__button {
+    width: 100px;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    border-radius: 2px;
+    line-height: 40px;
+    margin-right: 20px;
+    @include butto-transition;
+    &--about {
+      color: $font-gray;
+      background-color: $font-white;
+      &:hover {
+        color: $font-white;
+        border: 2px solid $font-white;
+        background-color: transparent;
+      }
+    }
+    &--donate {
+      background-color: $med-yellow;
+      color: $green-blue;
+      &:hover {
+        color: $med-yellow;
+        border: 2px solid $med-yellow;
+        background-color: transparent;
+      }
+    }
+  }
 }
