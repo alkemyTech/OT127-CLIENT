@@ -7,13 +7,15 @@
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 70px;
+  min-height: 70px;
   z-index: 999;
   padding-top: 10px;
-  padding-left: 40px;
-  padding-right: 40px;
   padding-bottom: 10px;
   background-color: variables.$med-yellow;
+  @media (min-width: 768px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
   &__logo {
     max-width: 150px;
     width: 100%;
@@ -23,6 +25,8 @@
     display: flex;
     gap: 2vw;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   &__link {
     @include outfit-regular-bold;
