@@ -10,33 +10,65 @@ const Sidebar = () => {
   const handleShow = () => setShow(true);
 
   const backofficeRoutes = [
-    { name: "Home", router: "/backoffice/home", icon: "home" },
-    { name: "Users", router: "/backoffice/users", icon: "person" },
+    { name: "Inicio", router: "/", icon: "home" },
+    { name: "Editar Inicio", router: "/backoffice/home", icon: "settings" },
     {
-      name: "Slides",
+      name: "Actividades",
+      router: "/backoffice/activities",
+      icon: "volunteer_activism",
+    },
+    {
+      name: "Categorías",
+      router: "/backoffice/categories",
+      icon: "category",
+    },
+    {
+      name: "Diapositivas",
       router: "/backoffice/slides",
       icon: "auto_awesome_motion",
     },
-    { name: "Members", router: "/backoffice/members", icon: "face" },
-    { name: "News", router: "/backoffice/news", icon: "feed" },
-    { name: "Organization", router: "/backoffice/organization", icon: "info" },
+    { name: "Miembros", router: "/backoffice/members", icon: "face" },
+    { name: "Novedades", router: "/backoffice/news", icon: "feed" },
+    { name: "Organización", router: "/backoffice/organization", icon: "info" },
+
+    { name: "Usuarios", router: "/backoffice/users", icon: "person" },
     {
-      name: "Create Project",
-      router: "/backoffice/projects/create",
-      icon: "post_add",
+      name: "Añadir Actividad",
+      router: "/backoffice/activities/create",
+      icon: "add_to_photos",
     },
     {
-      name: "Create Slides",
+      name: "Añadir Categoría",
+      router: "/backoffice/categories/create",
+      icon: "add_to_photos",
+    },
+    {
+      name: "Añadir Diapositiva",
       router: "/backoffice/slides/create",
       icon: "add_to_photos",
     },
     {
-      name: "Create User",
+      name: "Añadir Miembro",
+      router: "/backoffice/members/create",
+      icon: "add_to_photos",
+    },
+    {
+      name: "Añadir Novedad",
+      router: "/backoffice/news/create",
+      icon: "add_to_photos",
+    },
+    {
+      name: "Añadir Proyecto",
+      router: "/backoffice/projects/create",
+      icon: "add_to_photos",
+    },
+
+    {
+      name: "Añadir Usuario",
       router: "/backoffice/users/create",
-      icon: "person_add",
+      icon: "add_to_photos",
     },
   ];
-
   const logout = () => {
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("authenticatedUser");
@@ -49,7 +81,7 @@ const Sidebar = () => {
       <BackofficeHeader handleShow={handleShow}></BackofficeHeader>
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header>
-          <Offcanvas.Title>Backoffice Routes</Offcanvas.Title>
+          <Offcanvas.Title>Panel de administrador</Offcanvas.Title>
           <button
             type="button"
             onClick={handleClose}

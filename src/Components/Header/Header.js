@@ -10,8 +10,8 @@ const Header = () => {
   const token = localStorage.getItem("TOKEN");
 
   const menuItems = [
-    { link: "/school-campaign", name: "Campaña escolar" },
-    { link: "/toys-campaign", name: "Campaña de juguetes" },
+    { link: "/school-campaign", name: "Campaña escolar", target: "_blank" },
+    { link: "/toys-campaign", name: "Campaña de juguetes", target: "_blank" },
     { link: "/about", name: "Nosotros" },
   ];
 
@@ -46,6 +46,7 @@ const Header = () => {
                 activeClassName="header__nav-links-active"
                 to={item.link}
                 key={item.name}
+                target={item.target}
               >
                 {item.name}
               </NavLink>
@@ -79,7 +80,17 @@ const Header = () => {
               </NavLink>
             </>
           )}
-          {isAuthenticated && isAuthenticated.name !== 'Admin' && (
+
+          {isAuthenticated && isAuthenticated.name === "Admin" && (
+            <NavLink
+              className="header__link"
+              activeClassName="header__nav-links-active"
+              to="/backoffice/organization"
+            >
+              Ir al panel
+            </NavLink>
+          )}
+          {isAuthenticated && isAuthenticated.name !== "Admin" && (
             <NavLink className="header__link" to="/donate">
               Donar
             </NavLink>

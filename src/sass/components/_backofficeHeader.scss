@@ -9,6 +9,8 @@
   &__title {
     @include outfit-title;
     margin: 0 0 0 5vw;
+    text-decoration: none;
+    color: $font-white;
   }
   &__button {
     display: flex;
