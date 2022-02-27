@@ -8,9 +8,7 @@ import SocialMedia from "./SocialMedia";
 import Separator from "../Card/Separator";
 import aboutImage from "../../images/nosotros.jpg"
 
-const About = ({
-	text = "Desde 1997 en Somos Más trabajamos con los chicos y chicas, mamás y papás, abuelos y vecinos del barrio La Cava ",
-}) => {
+const About = () => {
 	const dispatch = useDispatch()
 	const info = useSelector(state => state.usReducer.info)
 	const [loading, setLoading] = useState(false);
@@ -20,7 +18,6 @@ const About = ({
 		dispatch(getUs());
 		setLoading(false)
 	}, []);//eslint-disable-line
-	// El texto en un futuro se obtendra desde una API
 	return (
 		<>
 			{loading ? (
