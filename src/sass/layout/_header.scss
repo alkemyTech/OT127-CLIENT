@@ -33,9 +33,12 @@
     text-decoration: none;
     text-align: center;
     color: variables.$green-blue;
+    transition: $cubic-bezier;
     &:hover {
       cursor: pointer;
       color: variables.$med-green;
+      border-bottom: 2px solid $med-green;
+      transform: scale(1.1);
     }
   }
   &__logbar {
