@@ -7,6 +7,8 @@ import Spinner from "../Spinner/Spinner";
 import Comments from "./Comments";
 import VideoPlayer from "./VideoPlayer";
 import SearchForm from "./SearchForm";
+import Separator from "../Card/Separator";
+import novedadesImg from "../../images/novedades.jpg"
 
 const News = () => {
   const dispatch = useDispatch();
@@ -26,11 +28,11 @@ const News = () => {
     //Ésta es la lista de novedades completa
     return news.length
       ? news.map((element) => (
-          <li className="card-info" key={element.id}>
-            <h3>{element.name}</h3>
-            <p>{element.content}</p>
-          </li>
-        ))
+        <li className="card-info" key={element.id}>
+          <h3>{element.name}</h3>
+          <p>{element.content}</p>
+        </li>
+      ))
       : null;
   };
 
@@ -38,11 +40,11 @@ const News = () => {
     // Ésta es la lista de novedades filtradas
     return filteredNews.length
       ? filteredNews.map((element) => (
-          <li className="card-info" key={element.id}>
-            <h3>{element.name}</h3>
-            <p>{element.content}</p>
-          </li>
-        ))
+        <li className="card-info" key={element.id}>
+          <h3>{element.name}</h3>
+          <p>{element.content}</p>
+        </li>
+      ))
       : null;
   };
 
@@ -62,12 +64,14 @@ const News = () => {
         <Spinner />
       ) : (
         <div>
-          <h1>Novedades</h1>
           <section>
             <h1>Último evento</h1>
             <VideoPlayer />
           </section>
           <SearchForm searchNews={searchNews} />
+          <Separator image={novedadesImg} >
+            <h1>Novedades</h1>
+          </Separator>
           <ul className="list-container">
             {filteredNews.length ? filteredNewsList() : newsList()}
           </ul>

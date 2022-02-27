@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <>
-      <h2>{welcomeText}</h2>
+      <h2 className="home__welcometext">{welcomeText}</h2>
       <SliderHome />
       <News />
     </>
