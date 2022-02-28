@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Skeleton from "../../features/skeleton/Skeleton";
 import quoteMark from "../../images/quote-mark.png";
-
+import Separator from "../Card/Separator";
+import comentariosImg from "../../images/comentarios.jpg"
 const Comments = () => {
   const [comments, setComments] = useState([]);
   const getComments = () => {
@@ -28,7 +29,9 @@ const Comments = () => {
 
   return (
     <div className="comments">
-      <h1 className="comments__title">Comentarios</h1>
+     <Separator image={comentariosImg} >
+      <h1>Comentarios</h1>
+         </Separator>
       <div className="comments__container">
         {comments.length ? (
           comments.map((comment) => {

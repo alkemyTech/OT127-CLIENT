@@ -66,7 +66,7 @@ const ProjectsForm = () => {
   return (
     <div className="form__container">
       <form className="form" onSubmit={handleSubmit}>
-        {id ? <p className="form__title">Editar proyecto</p> : <p className="form__title">Crear proyecto nuevo</p>}
+        {id ? <p className="form__title">Editar proyecto</p> : <p className="form__title">Crear nuevo proyecto</p>}
         <p className="form__subtitle">complete todos los campos</p>
         <input
           className="form__input"

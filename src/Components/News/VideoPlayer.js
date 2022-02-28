@@ -22,8 +22,8 @@ const VideoPlayer = () => {
     <div className="videoplayer">
       <ReactPlayer
         url="https://www.youtube.com/watch?v=4YnSk1gI_Oo"
-        width="650px"
-        height="400px"
+        width="100%"
+        height="450px"
         volume={volume}
         playing={isPlay}
         muted={muted}
