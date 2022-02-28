@@ -11,7 +11,7 @@
   box-shadow: 5px 5px 11px -2px rgba(0, 0, 0, 0.58);
 }
 
-@mixin butto-transition() {
+@mixin button-transition() {
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: all 0.3s ease-in-out;
