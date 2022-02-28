@@ -3,6 +3,7 @@ import SliderHome from "../../Components/Slides/SliderHome";
 import { useDispatch, useSelector } from "react-redux";
 import { getUs } from "../../Redux/reducers/usSlice";
 import News from "../../Components/News/News";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [welcomeText, setWelcomeText] = useState("Bienvenido"); //eslint-disable-line
@@ -22,8 +23,12 @@ const Home = () => {
           <p className="home__info">{info.short_description}</p>
           {isAuthenticated && isAuthenticated.name !== "Admin" ?
             <div className="home__button-container">
-              <button className="home__button home__button--about">Nosotros</button>
-              <button className="home__button home__button--donate">Donar</button>
+              <Link to="/about">
+                <button className="home__button home__button--about">Nosotros</button>
+              </Link>
+              <Link to="/donate">
+                <button className="home__button home__button--donate">Donar</button>
+              </Link>
             </div>
             :
             null
