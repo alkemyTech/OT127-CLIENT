@@ -7,6 +7,8 @@ import Spinner from "../Spinner/Spinner";
 import Comments from "./Comments";
 import VideoPlayer from "./VideoPlayer";
 import SearchForm from "./SearchForm";
+import Separator from "../Card/Separator";
+import novedadesImg from "../../images/novedades.jpg"
 
 const News = () => {
   const dispatch = useDispatch();
@@ -26,11 +28,13 @@ const News = () => {
     //Ésta es la lista de novedades completa
     return news.length
       ? news.map((element) => (
-          <li className="card-info" key={element.id}>
-            <h3>{element.name}</h3>
-            <p>{element.content}</p>
-          </li>
-        ))
+        <div key={element.name} className="card-custom__wrapper news__listitem">
+          <img src={element.image} alt="" className="card-custom__image" />
+          <div className="card-custom__content">
+            <h3 className="card-custom__title">{element.name}</h3>
+          </div>
+        </div>
+      ))
       : null;
   };
 
@@ -38,11 +42,13 @@ const News = () => {
     // Ésta es la lista de novedades filtradas
     return filteredNews.length
       ? filteredNews.map((element) => (
-          <li className="card-info" key={element.id}>
-            <h3>{element.name}</h3>
-            <p>{element.content}</p>
-          </li>
-        ))
+        <div key={element.name} className="card-custom__wrapper news__listitem">
+          <img src={element.image} alt="" className="card-custom__image" />
+          <div className="card-custom__content">
+            <h3 className="card-custom__title">{element.name}</h3>
+          </div>
+        </div>
+      ))
       : null;
   };
 
@@ -61,16 +67,18 @@ const News = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
-          <h1>Novedades</h1>
-          <section>
-            <h1>Último evento</h1>
+        <div className="news">
+          <section className="news__videoplayercontainer">
+            <h1 className="news__subtitle">Último evento</h1>
             <VideoPlayer />
           </section>
+          <Separator image={novedadesImg} >
+            <h1>Novedades</h1>
+          </Separator>
           <SearchForm searchNews={searchNews} />
-          <ul className="list-container">
+          <div className="card-custom news__list">
             {filteredNews.length ? filteredNewsList() : newsList()}
-          </ul>
+          </div>
           {showComments && <Comments />}
         </div>
       )}

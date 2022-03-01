@@ -117,17 +117,17 @@ const UsersList = () => {
 									<td className="table__cell">{user.name}</td>
 									<td className="table__cell">{user.email}</td>
 									<td className="table__cell">
-										{user.role_id === 1 ? (
+										{user.name === 'Admin' ? (
 											<AdminPanelSettingsIcon />
 										) : (
 											<AccountCircleIcon />
 										)}
 									</td>
 									<td className="table__cell-edit">
-										<Link to={`/backoffice/users/edit/${user.id}`}>Editar</Link>
+										<Link className="table__edit" to={`/backoffice/users/edit/${user.id}`}>Editar</Link>
 									</td>
 									<td className="table__cell-delete">
-										<button onClick={() => handleDelete(user.id)}>
+										<button className="table__delete" onClick={() => handleDelete(user.id)}>
 											ELIMINAR
 										</button>
 									</td>

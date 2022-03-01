@@ -1,0 +1,38 @@
+@use "../abstracts/variables";
+@use "../abstracts/mixins";
+@use "../base/typography";
+
+.news {
+  @include section-margin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    @include section-margin;
+    @include roboto-regular-bold;
+  }
+  &__subtitle {
+    @include roboto-regular;
+  }
+  &__videoplayercontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  &__listitem {
+    margin: 10px;
+    @include border-rounded;
+    min-width: 150px !important;
+    height: 250px;
+  }
+}

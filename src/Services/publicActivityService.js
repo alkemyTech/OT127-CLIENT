@@ -24,39 +24,23 @@ class ActivitiesService {
     if (id) {
       await axios
         .get(`${this.API_URL}/${id}`, this.header)
-        .then((response) => (data = response.data.data))
+        .then((response) => (data = response.data))
         .catch(() => sweetAlertError("No se pudo cargar la actividad"));
       return data;
     }
   };
 
-  post = async (name, description, image) => {
+  post = async (activity) => {
     await axios
-      .post(
-        this.API_URL,
-        {
-          name,
-          description,
-          image,
-        },
-        this.header
-      )
+      .post(this.API_URL, activity, this.header)
       .then(() => sweetAlertSuccess("Actividad creada"))
       .catch(() => sweetAlertError("No se pudo crear la actividad"));
   };
 
-  put = async (id, name, description, image) => {
+  put = async (id, value) => {
     if (id) {
       await axios
-        .put(
-          `${this.API_URL}/${id}`,
-          {
-            name,
-            description,
-            image,
-          },
-          this.header
-        )
+        .put(`${this.API_URL}/${id}`, value, this.header)
         .then(() => sweetAlertSuccess("Actividad editada."))
         .catch(() => sweetAlertError("No se pudo editar la actividad"));
     }

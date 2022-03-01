@@ -26,14 +26,19 @@
 @import "components/thanks";
 @import "components/videocontrols";
 @import "components/videoplayer";
+@import "components/news";
+@import "components/comments";
 @import "components/schoollContent";
 @import "components/categoriesList";
 @import "components/spiner";
+@import "components/searchform";
+
 // LAYOUT
 @import "layout/footer";
 @import "layout/header";
 @import "layout/layout";
 // PAGES
+@import "pages/about";
 @import "pages/activities";
 @import "pages/backoffice";
 @import "pages/contact";

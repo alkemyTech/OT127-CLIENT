@@ -1,44 +1,39 @@
 import React, { useEffect, useState } from "react";
 import Title from "../Titulosynovedades/Title";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { getUs } from "../../Redux/reducers/usSlice";
 import Spinner from "../Spinner/Spinner";
 
 import SocialMedia from "./SocialMedia";
+import Separator from "../Card/Separator";
+import aboutImage from "../../images/nosotros.jpg"
 
-const About = ({
-  text = "Desde 1997 en Somos Más trabajamos con los chicos y chicas, mamás y papás, abuelos y vecinos del barrio La Cava ",
-}) => {
+const About = () => {
 	const dispatch = useDispatch()
 	const info = useSelector(state => state.usReducer.info)
 	const [loading, setLoading] = useState(false);
-	const history = useHistory();
-	const isLogged = useSelector((state) => state.authReducer.userIsLogged);
-	
 
 	useEffect(() => {
 		setLoading(true);
-		if (!isLogged) {
-		  history.push("/login");
-		}
 		dispatch(getUs());
-	  }, []);//eslint-disable-line
-	// El texto en un futuro se obtendra desde una API
+		setLoading(false)
+	}, []);//eslint-disable-line
 	return (
 		<>
 			{loading ? (
-				<Spinner/>
+				<Spinner />
 			) : (
 				<>
-				<Title title="Nosotros" />
-				<main>
-					<p>{info.name}</p>
-					<p>{info.short_description}</p>
-				</main>
-				<SocialMedia />
+					<Separator image={aboutImage}>
+						<h1><b>Nosotros</b></h1>
+					</Separator>
+					<main className="about__main">
+						<p className="about__text about__text--name">{info.name}</p>
+						<p className="about__text about__text--description">{info.long_description}</p>
+					</main>
+					<SocialMedia />
 				</>
-				)
+			)
 			}
 		</>
 	);

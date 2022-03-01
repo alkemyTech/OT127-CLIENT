@@ -7,27 +7,38 @@
   justify-content: space-between;
   align-items: center;
   width: 100vw;
-  height: 70px;
+  min-height: 70px;
   z-index: 999;
   padding-top: 10px;
-  padding-left: 40px;
-  padding-right: 40px;
   padding-bottom: 10px;
   background-color: variables.$med-yellow;
+  @media (min-width: 768px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
   &__logo {
-    width: 150px;
+    max-width: 150px;
+    width: 100%;
+    min-width: 90px;
   }
   &__nav {
     display: flex;
-    gap: 30px;
+    gap: 2vw;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   &__link {
     @include outfit-regular-bold;
     text-decoration: none;
+    text-align: center;
     color: variables.$green-blue;
+    transition: $cubic-bezier;
     &:hover {
       cursor: pointer;
       color: variables.$med-green;
+      border-bottom: 2px solid $med-green;
+      transform: scale(1.1);
     }
   }
   &__logbar {
@@ -44,7 +55,7 @@
     border: none;
     background-color: variables.$dark-green;
     color: variables.$font-white;
-    width: 120px;
+    min-width: 120px;
     height: 30px;
     transition: variables.$transition-time;
     &:hover {

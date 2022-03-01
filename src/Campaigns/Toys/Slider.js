@@ -95,13 +95,13 @@ const Slider = () => {
           className="slider__arrow-button slider__arrow-button--left"
           onClick={prevSlide}
         >
-          <i class="fa fa-chevron-left"></i>
+          <i className="fa fa-chevron-left"></i>
         </span>
         <span
           className="slider__arrow-button slider__arrow-button--right"
           onClick={nextSlide}
         >
-          <i class="fa fa-chevron-right"></i>
+          <i className="fa fa-chevron-right"></i>
         </span>
       </div>
     </div>

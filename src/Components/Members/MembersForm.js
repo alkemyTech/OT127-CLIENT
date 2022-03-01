@@ -106,6 +106,7 @@ const MemberForm = () => {
         {({ setFieldValue }) => (
           <Form className="form__container">
             <div className="form">
+              {id ? <p className="form__title">Editar miembro</p> : <p className="form__title">Crear nuevo miembro</p>}
               <label className="form__label" htmlFor="name">
                 Nombre
               </label>
