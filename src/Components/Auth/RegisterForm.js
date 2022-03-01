@@ -6,10 +6,12 @@ import {
   sweetAlertSuccess,
 } from "../../Services/sweetAlertServices";
 import * as Yup from "yup";
-import Leaflet from "../../features/leaflet/Leaflet";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const RegisterForm = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
+  const [showPassword, setShowPassword] = useState("password");
   const isLogged = JSON.parse(localStorage.getItem("authenticatedUser"));
   let title = "Términos y condiciones";
   let text = "Acepta los términos y condiciones?";
@@ -22,7 +24,7 @@ const RegisterForm = () => {
       sweetAlertSuccess("Te has registrado con éxito.");
       resetForm();
       setAcceptTerms(false);
-      window.location.href = '/login'
+      window.location.href = "/login";
     } else {
       sweetAlertConfirm(title, text, imgTermsAndCoditions).then((res) => {
         setAcceptTerms(res);
@@ -128,12 +130,25 @@ const RegisterForm = () => {
                 <label htmlFor="password" className="form__label">
                   Contraseña
                 </label>
-                <Field
-                  name="password"
-                  type="password"
-                  className="form__input"
-                  placeholder="********"
-                />
+                <div className="form__password">
+                  <Field
+                    name="password"
+                    type={showPassword}
+                    className="form__input--password"
+                    placeholder="********"
+                  />
+                  {showPassword === "password" ? (
+                    <VisibilityIcon
+                      className="form__visibility"
+                      onClick={() => setShowPassword("text")}
+                    />
+                  ) : (
+                    <VisibilityOffIcon
+                      className="form__visibility"
+                      onClick={() => setShowPassword("password")}
+                    />
+                  )}
+                </div>
                 <ErrorMessage
                   name="password"
                   render={(msg) => <div className="form__error">{msg}</div>}
@@ -143,12 +158,25 @@ const RegisterForm = () => {
                 <label htmlFor="confirmPassword" className="form__label">
                   Confirmar contraseña
                 </label>
-                <Field
-                  name="confirmPassword"
-                  type="password"
-                  className="form__input"
-                  placeholder="********"
-                />
+                <div className="form__password">
+                  <Field
+                    name="confirmPassword"
+                    type={showPassword}
+                    className="form__input--password"
+                    placeholder="********"
+                  />
+                  {showPassword === "password" ? (
+                    <VisibilityIcon
+                      className="form__visibility"
+                      onClick={() => setShowPassword("text")}
+                    />
+                  ) : (
+                    <VisibilityOffIcon
+                      className="form__visibility"
+                      onClick={() => setShowPassword("password")}
+                    />
+                  )}
+                </div>
                 <ErrorMessage
                   name="confirmPassword"
                   render={(msg) => <div className="form__error">{msg}</div>}
