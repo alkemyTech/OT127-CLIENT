@@ -1,0 +1,94 @@
+@use "../abstracts/mixins";
+.content {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 70px;
+    max-width: 1300px;
+    @media only screen and (min-width: 900px) {
+      display: grid;
+      grid-template-columns: 130px 340px 130px;
+      grid-auto-rows: 120px;
+      padding: 20px;
+      gap: 35px;
+      margin: 10px auto;
+      text-align: center;
+    }
+    @media only screen and (min-width: 1300px) {
+      background-color: rgb(161 136 136 / 13%);
+      padding: 40px;
+    }
+  }
+
+  &__title {
+    @include roboto-title;
+    color: $dark-blue;
+    text-transform: uppercase;
+    @media only screen and (min-width: 900px) {
+      grid-column-start: span 3;
+      max-width: 400px;
+      place-self: center;
+    }
+  }
+  &__description {
+    @include roboto-regular-bold;
+    color: $font-gray;
+    margin-top: 25px;
+    max-width: 700px;
+    @media only screen and (min-width: 900px) {
+      grid-column-start: span 3;
+      margin: 0 20px;
+      max-width: 100%;
+    }
+  }
+
+  &__img {
+    display: none;
+    @media only screen and (min-width: 900px) {
+      display: block;
+      width: 125px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 15px;
+      filter: brightness(90%);
+      &:nth-child(2) {
+        transform: rotate(-10deg);
+      }
+      &:nth-child(4),
+      &:nth-child(6) {
+        transform: rotate(10deg);
+      }
+      &:nth-child(7) {
+        justify-self: center;
+        align-self: self-end;
+      }
+      &:last-child {
+        justify-self: end;
+        transform: rotate(-10deg);
+      }
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+  &__countdown {
+    display: none;
+    @media only screen and (min-width: 667px) {
+      display: block;
+      margin: 50px 0;
+      &-timer {
+        @include outfit-title;
+        background-color: $med-yellow;
+        padding: 20px;
+        color: $font-white;
+        font-size: 2rem;
+        border-radius: 15px;
+      }
+    }
+    @media only screen and (min-width: 900px) {
+      align-self: start;
+    }
+  }
+}

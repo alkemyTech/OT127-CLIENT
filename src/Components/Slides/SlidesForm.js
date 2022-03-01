@@ -8,9 +8,14 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/es";
 
+import {
+  getSlidesData,
+  getSlidesDataById,
+  postSlide,
+  putSlide,
+} from "../../Services/slidesApiService";
 
-import "../FormStyles.css";
-import { getSlidesData, getSlidesDataById, updateSlide, createNewSlide } from "../../Services/slidesApiService";
+import Progress from "../Progress/Progress";
 
 const SlidesForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -21,49 +26,29 @@ const SlidesForm = () => {
   });
   const [ordersList, setOrdersList] = useState([]); // para validar order
   const [loading, setLoading] = useState(false);
-
   const { id } = useParams();
 
   const getOrdersList = async () => {
-    await getSlidesData()
-      .then((res) => {
-        let data = res.data.data;
-        // arreglo de order utilizados
-        const orderBlackList = data
-          .map((data) => data.order)
-          .filter((order) => order !== initialValues.order);
-        setOrdersList(orderBlackList);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    await getSlidesData().then((res) => {
+      let data = res.data.data;
+      // arreglo de order utilizados
+      const ordersArr = data.map((data) => data.order);
+      setOrdersList(ordersArr);
+    });
   };
 
   const getSlideById = async (id) => {
-    setLoading(true);
-
-
-    await getSlidesDataById(id)
-      .then((res) => {
-        if (res.data.success) {
-          const { name, description, order, image } = res.data.data;
-          setInitialValues({
-            name: name,
-            description: description,
-            order: order ? order : 0,
-            image: image,
-            id: true,
-          });
-        } else {
-          const { status } = res.data;
-          alert(status.message);
-        }
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
-
-    setLoading(false);
+    await getSlidesDataById(id).then((res) => {
+      if (res.data.success) {
+        const { name, description, order, image } = res.data.data;
+        setInitialValues({
+          name: name,
+          description: description,
+          order: order ? order : 0,
+          image: image,
+        });
+      }
+    });
   };
 
   useEffect(() => {
@@ -84,7 +69,8 @@ const SlidesForm = () => {
     });
   };
 
-  const handleSubmit = async (formValues) => {
+  const handleSubmit = async (formValues, resetForm) => {
+    setLoading(true);
     let { image, ...rest } = formValues;
     if (typeof image === "object") {
       image = await toBase64(image);
@@ -92,21 +78,28 @@ const SlidesForm = () => {
         image,
         ...rest,
       };
+    } else {
+      formValues = {
+        ...rest,
+      };
     }
 
     if (id) {
-      await updateSlide(formValues, id).catch((err) => {
-        alert(err.message);
-      });
+      await putSlide(id, formValues);
+      getSlideById(id);
     } else {
-      await createNewSlide(formValues).catch((err) => {
-        alert(err.message);
-      });
+      await postSlide(formValues);
     }
+    //limpio el input file
+    inputFileRef.current.value = "";
+    resetForm();
+    setLoading(false);
   };
 
   const inputFileRef = useRef();
-
+  const ordersBlackList = ordersList.filter(
+    (order) => order !== initialValues.order
+  );
   const validations = Yup.object({
     name: Yup.string()
       .min(4, "Debe tener al menos 4 caracteres")
@@ -117,46 +110,41 @@ const SlidesForm = () => {
       .moreThan(0, "Debe ser un numero mayor o igual a cero")
       .required("Este campo es obligatorio")
       .integer()
-      .notOneOf(ordersList, "Numero de orden ya esta en uso"),
+      .notOneOf(ordersBlackList, "Numero de orden ya esta en uso"),
     image: Yup.string().required("Este campo es obligatorio"),
   });
 
   return (
-    <>
-      {loading ? (
-        <p>LOADING...</p>
-      ) : (
-        <Formik
-          enableReinitialize={true}
-          initialValues={initialValues}
-          validationSchema={validations}
-          onSubmit={async (values, { resetForm }) => {
-            let formValues = {
-              name: values.name,
-              description: values.description,
-              order: values.order,
-              image: values.image,
-            };
-            await handleSubmit(formValues);
-            // limpio el input file
-            inputFileRef.current.value = "";
-
-            resetForm();
-          }}
-        >
-          {({ setFieldValue }) => (
-            <Form className="form-container">
-              <label htmlFor="name">Titulo</label>
+    <div>
+      <Formik
+        enableReinitialize={true}
+        initialValues={initialValues}
+        validationSchema={validations}
+        onSubmit={(values, { resetForm }) => {
+          handleSubmit(values, resetForm);
+        }}
+      >
+        {({ setFieldValue }) => (
+          <Form className="form__container">
+            <div className="form">
+              <label className="form__label" htmlFor="name">
+                Titulo
+              </label>
               <Field
                 id="name"
-                className="input-field"
+                className="form__input"
                 type="text"
                 name="name"
-                placeholder="Slide Title"
+                placeholder="Titulo"
               />
 
-              <ErrorMessage name="name" render={(msg) => <div>{msg}</div>} />
-              <label htmlFor="description">Descripcion</label>
+              <ErrorMessage
+                name="name"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <label className="form__label" htmlFor="description">
+                Descripcion
+              </label>
               <Field name="description">
                 {({ field }) => (
                   <>
@@ -176,39 +164,51 @@ const SlidesForm = () => {
 
               <ErrorMessage
                 name="description"
-                render={(msg) => <div>{msg}</div>}
+                render={(msg) => <div className="form__error">{msg}</div>}
               />
-              <label htmlFor="order">Numero de orden</label>
+              <label className="form__label" htmlFor="order">
+                Numero de orden
+              </label>
               <Field
                 id="order"
-                className="input-field"
+                className="form__input"
                 type="number"
                 name="order"
                 onChange={(e) => {
-                  setFieldValue("order", parseInt(e.currentTarget.value));
+                  setFieldValue("order", e.currentTarget.value);
                 }}
                 placeholder="ingrese un numero"
               />
-              <ErrorMessage name="order" render={(msg) => <div>{msg}</div>} />
-              <label htmlFor="order">Cargar Imagen</label>
+              <ErrorMessage
+                name="order"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <label className="form__label" htmlFor="order">
+                {id ? "Cambiar Imagen" : "Cargar Imagen"}
+              </label>
               <input
                 ref={inputFileRef}
-                className="input-field"
                 type="file"
                 onChange={(e) => {
                   setFieldValue("image", e.currentTarget.files[0]);
                 }}
                 accept=".jpg, .png"
               />
-              <ErrorMessage name="image" render={(msg) => <div>{msg}</div>} />
-              <button type="submit" className="submit-btn">
-                Enviar
+              <ErrorMessage
+                name="image"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+              <button type="submit" className="form__button">
+                {id ? "Editar" : "Crear"}
               </button>
-            </Form>
-          )}
-        </Formik>
-      )}
-    </>
+              {loading && (
+                <Progress primaryColor="#1c4937" backgroundColor="#6ee7b7" />
+              )}
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 

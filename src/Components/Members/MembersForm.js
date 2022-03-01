@@ -1,51 +1,190 @@
-import React, { useState } from "react";
-import "../FormStyles.css";
+import React, { useState, useRef, useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import "@ckeditor/ckeditor5-build-classic/build/translations/es";
+import { useParams } from "react-router-dom";
 
-// Todo: extender servicios http members cuando el componente este listo
+import {
+  getMemberById,
+  postMember,
+  putMember,
+} from "../../Services/membersService";
+import Progress from "../Progress/Progress";
 
-const MembersForm = () => {
-  const [initialValues, setInitialValues] = useState({
+const MemberForm = () => {
+  const { id } = useParams();
+
+  const [formValues, setFormValues] = useState({
     name: "",
     description: "",
+    facebookUrl: "",
+    linkedinUrl: "",
+    image: "",
   });
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    if (e.target.name === "name") {
-      setInitialValues({ ...initialValues, name: e.target.value });
-    }
-    if (e.target.name === "description") {
-      setInitialValues({ ...initialValues, description: e.target.value });
-    }
+  const inputFileRef = useRef();
+
+  const send_image = (files) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(files);
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+    });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(initialValues);
+  const getDataById = async () => {
+    const response = await getMemberById(id);
+    const data = response.data.data;
+    setFormValues({
+      name: data.name,
+      description: data.description,
+      facebookUrl: data.facebookUrl,
+      linkedinUrl: data.linkedinUrl,
+      image: data.image,
+    });
   };
 
+  useEffect(() => {
+    if (id) {
+      getDataById(id);
+    }
+  }, []); //eslint-disable-line
+
+  const handleSubmit = async (formValues, resetForm) => {
+    setLoading(true);
+    let { image, ...rest } = formValues;
+    if (typeof image === "object") {
+      image = await send_image(image);
+      formValues = {
+        image,
+        ...rest,
+      };
+    } else {
+      formValues = {
+        ...rest,
+      };
+    }
+
+    if (id) {
+      await putMember(id, formValues);
+      getDataById();
+    } else {
+      await postMember(formValues);
+    }
+
+    inputFileRef.current.value = "";
+    resetForm();
+    setLoading(false);
+  };
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <input
-        className="input-field"
-        type="text"
-        name="name"
-        value={initialValues.name}
-        onChange={handleChange}
-        placeholder="Name"
-      ></input>
-      <input
-        className="input-field"
-        type="text"
-        name="description"
-        value={initialValues.description}
-        onChange={handleChange}
-        placeholder="Write some description"
-      ></input>
-      <button className="submit-btn" type="submit">
-        Send
-      </button>
-    </form>
+    <div>
+      <Formik
+        enableReinitialize={true}
+        initialValues={formValues}
+        validationSchema={Yup.object({
+          name: Yup.string()
+            .min(4, "Debe tener por lo menos 4 caracteres.")
+            .required("Campo obligatorio"),
+          description: Yup.string().required("Campo obligatorio"),
+          image: Yup.string().required("Este campo es obligatorio"),
+          facebookUrl: Yup.string()
+            .required("Campo obligatorio")
+            .url("Formato invalido"),
+          linkedinUrl: Yup.string()
+            .required("Campo obligatorio")
+            .url("Formato invalido"),
+        })}
+        onSubmit={(values, { resetForm }) => {
+          handleSubmit(values, resetForm);
+        }}
+      >
+        {({ setFieldValue }) => (
+          <Form className="form__container">
+            <div className="form">
+              <label className="form__label" htmlFor="name">
+                Nombre
+              </label>
+              <Field name="name" type="text" className="form__input" />
+              <ErrorMessage
+                name="name"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+
+              <label className="form__label" htmlFor="description">
+                Descripcion
+              </label>
+              <Field name="description">
+                {({ field }) => (
+                  <>
+                    <CKEditor
+                      config={{
+                        language: "es",
+                      }}
+                      editor={ClassicEditor}
+                      data={field.value}
+                      onChange={(event, editor) => {
+                        setFieldValue(field.name, editor.getData());
+                      }}
+                    />
+                  </>
+                )}
+              </Field>
+              <ErrorMessage
+                name="description"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+
+              <label className="form__label" htmlFor="image">
+                {id ? "Cambiar Imagen" : "Cargar Imagen"}
+              </label>
+              <input
+                name="image"
+                ref={inputFileRef}
+                type="file"
+                accept=".jpg, .png"
+                onChange={(e) => {
+                  setFieldValue("image", e.currentTarget.files[0]);
+                }}
+              />
+              <ErrorMessage
+                name="image"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+
+              <label className="form__label" htmlFor="facebookUrl">
+                Facebook
+              </label>
+              <Field name="facebookUrl" type="text" className="form__input" />
+              <ErrorMessage
+                name="facebookUrl"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+
+              <label className="form__label" htmlFor="linkedinUrl">
+                LinkedIn
+              </label>
+              <Field name="linkedinUrl" type="text" className="form__input" />
+              <ErrorMessage
+                name="linkedinUrl"
+                render={(msg) => <div className="form__error">{msg}</div>}
+              />
+
+              <button className="form__button" type="submit">
+                {id ? "Editar" : "Crear"}
+              </button>
+              {loading && (
+                <Progress primaryColor="#1c4937" backgroundColor="#6ee7b7" />
+              )}
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
-
-export default MembersForm;
+export default MemberForm;

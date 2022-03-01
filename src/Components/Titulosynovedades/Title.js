@@ -1,6 +1,5 @@
 import React from "react"
 import PropTypes from "prop-types"
-import "./title.css"
 
 const Title = ({ title, image = "/images/600x450.png" }) => {
 	return (

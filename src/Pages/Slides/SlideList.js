@@ -1,99 +1,116 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { getSlides, getSlidesSearch } from "../../Redux/reducers/slidesSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import "./SlideList.css";
+import Spinner from "../../Components/Spinner/Spinner";
+import { sweetAlertConfirm } from "../../Services/sweetAlertServices";
+import { deleteSlide } from "../../Services/slidesApiService";
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 
 const SlideList = () => {
-  const slideList = {
-    data: [
-      {
-        id: 1,
-        name: "Ignacio",
-        image: "http://ongapi.alkemy.org/storage/j8Uo4skOTP.jpeg",
-        order: 5454,
-      },
-      {
-        id: 2,
-        name: "Roman",
-        image: "http://ongapi.alkemy.org/storage/rEZJhWbxCx.jpeg",
-        order: 8989,
-      },
-      {
-        id: 3,
-        name: "Título de prueba",
-        image: "http://ongapi.alkemy.org/storage/tRMcq6w2JV.jpeg",
-        order: 1,
-      },
-      {
-        id: 4,
-        name: "myslide",
-        image: "http://ongapi.alkemy.org/storage/ae5LYQeuId.png",
-        order: 4555,
-      },
-    ],
-  };
-  const [slides, setSlides] = useState([]);
+	const dispatch = useDispatch();
 
-  const getSlidesData = () => {
-    setSlides(slideList.data);
-  };
+	useEffect(() => {
+		dispatch(getSlides());
+	}, []); //eslint-disable-line
 
-  useEffect(() => {
-    getSlidesData();
-  }, []);
+	const slides = useSelector((state) => state.slidesReducer.slides.data);
 
-  const rows = slides;
+	const rows = slides;
 
-  return (
-    <div className="list-container">
-      <Link to="/backoffice/slides/create">Crear Slide</Link>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">Título</TableCell>
-              <TableCell align="center">Imagen</TableCell>
-              <TableCell align="center">Orden</TableCell>
-              <TableCell align="center">Acciones</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows &&
-              rows.map(({ id, name, image, order }) => (
-                <TableRow key={id}>
-                  <TableCell align="center">{name}</TableCell>
-                  <TableCell align="center">
-                    <img src={image} alt="" className="imageTable" />
-                  </TableCell>
-                  <TableCell align="center">{order}</TableCell>
-                  <TableCell>
-                    <button>
-                      <Link to={`/backoffice/slides/edicion/${id}`}>
-                        Editar
-                      </Link>
-                    </button>
-                  </TableCell>
-                  <TableCell align="center">
-                    <button>
-                      {/*TODO: Crear ruta*/}
-                      <Link to={`/backoffice/slides/delete/${id}`}>
-                        Eliminar
-                      </Link>
-                    </button>
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
-  );
+	const handleClickDelete = (id) => {
+		sweetAlertConfirm(
+			"Eliminar slide",
+			"Seguro quieres eliminar el slide?"
+		).then((res) => {
+			res && deleteSlide(id);
+			setTimeout(() => {
+				dispatch(getSlides());
+			}, 2000);
+		});
+	};
+
+	const handleSearchChange = (e) => {
+		let { value } = e.target;
+		if (value.length > 0) {
+			dispatch(getSlidesSearch(value));
+		} else {
+			dispatch(getSlides());
+		}
+	};
+	return (
+		<div className="table">
+			<div className="table__container">
+				<div className="table__actions">
+					<TextField
+						type="search"
+						name="Buscar Usuario"
+						size="small"
+						label="Buscar Usuario"
+						placeholder="Buscar Slide"
+						onChange={(e) => {
+							handleSearchChange(e);
+						}}
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<span className="material-icons">
+										search
+									</span>
+								</InputAdornment>
+							),
+						}}
+					/>
+					<Link className="table__link" to="/backoffice/slides/create">
+						Crear Slide
+					</Link>
+				</div>
+				{!rows.length ? (
+					<Spinner />
+				) : (
+					<table className="table__data">
+						<thead className="table__head">
+							<tr className="table__row">
+								<th className="table__title">Título</th>
+								<th className="table__title">Imagen</th>
+								<th className="table__title">Orden</th>
+								<th className="table__title-edit">Editar</th>
+								<th className="table__title-delete">Eliminar</th>
+							</tr>
+						</thead>
+						<tbody className="table__body">
+							{rows.map(({ id, name, image, order }) => (
+								<tr key={id} className="table__row">
+									<td className="table__cell">{name}</td>
+									<td className="table__cell">
+										<img
+											src={image}
+											alt=""
+											className="imageTable"
+											width="100"
+										/>
+									</td>
+									<td className="table__cell">{order}</td>
+									<td className="table__cell-edit">
+										<Link to={`/backoffice/slides/edit/${id}`}>Editar</Link>
+									</td>
+									<td className="table__cell-delete">
+										<button
+											className="table__delete"
+											onClick={() => handleClickDelete(id)}
+										>
+											Eliminar
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default SlideList;

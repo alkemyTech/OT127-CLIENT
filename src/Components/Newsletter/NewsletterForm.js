@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./newsletter.scss";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -7,6 +6,12 @@ const NewsletterForm = () => {
   const [email, setEmail] = useState({
     email: "",
   });
+  const [userFeedback, setUserFeedback] = useState("");
+  const [showFeedback, setShowFeedback] = useState(false);
+
+  const token = localStorage.getItem("TOKEN");
+  const userSubscribed = localStorage.getItem("newsletter");
+
   return (
     <>
       <Formik
@@ -21,38 +26,54 @@ const NewsletterForm = () => {
           setEmail({
             email: values.email,
           });
+          if (!token) {
+            setUserFeedback("Por favor inicia sesión o registrate");
+            setShowFeedback(true);
+            setTimeout(() => {
+              setShowFeedback(false);
+              setUserFeedback("");
+            }, 2000);
+          } else {
+            if (userSubscribed) {
+              setUserFeedback("Ya te habías suscripto");
+              setShowFeedback(true);
+              setTimeout(() => {
+                setShowFeedback(false);
+                setUserFeedback("");
+              }, 2000);
+            } else {
+              localStorage.setItem(
+                "newsletter",
+                JSON.stringify(userNewsletterSubscribed)
+              );
+            }
+          }
 
-          localStorage.setItem(
-            "newsletter",
-            JSON.stringify(userNewsletterSubscribed)
-          );
           resetForm();
         }}
       >
-        <div className="container">
-          <div className="newsletter__wrapper">
-            <div>
-              <ErrorMessage
-                name="email"
-                render={(msg) => <div className="error">{msg}</div>}
-              />
-            </div>
-            <div className="newsletter__main-content">
-              <Form className="newsletter__subscription">
-                <Field
-                  className="newsletter__add-email"
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Ingresa tu email"
-                />
-                <button className="newsletter__submit-button" type="submit">
-                  Suscribirse
-                </button>
-              </Form>
-            </div>
-          </div>
+        <div className="newsletter__wrapper">
+          <ErrorMessage
+            name="email"
+            render={(msg) => <div className="newsletter__error">{msg}</div>}
+          />
+          {showFeedback && (
+            <p className="newsletter__error">{userFeedback}</p>
+          )}
+          <Form className="newsletter__form">
+            <Field
+              className="newsletter__add-email"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Suscribete al newsletter"
+            />
+            <button className="newsletter__submit-button" type="submit">
+              Suscribirse
+            </button>
+          </Form>
         </div>
+
       </Formik>
     </>
   );

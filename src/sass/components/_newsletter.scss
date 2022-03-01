@@ -1,0 +1,53 @@
+.newsletter {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &__form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    @media (min-width: 678px) {
+      flex-wrap: nowrap;
+    }
+  }
+  &__add-email {
+    border: none;
+    outline: none;
+    padding: 10px 0px;
+    padding-left: 10px;
+    margin-right: 5px;
+    width: 200px;
+    @include shadow;
+  }
+  &__submit-button {
+    border: none;
+    @include border-rounded;
+    outline: none;
+    margin: 1px;
+    margin-top: 5px;
+    padding: 0 20px;
+    min-height: 30px;
+    cursor: pointer;
+    background: #4abebb;
+    color: #ffffff;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      background-color: darken($color: #4abebb, $amount: 15);
+      transition: background 0.4s ease-in;
+    }
+    &:not(:hover) {
+      transition: background 0.4s ease-out;
+    }
+  }
+  &__error {
+    color: #ec255a;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+}
