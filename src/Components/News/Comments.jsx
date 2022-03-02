@@ -56,7 +56,7 @@ const Comments = () => {
             );
           })
         ) : (
-          <Skeleton mode="list" />
+          <Skeleton mode="groupCards" quantity={4} />
         )}
       </div>
     </div>
